@@ -1,0 +1,51 @@
+{yun:}include file="$wapstyle/header_lt.htm"{/yun}
+<div class="itwap_top">
+     <ul>
+      <li class="grade popup" data-pop="grade"><a href="javascript:void(0);" class="searchOptions_list_a">{yun:}if $city_name[$smarty.get.cityid] || $city_name[$smarty.get.provinceid]{/yun}{yun:}$city_name[$smarty.get.cityid]{/yun}{yun:}$city_name[$smarty.get.provinceid]{/yun}{yun:}elseif $city_name[$smarty.get.three_cityid]{/yun}{yun:}$city_name[$smarty.get.three_cityid]{/yun}{yun:}elseif $config.cityid&&$config.sy_web_site=='1'{/yun}{yun:}$city_name[$config.cityid]{/yun}{yun:}else{/yun}区域{yun:}/if{/yun}<i class="itwap_top_icon"></i></a></li>
+      <li class="lietou popup" data-pop="lietou"><a href="javascript:void(0);" class="searchOptions_list_a">{yun:}if $ltjob_name[$smarty.get.jobtwo]{/yun}{yun:}$ltjob_name[$smarty.get.jobtwo]{/yun}{yun:}else{/yun}职位{yun:}/if{/yun}<i class="itwap_top_icon"></i></a></li>
+      <li class="Sortsalary popup" data-pop="Sortsalary"><a href="javascript:void(0);" class="searchOptions_list_a">{yun:}if $ltclass_name[$smarty.get.exp]{/yun}{yun:}$ltclass_name[$smarty.get.exp]{/yun}{yun:}else{/yun}经验{yun:}/if{/yun}<i class="itwap_top_icon"></i></a></li>
+      <li class="Gengduot popup" data-pop="Gengduot" style="border:none"><a href="javascript:void(0);" class="searchOptions_list_a">更多<i class="itwap_top_icon"></i></a></li>
+      <input type="hidden" id="searchurl" value="{yun:}$searchurl{/yun}" />
+      <input type="hidden" id="waptype" value="1" /> 
+     </ul>
+</div>   
+{yun:}ltjoblist  hy='auto.hy' pr='auto.pr' mun='auto.mun' edu='auto.edu' exp='auto.exp' jobone='auto.jobone' jobtwo='auto.jobtwo' salary='auto.salary' minsalary='auto.minsalary' maxsalary='auto.maxsalary' uptime='auto.uptime' provinceid='auto.provinceid' cityid='auto.cityid' three_cityid='auto.three_cityid' keyword='auto.keyword' uid='auto.uid' order=lastupdate ispage=1 limit=20 item=list islt=4{/yun}    
+<div class="ltwap_box">
+<div class="ltwap_box_cont">
+     <div class="itwap_job_ct_tit">
+          <span class="itwap_job_ct_tit_nm"><a href="{yun:}if $list.usertype==3{/yun}{yun:}url m=wap c=ltjob a=recshow id=$list.id{/yun}{yun:}else{/yun}{yun:}url m=wap c=ltjob a=show id=$list.id{/yun}{yun:}/if{/yun}">{yun:}$list.job_name|mb_substr:0:9:'utf-8'{/yun}{yun:}if strlen($list.job_name) gt 18{/yun}..{yun:}/if{/yun}</a></span>
+     </div>
+  
+      
+     <div class="itwap_job_ct_company">
+     <span class="itwap_job_ct_xz">{yun:}$list.salary_info{/yun}</span><span class="itwap_job_ct_line">|</span>
+     {yun:}$list.cityid_info{/yun} {yun:}$list.three_cityid_info{/yun}<span class="itwap_job_ct_line">|</span>{yun:}$list.exp_info{/yun}经验<span class="itwap_job_ct_line">|</span>{yun:}$list.edu_info{/yun}学历</div>
+     <div class="itwap_job_ct_time">{yun:}$list.lastupdate{/yun} </div>
+    
+
+      <div class="itwap_job_ct_company_box"><span class="itwap_job_ct_company_box_n">{yun:}$list.com_name{/yun}</span > {yun:}if $list.rebates>0{/yun}<i class="itwap_job_ct_company_sj">赏金：￥{yun:}$list.rebates{/yun}</i>{yun:}/if{/yun}</div>
+     
+      </div> 
+</div>
+  {yun:}/ltjoblist{/yun}
+ 
+  {yun:}if $total<=0{/yun}
+      {yun:}if $smarty.get.keyword!="" {/yun}
+      <div class="wap_member_no">没有搜索到猎头职位<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='ltjob'{/yun}">重新搜索</a></div></div>
+     
+      {yun:}else{/yun}
+      <div class="wap_member_no">暂无猎头职位<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='ltjob'{/yun}">重新搜索</a></div></div>
+      
+      {yun:}/if{/yun}
+      {yun:}else{/yun}
+      <div class="pages">{yun:}$pagenav{/yun}</div>
+      {yun:}/if{/yun}
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/search.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/demo.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script> 
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/demo.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+{yun:}include file="$wapstyle/publictwo.htm"{/yun}
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"><div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<h6>订单详情</h6>
+<div class="infoboxp_right"> 
+<a  href="?m=crm_order" class="infoboxp_tj">CRM订单管理</a>
+</div>
+</div>
+<div class="main_tag" >
+<div class="tag_box"> 
+	<table width="100%" class="table_form" style="background:#fff; font-size:14px;">
+		<tr  class="admin_table_trbg">
+			<th width="120">产品名称：</th>
+			<td>{yun:}$product.name{/yun}</td></tr>
+		<tr >
+			<th>产品描述：</th>
+			<td>{yun:}$product.content{/yun}</td>
+		</tr>
+		<tr  class="admin_table_trbg">
+			<th>订单备注：</th>
+			<td>{yun:}$info.content{/yun}
+			</td>
+		</tr>
+    <tr>
+			<td align="center" colspan="2">
+            <input type="button" value="&nbsp;关 闭&nbsp;" onclick="javascript:location.href='index.php?m=crm_order';" class="admin_button">
+     		</td>
+		</tr>
+	</table>
+
+</div></div></div>
+</body>
+</html>

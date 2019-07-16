@@ -1,0 +1,249 @@
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<div class="clear"></div>
+<div class="lt_w1200">
+<div class="lt_kh">
+<div class="lt_kh_cj">高端资源，快速拓宽候选人群</div>
+<div class="lt_kh_cjs">领先的中高级人才招聘求职平台</div>
+<div class="lt_search_box">
+<div class="lt_search">
+<form action="index.php" method="get" id="lietou_login_form" onsubmit="return search_keyword(this,'输入职位关键词：如销售总监等');">
+			{yun:}if  !$config.sy_lietoudir{/yun}<input type="hidden" value="lietou" name="m" />{yun:}/if{/yun}
+			<input type="hidden" value="post" name="c" id="search_type" />
+			<div class="index_hunter_search_con fl">
+				<div class="index_search_name f16 fl">
+					<span id="search_type_name">职位</span>
+					<ul class="index_search_name_list none">
+						<li><a href="javascript:;" search_type="famous">公司</a></li>
+						<li><a href="javascript:;" search_type="post">职位</a></li>
+						<li><a href="javascript:;" search_type="service">猎头</a></li>
+					</ul>
+				</div>
+				<div class="sindex_earch_keyword fl">
+					<input class="hunter_search_text fl" type="text" value="输入职位关键词：如销售总监等" onClick="if(this.value=='输入职位关键词：如销售总监等'){this.value=''}" onBlur="if(this.value==''){this.value='输入职位关键词：如销售总监等'}" name="keyword" id="search" />
+				</div>
+			</div>
+			<input class="index_search_bth f16  fl" type="submit" value="搜 索" />
+		</form>
+        </div>
+    {yun:}if $postkeyword{/yun}
+		<div class="index_hunter_search_tag">
+		热门搜索：
+			{yun:}key limit=10 tuijian=1 type=7 item=keylist limit=9{/yun}
+			<a href="{yun:}$keylist.url{/yun}">{yun:}$keylist.key_title{/yun}</a>
+			{yun:}/key{/yun}
+		</div>
+    {yun:}else{/yun}
+<div class="index_hunter_search_tag fl">&nbsp;</div>
+{yun:}/if{/yun}
+
+
+</div>
+
+
+</div>
+</div>
+
+<div class="hunter_bar">
+<div class="hunter_bar_bg"></div>
+	<div class="layui-carousel" id="test1" lay-filter="test1">
+		  <div carousel-item="">
+		  	{yun:}adlist classid=9 name=foo item=ad_l{/yun} 
+		      <div><a href="{yun:}$ad_l.src{/yun}"><img src="{yun:}$ad_l.pic{/yun}" width="1415px" height="400px"/></a></div>
+		    {yun:}/adlist{/yun}
+		  </div>
+	</div>
+</div>
+
+<div class="clear"></div>
+<!--职位-->
+
+<div class="lt_w1200">
+<div class="lt_index_tit"><span class="lt_index_tit_s"> 悬赏招聘</span><div class="lt_index_tit_p">
+<span class="lt_index_tit_span"><i class="lt_index_tit_linel"></i><i class="lt_index_tit_liner"></i>新鲜职位火速推荐，获得相应赏金</span></div></div>
+<div class="lt_index_job_box">
+<div class="lt_index_job_c">
+<ul class="lt_index_rewardjob">
+{yun:}ltjoblist rebates=1 order=lastupdate ispage=1 limit=6 item=jlist{/yun}        
+<li>
+<div class="lt_index_rewardjob_sj">
+<div class="lt_index_rewardjob_sj_name">赏金</div>
+{yun:}if $jlist.rebates>'9999'{/yun}
+						￥{yun:}$jlist.rebates{/yun}
+						{yun:}else{/yun}
+						￥{yun:}$jlist.rebates{/yun}
+						{yun:}/if{/yun}
+                        </div>
+<div class="lt_index_rewardjob_c">
+<div class="lt_index_rewardjob_jobname"> <a href="{yun:}$jlist.job_url{/yun}" target="_blank">{yun:}$jlist.job_name{/yun}</a></div>
+<div class="lt_index_rewardjob_comname">{yun:}$jlist.com_name{/yun}</div>
+<span class="lt_index_job_xz">{yun:}$jlist.salary_info{/yun}</span><span class="lt_index_job_line">|</span>{yun:}$jlist.edu_info{/yun}学历<span class="lt_index_job_line">|</span>{yun:}$jlist.exp_info{/yun}经验<span class="lt_index_job_line">|</span>{yun:}$jlist.cityid_info{/yun}
+<div class="lt_index_rewardjob_time">更新：{yun:}$jlist.lastupdate{/yun}</div>
+</div>
+<a href="{yun:}$jlist.job_url{/yun}" target="_blank" class="lt_index_rewardjob_tj">推荐<i class="lt_index_rewardjob_tjicon"></i></a>
+</li>
+	{yun:}/ltjoblist{/yun}
+</ul>
+</div><div class="lt_index_job_more">	<a href="{yun:}url m=lietou c=post rebates=1{/yun}" class="lt_index_job_more_a">+ 查看更多</a></div>
+
+</div></div>
+<div class="clear"></div>
+<div class="lt_index_tit" ><span class="lt_index_tit_s" > 推荐职位</span><div class="lt_index_tit_p"><span class="lt_index_tit_span"><i class="lt_index_tit_linel"></i><i class="lt_index_tit_liner"></i>精选职位任您挑选，快速解决就业难题</span></div></div>
+<div style="width:100%; background:#fff;-webkit-box-shadow: 0 0 10px 0 rgba(56,81,76,.12);box-shadow: 0 0 10px 0 rgba(56,81,76,.12);">
+<div class="lt_w1200">
+<div class="lt_index_job_box">
+<div class="lt_index_job_c">
+<div class="hotjob_box">
+<ul>
+{yun:}ltjoblist rec=1 order=lastupdate ispage=1 limit=8 item=tlist{/yun} 
+<li class="hotjob_list">
+<div class="hotjob_logo">
+<div class="hotjob_name"><a href="{yun:}$tlist.job_url{/yun}">{yun:}$tlist.job_name{/yun}</a></div><i class="hotjob_nameicon"></i></div>
+<div class="hotjob_infobox">
+<div class="hotjob_xz">{yun:}$tlist.salary_info{/yun}</div>
+<div class="hotjob_info">{yun:}$tlist.cityid_info{/yun} / {yun:}$tlist.exp_info{/yun}经验 / {yun:}$tlist.edu_info{/yun}学历</div>
+<!--<div class="hotjob_tag">       
+        {yun:}if $tlist.welfarename{/yun}
+       <div class="post_items_tag_box"> 
+        {yun:}foreach  item=v from=$tlist.welfarename{/yun}
+            {yun:}if $v{/yun}<span class="hotjob_fl"> {yun:}$v{/yun}</span>    </span>{yun:}/if{/yun}
+            {yun:}/foreach{/yun}</div>
+       {yun:}/if{/yun}
+   
+      </div>-->
+<div class="hotjob_time">{yun:}$tlist.lastupdate{/yun}发布</div>
+</div>
+</li>
+{yun:}/ltjoblist{/yun}
+</ul>
+</div>
+</div>
+<div class="lt_index_job_more">	<a href="{yun:}url m=lietou c=post rec=1{/yun}" class="lt_index_job_more_a" style="background:#f60;color:#fff">+ 查看更多</a></div>
+</div>
+</div></div><div class="lt_w1200">
+<div class="clear"></div>
+<div class="lt_index_tit"><span class="lt_index_tit_s"> 最新职位</span><div class="lt_index_tit_p"><span class="lt_index_tit_span"><i class="lt_index_tit_linel"></i><i class="lt_index_tit_liner"></i>每日精选优质职位，满足你的个性要求</span></div></div>
+<div class="lt_index_job_box">
+<div class="lt_index_job_c">
+<ul class="lt_index_job_box_ul">
+{yun:}ltjoblist comlen=10 item=ltjoblist ispage=1 limit=16{/yun}
+<li><i class="lt_index_job_box_ulline"></i>
+<div class="lt_index_job_name"><a href="{yun:}$ltjoblist.job_url{/yun}" title="{yun:}$ltjoblist.job_name{/yun}" target="_blank">{yun:}$ltjoblist.job_name{/yun}</a></div><div class="lt_index_job_yq">{yun:}$ltjoblist.edu_info{/yun}<span class="lt_index_job_line">{yun:}if $ltjoblist.edu_info{/yun}|{yun:}/if{/yun}</span><span class="lt_index_job_xz">{yun:}$ltjoblist.salary_info{/yun}</span></div>
+<div class="lt_index_job_com">
+<div class="lt_index_job_comlogo"><img src="{yun:}$ltjoblist.logo_n{/yun}" width="50" height="50"></div>
+<div class="lt_index_job_comname"><a href="{yun:}$ltjoblist.lt_url{/yun}">{yun:}$ltjoblist.com_name{/yun}</a></div>
+<div class="lt_index_job_comhy">{yun:}$ltjoblist.hy_n{/yun}/{yun:}$ltjoblist.cityid_info{/yun}</div>
+</div>
+</li>
+{yun:}/ltjoblist{/yun}
+</ul></div>
+<div class="lt_index_job_more">	<a href="{yun:}url m=lietou c=post{/yun}" class="lt_index_job_more_a">+ 查看更多</a></div>
+
+</div>
+<div class="lt_index_tit"><span class="lt_index_tit_s"> 委托求职</span><div class="lt_index_tit_p"><span class="lt_index_tit_span"><i class="lt_index_tit_linel"></i><i class="lt_index_tit_liner"></i>找工作不随便，这里是野心与实力的汇聚</span></div></div>
+<div class="lt_index_job_box">
+<div class="lt_index_job_c">
+
+<ul class="lt_index_h">
+				{yun:}lietoulist ispage=1 limit=8 item=ltlist{/yun}
+                <li>
+<div class="lt_photo"><img src="{yun:}formatpicurl path=$ltlist.photo_big type=ltlogo{/yun}" width="70" height="70">                                    <a href="javascript:ltatn('{yun:}$ltlist.uid{/yun}');" id="guanzhu{yun:}$ltlist.uid{/yun}" title="{yun:}$ltlist.atn{/yun}" class="lt_index_p_gz"> 
+							{yun:}if $ltlist.atn=='1'{/yun}取消关注{yun:}else{/yun}+ 关注{yun:}/if{/yun}
+								
+								</a></div>
+
+<div class="lt_name"><a href="{yun:}$ltlist.name_url{/yun}" target="_blank">{yun:}$ltlist.realname{/yun}</a></div>
+<div class="lt_city">{yun:}$ltlist.cityone_info{/yun}-{yun:}$ltlist.citytwo_info{/yun}</div>
+<div class="lt_index_h_sc">{yun:}$ltlist.hy|mb_substr:0:16:'utf-8'{/yun}</div>
+<div class="lt_index_h_n">
+<div class="lt_index_p"><span class="lt_n">{yun:}$ltlist.ltjoblist|@count{/yun}</span> 在招职位<i class="lt_index_pline"></i></div>
+<div class="lt_index_p"><span class="lt_n">{yun:}$ltlist.ant_num{/yun}</span> 关注人数<i class="lt_index_pline"></i></div>
+<div class="lt_index_p"><span class="lt_n">{yun:}$ltlist.exp_info{/yun}</span> 从业年限</div>
+</div>
+
+
+<div class="lt_index_p_wt_bot"><a href="{yun:}$ltlist.name_url{/yun}" target="_blank" class="lt_index_p_wt">委托简历</a>   
+  </div>
+</li>
+              
+                
+                
+                
+		
+				{yun:}/lietoulist{/yun}
+                </ul>
+			</div>
+	</div>
+<div class="lt_index_job_more">	<a  href="{yun:}url m=lietou c=service{/yun}" target="_blank"class="lt_index_job_more_a">+ 查看更多</a></div>
+<div class="lt_index_tit"><span class="lt_index_tit_s"> 友情链接</span></div>
+<div class="links_con_img fl">
+            {yun:}link type=2 tem_type=2 item=linklist{/yun}
+            <a href="{yun:}$linklist.link_url{/yun}" target="_blank"><img class="png" src="{yun:}formatpicurl path=$linklist.pic{/yun}" width="120" height="35" alt="{yun:}$linklist.link_name{/yun}" /></a>
+            {yun:}/link{/yun}
+		</div>
+		<div class="links_con fl">
+			{yun:}link type=1 tem_type=3 item=linklist2{/yun}
+			<a href="{yun:}$linklist2.link_url{/yun}" title="{yun:}$linklist2.link_name{/yun}">{yun:}$linklist2.link_name{/yun}</a>
+			{yun:}/link{/yun}
+		</div>
+</div>
+
+
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js?v={yun:}$config.cachecode{/yun}"></script>
+<script>
+  DD_belatedPNG.fix('.png,.New_post,.box_bot,.new_post_box_h1 span,.icon,.ser_cz a,.Strat-list ,.logoin_su2,.logoin_after_su2,.logoin_after em,.logoin_after_tx dt,.service_filter_fot,.Strat-list .s,.nav_exit span,.company_focus');
+</script>
+<![endif]-->
+<script>var webname = "{yun:}$config.sy_webname{/yun}";</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/public_lt.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/jquery.flexslider.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+<script src="{yun:}$style{/yun}/js/jcarousellite.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/gt.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/pc.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script>
+$(window).load(function() {
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false,
+		animation:'slide'
+	});
+});
+layui.use(['carousel'], function(){
+  var carousel = layui.carousel;
+  carousel.render({
+    elem: '#test1'
+    ,width: '100%'
+    ,height: '400px'
+  });
+});
+$(function(){ 
+	$('.index_search_name_list li').delegate('a','click',function(){
+		$(this).parent().parent().hide();
+		$('#search_type_name').html($(this).html());
+		$('#search_type').val($(this).attr('search_type'));
+		var search_text_all='|输入职位关键词：如公司等|输入职位关键词：如职位等|输入职位关键词：如猎头等|';
+		var search_text_list=search_text_all.split('|');
+		var search_text_index=$(this).parent().index()+1;
+		if(search_text_all.indexOf('|'+$('#search').val()+'|')>=0){
+			$('#search').val(search_text_list[search_text_index]);
+		}
+		$('#search').attr('placeholder',search_text_list[search_text_index]);
+	});
+	$('.index_search_name').hover(function(){
+		$(".index_search_name_list ").show();
+	},function(){
+		$(".index_search_name_list ").hide();
+	});  
+	$('.reward_items').hover(function(){
+		$(this).addClass('reward_items_hover');
+	},function(){
+		$(this).removeClass('reward_items_hover');
+	});  
+});
+
+</script>
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

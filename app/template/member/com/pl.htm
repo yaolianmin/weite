@@ -1,0 +1,151 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <div class=right_box>
+    <div class=admincont_box >
+      <div class="com_tit"><span class="com_tit_span">面试评价</span></div>
+      <div class="com_body">
+         <div class="admin_new_tip ">
+            <div class="admin_new_tit"><i class="admin_new_tit_icon"></i>温馨提示</div>
+            <div class="admin_new_tip_list_cont">
+              <div class="admin_new_tip_list">关注贵公司的人才，邀请面试成功率更高！</div>
+            </div>
+          </div>
+
+        <div class="clear"></div>
+        <div class="admin_note2 mt20">
+         <table class="com_table">
+          {yun:}if $rows{/yun}
+            <tr>
+            <th>面试人</th>
+			<th>评分</th>
+           <th>评论时间</th>
+          <th>回复状态</th>
+			
+            	<th width="300">面试过程</th><th>详情</th>
+            </tr>
+            {yun:}/if{/yun}
+            {yun:}foreach item=v from=$rows{/yun}
+              <tr>
+              
+           <td align="center">
+
+		   {yun:}if $v.name!="" &&  $v.isnm!='1'{/yun}
+
+			<a href="{yun:}url m=resume c=show uid='`$v.uid`'{/yun}" class="cblue" target="_blank">{yun:}$v.name{/yun}</a> 
+			
+			{yun:}else{/yun}
+			匿名
+			{yun:}/if{/yun}</td>
+			<td>
+			<div class="com_pl_gc">综合评分：<i class="com_pl_n">{yun:}$v.score{/yun}</i> 分</div>
+			<div class="com_pl_gc">描述相符：<i class="com_pl_n">{yun:}$v.desscore{/yun}</i> 分</div>
+			<div class="com_pl_gc">面&nbsp;试&nbsp;官  ：<i class="com_pl_n">{yun:}$v.hrscore{/yun}</i> 分</div>
+			<div class="com_pl_gc">企业环境：<i class="com_pl_n">{yun:}$v.comscore{/yun}</i> 分</div>
+			</td> 
+         
+           <td  align="center">{yun:}$v.ctime|date_format:'%Y-%m-%d'{/yun}</td>
+          <td align="center">{yun:}if $v.reply!=""{/yun}<font color="#FF0000">已回复</font> {yun:}else{/yun}未回复<span onclick="reply_msg('{yun:}$v.id{/yun}');" style="cursor:pointer; color:#06F">【回复】</span> {yun:}/if{/yun}</div>
+			  <td class="com_pl_gc">{yun:}$v.content{/yun}</td><td align="center"><a href="javascript:;" onclick="showpl('pl_div','{yun:}$v.content{/yun}','{yun:}$v.othercontent{/yun}','{yun:}$v.reply{/yun}')" class=" com_bth cblue">查看</a></td>
+          
+              </tr>
+           
+            {yun:}foreachelse{/yun}
+         <tr>
+            <td colspan="7" class="table_end">    <div class="com_msg_no">
+				 <p>暂无评论！</p>
+               </div> </td>
+          
+              </tr>
+            {yun:}/foreach{/yun}
+           <tr>
+            <td colspan="7" class="table_end">
+            <div class="diggg mt10">{yun:}$pagenav{/yun}</div></td>
+          
+              </tr>
+          
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+<div id="reply" style=" width:408px; display:none;margin: 0 auto; padding: 0;">
+  <form id="formstatus" method="post" target="supportiframe" action="index.php?c=pl&act=save" onSubmit="return check_msg();">
+    <table class="table_form "  id="infobox">
+      <tr>
+        <td>回复内容：</td>
+        <td><textarea name="reply" id="content" rows="4" cols="35" class="text" ></textarea></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align:center;padding:0"><input type="submit" name="submit" value="回复" class="Reply_cont_submit"  /></td>
+      </tr>
+    </table>
+    <input type="hidden" id="msgid" name="id" value="" />
+  </form>
+</div>
+</div>
+<div id="pl_div" style="display:none;width:420px">
+	<form id="formstatus" method="post" target="supportiframe" action="index.php?m=admin_company_job&c=status">
+    <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+	  <table class="table_form "  id="infobox" style="width:100%"> 
+				<tr><td>面试过程：</td><td><textarea name="beizhu" id="beizhu" class="com_pl_textarea"  readonly></textarea></td></tr>
+			<tr><td>其他评论：</td><td><textarea name="other" id="other" class="com_pl_textarea" readonly></textarea></td></tr>
+			<tr><td>企业回复：</td><td><textarea name="plreply" id="plreply"  class="com_pl_textarea" readonly></textarea></td></tr>  
+	  </table>
+	 </form>
+</div> 
+<script>
+function reply_msg(id){ 
+	$("#msgid").val(id); 
+	$.layer({
+		type : 1,
+		title :'回复留言', 
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['410px','210px'],
+		page : {dom :"#reply"}
+	}); 
+} 
+function check_msg(){
+	if($.trim($("#content").val())==""){ 
+		layer.msg('回复内容不能为空！', 2, 8);return false;
+	}
+}
+function check_pl(id){
+	$.post("index.php?c=pl&act=plset",{id:id,ajax:1},function(data){ 
+		if(data==1){
+			layer.msg('设置成功！', 2, 9);
+		}else{
+			layer.msg('设置失败！', 2, 8);
+		}
+	})
+}
+function onstatus(id,status){
+	$.post("index.php?c=pl&act=plset",{id:id,status:status},function(data){
+		if(data==1){
+			layer.msg('审核成功！', 2, 9);
+			$("#status"+id).html('<font color="green">已审核</font>');
+		}else{
+			layer.msg('审核失败！', 2, 8);
+		}
+	})
+}
+function showpl(div,content,othercontent,reply){ 
+	$("#beizhu").html(content);
+	$("#other").html(othercontent);
+	
+	$("#plreply").html(reply);
+	$.layer({
+		type : 1,
+		title :'面试评价', 
+		offset: [($(window).height() - 310)/2 + 'px', ''],
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['420px','300px'],
+		page : {dom :"#"+div}
+	}); 
+}
+</script> 
+{yun:}include file="$comstyle/footer.htm"{/yun}

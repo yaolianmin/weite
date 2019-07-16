@@ -1,0 +1,215 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+	<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+		<div class=right_box>
+			<div class=admincont_box>
+				<div class="com_tit"><span class="com_tit_span">猎头管理</span></div>
+				
+				<div class="job_list_tit">
+					<ul class="">
+						<li {yun:}if $smarty.get.c=="lt_job"&&$smarty.get.act!=""{/yun} class="job_list_tit_cur"{yun:}/if{/yun}style="position:relative"> <a href="javascript:void(0);" onclick="jobadd_url('{yun:}$addltjobnum{/yun}','{yun:}$config.integral_lt_job{/yun}','lt','{yun:}$config.com_integral_online{/yun}','{yun:}$config.integral_proportion{/yun}');return false;" title="新增猎头职位" >新增猎头职位</a> </li>						
+						<li {yun:}if $smarty.get.c=="lt_job"&&$smarty.get.act==""{/yun} class="job_list_tit_cur"{yun:}/if{/yun}> 
+							<a href="index.php?c=lt_job" title="猎头职位列表">猎头职位列表</a> 
+						</li>
+					</ul>
+				</div>
+				
+				<script>
+				function reclt(id,time){ 
+					$("#recid").val(id);
+					if(time!=""){
+						$("#rectime").html('当前职位推荐到期时间：<font color="red">'+time+'</font>');
+					} else{
+						$("#rectime").hide('');
+					}
+					$.layer({
+						type : 1,
+						title : '推荐职位',
+						closeBtn : [0 , true],
+						border : [10 , 0.3 , '#000', true],
+						area : ['330px','230px'],
+						page : {dom : '#recom'}
+					});
+				} 
+				function showltjobstatus(id){
+					var statusbody=$("#ltjobstatus"+id).attr('statusbody');
+					$("#showltjob").html(statusbody)
+					$.layer({
+						type : 1,
+						title : '审核说明',
+						closeBtn : [0 , true],
+						border : [10 , 0.3 , '#000', true],
+						area : ['320px','auto'],
+						page : {dom : '#statusbody'}
+					});
+				}
+				</script>
+				
+				<div class="clear"></div>
+
+				<div class="com_body">
+					{yun:}if !empty($rows){/yun}
+						<div class="admin_new_tip mt20">
+							<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+							
+							<div class="admin_new_tip_list_cont">
+								<div class="admin_new_tip_list"> 
+									如果贵公司想快速招聘人才，建议升级贵宾，获取更多的展示机会，以帮助您快速找到满意的人才。 
+								</div>
+     
+								<div  class="admin_new_tip_list">
+									贵公司还可以发布（<span class="f60">{yun:}if $statis.vip_etime>time()||$statis.vip_etime=="0"{/yun}{yun:}if $statis.rating_type==1{/yun}{yun:}$statis.lt_job_num{/yun}{yun:}else{/yun}无限{yun:}/if{/yun}{yun:}else{/yun}0{yun:}/if{/yun}</span>）条猎头职位信息 
+								</div>
+
+								<div class="admin_new_tip_list">
+									请贵公司保证职位信息的真实性、合法性，并及时更新职位信息，如被举报或投诉，确认发布的信息违反相关规定后，本站将会关闭贵公司的招聘服务，敬请谅解！ 
+								</div>
+							</div>
+						</div>
+        
+						<div class="com_m_search">
+							<input class="com_m_tj" onclick="jobadd_url('{yun:}$addltjobnum{/yun}','{yun:}$config.integral_lt_job{/yun}','lt','{yun:}$config.com_integral_online{/yun}','{yun:}$config.integral_proportion{/yun}');" type="button" value="+ 新增猎头职位" style="margin-left:0px;">						</div>
+					{yun:}/if{/yun}
+        
+					<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+					<form action="index.php?c=lt_job&act=del" target="supportiframe" method="post" id='myform'>
+						<table class="com_table">
+							{yun:}if !empty($rows){/yun}
+							<tr>
+								<th>&nbsp;</th>
+								<th>职位名称</th>
+								<th>应聘简历</th>
+								<th>浏览量 </th>
+								<th>职位状态</th>
+ 								<th>截止日期</th>
+								<th>更新时间</th>
+
+								<th width="160">推广</th>
+								<th width="200">操作</th>
+							</tr>
+							{yun:}/if{/yun}
+						
+							{yun:}foreach from=$rows item=list{/yun}
+							<tr>
+								<td><input type="checkbox" name="checkboxid[]" value="{yun:}$list.id{/yun}" class="com_Release_job_check"></td>
+								
+								<td align="center">
+									<a href="{yun:}url m=lietou c=jobcomshow id='`$list.id`'{/yun}" class="com_Release_name" target="_blank">{yun:}$list.job_name{/yun}</a>
+								</td>
+								
+								<td align="center">
+									<a href="index.php?c=hr&type=2&jobid={yun:}$list.id{/yun}" target="_blank">{yun:}$list.num{/yun}份</a>
+								</td>
+
+								<td align="center">{yun:}$list.hits{/yun}</td>
+
+								<td align="center">
+									{yun:}if $list.status=="0"{/yun} 
+										<font color=blue>等待审核</font> 
+									{yun:}elseif $list.status=="1"{/yun}
+										{yun:}if $list.zp_status=="1"{/yun} 
+											<a href="javascript:void(0)" onclick="layer_del('', 'index.php?c=lt_job&act=jobset&status=2&id={yun:}$list.id{/yun}');" class="com_Release_job_lok">已下架</a> 
+										{yun:}else{/yun} 
+											<a href="javascript:void(0)" onclick="layer_del('', 'index.php?c=lt_job&act=jobset&status=1&id={yun:}$list.id{/yun}');" class="com_Release_job_lok">发布中</a> 
+										{yun:}/if{/yun}	
+									{yun:}elseif $list.status=="2"{/yun} 
+										<font color=red>已结束</font> 
+									{yun:}elseif $list.status=="3"{/yun}
+										<font color=red>未通过</font>
+										{yun:}if $list.statusbody{/yun} 
+										<a href="javascript:void(0);" onclick="showltjobstatus({yun:}$list.id{/yun})" class="looklist" id="ltjobstatus{yun:}$list.id{/yun}" statusbody="{yun:}$list.statusbody{/yun}" class="uesr_name_a">说明</a>
+										{yun:}/if{/yun}
+									{yun:}/if{/yun} 
+								</td>
+	
+								<td align="center">
+									<div class="lt_job_date_em">{yun:}$list.edate|date_format:'%Y-%m-%d'{/yun}</div>
+								</td>
+  									
+								<td align="center">
+									<div class="lt_job_date_em">{yun:}$list.lastupdate|date_format:'%Y-%m-%d'{/yun}</div> 
+									 
+								</td>
+
+								<td align="center">
+									{yun:}if $list.zp_status!=1 && $list.status==1{/yun} 
+										<a href="javascript:;" onclick="reclt('{yun:}$list.id{/yun}','{yun:}if $list.rec=='1' &&  $list.rec_time>time(){/yun}{yun:}$list.rec_time|date_format:'%Y-%m-%d'{/yun}{yun:}/if{/yun}')" class="com_bth cblue">
+											{yun:}if $list.rec=='1' &&  $list.rec_time>time(){/yun}已推荐{yun:}else{/yun}推荐{yun:}/if{/yun}
+										</a>
+										{yun:}if $list.rec_time>time(){/yun}
+											<div class="lt_job_date_em">到期时间：{yun:}$list.rec_time|date_format:'%Y-%m-%d'{/yun}</div>
+										{yun:}/if{/yun}
+									{yun:}else{/yun} 
+										未招聘状态无法推广
+									{yun:}/if{/yun} 
+								</td>
+								
+								<td align="center">
+									{yun:}if $list.zp_status!=1 && $list.status==1{/yun} 
+										<a href="javascript:void(0)" onClick="refreshLtJob('{yun:}$list.id{/yun}');" class="com_bth cblue" > 刷新 </a> 
+									{yun:}/if{/yun}
+	
+									<a href="index.php?c=lt_job&act=edit&id={yun:}$list.id{/yun}" class="com_bth cblue">修改</a>
+									
+									<a href="javascript:void(0)" onclick="layer_del('确定要删除该职位？','index.php?c=lt_job&act=del&id={yun:}$list.id{/yun}');" class="com_bth cblue">删除</a>
+								</td >
+							</tr>
+							{yun:}foreachelse{/yun}
+							<tr>
+								<td colspan="9" class="table_end">
+									<div class="msg_no">
+										<p>亲爱的用户，目前您还没有相关信息</p>
+										<a href="javascript:void(0);" onclick="jobadd_url('{yun:}$addltjobnum{/yun}','{yun:}$config.integral_lt_job{/yun}','lt','{yun:}$config.com_integral_online{/yun}','{yun:}$config.integral_proportion{/yun}');" class="com_msg_no_bth com_submit">点击添加猎头职位</a>									</div>
+								</td>
+							</tr>
+							{yun:}/foreach{/yun}
+							{yun:}if !empty($rows){/yun}
+							<tr>
+								<td colspan="9" class="table_end">
+									<div class="com_Release_job_bot mt20"> 
+										<span class="com_Release_job_qx">
+											<input id='checkAll' type="checkbox" onclick="m_checkAll(this.form)" class="com_Release_job_qx_check"> 全选	
+										</span>
+										<input class="c_btn_02 c_btn_02_w110" type="button" value="批量删除" onclick="return really('checkboxid[]')">
+									</div>
+								</td>
+							</tr>
+							{yun:}/if{/yun}
+							<tr>
+								<td colspan="9" class="table_end"><div class="diggg">{yun:}$pagenav{/yun}</div></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="recom"  style="display:none; width: 250px; ">
+		<div class="job_box_div" style="padding:10px;width:auto;">
+			<div class="job_box_msg">
+				提示：参加推荐职位，一天需要 <font color="red">{yun:}$config.lt_recjob{/yun}</font> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}！
+				<div id="rectime"></div>
+			</div>
+
+			<form action='index.php?c=lt_job&act=jobset' target="supportiframe" method="post" id='recomf'>
+				<input type="hidden" name="recid" id="recid" value=""/>
+				<input type="hidden" name="sub_rec" id="sub_rec" value="1"/>
+				<div class="job_box_inp" style='width:100%'> 
+					<span class="fltL">推荐天数：</span>
+					<input name="day" value="" class="com_info_text placeholder fltL" type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:100px;"/>
+					<span class="fltL box_infobox_span">天</span> 
+				</div>
+				<span class="job_box_botton" style="width:290px; position:relative"> 
+					<a class="job_box_yes job_box_botton2" href="javascript:void(0);" onclick="setTimeout(function(){$('#recomf').submit()},0);" style="top:30px">确定</a> 
+				</span>
+			</form>
+		</div>
+	</div>
+	
+	<div class="admin_Operating_sh" id="statusbody" style="padding:10px;width:300px; display:none;">
+		<div class="admin_Operating_text" style="padding:5px; height:auto;color:#C30; font-size:14px; line-height:23px;white-space: normal; word-break: break-all;" id="showltjob"> 
+	</div>
+</div>
+ {yun:}include file="$comstyle/com_tc_server.htm"{/yun} 
+ {yun:}include file="$comstyle/footer.htm"{/yun}

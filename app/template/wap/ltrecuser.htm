@@ -1,0 +1,193 @@
+{yun:}include file="$wapstyle/header_lt.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/itwap.css?v={yun:}$config.cachecode{/yun}" type="text/css"/>
+<div class="lt_recuser_box">
+<div class="">赏金：<span class="lt_recuser_box_money">￥{yun:}$jobinfo.rebates{/yun}</span></div>
+<div class="">推荐职位： <a href="{yun:}url m=wap c=ltjob a=recshow id=$jobinfo.id{/yun}">{yun:}$jobinfo.job_name|mb_substr:0:18:'utf-8'{/yun}</a></div>
+<div class="">年薪：{yun:}if $jobinfo.maxsalary>0{/yun}￥{yun:}$jobinfo.minsalary{/yun}-{yun:}$jobinfo.maxsalary{/yun}万{yun:}elseif $jobinfo.minsalary>0{/yun}￥{yun:}$jobinfo.minsalary{/yun}万以上{yun:}else{/yun}面议{yun:}/if{/yun}</div>
+</div>
+
+<div class="lt_recuser_box_js">
+<div class="lt_recuser_box_js_h1"><i class="lt_recuser_box_js_h1_icon"></i>职位要求</div>
+<div class="lt_recuser_box_js_p">
+<div class="">招聘企业： {yun:}$jobinfo.com_name{/yun}</div>
+<div class="">学历要求： {yun:}$jobinfo.edu_info{/yun} </div>
+<div class="">工作地点： {yun:}$jobinfo.provinceid_info{/yun} {yun:}$jobinfo.cityid_info{/yun} {yun:}$jobinfo.three_cityid_info{/yun}</div>
+<div class="">截止日期： {yun:}$jobinfo.edate|date_format:"%Y-%m-%d"{/yun}</div>
+
+</div>
+</div>
+<div class="lt_recuser_box_js">
+<div class="lt_recuser_box_js_h1"><i class="lt_recuser_box_js_h1_icon"></i>职位描述</div>
+<div class="lt_recuser_box_js_p">{yun:}$jobinfo.job_desc{/yun}</div>
+</div>
+<div class="lt_recuser_box_js">
+<div class="lt_recuser_box_js_h1"><i class="lt_recuser_box_js_h1_icon"></i>推荐人才</div>
+ <input type="hidden" id="uid" value="{yun:}$uid{/yun}" />
+  <input type="hidden" name="job_uid" id="job_uid" value="{yun:}$jobinfo.uid{/yun}" />
+  <input type="hidden" name="job_id" id="job_id" value="{yun:}$jobinfo.id{/yun}" />
+ 
+<div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>真实姓名： </span>
+<input type="text" value="" class="lt_recuser_box_tj_list_text" id="name" name="name">
+</div>
+ <div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别： </span>
+<div class="lt_select">
+<select id="sex" name="sex" style="width:100%">
+<option value="">请选择</option>
+<option value="1">男</option>
+<option value="2">女</option>
+</select>
+</div>
+</div>
+<div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>出生年月：</span> 
+ <input type="text" value="" class="lt_recuser_box_tj_list_text" id="birthday" name="birthday">
+ </div>
+ <div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>最高学历： </span>
+<div class="lt_select">
+<select id="edu" name="edu" style="width:100%"><option value="">请选择</option>
+{yun:}foreach from=$userdata.user_edu item=v{/yun}
+<option value="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</option>
+{yun:}/foreach{/yun}</select>
+</div>
+</div>
+ <div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>工作经验： </span>
+<div class="lt_select">
+<select id="exp" name="exp" style="width:100%"><option value="">请选择</option>
+{yun:}foreach from=$userdata.user_word item=v{/yun}
+<option value="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</option>
+{yun:}/foreach{/yun}</select>
+</div>
+</div>
+<div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>手机号码：</span> 
+ <input type="text" value="" class="lt_recuser_box_tj_list_text" id="phone" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" name="phone">
+ </div>
+<div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name">联系邮箱：</span> 
+ <input type="text" value="" class="lt_recuser_box_tj_list_text" id="email" name="email">
+ </div>
+ <div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>从事行业： </span>
+<div class="lt_select">
+<select id="hy" name="hy" style="width:100%"><option value="">请选择</option>
+{yun:}foreach from=$industry_index item=v{/yun}
+<option value="{yun:}$v{/yun}">{yun:}$industry_name[$v]{/yun}</option>
+{yun:}/foreach{/yun}</select>
+</div>
+</div>
+<div style="clear:both"></div>
+ <div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>期望职位： </span>
+<div class="lt_selectw30" style=" float:left">
+<select name="job1" onchange="checkjob(this.value,'1');" >
+<option value="" value="">请选择</option>{yun:}foreach from=$job_index item=v{/yun}
+<option value="{yun:}$v{/yun}" {yun:}if $row.job1==$v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$job_name[$v]{/yun}</option>
+{yun:}/foreach{/yun}</select>
+</div>
+<div class="lt_selectw30" style=" float:left; margin-left:5px; margin-right:5px;">
+<select id="job1_son" name="job1_son" onchange="checkjob(this.value,'2');">
+<option value="">请选择</option>
+</select>
+</div>
+<div class="lt_selectw30" style=" float:left">
+<select id="job_post" name="job_post" >
+<option value="">请选择</option>
+</select>
+</div>
+</div>
+<div style="clear:both"></div>
+ <div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>期望城市： </span>
+<div class="lt_selectw30" style=" float:left">
+<select id="provinceid" name="provinceid"  onchange="checkcity(this.value,'1');">
+<option value="">请选择</option>
+{yun:}foreach from=$city_index item=v{/yun}
+<option value="{yun:}$v{/yun}">{yun:}$city_name[$v]{/yun}</option>
+{yun:}/foreach{/yun}
+</select>
+</div>
+<div class="lt_selectw30" style=" float:left; margin-left:5px; margin-right:5px;">
+<select id="cityid" name="cityid"  onchange="checkcity(this.value,'2');">
+<option value="">请选择</option></select>
+</div>
+<div class="lt_selectw30" style=" float:left">
+<select id="three_cityid" name="three_cityid">
+<option value="">请选择</option></select>
+</div>
+</div>
+<div style="clear:both"></div>
+ <div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>期望薪资： </span>
+<input type="text" id="minsalary" name="minsalary" size="5" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="post_text">
+<span> - </span>
+<input type="text" id="maxsalary" name="maxsalary" size="5" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="post_text">
+<span>万/年</span>
+</div>
+ <div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>工作性质： </span>
+<div class="lt_select">
+<select id="type" name="type" style="width:100%"><option value="">请选择</option>
+{yun:}foreach from=$userdata.user_type item=v{/yun}
+<option value="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</option>
+{yun:}/foreach{/yun}</select>
+</div>
+</div>
+ <div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>到岗时间： </span>
+<div class="lt_select">
+<select id="report" name="report" style="width:100%"><option value="">请选择</option>
+{yun:}foreach from=$userdata.user_report item=v{/yun}
+<option value="{yun:}$v{/yun}">{yun:}$userclass_name[$v]{/yun}</option>
+{yun:}/foreach{/yun}</select>
+</div>
+</div>
+<div class="lt_recuser_box_tj_list">
+<span class="lt_recuser_box_name"><i class="lt_recuser_box_bt">*</i>推荐描述：</span>
+ <textarea class="lt_recuser_box_tj_list_textarea"  type="text" id="content" name="content"></textarea>
+ </div>
+<div class="advice_list_but">
+<input type="button" onclick="ltrecuser('{yun:}url m=wap c=ltjob a=recusersave{/yun}')" value="立即推荐" class="lt_recuser_box_tj_list_sub">
+</div>
+</div>
+
+<div class="lt_recuser_box_tj_p">
+为避免纠纷，请确认您所输入的好友信息是准确的：<br>
+ 1.好友姓名请不要用先生女士等称谓代替；<br>
+2.好友手机号码请尽量准确，以免联系不上；<br>
+3.企业面试候选人之前不会透露个人信息给客户，防止骚扰。<br>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/lt.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/jobadd.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_002.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_003.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css?v={yun:}$config.cachecode{/yun}" type="text/css"> 
+<script>
+$(function () {
+	var currYear = (new Date()).getFullYear();
+	var opt = {
+		preset: 'date', //日期
+		theme: 'android-ics light', //皮肤样式
+		display: 'modal', //显示方式 
+		mode: 'scroller', //日期选择模式
+		dateFormat: 'yy-mm-dd', // 日期格式
+		setText: '确定', //确认按钮名称
+		cancelText: '取消',//取消按钮名籍我
+		dateOrder: 'yyyymmdd', //面板中日期排列式
+		dayText: '日', monthText: '月', yearText: '年',
+		startYear: currYear - 100, //开始年份
+		endYear: currYear-14 //结束年份
+	};
+	$("#birthday").mobiscroll('setDate', $("#birthday").val(), true).date(opt); 
+});
+</script> 
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"><div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top" style="z-index:600;position:relative;">	
+	<div class="report_uaer_list"><span class="infoboxp_top_span">赏金职位</span>
+	 <a href="index.php?m=admin_jobpack" {yun:}if $smarty.get.c!="reward"{/yun}class="report_uaer_list_on"{yun:}/if{/yun}>分享职位</a>
+	 <a href="index.php?m=admin_jobpack&c=reward" {yun:}if $smarty.get.c=="reward"{/yun}class="report_uaer_list_on"{yun:}/if{/yun}>悬赏职位</a>
+	  </div> 
+  </div> 
+  <div class="admin_Filter">   
+	<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>	
+      
+  </div>
+  {yun:}include file="admin/admin_search.htm"{/yun}
+  <div class="table-list">
+    <div class="admin_table_border">
+      <form action="index.php" name="myform" method="get" target="supportiframe" id='myform'>
+        <input name="m" value="admin_memberlog" type="hidden"/>
+        <input name="c" value="dellog" type="hidden"/>
+        <table width="100%">
+          <thead>
+            <tr class="admin_table_top">
+              <th style="width:20px;"><label for="chkall">
+                  <input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/>
+                </label></th>
+                  {yun:}if $smarty.get.t=="id" && $smarty.get.order=="asc"{/yun}
+                  <th><a href="{yun:}searchurl order=desc t=id m=admin_memberlog untype='order,t'{/yun}">编号<img src="images/sanj.jpg"/></a></th>
+                  {yun:}else{/yun}
+                  <th><a href="{yun:}searchurl order=asc t=id m=admin_memberlog untype='order,t'{/yun}">编号<img src="images/sanj2.jpg"/></a></th>
+                  {yun:}/if{/yun}
+              <th align="left">公司名称</th>
+              <th align="left">职位名称</th>
+              <th align="left">赏金总额</th>
+              <th align="left">投递赏金</th>
+              <th align="left">面试赏金</th>
+			  <th align="left">入职赏金</th>
+             
+              <th>发布时间</th>
+            
+             
+              <th align="left">应聘人数</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+          {yun:}foreach item=v from=$rows{/yun}
+          <tr align="center" id="list{yun:}$v.id{/yun}">
+            <td><input type="checkbox" value="{yun:}$v.id{/yun}"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+            <td>{yun:}$v.id{/yun}</td>
+            <td align="left" >{yun:}$v.com_name{/yun}</td>
+            <td align="left">{yun:}$v.name{/yun}</td>
+            <td align="left">{yun:}$v.money{/yun}</td>
+            <td align="left">{yun:}$v.sqmoney{/yun}</td>
+            <td align="left">{yun:}$v.invitemoney{/yun}</td>
+            <td align="left">{yun:}$v.offermoney{/yun}</td>
+            <td class="td">{yun:}$v.lastupdate|date_format:"%Y-%m-%d %H:%M"{/yun}</td>
+            
+            <td>
+			{yun:}if $v.sqnum>0{/yun}
+
+				<a href="index.php?m=admin_jobpack&c=rewardlog&jobid={yun:}$v.jobid{/yun}{yun:}if $smarty.get.t=='r'{/yun}&t=r{yun:}/if{/yun}" class="admin_cz_sc"><font color='green'>{yun:}$v.sqnum{/yun}人 查看应聘记录</font></a>
+
+			{yun:}else{/yun}
+
+				<font color='red'>暂无应聘</font>
+
+			{yun:}/if{/yun}
+			</td>
+           
+          </tr>
+          {yun:}/foreach{/yun}
+            </tbody>
+        </table>
+		<input type="hidden" name="pytoken"  id='pytoken' value="{yun:}$pytoken{/yun}">
+      </form>
+    </div>
+  </div>
+  </div>
+</body>
+</html>

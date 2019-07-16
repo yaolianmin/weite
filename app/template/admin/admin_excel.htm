@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script> 
+<script src="js/show_pub.js?v={yun:}$config.cachecode{/yun}"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"> 
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">请按照范本格式上传 xls文件，其他文件无法读取。</div>
+</div>
+</div>
+<div class="clear"></div>
+
+  <div class="tag_box mt10">
+	 <iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+
+<form name="resume" action="index.php?m=excel&c=resume" method="post" target="supportiframe" encType="multipart/form-data" onSubmit="return tcdiv('resume');">
+<input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+<table width="100%" class="table_form">
+      <tbody>
+  <tr class="admin_table_trbg">
+    <th width="160" bgcolor="#f0f6fb"><span class="admin_bold">参数说明</span></th>
+    <td bgcolor="#f0f6fb"><span class="admin_bold">参数值</span></td>   
+  </tr>     </tbody>
+	<tr id="photo" >
+		<th width="160">上传个人简历数据：</th>
+		<td>
+         <input type="file" name="excel" value="" class=""> 
+         <input class="subbut" type="submit" name="link_add" value="&nbsp;开始导入&nbsp;" />
+		</td>
+	</tr>
+</table>
+</form>
+<form name="comexcel" action="index.php?m=excel&c=comexcel" target="supportiframe"  method="post" encType="multipart/form-data" onSubmit="return tcdiv('comexcel');">
+<input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+<table width="100%" class="table_form">
+	<tr id="photo" >
+		<th width="160">上传企业职位数据：</th>
+		<td>
+         <input type="file" name="excel" value="" class=""> 
+         <input class="subbut" type="submit" name="link_add" value="&nbsp;开始导入&nbsp;" />
+		</td>
+	</tr>
+</table>
+</form>
+</div>
+</div>
+
+<script>
+function tcdiv(name){
+	parent.layer.load('执行中，请稍后...',0);
+}
+</script>
+</body>
+</html>

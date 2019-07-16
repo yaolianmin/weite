@@ -1,0 +1,61 @@
+<div class="m_cont_inner">
+
+
+
+{yun:}if $isdef==1{/yun}
+   <div class="m_inner_zuob fl">
+         <div class="m_inner_gl_name"><span class="all_word">账号管理</span><span class="all_cirle"></span></div>
+	<div class="m_zuob_list {yun:}if $smarty.get.c=='info'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=info"><i class="left_icon left_icon_info"></i>基本信息</a></div>
+	<div class="m_zuob_list {yun:}if $smarty.get.c=='uppic'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=uppic"><i class="left_icon left_icon_tx"></i>上传头像</a></div>
+	<div class="m_zuob_list {yun:}if $smarty.get.c=='binding'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=binding"><i class="left_icon left_icon_rz"></i>认证管理</a></div>
+	<div class="m_zuob_list {yun:}if $smarty.get.c=='passwd'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=passwd"><i class="left_icon left_icon_mm"></i>修改密码</a></div>
+        <div class="m_zuob_list  {yun:}if $smarty.get.c=='zixun'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=zixun"><i class="left_icon left_icon_zx"></i>求职咨询</a></div>
+    <div class="m_zuob_list {yun:}if $smarty.get.c=='sysnews'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=sysnews"><i class="left_icon left_icon_xx"></i>系统消息</a></div>
+   <div class="m_zuob_list"><a href="{yun:}url m=ask c=friend a=myquestion uid=$uid{/yun}" target="_blank"><i class="left_icon left_icon_ask"></i>我的问答</a></div>
+    {yun:}if $smarty.get.c=='setname'{/yun}
+    <div class="m_zuob_list m_zuob_cur"><a href="index.php?c=setname"><i class="left_icon left_icon_fbz"></i>修改账户</a></div>
+    {yun:}/if{/yun}
+  </div>
+{yun:}/if{/yun}
+
+{yun:}if $isdef==2{/yun}
+	<div class="m_inner_zuob fl">
+    <div class="m_inner_gl_name"><span class="all_word">职位管理</span><span class="all_cirle"></span></div>
+		<div class="m_zuob_list {yun:}if $smarty.get.c=='jobadd'{/yun}m_zuob_cur{yun:}/if{/yun}">
+			<a href="javascript:void(0);" onclick="jobadd_url('{yun:}$addltjobnum{/yun}','{yun:}$config.integral_lt_job{/yun}','lietou','{yun:}$config.com_integral_online{/yun}','{yun:}$config.integral_proportion{/yun}');"><i class="left_icon left_icon_fbzw"></i>发布新职位</a>		</div>
+
+		<div class="m_zuob_list {yun:}if $smarty.get.s=='1'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=job&s=1"><i class="left_icon left_icon_fbz"></i>发布中的职位</a></div>
+		<div class="m_zuob_list {yun:}if $smarty.get.s=='0' && $smarty.get.zp_status!='1'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=job&s=0"><i class="left_icon left_icon_fbzw left_icon_dsh"></i>待审核的职位</a></div>
+		<div class="m_zuob_list {yun:}if $smarty.get.s=='2'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=job&s=2"><i class="left_icon left_icon_fbzw left_icon_ygq"></i>已过期的职位</a></div>
+		<div class="m_zuob_list {yun:}if $smarty.get.s=='3'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=job&s=3"><i class="left_icon  left_icon_wtg"></i>未通过的职位</a></div>
+        <div class="m_zuob_list {yun:}if $smarty.get.zp_status=='1'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=job&zp_status=1"><i class="left_icon  left_icon_xj"></i>已下架的职位</a></div>
+  </div>
+{yun:}/if{/yun}
+
+{yun:}if $isdef==3{/yun}
+  <div class="m_inner_zuob fl">
+     <div class="m_inner_gl_name"><span class="all_word">财务管理</span><span class="all_cirle"></span></div>
+<div class="m_zuob_list {yun:}if $smarty.get.c=='mypay'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=mypay"><i class="left_icon left_icon_zhzx"></i>账户中心</a></div>
+	<div class="m_zuob_list {yun:}if $smarty.get.c=='pay'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=pay"><i class="left_icon left_icon_cz"></i>立刻充值</a></div>
+    <div class="m_zuob_list {yun:}if $smarty.get.c=='paylogtc'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=paylogtc"><i class="left_icon left_icon_hy"></i>我的会员</a></div>
+	<div class="m_zuob_list {yun:}if $smarty.get.c=='right'&&($smarty.get.act==''||$smarty.get.act=='time'||$smarty.get.act=='added'){/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=right"><i class="left_icon left_icon_hyfw"></i>会员服务</a></div>
+	<div class="m_zuob_list {yun:}if $smarty.get.c=='integral'||$smarty.get.c=='integral_reduce'||$smarty.get.c=='reward_list'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=integral"><i class="left_icon left_icon_dj"></i>{yun:}$config.integral_pricename{/yun}管理</a></div>
+  <div class="m_zuob_list {yun:}if $smarty.get.c=='paylog'||$smarty.get.c=='consume'||$smarty.get.c=='paymanage'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=paymanage"><i class="left_icon left_icon_mx"></i>财务明细</a></div>
+   <div class="m_zuob_list {yun:}if $smarty.get.c=='jobpack' && $smarty.get.act=='loglist'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=jobpack&act=loglist"><i class="left_icon left_icon_sj"></i>赏金收益</a></div>
+    <div class="m_zuob_list {yun:}if $smarty.get.c=='coupon_list'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=coupon_list"><i class="left_icon left_icon_yhq"></i>优惠券</a></div>
+
+	</div>
+{yun:}/if{/yun}
+{yun:}if $isdef==4{/yun}
+    <div class="m_inner_zuob fl">
+      <div class="m_inner_gl_name"><span class="all_word">招聘管理</span><span class="all_cirle"></span></div>
+     <div class="m_zuob_list {yun:}if $smarty.get.c=='yp_resume'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=yp_resume"><i class="left_icon left_icon_jl"></i>应聘来的简历</a></div>
+     <div class="m_zuob_list {yun:}if $smarty.get.c=='search_resume'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=search_resume"><i class="left_icon left_icon_src"></i>搜人才</a></div>  
+    <div class="m_zuob_list {yun:}if $smarty.get.c=='entrust_resume'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=entrust_resume"><i class="left_icon left_icon_wt"></i>委托来的简历</a></div>
+        <div class="m_zuob_list {yun:}if $smarty.get.c=='down_resume'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=down_resume"><i class="left_icon left_icon_xz"></i>已下载的简历</a></div>
+        <div class="m_zuob_list {yun:}if $smarty.get.c=='look_resume'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=look_resume"><i class="left_icon left_icon_ll"></i>浏览过的简历</a></div>
+    	<div class="m_zuob_list {yun:}if $smarty.get.c=='give_rebates'||$smarty.get.c=='my_rebates'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=give_rebates"><i class="left_icon left_icon_xs"></i>猎头悬赏</a></div>
+		<div class="m_zuob_list {yun:}if $smarty.get.c=='talent'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=talent"><i class="left_icon left_icon_jlk"></i>简历库</a></div>
+		<div class="m_zuob_list {yun:}if $smarty.get.c=='jobpack'{/yun}m_zuob_cur{yun:}/if{/yun}"><a href="index.php?c=jobpack"><i class="left_icon left_icon_sj"></i>悬赏申请</a></div>
+    </div>
+{yun:}/if{/yun}

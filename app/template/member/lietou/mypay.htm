@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<!--内容部分content-->
+<div class="m_content">
+	<div class="wrap">
+		{yun:}include file="$lietoustyle/left.htm"{/yun}
+		<div class="m_inner_youb fr">
+        
+        
+          <div class="lt_m_tit"><span class="lt_m_tit_s">账户余额</span></div>
+			<div class="m_youb_yue01">
+				<div class="m_youb_yue"> 
+					我的账户{yun:}$config.integral_pricename{/yun}：
+					<em>{yun:}$statis.integral_format{/yun}</em>{yun:}$config.integral_priceunit{/yun}
+					<a href="index.php?c=pay&type=integral" class="m_yue_cz01">账户充值</a>
+					<a class="m_yue_cz02"  href="javascript:use_card();"  style="width:120px;">使用充值卡充值</a>
+					<a href="index.php?c=right" class="m_yue_cz02">查看特权</a>
+				</div>
+
+				<div class="m_youb_all">
+					<ul>
+						<li>总计充值金额：<span> {yun:}$statis.all_pay{/yun} 元</span></li>
+						
+						<li>消费金额：<span><em class="ff8"> {yun:}$statis.consum_pay{/yun} </em>元</span></li>
+					</ul>
+				</div>
+ 			</div>
+ 		</div>
+	</div>
+</div>
+
+<script>
+function use_card(){
+	$.layer({
+		type : 1,
+		title : '使用充值卡充值',
+		closeBtn : [0 , true], 
+		border : [10 , 0.3 , '#000', true],
+		area : ['350px','170px'],
+		page : {dom : '#use_card'}
+	}); 
+}
+</script>
+<div id="use_card"  style="display:none; width: 350px;">
+  <div class="job_box_div">
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form action="index.php?c=mypay&act=card" target="supportiframe" method="post" id='myform'>
+      <div class="mypay_box fl" >
+       <span class="mypay_name fl" style="width:80px;"> 卡号：</span>
+        <input name="card" class="mypay_input fl" type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+         </div>
+      <div class="mypay_box fl">
+       <span class="mypay_name fl" style="width:80px;"> 密码：</span>
+        <input name="password" class="mypay_input fl" type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"/>
+         </div>
+      <div class="mypay_box fl"> 
+      <span class="mypay_name fl" style="width:80px;"> &nbsp;</span>
+      <a class="mypay_bth fl" href="javascript:void(0);" onclick="setTimeout(function(){$('#myform').submit()},0);">确定</a> </div>
+    </form>
+  </div>
+</div>
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

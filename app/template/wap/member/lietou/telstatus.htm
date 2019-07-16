@@ -1,0 +1,38 @@
+{yun:}include file="$wapstyle/member/lheader.htm"{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/talent.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script>var weburl="{yun:}$config.sy_weburl{/yun}";</script>
+
+<section class="wap_member">
+	
+  
+      <div class="wap_member_comp_h1"><span>简历授权认证</span></div>
+     
+      <div class="pmail_hint">简历授权认证后，您可以将简历推荐给需要的企业赚取赏金 </div>
+      <div class="bingdingbox">
+      <ul>
+        <li>  <span class="bingdingbox_name"><i>*</i>简历手机号</span>
+       <input type="text" class="bingdingbox_text" name="linktel" id="linktel" value="{yun:}$Info.linktel{/yun}">
+        </li>
+   
+       
+		  <li> <span class="bingdingbox_name"><i>*</i> 验证码</span>
+		 <div class="bingdingbox_yz"><input type="text" name="authcode" class="bingdingbox_text ">
+        <img id="vcode_img" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php" class="bingdingbox_yzm" onclick="checkCode('vcode_img');"></div></li>
+       
+        <li class="bingdingbox_yz_line"> 
+         <span class="bingdingbox_name"><i>*</i> 短信验证</span>
+           <div class="bingdingbox_yz"> <input type="text" class="bingdingbox_text " id="moblie_code">
+          <a href="javascript:void(0);" onclick="tsendmoblie();" class="bingdingbox_textym" id="time">获取验证码</a> 
+          </div>
+          </li>
+      </ul>
+    </div>
+      <div class="bingdingbox_bth_box"> 
+		  <input type='hidden' name='telid' id="telid" value='{yun:}$Info.id{/yun}'>
+          <input type="button" value="提交" class="bingdingbox_bth" onclick="telstatus();">
+      </div>
+
+</section>
+</div>
+<input type="hidden" id="send" value="0" />
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

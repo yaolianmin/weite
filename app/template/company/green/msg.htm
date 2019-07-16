@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>{yun:}$title{/yun}</title>
+<link rel="stylesheet" type="text/css" href="{yun:}$com_style{/yun}/images/style.css?v={yun:}$config.cachecode{/yun}" />
+</head>
+
+<body style="background:#f0f0f0">
+<!--header头部-->
+<div class="c_w_header">
+  <div class="c_header_tou01">
+    <div class="wrap">
+      <div class="c_tou01_huany">
+        <div class="c_huany_xt fl">{yun:}$com.name{/yun}欢迎您！</div>
+      </div>
+    </div>
+  </div>
+   <div class="black_bg" >
+  <div class="black_banner" ><img  src="{yun:}$banner.pic{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_banner{/yun}',2);"> </div></div>
+  <div class="black_cont">
+  <div class="black_cont_cominfo">
+  <div class="balck_logo"><img src="{yun:}$com.logo{/yun}" width="120" height="120" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);" />
+  </div>
+  <div class="black_cont_cominfo_right">
+  <div class="black_cont_cominfo_nb">
+  <h1 class="black_cont_cominfo_name">{yun:}$com.name{/yun}</h1> 
+   {yun:}if $ComMember.source==6 && $ComMember.claim==0 && $ComMember.email!=""{/yun}
+        <a href="javascript:claim('{yun:}url m=ajax c=claim uid=$com.uid{/yun}');">认领</a>
+        {yun:}/if{/yun}
+  {yun:}if $usertype=='1'{/yun}
+			  {yun:}if $isatn.id{/yun} 
+			  <a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="wrap_l_name_gz">取消关注</a> 
+			  {yun:}else{/yun} 
+			  <a href="javascript:void(0)" onclick="atn('{yun:}$com.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}')" id='atn_{yun:}$com.uid{/yun}' class="wrap_l_name_gz">关注</a> 
+			  {yun:}/if{/yun}
+          {yun:}else{/yun} 
+            {yun:}if $uid{/yun}
+            <a href="javascript:void(0)" onclick="layer.msg('只有个人用户才能关注', 2,8)" class="wrap_l_name_gz">关注</a> 
+            {yun:}else{/yun}
+            <a href="javascript:void(0)" onclick="showlogin('1');" class="wrap_l_name_gz">关注</a> 
+            {yun:}/if{/yun} 
+		  {yun:}/if{/yun}
+         <!-- 已有<font id="antnum{yun:}$com.uid{/yun}">{yun:}$com.ant_num{/yun}</font>人关注-->
+         
+		   {yun:}if $com.welfare_n{/yun}
+           <div class="com_welfare">
+			{yun:}foreach from=$com.welfare_n item=wlist{/yun} 
+			<span class="com_welfare_s">{yun:}$wlist{/yun}</span>
+			{yun:}/foreach{/yun} 
+			 </div>{yun:}/if{/yun}
+             
+		  
+
+  </div>
+ 
+  </div>
+  </div>
+ 
+    <div class="black_cont_bg"></div>
+   </div>   <div class="clear"></div>
+      <div class="black_com_w980">
+   <div class="black_com_box">
+      <div class="black_com_box_left">
+        
+{yun:}score uid=$com.uid item=score{/yun}
+
+  <div class="black_com_box_tit"><span class="black_com_box_tit_s">面试评价</span></div>
+      <div class="evaluate">
+
+          {yun:}if $score.num{/yun}
+          <div class="evaluate_pf_otherbox">
+           <div class="evaluate_pf_left">
+           <div class="evaluate_pf_left_tit">综合评分<span class="evaluate_pf_left_tit_n">( 来自{yun:}$score.num{/yun}人评价 )</span></div>
+          <div class="evaluate_pf_other">
+         <div class="evaluate_pf_other_name">描述相符：</div>
+        <div class="evaluate_pf_other_start"><i class="evaluate_pf_other_start_p" style="width:{yun:}$score.desscore/5*100{/yun}%"></i></div>
+        <div class="evaluate_pf_other_fs">{yun:}$score.desscore{/yun}</div>
+          </div>
+           <div class="evaluate_pf_other">
+         <div class="evaluate_pf_other_name">面试官：</div>
+        <div class="evaluate_pf_other_start"><i class="evaluate_pf_other_start_p" style="width:{yun:}$score.hrscore/5*100{/yun}%"></i></div>
+          <div class="evaluate_pf_other_fs">{yun:}$score.hrscore{/yun}</div>
+          </div>
+                <div class="evaluate_pf_other">
+        <div class="evaluate_pf_other_name"> 公司环境：</div>
+        <div class="evaluate_pf_other_start"><i class="evaluate_pf_other_start_p" style="width:{yun:}$score.comscore/5*100{/yun}%"></i></div>
+          <div class="evaluate_pf_other_fs">{yun:}$score.comscore{/yun}</div>
+          </div>
+          </div>
+          
+            <div class="evaluate_pf_right">
+            综合：<span class="evaluate_pf_right_fs">{yun:}$score.score{/yun}</span>
+            分
+            </div>
+            
+            </div>
+          
+         <div class="evaluate_job">
+        <span class="evaluate_job_s">面试职位：</span><a href="{yun:}url m=company c=msg id=$com.uid{/yun}" class="evaluate_job_cur">全部</a>
+        
+		{yun:}foreach from=$msgjob item=mjob{/yun}
+		<a href="{yun:}url m=company c=msg id=$com.uid jobid=$mjob.id{/yun}">{yun:}$mjob.name|mb_substr:0:10:'utf-8'{/yun}</a>
+		{yun:}/foreach{/yun}
+         </div>
+		{yun:}else{/yun}
+       <div class="clear"></div>
+	   <div class="firm_tips_no">  该企业尚未收到面试评价!</div>
+		 {yun:}/if{/yun}
+		
+        <!-- 循环star-->
+		{yun:}commsg limit=5 id='auto.id' ispage=1 item=mlist{/yun}
+         <div class="evaluate_userlist">
+         <div class="evaluate_username">
+         <div class="evaluate_userphoto"><img src="{yun:}$mlist.photo{/yun}" width="80" height="80">
+         </div>
+         <div class="evaluate_username_u">{yun:}$mlist.name{/yun}</div>
+         </div>
+         <div class="evaluate_user_pf">
+         <div class="evaluate_ms_box">
+         <div class="evaluate_pf_userzh">
+         <div class="evaluate_pf_userzh_l">综合评分：</div>
+        <div class="evaluate_pf_other_start"><i class="evaluate_pf_other_start_p" style="width:{yun:}$mlist.scorepf{/yun}%"></i></div>
+          <div class="evaluate_pf_other_fs">{yun:}$mlist.score{/yun}</div>
+          </div>
+          <div class="evaluate_pf_job">面试职位：{yun:}if $mlist.jobname{/yun}<a href="{yun:}url m=job c=comapply id=$mlist.jobid{/yun}">{yun:}$mlist.jobname{/yun}</a>{yun:}else{/yun}职位已下架{yun:}/if{/yun}</div>
+       <div class="evaluate_date">{yun:}$mlist.ctime|date_format:"%Y-%m-%d"{/yun}</div>
+        </div>
+        <div class="evaluate_tag">
+		{yun:}foreach from=$mlist.tags item=v{/yun}
+        <span class="evaluate_tag_s">{yun:}$v{/yun}</span>
+		{yun:}/foreach{/yun}
+       
+        </div>
+           <div class="evaluate_pj_box">
+            <div class="evaluate_pj">[面试过程] {yun:}$mlist.content{/yun}</div>
+            <div class="evaluate_pj">[其他评价] {yun:}$mlist.othercontent{/yun}</div>
+          </div>
+          </div>
+        </div>   
+		{yun:}/commsg{/yun}
+         <!-- 循环end-->
+         
+          </div> 
+         </div> 
+            <div class="black_com_box_right">
+			   <div class="black_com_box_tit"><span class="black_com_box_tit_s">投递查看</span></div>
+			   <div class="black_com_lookreseme"><div class="black_com_lookreseme_n"><span class="black_com_lookreseme_n_n">{yun:}$pre{/yun}</span>%</div>简历回复率</div>
+				   <div class="black_com_lookms"><div class="black_com_lookreseme_n"><span class="black_com_lookreseme_n_n">{yun:}$invite_resume{/yun}</span></div>邀请面试</div>
+			   <div class="black_com_box_tit"><span class="black_com_box_tit_s">基本信息</span></div>
+			   <div class="black_com_box_right_info">
+			   <div class="c_nr_hy"><em>行业</em><span>{yun:}$com.hy_info{/yun}</span></div>
+				  <div class="c_nr_hy"><em>性质</em><span>{yun:}$com.pr_info{/yun}</span></div>
+				  <div class="c_nr_hy"><em>规模</em><span>{yun:}$com.mun_info{/yun}</span></div>
+				  <div class="c_nr_hy"><em>地区</em><span>{yun:}$com.provinceid{/yun}</span></div>
+			  {yun:}if $com.money{/yun}<div class="c_nr_hy"><em>注资</em>{yun:}$com.money{/yun}{yun:}if $com.moneytype==1{/yun}万元{yun:}else{/yun}万美元{yun:}/if{/yun}</div>{yun:}/if{/yun}
+			  {yun:}if $com.sdate{/yun}<div class="c_nr_hy"><em>创办</em>{yun:}$com.sdate{/yun}</div>{yun:}/if{/yun}
+					   
+			   </div>
+			   </div>
+         <div class="pages">{yun:}$pagenav{/yun}</div>
+   </div> 
+      </div>
+    </div>
+    
+    <!--内容结束-->
+<div class="clear"></div>
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}",integral_pricename='{yun:}$config.integral_pricename{/yun}',pricename='{yun:}$config.integral_pricename{/yun}',code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /><script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script><script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+ <script src="{yun:}$config.sy_weburl{/yun}/js/popImage/jquery.popImage.mini.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script>
+$(function () {
+	$("a.image_gall").popImage();
+	$('.c_zj02_list li').click(function () {
+		$(this).addClass('c_zj02_curr').siblings().removeClass('c_zj02_curr');
+	});
+});
+</script>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+<iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" class="none"></iframe>
+<!--底部footer-->
+{yun:}include file="$tplstyle/footer.htm"{/yun}
+    
+    

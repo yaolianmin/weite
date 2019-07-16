@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}" />
+<meta name="description" content="{yun:}$description{/yun}" />
+<link href="{yun:}$style{/yun}/style/classic.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="{yun:}$style{/yun}/style/css.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+{yun:}if $ishtml{/yun}
+<script src="{yun:}url m=ajax c=wjump{/yun}" language="javascript"></script>
+{yun:}/if{/yun}
+</head>
+
+<body>
+{yun:}include file="$tplstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="index_banner none" id="js_ads_banner_top">{yun:}adlist classid=73 limit=1 item=adlist_73{/yun}
+{yun:}$adlist_73.html{/yun}
+{yun:}/adlist{/yun}</div>
+<div class="index_banner" id="js_ads_banner_top_slide">{yun:}adlist classid=72 limit=1 item=adlist_72{/yun}
+{yun:}$adlist_72.html{/yun}
+{yun:}/adlist{/yun}</div>
+ <div class="w980">
+    <div class="index_banner_cont "> {yun:}adlist classid=13 limit=2 item=adlist_13{/yun}
+      {yun:}$adlist_13.html{/yun}
+      {yun:}/adlist{/yun}
+      {yun:}adlist classid=14 limit=6 item=adlist_14{/yun}
+      {yun:}$adlist_14.html{/yun}
+      {yun:}/adlist{/yun}
+      {yun:}adlist classid=15 limit=10 item=adlist_15{/yun}
+      {yun:}$adlist_15.html{/yun}
+      {yun:}/adlist{/yun} </div>
+  </div>
+
+<!--content  start--> 
+<div class="yun_content">
+  <div class="clear"></div>
+ <!-- Index  login-->  
+<div class="hp_login fl">
+     <div class="hp_login_tit"><span class="yun_Indexlogin_tit_s"><i class="yun_Indexlogin_tit_line"></i>会员登录</span></div>
+     <div class="yun_Indexlogin_box">
+     <div class="hp_login_hy">
+          <i class="hp_login_hy_icon fl"></i>
+          <input class="hp_login_hy_but fl" type="text" id="username" name="username" placeholder="邮箱/手机号/用户名"/>
+     </div>
+     <div class="hp_login_hy">
+          <i class="hp_login_mm_icon fl"></i>
+          <input class="hp_login_hy_but fl" type="password" id="password" name="password" placeholder="请输入密码"/>
+     </div>
+     <div class="hp_login_box">
+          <div class="hp_login_box_ft fl">
+               <input type="checkbox"/>
+               <span class="hp_login_box_r">下次自动登录</span>
+          </div>
+      </div>
+     <div class="hp_login_lg"><input class="hp_login_lg_but" type="submit" value="登录" onclick="check_login('{yun:}url m=login c=loginsave{/yun}');"/></div><div class="yun_Indexlogin_sub_fotg">还没有注册账号？<a href="{yun:}url m=forgetpw{/yun}" class="yun_Indexlogin_ft ">忘记密码?</a></div>
+     <div class="hp_login_rg">
+          <a href="{yun:}url m=register usertype=2 type=1{/yun}" class="yun_text_color_login ">企业注册</a>
+          <a href="{yun:}url m=register usertype=1 type=1{/yun}" class="yun_text_color_login_gr">个人注册</a>
+     </div>
+</div>
+</div>
+<!-- Index  login end-->  
+  <div class="cont_Projector">
+    <div class="Projector">
+      <div class="Projector_img">
+        <div id="slides" class="s_lb">
+          <div class="slides_container"> {yun:}adlist classid=3 item="lunbo" key=key{/yun}
+            <div class="slide">{yun:}$lunbo.html{/yun}</div>
+            {yun:}/adlist{/yun} </div>
+        </div>
+      </div>
+    </div>
+    <div class="yun_Announcement">
+      <ul>
+        {yun:}downlist item=dlist limit=10{/yun}
+        <li><a href="{yun:}$dlist.curl{/yun}"  target="_blank">{yun:}$dlist.comname{/yun}</a> 下载了 <a href="{yun:}$dlist.url{/yun}" target="_blank">{yun:}$dlist.username{/yun}</a> 的简历 <em class="yun_new_dt_em">{yun:}$dlist.time{/yun}</em></li>
+        {yun:}/downlist{/yun}
+      </ul>
+    </div>
+    
+  </div>
+  <div class="yuin_index_r">
+    <div class="yuin_index_r_h1">
+      <ul class="yun_index_h1_list">
+        <li class="yun_index_h1_cur"><span>最新资讯</span>&nbsp;</li>
+        <li><span>网站公告</span>&nbsp;</li>
+        <li style="border:none;" ><span>招聘会</span>&nbsp;</li>
+      </ul>
+
+    </div>
+    <div class="yun_index_cont" style="display:block">
+      <ul class="yun_in_news">
+        {yun:}article item=alist t_len=15 limit=8 key=key name=newlist1{/yun}
+        <li><span {yun:}if $key<3{/yun}class="yun_in_news_span yun_in_news_span_cur"{yun:}else{/yun}class="yun_in_news_span"{yun:}/if{/yun}>{yun:}$key+1{/yun}</span><a href="{yun:}$alist.url{/yun}" class="yun_in_news_a" target="_blank">{yun:}$alist.title{/yun}</a></li>
+        {yun:}/article{/yun}
+      </ul>
+    </div>
+    <div class="yun_index_cont none">
+      <ul class="index_latest_news">
+        {yun:}announcement t_len=18 limit=10 item=gonggao name=gonggaolist1{/yun}
+        <li><a href="{yun:}$gonggao.url{/yun}" target="_blank">{yun:}$gonggao.title_n{/yun}</a></li>
+        {yun:}/announcement{/yun}
+      </ul>
+    </div>
+    <div class="yun_index_cont none">
+      <ul class="index_latest_news">
+        {yun:}fairs len=19 limit=10 item=flist{/yun}
+        <li><a href="{yun:}$flist.url{/yun}" target="_blank">{yun:}$flist.title{/yun}</a></li>
+        {yun:}/fairs{/yun}
+      </ul>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="w980">
+    <div class="Famous_recruitment">
+      <div class="Latest_talent_h1 "><b ><a href="{yun:}url m=company rec=1{/yun}" rel="nofollow" target="_blank">名企招聘</a><span class="index_Emergency_span">Famous Enterprise </span></b></div>
+ <div class="yunFamousenterprises fl">
+                        <div class="yunFamousenterprises_box fl">
+                            <div class="Famous_recruitment_cont">
+                                <div class="index_left15560">
+                                    <div id="mainids">
+                                        {yun:}hotjob item=hotjoblist limit=18{/yun}
+                                        <div class="tlogo">
+                                            <ul>
+                                                <li onmouseover="showDiv2(this)" onmouseout="showDiv2(this)">
+                                                    <a href="{yun:}$hotjoblist.url{/yun}" target="_blank" class="tlogo_p_a"><img width="100" height="100" border="1" class="on lazy" src="{yun:}formatpicurl path=$hotjoblist.hot_pic type=comlogo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);" alt="{yun:}$hotjoblist.username{/yun}" /></a>
+                                                    <div class="yunFamousenterprises_comname">{yun:}$hotjoblist.username{/yun}</div>
+                                                    <div class="yunFamousenterprises_comname_bg"></div>
+                                                    <div class="show">
+                                                        <div class="area">{yun:}$hotjoblist.job{/yun}</div>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        {yun:}/hotjob{/yun} </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="clear"></div>
+  <div class="index_Emergency_job">
+    <div class="Emergency_index_cont">
+      <div class="Latest_talent_h1 "><b ><a href="{yun:}listurl type=tp v=1{/yun}" rel="nofollow" target="_blank">紧急招聘</a><span class="index_Emergency_span">Urgent Jobs</span></b><a href="{yun:}url m=job c=search urgent=1{/yun}" class="index_more"  rel="nofollow" target="_blank">更多>></a></div>
+      <ul>
+        {yun:}comjob limit=30 urgent=1 comlen=16 joblen=6 jobnum=1 item=urgentjoblist{/yun}
+        <li class="Emergency_list"> <a href="{yun:}$urgentjoblist.curl{/yun}" class="index_Emergency_com_name" target="_blank">{yun:}$urgentjoblist.name_n{/yun}</a> {yun:}foreach from=$urgentjoblist.joblist key=key item=urgentitem{/yun} <a href="{yun:}$urgentitem.url{/yun}" target="_blank" class="index_Emergency_post_name">{yun:}$urgentitem.name_n{/yun}</a> {yun:}/foreach{/yun} </li>
+        {yun:}/comjob{/yun}
+      </ul>
+    </div>
+ 
+  </div>
+  <div class="index_Emergency_job">
+    <div class="Latest_talent_h1 "><b ><a href="{yun:}listurl type=tp v=2{/yun}" rel="nofollow" target="_blank">推荐职位</a><span class="index_Emergency_span">Recommend Jobs</span></b><a href="{yun:}url m=job c=search rec=1{/yun}" class="index_more" rel="nofollow" target="_blank">更多>></a></div>
+    <div class="Recommended_jobs_cont">
+      <ul>
+        {yun:}comjob limit=28 rec=1 comlen=16 joblen=5 jobnum=1  item=job_list key=key name=comjoblist1{/yun}
+        <li> <em class="Recommended_jobs_cont_li"> <span class="Recommended_jobs_pin">聘：</span>{yun:}foreach from=$job_list.joblist item=jlist{/yun} <a href="{yun:}$jlist.url{/yun}" class="Recommended_jobs_name_cor" target="_blank">{yun:}$jlist.name_n{/yun}</a> {yun:}/foreach{/yun} </em> <em class="Recommended_jobs_name" style="padding-top:5px;"> <a href="{yun:}$job_list.curl{/yun}" target="_blank">{yun:}$job_list.name_n{/yun}</a>
+        {yun:}if $job_list.ratlogo{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$job_list.ratlogo{/yun}" style="max-width:20px; margin-left:5px; vertical-align:middle" class="lazy" src=""/>{yun:}/if{/yun} 
+        {yun:}if $job_list.yyzz_status==1{/yun}<img src="{yun:}$style{/yun}/images/disc_icon10.png" width="16" height="16" title="认证企业"/>{yun:}/if{/yun}
+        </em> </li>
+        {yun:}/comjob{/yun}
+      </ul>
+    </div>
+  </div>
+ 
+  <div class="clear"></div>
+  <div class="index_Emergency_job" >
+    <div class="Featured_Jobs_bg1">
+      <div class="Latest_talent_h1"><b><a href="{yun:}url m=job c=search{/yun}" rel="nofollow" target="_blank">最新职位</a><span class="index_Emergency_span">New Jobs</span></b><a href="{yun:}url m=job{/yun}" class="index_more" rel="nofollow" target="_blank">更多>></a></div>
+      <div class="Featured_Jobs">
+        <ul class="jinji_list">
+          {yun:}comjob limit=42 comlen=13 joblen=5 jobnum=3  item=hot key=key name=comjoblist2{/yun}
+          <li class="Featured_Jobs_t1"> <a href="{yun:}$hot.curl{/yun}" class="Featured_Jobs_name fl" target="_blank">{yun:}$hot.name_n{/yun}</a>  
+          {yun:}if $hot.ratlogo{/yun}<img src="{yun:}$config.sy_weburl{/yun}/{yun:}$hot.ratlogo{/yun}" width="16" height="16"  class="lazy" src=""/>{yun:}/if{/yun} 
+        {yun:}if $hot.yyzz_status==1{/yun}<img src="{yun:}$style{/yun}/images/disc_icon10.png" width="16" height="16" title="认证企业"/>{yun:}/if{/yun}
+        
+          {yun:}foreach from=$hot.joblist item=jlist{/yun} <a href="{yun:}$jlist.url{/yun}" target="_blank" class="Featured_Jobs_name_c">{yun:}$jlist.name_n{/yun}</a> 
+        
+          {yun:}/foreach{/yun} </li>
+          {yun:}/comjob{/yun}
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="clear"></div>
+  <div class="index_Emergency_job">
+    <div class="Latest_talent_h1"><b><a href="{yun:}url m=resume c=search {/yun}" rel="nofollow" target="_blank">最新人才</a><span class="index_Emergency_span">New User</span></b><a href="{yun:}url m=resume {/yun}" class="index_more" rel="nofollow" target="_blank">更多>></a></div>
+   
+   <div class="hp_people"> <ul>
+         {yun:}userlist item=ulist post_len=10 limit=12 key=key name=userlist1{/yun}
+         <li>
+             <div class="hp_people_box">
+              <div class="hp_people_box_rt fl"><a href="{yun:}url m=resume  c=show id='`$ulist.id`'{/yun}" target="_blank"><img style="width:80px;height:80px;border-radius:50%" src="{yun:}$ulist.photo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);" /></a></div>
+                  <div class="hp_people_box_ft fl">
+                       <div class="hp_people_box_ft_nm"><a href="{yun:}url m=resume  c=show id='`$ulist.id`'{/yun}" target="_blank">{yun:}$ulist.username_n|mb_substr:0:10:"utf-8"{/yun}</a></div>
+                  
+                       <div class="hp_people_box_ft_v">{yun:}$ulist.exp_n{/yun}经验<i class="index_line">|</i>{yun:}$ulist.edu_n{/yun}学历</div>
+                            <div class="hp_people_box_ft_y">意向：{yun:}$ulist.job_post_n{/yun}</div>
+                  </div>
+                 
+             </div>
+         </li>
+         {yun:}/userlist{/yun}
+     </ul>
+   </div>
+   
+   
+   
+   
+   
+  </div>
+<div class="clear"></div>
+    <!--职场资讯开始-->
+     <div class="index_Emergency_job">
+    <div class="Latest_talent_h1"><b><a href="{yun:}url m=article{/yun}"rel="nofollow"target="_blank">职场资讯</a><span class="index_Emergency_span">News</span></b> <em style="float:right; font-size:14px;line-height:34px; margin-right:10px;">{yun:}articleclass rec=1  item=arcgroupright urlstatic=1 key=key len=4 pt_len=12 pd_len=40 t_len=15{/yun}{yun:}if $key>0{/yun}|{yun:}/if{/yun} <a  href="{yun:}$arcgroupright.url{/yun}" target="_blank">{yun:}$arcgroupright.name{/yun}</a> {yun:}/articleclass{/yun} <a href="{yun:}url m=article{/yun}" target="_blank">更多>></a></em>
+</div>
+ 
+      <!--简历指导--> 
+      {yun:}article rec=1  limit=8 pic=1 t_len=20 d_len=24 type=t urlstatic=1 item=indexnews{/yun}
+      <div class="index_news_content"> {yun:}if $indexnews.pic{/yun}
+        <dl class="index_news_top">
+          <dt> <a href="{yun:}$indexnews.pic.0.url{/yun}"> <img width="100" height="80" src="{yun:}$indexnews.pic.0.newsphoto{/yun}"> </a> </dt>
+          <dd> <strong><a href="{yun:}$indexnews.pic.0.url{/yun}">{yun:}$indexnews.pic.0.title{/yun}</a></strong> <span>{yun:}$indexnews.pic.0.description{/yun}...</span> <a href="{yun:}$indexnews.pic.0.url{/yun}" target="_blank">[详细]</a> </dd>
+        </dl>
+        {yun:}/if{/yun}
+        <div class="index_news_right">
+          <ul>
+            {yun:}foreach from=$indexnews.arclist item=arcitem{/yun}
+            <li><span>[{yun:}$arcitem.name{/yun}]</span> <a href="{yun:}$arcitem.url{/yun}" target="_blank">{yun:}$arcitem.title{/yun}</a></li>
+            {yun:}/foreach{/yun}
+          </ul>
+        </div>
+      </div>
+      {yun:}/article{/yun} </div>
+  <div class="index_link">
+      <div class="index_Emergency_job">
+        <div class="Latest_talent_h1 "><b >友情链接<span class="index_Emergency_span">Links</span></b> {yun:}if $config.sy_linksq==1{/yun} <a href="{yun:}url m=link{/yun}" class="index_more" rel="nofollow">申请链接</a>{yun:}/if{/yun}</div>
+        <div class="index_link_cont">
+          <div class="index_link_list">
+            <div class="index_link_list_img"> {yun:}link type=2 tem_type=2 item=linklist{/yun} <a href="{yun:}$linklist.link_url{/yun}" target="_blank"><img class="lazy" src="{yun:}$linklist.pic{/yun}" data-original="{yun:}$linklist.pic{/yun}" width="130" height="35" alt="{yun:}$linklist.link_name{/yun}" /></a> {yun:}/link{/yun} </div>
+            <div class="index_link_list_name"> {yun:}link type=1 tem_type=2 item=linklist2{/yun} <a href="{yun:}$linklist2.link_url{/yun}" target="_blank"> {yun:}$linklist2.link_name{/yun}</a> {yun:}/link{/yun} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div></div></div>
+{yun:}if $config.sy_footer_fix=='1'{/yun} 
+<div class="tip_bottom">
+  <div class="tip_bottom_cont">
+    <div class="tip_bottom_bg"></div>
+      <div class="tip_bottom_cont_c">
+    <div class="tip_bottom_main" >
+       <div class="tip_bottom_icon png"></div>
+      <div class="tip_bottom_left"> <a href="javascript:void(0);" onclick="$('.tip_bottom').hide();" class="tip_bottom_close png"></a> 
+      <div class="tip_bottom_ewm"><div class="tip_bottom_ewm_bg"><i class="tip_bottom_ewm_p_icon"></i><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_qcode{/yun}"  width="90" height="90"></div><div class="tip_bottom_ewm_p">手机也能找工作</div></div>
+      <span class="tip_bottom_logo">
+        <h2><span class="tip_bottom_fast"><span class="tip_bottom_time">30秒</span> 填写简历</span>，好工作轻松搞定！</h2>
+        </span>
+        <div class="tip_bottom_num "><span>0</span>公司</div>
+        <div class="tip_bottom_num "><span>0</span>职位</div>
+       {yun:}if !$uid{/yun}
+        <div class="tip_bottom_member">
+        <a href="{yun:}url m=login{/yun}" class="tip_bottom_login">登录</a> 
+        <a href="{yun:}url m=register{/yun}" class="tip_bottom_reg" >快速注册<i class="tip_bottom_reg_icon"></i></a> </div>
+    {yun:}/if{/yun}
+    </div></div>
+  </div>  </div>
+</div>
+{yun:}/if{/yun}
+      <div id="bg"></div>
+      {yun:}include file="$tplstyle/backtop.htm"{/yun}
+      <div id='footer_ad'> {yun:}adlist classid=10 item=footer_ad{/yun}
+        <div class="footer_ban" id="">
+          <div class="baner_footer" id='bottom_ad_fl'> <span class="ban_close" onclick="colse_bottom()">关闭</span> {yun:}$footer_ad.html{/yun} </div>
+          <input type="hidden" value='1' id='bottom_ad_is_show' />
+        </div>
+        {yun:}/adlist{/yun}
+        {yun:}adlist classid=11 key=key item=left_ad{/yun}
+        <div class="duilian {yun:}if $key=='0'{/yun}duilian_left{yun:}else{/yun}duilian_right{yun:}/if{/yun}">
+          <div class="duilian_con">{yun:}$left_ad.html{/yun}</div>
+          <div class="close_container">
+            <div class="btn_close"></div>
+          </div>
+        </div>
+        {yun:}/adlist{/yun} </div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/index.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$style{/yun}/js/reg_ajax.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$style{/yun}/js/banner.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/slides.jquery.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/gt.js?v={yun:}$config.cachecode{/yun}"></script>
+<script type="text/javascript">
+//顶部伸展广告
+if ($("#js_ads_banner_top_slide").length){  //判断当前广告是否展开，如果没有，则执行下面代码
+	var $slidebannertop = $("#js_ads_banner_top_slide"),$bannertop = $("#js_ads_banner_top");
+	setTimeout(function(){$bannertop.slideUp(1000);$slidebannertop.slideDown(1000);},1500); //1500毫秒(1.5秒)后，小广告收回，大广告伸开，执行时间都是1秒(1000毫秒)
+	setTimeout(function(){$slidebannertop.slideUp(1000,function (){$bannertop.slideDown(1000);});},2000); //2.0秒(2000毫秒)之后，大广告收回，小广告展开。
+}
+$("#slides").slides({
+		preload: true,
+		preloadImage: '{yun:}$style{/yun}/images/loading.gif',
+		play: 5000,
+		pause: 2500,
+		hoverPause: true
+	});
+$(document).ready(function() {
+    marquee("2000",".yun_Announcement ul");
+    //首页登录框以及登录后显示各会员中心内容
+	var loginIndex='{yun:}url m=ajax c=DefaultLoginIndex{/yun}';
+    $.get(loginIndex,{rand:Math.random()},function(data){
+		$(".hp_login").html(data);
+	});
+    $(".index_new_job li").hover(function(){
+		var aid=$(this).attr("aid");
+		$("#joblist"+aid).addClass("index_new_job_hover");	
+	},function(){
+		var aid=$(this).attr("aid");
+		$("#joblist"+aid).removeClass("index_new_job_hover");	
+	})   
+	$(".menu_box").hover(function(){
+		var aid=$(this).attr("aid");
+		var ftop=Number($(this).offset().top); 
+		var sheight=Number($("#jobclass_"+aid).height());  
+		if(aid=='0'){ 
+			$("#jobclass_"+aid).css("top","0px"); 
+		}else if(sheight>ftop){ 
+			$("#jobclass_"+aid).css("top","0px"); 
+		}else if(ftop>sheight&&Number(sheight)<250){  
+			var isIE6=!window.XMLHttpRequest;
+			if (isIE6){
+				var top=Number(ftop)-Number(99);
+			}else if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i)=="9."){
+				var top=Number(ftop)-Number(94);
+			}else{ 
+				var top=Number(ftop)-Number(94);
+			}  
+			$("#jobclass_"+aid).css("top",top+"px"); 
+ 		}else if(Number(sheight)>250){ 
+			var top=Number(ftop)-Number(320);
+			$("#jobclass_"+aid).css("top",top+"px"); 
+		} 
+		$("#jobclass"+aid).addClass("current");	
+		$("#jobclass_"+aid).attr("class","menu_sub db");
+	},function(){
+		var aid=$(this).attr("aid");
+		$("#jobclass"+aid).removeClass("current");	
+		$("#jobclass_"+aid).attr("class","menu_sub dn");	
+	})  
+	$(".select_wrap").hover(function(){
+		$(".select_wrap_list").show();
+	},function(){
+		$(".select_wrap_list").hide();
+	})  
+
+});
+
+
+</script> 
+{yun:}if $config.sy_footer_fix=='1'{/yun} 
+<script>
+$(document).ready(function() {
+	$.get('{yun:}url m=ajax c=footertj{/yun}',{rand:Math.random()},function(data){
+		$(".tip_bottom_left").html(data);
+	})
+})
+</script>
+{yun:}/if{/yun}
+<!--下面为调用网站主题--> 
+{yun:}webspecial{/yun}
+{yun:}include file="$tplstyle/footer.htm"{/yun}

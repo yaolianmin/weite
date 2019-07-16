@@ -1,0 +1,40 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+       <div class="com_tit"><span class="com_tit_span">广告订单详情</span><span class="remind" style="float:right; margin-right:10px; line-height:36px;color:#F30;cursor:pointer " > </span></div>  
+          <div class="com_m_search"> 
+      <a title="购买广告位" class="com_m_tj" onclick="javascript:history.go(-1);">广告订单列表</a></div>
+
+  <div class="com_body">
+        <div class="table">
+          <table width="100%" cellspacing="1" cellpadding="1" class="com_table">
+            <tr>
+              <th>广告类别</th>
+              <th>广告名称</th>
+              <th>广告链接</th>
+              <th>购买时间</th>
+              <th>购买费用</th>
+              <th>点击次数</th>
+              <th>广告状态</th>
+            </tr>
+            <tr>
+              <td>{yun:}$info.adname{/yun}</td>
+              <td align="center">{yun:}$info.ad_name{/yun}</td>
+              <td align="center">{yun:}$info.pic_src{/yun}</td>
+              <td align="center">{yun:}$info.buy_time{/yun} 月</td>
+              <td align="center"><span>{yun:}$info.integral{/yun}&nbsp;{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></td>
+              <td align="center">{yun:}$ad.hits{/yun}</td>
+              <td align="center">{yun:}$ad.type{/yun}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="clear"></div>
+        <div class="ad_bnner_tit" style="padding:20px 0;">广告效果图： </div>
+        <div  class="ad_bnner"><img src=".{yun:}$info.pic_url{/yun}"  /> </div>
+      </div>
+    </div>
+  </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

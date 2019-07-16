@@ -1,0 +1,49 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+
+
+
+<div id="sqrewardjob_show" class="comapply_redpack_pop" style="background:#fff">
+<div class="comapply_redpack_tit">
+<div class="comapply_redpack_tit_s">投递者简历要求</div>
+<div class="comapply_redpack_tit_n">* 你的简历需必填红色项目才能投递赏金职位</div>
+</div>
+<div class="comapply_redpack_list_c">
+<div class="comapply_redpack_list_c_s {yun:}if $reward.exp=='1'{/yun}comapply_redpack_list_c_s_cur{yun:}/if{/yun}"><i class="comapply_redpack_list_c_icon comapply_redpack_list_c_icon_gz"></i>工作经历
+<div class="{yun:}if $rdata.exptype=='1'{/yun}comapply_redpack_list_resume_tj_no{yun:}else{/yun}comapply_redpack_list_resume_tj{yun:}/if{/yun}"><span class="comapply_redpack_list_resume_s expmsg">{yun:}if $rdata.exptype=='1'{/yun}不符合{yun:}else{/yun}符合{yun:}/if{/yun}</span></div>
+</div>
+<div class="comapply_redpack_list_c_s {yun:}if $reward.edu=='1'{/yun}comapply_redpack_list_c_s_cur{yun:}/if{/yun}"><i class="comapply_redpack_list_c_icon comapply_redpack_list_c_icon_jy"></i>教育经历
+<div class="{yun:}if $rdata.edutype=='1'{/yun}comapply_redpack_list_resume_tj_no{yun:}else{/yun}comapply_redpack_list_resume_tj{yun:}/if{/yun}"><span class="comapply_redpack_list_resume_s edumsg">{yun:}if $rdata.edutype=='1'{/yun}不符合{yun:}else{/yun}符合{yun:}/if{/yun}</span></div>
+</div>
+<div class="comapply_redpack_list_c_s {yun:}if $reward.project=='1'{/yun}comapply_redpack_list_c_s_cur{yun:}/if{/yun}"><i class="comapply_redpack_list_c_icon comapply_redpack_list_c_icon_xm"></i>项目经历
+<div class="{yun:}if $rdata.projecttype=='1'{/yun}comapply_redpack_list_resume_tj_no{yun:}else{/yun}comapply_redpack_list_resume_tj{yun:}/if{/yun} "><span class="comapply_redpack_list_resume_s projectmsg">{yun:}if $rdata.projecttype=='1'{/yun}不符合{yun:}else{/yun}符合{yun:}/if{/yun}</span></div>
+</div>
+<div class="comapply_redpack_list_c_s {yun:}if $reward.skill=='1'{/yun}comapply_redpack_list_c_s_cur{yun:}/if{/yun}"><i class="comapply_redpack_list_c_icon comapply_redpack_list_c_icon_jn"></i>技能证书
+<div class="{yun:}if $rdata.skilltype=='1'{/yun}comapply_redpack_list_resume_tj_no{yun:}else{/yun}comapply_redpack_list_resume_tj{yun:}/if{/yun}"><span class="comapply_redpack_list_resume_s skillmsg">{yun:}if $rdata.skilltype=='1'{/yun}不符合{yun:}else{/yun}符合{yun:}/if{/yun}</span></div>
+</div>
+</div>
+
+
+
+<div class="comapply_redpack_td sqreward">
+{yun:}if $error=='1'{/yun}
+<a href="{yun:}url m=wap c=reward a=sqreward jobid=$jobid{/yun}" class="comapply_redpack_td_cur" id="clickreward_sq">赏金投递</a> 
+{yun:}else{/yun}
+<a href="{yun:}url m=wap{/yun}member/index.php?c=resume" class="comapply_redpack_td_cur">完善简历</a> 
+{yun:}/if{/yun}
+</div>
+
+<div class="comapply_redpack_td perresume">
+
+
+</div>
+
+</div>
+
+
+
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun}

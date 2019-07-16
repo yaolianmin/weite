@@ -1,0 +1,74 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_w1200">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+    <div class="yun_m_rightbox fltR mt20 re">
+       <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">赏金提现</span> <i class="member_right_h1_icon user_bg"></i></div>
+       <div>
+            <div id="gms_showclew"></div>
+            
+              <div class="job_list_tit"> 
+              <ul class="">
+					<li class="job_list_tit_cur"><a href="index.php?c=jobpack&act=withdraw">赏金提现</a></li>
+					 <li ><a href="index.php?c=jobpack&act=withdrawlist">提现记录</a></li>
+					
+          
+			</ul> 
+    </div>
+      <div  class="resume_Prompt_box"><div  class="resume_Prompt"><i class="resume_Prompt_icon"></i>提现说明：单笔提现金额必须达到{yun:}$config.sy_withdraw_minmoney{/yun}元
+{yun:}if $config.sy_withdraw_num>0{/yun} 单次提现收取每笔{yun:}$config.sy_withdraw_pound{/yun}%手续费{yun:}/if{/yun}
+{yun:}if $config.sy_withdraw_money>0{/yun} {yun:}$config.sy_withdraw_money{/yun}元以内及时到账，超过{yun:}$config.sy_withdraw_money{/yun}元需审核。{yun:}/if{/yun}！</div></div>
+      
+    <div class="resume_box_list">
+
+           <div class="withdraw_tx_box">
+          <span class="withdraw_tx_box_d"> 可提现金额：</span> <span class="withdraw_tx_box_n">￥{yun:}$statis.packpay{/yun}</span>  元
+           </div>
+                   <div class="clear"></div>
+          <div class="packloglost_box_l_b">
+            
+            <iframe id="withdraw"  name="withdraw" onload="returnmessage('withdraw');" style="display:none"></iframe>
+            <form name="pay" target="withdraw" action="index.php?c=jobpack&act=withdraw" method="post" onsubmit="return withdraw_form();">
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0"  class="com_pay_table">
+           
+               
+                <tr>
+                  <th height="30" width="170">真实姓名：<span class="com_pay_table_pay_s">*</span></th>
+                  <td>
+                    <input type="text" name="real_name" id="real_name" size="20" value="" class="com_pay_table_pay_text"> <span class="packloglost_box_l_b_ts">用于核验打款账户</span>
+                  </td>
+                </tr>
+				<tr>
+                  <th height="30" width="170">提现金额：<span class="com_pay_table_pay_s">*</span></th>
+                  <td>
+                    <input type="text" name="price" id="price" size="20" value=""  onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" maxlength='6' class="com_pay_table_pay_text"> 
+                  </td>
+                </tr>
+              
+             
+                <tr>
+                  <th>&nbsp;</th>
+                  <td height="40"><div style="padding:10px 0;">
+				 {yun:}if $statis.packpay>=$config.sy_withdraw_minmoney{/yun}
+				  <input  type="submit" value="下一步" name=nextstep class="withdraw_bth" >
+				  {yun:}else{/yun}
+				  <input  type="button" value="不可提现" name=nextstep class="layui-btn layui-btn-disabled" >
+				  
+				  {yun:}/if{/yun}
+
+				  </div></td>
+                </tr> 
+				</table>
+			</form>
+            
+           
+          </div>
+          
+          <div class="clear"></div>
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+{yun:}include file="$userstyle/footer.htm"{/yun}

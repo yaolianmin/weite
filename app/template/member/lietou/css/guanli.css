@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+/*充值管理*/
+.subsc_list{width:812px; }
+.subsc_con{ width:100%;}
+.subsc_list li{ float:left;}
+.subsc_title{background:#f7f7f7; font-weight:bold; font-size:14px;}
+.subsc_title li{ height:40px; line-height:40px; }
+.subsc_list .subsc_term{ width:467px;}
+.subsc_list .subsc_term a{ color:#2b5c82;}
+.subsc_title .subsc_term{ width:437px; padding-left:30px;}
+.subsc_list .subsc_time{width:120px;text-align:center;}
+.subsc_list .subsc_time01{ color:#36ad33;}
+.subsc_list .subsc_operate{width:130px; text-align:center;}
+.subsc_list .subsc_operate a{ color:#333;}
+.subsc_list .subsc_importannt{width:692px; padding-left:20px; line-height:46px; color:#77797a;}
+.Available_h1 { font-size: 16px; font-weight:bold}
+.Available_bal span{ color:#f06e0c; font-size:26px; margin-right:5px;}
+.Available_bth{ width:74px; height:29px;background: url(../images/account.png) no-repeat; display:inline-block; margin:10px 0 0 30px;}
+.wxts_box{ line-height:25px;}
+.wxts { background: url(../images/ts2.jpg) no-repeat  left 5px;color: #FF6600;font-weight: bold;padding-left: 20px;}
+.recharge_number{width:150px; padding-left:10px;}
+.subsc_title .recharge_number{ width:140px; padding-left:20px;}
+.recharge_fond{ width:692px; padding:15px 0px 15px 10px;}
+.recharge_list .subsc_list{ margin-top:0; margin-top:14px; border-bottom:1px solid #f2f2f2; color:#999;}
+.recharge_tips{color:#999; line-height:23px; margin-top:30px;}
+.search_con{ width:952px; padding:0 30px 18px 30px;}
+.search_list{width:100%; margin:20px 0 60px 0;}
+.search_list li{width:100%; float:left;}
+.used_for{ color:#1e1c1c;}
+.subsc_list .subsc_time a{ color:#555;}
+.subsc_list .subsc_time a:hover{ color:#f60;}
+.colour_red{ color:#f00;}
+
+
+.recharge_fond01{ padding-left:40px; *padding-left:35px; }
+.recharge_list .subsc_list_end{border-bottom:none;}

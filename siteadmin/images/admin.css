@@ -1,0 +1,121 @@
+@charset "gb2312";
+@CHARSET "GBK";
+body{
+ margin: 0;
+ padding: 0;
+ font-size: 12px;
+background:#1178c3;width:100%;height:100%; font-family:Î¢ÈíÑÅºÚ
+}.logoin_c{width:450px; padding-left:160px;}
+.logoin_cont{width:850px; margin:0 auto}
+.admin_logo_bg{width:100%; min-width:1000px}
+.logoin_top{width:100%;height:145px;}
+.login_box{
+ width:1000px;
+ height:500px;
+ margin:0 auto;
+}
+.logoin_c_box{width:450px;height:388px; background:#fff;border-radius:5px; padding-left:70px;}
+.logoin_title{width:100%;height:57px; float:left; background:url(../images/logoin_line.png) no-repeat 70px bottom; text-align:center}
+.logoin_logo{width:100%;height:60px;margin-top:30px; float:left}
+.logoin_logo img{ float:left}
+.logoin_logo_fz{ font-size:18px; float:left;color:#449edd; margin-left:10px; margin-top:20px;}
+.logoin_title_c{width:351px; margin:0 auto;}
+.logoin_title img{ display:block; margin:5px auto}
+
+.login_iptbox{
+
+ color:#000;
+ text-align: center;
+ margin-left:15px;
+ _margin-left:0px;
+
+
+}
+.logoin_list{width:100%; float:left; list-style:none; padding:0; margin:0}
+.logoin_list li{width:100%; float:left; margin-top:20px;}
+.logoin_list li .logoin_list_a{width:55px;height:50px; float:left; background:#449edd url(../images/imz10.jpg) no-repeat center center; display:block; text-align:right; line-height:29px;border-radius:5px 0px 0px 5px;}
+.logoin_list li .logoin_list_b{width:55px;height:50px; float:left; background:#449edd url(../images/imz11.jpg) no-repeat center center; display:block; text-align:right; line-height:29px;border-radius:5px 0px 0px 5px;}
+.login_iptbox .ipt{
+ width:316px;
+ height:48px;
+ display:block; float:left;
+ border:none;
+ line-height:48px;
+ border:1px solid #43a0dd;
+ font-size:16px;
+ color:#666;
+ font-family:Î¢ÈíÑÅºÚ;
+ padding-left:10px;
+}
+.login_iptbox .ipt_code{
+ width:196px;
+ height:46px;
+ display:block; float:left;
+ border:none;
+ line-height:46px;
+ border:1px solid #43a0dd;
+ font-size:16px;
+ color:#666;
+ font-family:Î¢ÈíÑÅºÚ;
+ padding-left:10px;
+
+}
+.login_iptbox img{ float:left; margin-left:10px; margin-top:3px;}
+.login_iptbox .ipt_btn{
+
+ width:110px;
+ height:34px;
+ background: url("./lo_sub.png") no-repeat;
+ border: none;
+ display:block; float:left;
+ cursor:pointer
+}
+#code_img{
+ position:relative;
+ background:url(./login_ts140x89.gif) no-repeat;
+ width:140px;
+ height:89px;
+ left:430px;
+ top:-133px;
+ text-align:center;
+ display:none;
+ color:#000;
+ }
+ .admintop{
+  background-color: #3A6EA5;
+  height:81px;
+ }
+ .logodiv{
+  width:136px;
+  height:81px;
+  float: left;
+ }
+ .logo_a{
+  display:block;
+  width:136px;
+  height:81px;
+  background: url("./logo.gif");
+ }
+ .adminshell{
+  width:600px;
+  height:81px;
+  margin-left: 10px;
+  float:left;
+ }
+ .admininfo{
+  width:600px;
+  height:40px;
+  line-height:40px;
+ }
+ .adminmenu ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+ }
+ .adminmenu li{
+  float: left;
+ }
+ .admin_login_sub{width:185px;height:50px; margin-right:10px; border:none; background:#449edd;color:#fff; float:left; font-size:18px; cursor:pointer;border-radius:3px;  font-family:Î¢ÈíÑÅºÚ}
+ .admin_login_sub1{ background:#ff7300}
+ 
+ .login_fot{width:100%; padding:10px 0; text-align:center; background:#f5f5f5}

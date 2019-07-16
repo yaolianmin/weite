@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="js/echarts_plain.js?v={yun:}$config.cachecode{/yun}"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+
+<div class="infoboxp">
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">该页面展示了职位数据统计。</div>
+</div>
+</div>
+
+ {yun:}include file="admin/admin_tongji_top.htm"{/yun} 
+ <div class="clear"></div>
+
+
+
+<div class="table-list">
+  <div class="">
+  <div class="admin_tongji_box">
+    <div class="admin_atatic_chart" id="main2" style="width:100%;height:300px;"></div>
+
+    <div class="admin_udbox">
+	<div class="admin_tj_udtit">最多发布企业</div>
+       <div class="admin_udbox_list">
+	{yun:}foreach from=$toplist.company item=clist{/yun}
+    <div class="admin_udbox_list_resume">
+	<div class="admin_udbox_list_resume_name"><a href='{yun:}url m=company c=show id=$clist.uid{/yun}'>{yun:}$clist.name{/yun}</a></div>
+	发布数：{yun:}$clist.count{/yun}
+    </div>
+	{yun:}/foreach{/yun}
+	</div>
+    </div>
+  <div class="clear"></div><div class="admin_udbox_table_bor">
+  <div class="admin_udbox_table_box">
+  <div class="admin_udbox_right_fx">当前区段内招聘需求数据分析：</div>
+ <table cellpadding="0" cellspacing="0" width="100%" class="admin_udbox_table">
+ <tr>
+ <td><!-- 行业统计 -->
+	<div class="admin_atatic_chart" id="hytj" style="width:500px;height:300px; margin:0 auto"></div></td>
+  <td class="admin_atatic_chart_tdbor">
+	<!-- 区域统计 -->
+	<div class="admin_atatic_chart" id="citytj" style="width:500px;height:300px; margin:0 auto"></div></td>
+ </tr>
+  <tr>
+	<td>	<!-- 学历统计 -->
+	<div class="admin_atatic_chart" id="salarytj" style="width:500px;height:300px; margin:0 auto"></div></td>
+
+  <td class="admin_atatic_chart_tdbor"><!-- 经验统计 -->
+	<div class="admin_atatic_chart" id="edutj" style="width:500px;height:300px; margin:0 auto"></div></td>
+ </tr>
+ 
+  <tr>
+	<td>	<!-- 工作经验 -->
+	<div class="admin_atatic_chart" id="exptj" style="width:500px;height:300px; margin:0 auto"></div></td>
+
+  <td class="admin_atatic_chart_tdbor">
+	
+	</td>
+ </tr>
+ </table>
+ </div></div>
+    </div>
+  
+
+</div> 
+</div> 
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = echarts.init(document.getElementById('main2'));
+		option = null;
+       option = {
+    title: {
+        text: '{yun:}$name{/yun}'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:[{yun:}foreach name=foo from=$list item=daylist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$daylist.date{/yun}'{yun:}/foreach{/yun}]
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : [
+			{yun:}foreach name=foo1 from=$list item=lists{/yun}
+			{yun:}if $smarty.foreach.foo1.index<1{/yun}
+			{yun:}foreach name=foo2 from=$lists.list item=daylist{/yun}{yun:}if $smarty.foreach.foo2.index>0{/yun},{yun:}/if{/yun}'{yun:}$daylist.date{/yun}'{yun:}/foreach{/yun}
+			{yun:}/if{/yun}
+			{yun:}/foreach{/yun}
+			
+			]
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {yun:}foreach name=foo1 from=$list item=lists{/yun}
+		
+		{yun:}if $smarty.foreach.foo1.index>0{/yun},{yun:}/if{/yun}{
+            name:'{yun:}$lists.name{/yun}',
+            type:'line',
+            stack: '总量',
+            areaStyle: {normal: {}},
+            data:[{yun:}foreach name=foo2 from=$lists.list item=daylist{/yun}{yun:}if $smarty.foreach.foo2.index>0{/yun},{yun:}/if{/yun}{yun:}$daylist.count{/yun}{yun:}/foreach{/yun}]
+        }
+		{yun:}/foreach{/yun}
+    ]
+};
+        myChart.setOption(option); // 为echarts对象加载数据 
+
+		//招聘需求行业统计
+		var myChartHy = echarts.init(document.getElementById('hytj'));
+		optionhy = null;
+		optionhy = {
+    title : {
+        text: '招聘旺盛行业',
+        subtext: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+		top:'20%',
+        data: [{yun:}foreach name=foo from=$counttj.job1 item=job1list{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$job1list.name{/yun}'{yun:}/foreach{/yun}]
+    },
+    series : [
+        {
+            name: '占比分析',
+            type: 'pie',
+            radius : '55%',
+            center: ['70%', '60%'],
+            data:[
+			{yun:}foreach name=foo from=$counttj.job1 item=job1list{/yun}
+
+			{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}
+			{value:'{yun:}$job1list.count{/yun}', name:'{yun:}$job1list.name{/yun}'}
+			
+			
+			
+			{yun:}/foreach{/yun}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+ myChartHy.setOption(optionhy); // 为echarts对象加载数据 
+
+ //招聘需求区域统计
+		var myChartCity = echarts.init(document.getElementById('citytj'));
+		optioncity = null;
+		optioncity = {
+    title : {
+        text: '招聘热门区域',
+        subtext: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+		top:'20%',
+        data: [{yun:}foreach name=foo from=$counttj.provinceid item=citylist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$citylist.name{/yun}'{yun:}/foreach{/yun}]
+    },
+    series : [
+        {
+            name: '占比分析',
+            type: 'pie',
+            radius : '55%',
+            center: ['60%', '60%'],
+            data:[
+			{yun:}foreach name=foo from=$counttj.provinceid item=citylist{/yun}
+
+			{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}
+			{value:'{yun:}$citylist.count{/yun}', name:'{yun:}$citylist.name{/yun}'}
+			
+			
+			
+			{yun:}/foreach{/yun}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+ myChartCity.setOption(optioncity); // 为echarts对象加载数据 
+
+ //招聘需求学历统计
+		var myChartEdu = echarts.init(document.getElementById('edutj'));
+		optionedu = null;
+		optionedu = {
+    title : {
+        text: '需求学历区间',
+        subtext: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+		top:'20%',
+        data: [{yun:}foreach name=foo from=$counttj.edu item=edulist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$edulist.name{/yun}'{yun:}/foreach{/yun}]
+    },
+    series : [
+        {
+            name: '占比分析',
+            type: 'pie',
+            radius : '55%',
+            center: ['60%', '60%'],
+            data:[
+			{yun:}foreach name=foo from=$counttj.edu item=edulist{/yun}
+
+			{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}
+			{value:'{yun:}$edulist.count{/yun}', name:'{yun:}$edulist.name{/yun}'}
+			
+			
+			
+			{yun:}/foreach{/yun}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+ myChartEdu.setOption(optionedu); // 为echarts对象加载数据 
+
+//招聘需求薪资统计
+		var myChartSalary = echarts.init(document.getElementById('salarytj'));
+		optionsalary = null;
+		optionsalary = {
+    title : {
+        text: '企业待遇区间',
+        subtext: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+		top:'20%',
+        data: [{yun:}foreach name=foo from=$counttj.salary item=salarylist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$salarylist.name{/yun}'{yun:}/foreach{/yun}]
+    },
+    series : [
+        {
+            name: '占比分析',
+            type: 'pie',
+            radius : '55%',
+            center: ['70%', '60%'],
+            data:[
+			{yun:}foreach name=foo from=$counttj.salary item=salarylist{/yun}
+
+			{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}
+			{value:'{yun:}$salarylist.count{/yun}', name:'{yun:}$salarylist.name{/yun}'}
+			
+			
+			
+			{yun:}/foreach{/yun}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+ myChartSalary.setOption(optionsalary); // 为echarts对象加载数据 
+
+
+
+ //招聘需求工作经验统计
+		var myChartExp = echarts.init(document.getElementById('exptj'));
+		optionexp = null;
+		optionexp = {
+    title : {
+        text: '需求工作经验区间',
+        subtext: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+		top: '20%',
+        data: [{yun:}foreach name=foo from=$counttj.exp item=explist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$explist.name{/yun}'{yun:}/foreach{/yun}]
+    },
+    series : [
+        {
+            name: '占比分析',
+            type: 'pie',
+            radius : '55%',
+            center: ['70%', '60%'],
+            data:[
+			{yun:}foreach name=foo from=$counttj.exp item=explist{/yun}
+
+			{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}
+			{value:'{yun:}$explist.count{/yun}', name:'{yun:}$explist.name{/yun}'}
+			
+			
+			
+			{yun:}/foreach{/yun}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+ myChartExp.setOption(optionexp); // 为echarts对象加载数据 
+
+
+    </script>
+</body>
+</html>

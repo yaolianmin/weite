@@ -1,0 +1,207 @@
+{yun:}if $usertype=="1"{/yun}   
+	<div class="yun_kp_r_login" >      
+		<div class="yun_kp_r_login_img">
+			<img width="60" height="60" src="{yun:}$member.photo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);" style="border-radius:50%;">
+		</div>
+        
+		<div class="yun_kp_r_login_r"> 
+			尊敬的个人用户：</br>
+			<span class="login_after_username_id">{yun:}$username{/yun}</span>
+		</div>
+	</div>
+    
+	<div class="yun_kp_r_login_b">
+		<a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=expect&add={yun:}$uid{/yun}" class="yun_kp_r_login_sub">创建简历</a> 
+		<a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=resume" class="yun_kp_r_login_sub">简历管理</a> 
+		<a href="{yun:}$config.sy_weburl{/yun}/member/index.php" class=" yun_kp_r_login_sub" style="width:95px">进入管理中心</a> 
+	</div>
+
+	<div class="login_out"><a href="javascript:void(0);" onclick="logout('{yun:}url c=logout{/yun}');" class="login_after_bttc"> 安全退出</a></div>
+   
+	{yun:}elseif $usertype=="2"{/yun}
+		<div class="yun_kp_r_login" >      
+			<div class="yun_kp_r_login_img">
+				<img width="60" height="60"src="{yun:}$company.logo{/yun}"  onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}',2);">
+			</div>
+			
+			<div class="yun_kp_r_login_r"> 尊敬的企业用户：</br>
+				<span class="login_after_username_id">{yun:}$username{/yun}</span>
+			</div>
+        </div>
+
+		<div class="yun_kp_r_login_b">
+			<a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=job&w=1"class="yun_kp_r_login_sub">招聘职位</a>
+			
+			{yun:}if $addjobnum=='1'{/yun} 
+				<a href="{yun:}$config.sy_weburl{/yun}/member/index.php?c=jobadd" class="yun_kp_r_login_sub">发布职位</a> 
+			{yun:}else{/yun} 
+				<a href="javascript:void(0)" onclick="jobaddurl('{yun:}$addjobnum{/yun}','{yun:}$config.integral_job{/yun}')" class="yun_kp_r_login_sub">发布职位</a> 
+			{yun:}/if{/yun} 
+			
+			<a href="{yun:}$config.sy_weburl{/yun}/member/index.php" class=" yun_kp_r_login_sub" style="width:95px">进入管理中心</a> 
+		</div>
+
+		<div class="login_out"> 
+			<a href="javascript:void(0);" onclick="logout('{yun:}url c=logout{/yun}');" class="login_after_bttc"> 安全退出</a>
+		</div>
+	{yun:}else{/yun}
+		<div class="hp_login" >
+			<div class="yun_kp_r_login" >      
+				<div class="yun_kp_r_login_img"><img src="{yun:}$style{/yun}/images/img11.jpg" width="50" height="50"></div>
+				
+				<div class="yun_kp_r_login_r">
+					Hi!你好</br>
+					找工作或招人才？<a href="{yun:}url m=login{/yun}" class="yun_kp_r_login_r_red">登录</a> 看看 
+				</div>
+			</div>
+
+			<div class="yun_kp_r_login_b">
+				<a href="{yun:}url m=login{/yun}" class="yun_kp_r_login_sub yun_kp_r_login_icon">登录</a>
+				<a href="{yun:}url m=register{/yun}" class="yun_kp_r_login_sub">免费注册</a>
+ 			</div>
+
+			{yun:}if $config.sy_sinalogin==1 || $config.sy_wxlogin==1{/yun}
+				<div class="yun_kp_other_login"> 
+					<span class="yun_kp_other_login_name">其他方式登录：</span> 
+					{yun:}if $config.sy_qqlogin==1{/yun} 
+						<a href="{yun:}url m=qqconnect c=qqlogin{/yun}" class="yun_kp_other_login_icon"><img src="{yun:}$style{/yun}/images/kp_qq.png" ></a> 
+					{yun:}/if{/yun}
+					
+					{yun:}if $config.sy_sinalogin==1{/yun} 
+						<a href="{yun:}url m=sinaconnect {/yun}" class="yun_kp_other_login_icon"><img src="{yun:}$style{/yun}/images/kp_sina.png"></a> 
+					{yun:}/if{/yun}
+
+					{yun:}if $config.sy_wxlogin==1{/yun} 
+						<a href="{yun:}url m=wxconnect {/yun}" class="yun_kp_other_login_icon"><img src="{yun:}$style{/yun}/images/kp_wx.png"></a> 
+					{yun:}/if{/yun} 
+				</div>
+			{yun:}/if{/yun}
+        </div>
+	{yun:}/if{/yun}
+
+	<style>#label{height:34px; line-height:34px;border:1px solid #e6e6e6}</style>
+
+<script>
+$(document).ready(function(){
+	//账号登录和手机登录tab选择
+	$('#acount_login').click(function(data){
+		$('#acount_login').removeClass().addClass('login_box_h_list_cur');
+		$('#mobile_login').removeClass();
+		$('#login_normal_box').show();
+		$('#login_sj_box').hide();
+		$('#login_sjyz_box').hide();
+		$('#act_login').val('0');
+	});
+	$('#mobile_login').click(function(data){
+		$('#mobile_login').removeClass().addClass('login_box_h_list_cur');
+		$('#acount_login').removeClass();
+		$('#login_sj_box').show();
+		$('#login_sjyz_box').show();
+		$('#login_normal_box').hide();
+		$('#act_login').val('1');
+	});
+	$("#username,#txt_CheckCode,#usermoblie,#dynamiccode").focus(function(){
+		var txAreaVal = $(this).val();
+		if( txAreaVal == this.defaultValue){$(this).val("");}
+	}).blur(function(){
+		var txAreaVal = $(this).val();
+		if( txAreaVal == this.defaultValue||$(this).val()==""){$(this).val(this.defaultValue);}
+	}).keydown(function (e) {
+	    var ev = document.all ? window.event : e;
+	    if (ev.keyCode == 13) {
+	        check_login('{yun:}url m=login c=loginsave{/yun}','vcode_imgs');
+	    } else { return;}
+	});
+	$("#password2").focus(function(){
+		$("#password").show();
+		$("#password").focus();
+		$("#password2").hide();
+	})
+	$("#password").blur(function(){
+		if($("#password").val()==""){
+			$("#password2").show();
+			$("#password").hide();
+		}
+	}).keydown(function (e) {
+	    var ev = document.all ? window.event : e;
+	    if (ev.keyCode == 13) {
+	        check_login('{yun:}url m=login c=loginsave{/yun}','vcode_imgs');
+	    } else { return; }
+	});
+	var setval;
+	$('.wxcode_login').click(function(data){
+		$('.wxcode_login').hide();
+		$('.normal_login').show();
+		$('#login_normal').hide();
+		$('.login_box_h_list').hide();
+		$('.wx_login_show').show();
+		$.post('{yun:}url m=login c=wxlogin{/yun}',{t:1},function(data){
+			if(data==0){
+				$('#wx_login_qrcode').html('二维码获取失败..');
+			}else{
+				$('#wx_login_qrcode').html('<img src="'+data+'" width="100" height="100">');
+				setval = setInterval("wxorderstatus()", 2000); 
+			}
+		});
+
+	});
+	$('.normal_login').click(function(data){
+		$('.wxcode_login').show();
+		$('.normal_login').hide();
+		$('#login_normal').show();
+		$('.login_box_h_list').show();
+		$('.wx_login_show').hide();
+		clearInterval(setval);
+	});
+});
+
+function wxorderstatus() { 
+	$.post('{yun:}url m=login c=getwxloginstatus{/yun}',{t:1},function(data){
+		
+		var data=eval('('+data+')');
+		if(data.url!='' && data.msg!=''){
+			layer.msg(data.msg, 2, 9,function(){window.location.href=data.url;});
+		}else if(data.url){
+			
+			window.location.href=data.url;
+		}
+	});
+}
+
+function jobaddurl(num,integral_job){ 
+	var gourl= weburl+'/member/index.php?c=jobadd';
+		checkType = 'addjob';
+
+	var url = weburl + '/index.php?m=company&c=ajax_day_action_check';
+		$.post(url,
+			{'type': checkType},
+			function(data){
+				data = eval('(' + data + ')');
+				if(data.status == -1){
+					layer.msg(data.msg, 2, 8);
+				}else if(data.status == 1){
+					if(num==1){
+						window.location.href=gourl;
+						window.event.returnValue = false;
+						return false;
+					}else if(num==2){
+						var msg='套餐已用完，您可以<a href="'+weburl+'/member/index.php?c=right&act=added" style="color:red;">购买增值包</a>！是否继续？';
+						layer.confirm(msg, function(){
+							layer.closeAll();
+							window.location.href=weburl+"/member/index.php?c=right&act=added"; 
+							
+						});
+					}else if(num==0){
+						var msg='会员已到期，您可以<a href="'+weburl+'/member/index.php?c=right" style="color:red">购买会员</a>！是否继续？';
+
+						layer.confirm(msg, function(){
+							window.location.href=weburl+"/member/index.php?c=right"; 
+						});  
+ 						
+ 					}
+				}
+			}
+		);
+	 
+}
+</script>

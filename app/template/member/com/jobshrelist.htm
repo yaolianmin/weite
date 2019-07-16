@@ -1,0 +1,101 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <div class=right_box>
+    <div class=admincont_box>
+	<div class="yun_com_tit"><span class="yun_com_tit_s">赏金推广职位</span></div>
+        <div class="job_list_tit">
+         <ul class="">
+         <li {yun:}if !$smarty.get.t{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=jobpack">分享职位</a></li>
+         <li {yun:}if $smarty.get.t=="r"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=jobpack&t=r">悬赏职位</a></li>
+         </ul>
+         </div> <div class="clear"></div>
+   <div class="com_body">
+       
+        <div class="com_Release_job">
+         <div class="clear"></div>
+         <div class="joblist_search">
+      </div>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php?c=job&act=opera" target="supportiframe" method="post" id='myform'>
+         
+            {yun:}foreach item=job from=$rows{/yun}
+            
+         
+              <div class="jobshrelist_box">
+              <div class="job_shrelist_box">
+              <div class="job_shrelist_top">
+              <a href="{yun:}url m=job c=comapply id='`$job.jobid`'{/yun}" class="job_list_sj_time_jobname" target="_blank">{yun:}$job.name{/yun}</a>
+                <span  class="job_shrelist_time">更新时间：{yun:}$job.lastupdate|date_format:'%Y-%m-%d'{/yun}</span>
+                </div>
+              
+               <div class="jobshrelist_sj jobshrelist_sj_tg">
+               <i class="job_list_sj_icon"></i>
+               <div class="jobshrelist_sj_n">{yun:}$job.sharenum{/yun}</div>
+               <div class="jobshrelist_sj_name">推广量</div>   
+               </div>
+               
+               <div class="jobshrelist_sj jobshrelist_sj_zg">
+               <i class="job_list_sj_icon"></i>
+               <div class="jobshrelist_sj_n">{yun:}$job.packprice{/yun}</div>
+               <div class="jobshrelist_sj_name">赏金总额</div>   
+               </div>
+               
+              <div class="jobshrelist_sj jobshrelist_sj_dc">
+              <i class="job_list_sj_icon"></i>
+              <div class="jobshrelist_sj_n">{yun:}$job.packmoney{/yun}</div>
+               <div class="jobshrelist_sj_name">赏金单价</div> 
+               </div>
+              
+              <div class="jobshrelist_sj jobshrelist_sj_sy">
+              <i class="job_list_sj_icon"></i>
+              <div class="jobshrelist_sj_n">{yun:}$job.nowprice{/yun}</div>
+              <div class="jobshrelist_sj_name">剩余赏金</div> 
+              </div>
+                <div class="jobshrelist_czs">
+				 <a href="index.php?c=jobadd&act=edit&id={yun:}$job.jobid{/yun}" class="jobshrelist_cz_xg">修改</a>
+                 <a href="javascript:void(0);" onclick="layer_del('确定取消赏金分享？','index.php?c=jobpack&act=delshare&id={yun:}$job.jobid{/yun}');" class="jobshrelist_cz_xg">取消</a>
+				 <a href="{yun:}url m=job c=comapply id='`$job.jobid`'{/yun}" target="_blank" title="预览">预览</a>
+                 </div>
+                     
+				
+                  
+                 </div>   
+                   
+              </div>
+         
+            {yun:}foreachelse{/yun}
+            <div class="com_msg_no">
+                 <p>亲爱的用户，目前您还没有赏金推广职位</p>
+              
+            </div>   
+            {yun:}/foreach{/yun} 
+            {yun:}if !empty($rows){/yun}
+          
+            {yun:}/if{/yun}
+          </form>
+        </div>
+        <div  class="clear"></div>
+        <div class="diggg">{yun:}$pagenav{/yun}</div>
+        <div  class="clear"></div>
+
+        <div  class="clear"></div>
+        <div class="wxts_box wxts_box_mt30">
+          <div class="wxts">温馨提示：</div>
+1.发布分享推广，所有用户都可帮助您将职位分享至朋友圈，第一时间扩散至当地社交圈<br>
+2.设置合理分享金额，更容易让用户关注并帮您分享<br>
+3.职位分享至朋友圈，每个微信用户浏览只计算一次，不重复扣费，一份分享赏金获得一个关注<br>
+4.系统自动推荐职位至赏单榜，更快一步发现您职位
+       
+        </div>
+      </div>
+      </div>
+          
+      </div>
+    </div>
+  </div> 
+<script>
+
+</script> 
+
+ {yun:}include file="$comstyle/footer.htm"{/yun}

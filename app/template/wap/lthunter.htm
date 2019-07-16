@@ -1,0 +1,87 @@
+{yun:}include file="$wapstyle/header_lt.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/itwap.css?v={yun:}$config.cachecode{/yun}" type="text/css"/>
+<div class="itwap_job_title">
+     <div class="itwap_job_ds_pp">
+          <div class="itwap_job_ds_pp_img_p"><a ><img src="{yun:}$info.photo_big{/yun}" width="52" height="52" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_lt_icon{/yun}',2);"/></a></div>
+          <div class="itwap_job_ds_pp_ct">
+               <a class="itwap_job_ds_pp_nm" >{yun:}$info.realname{/yun}</a>
+               <div class="itwap_job_ds_pp_ct_t">关注人数：<span id="atn{yun:}$info.uid{/yun}">{yun:}$info.ant_num{/yun}</span>人<br>
+               从业年限：{yun:}$info.exp_info{/yun}</div>
+          </div>
+          <div class="itwap_job_ds_gz">   
+          </div>
+     </div>
+</div>  <div class="lt_h_bth_box">
+          {yun:}if $usertype==1{/yun}
+          <a style="width:49%;" href="javascript:void(0);" onclick="entrust('{yun:}$info.uid{/yun}','{yun:}$info.realname{/yun}');" class="lt_h_bth"> 委托简历</a>
+          {yun:}else{/yun}
+              {yun:}if $uid{/yun}
+              <a style="width:49%;" href="javascript:void(0)" onclick="layermsg('只有个人用户才能委托简历');" class="lt_h_bth">委托简历</a>
+              {yun:}else{/yun}
+              <a style="width:49%;" href="{yun:}url m=wap c=login{/yun}"  class="lt_h_bth">委托简历</a>
+              {yun:}/if{/yun}
+          {yun:}/if{/yun}
+                    {yun:}if $usertype==1{/yun}
+                  <a style="width:49%;" href="javascript:void(0);" onclick="ltatn('{yun:}$info.uid{/yun}');" id="guanzhu{yun:}$info.uid{/yun}" class="lt_h_bth lt_h_bthend">{yun:}if is_array($atn){/yun}取消关注{yun:}else{/yun}+关注{yun:}/if{/yun}</a>
+             {yun:}else{/yun}
+                 {yun:}if $uid{/yun}
+                  <a style="width:49%;" href="javascript:void(0)" onclick="layermsg('只有个人用户才能关注！')" class="lt_h_bth lt_h_bthend">+关注</a>
+                {yun:}else{/yun}
+                 <a style="width:49%;" href="javascript:void(0)" onclick="layermsg('请先登录！')" class="lt_h_bth lt_h_bthend">+关注</a>
+              	{yun:}/if{/yun}
+            {yun:}/if{/yun}
+         </div>
+<div class="itwap_job_ds">
+     <div class="itwap_job_ds_top"><i class="itwap_job_ds_top_icon"></i>基本信息</div>
+     <div class="itwap_job_ds_yq">
+          {yun:}if $info.rzid{/yun}<p>认证ID号：{yun:}$info.rzid{/yun} </p>{yun:}/if{/yun}
+          <p>上次登录：{yun:}$user.login_date|date_format:"%Y-%m-%d %H:%M:%S"{/yun}</p>
+          <p>擅长行业：{yun:}$info.hy_info{/yun}</p>
+          <p>擅长职位：{yun:}$info.job_info{/yun}</p>
+     </div>
+     <div class="itwap_job_ds_top"><i class="itwap_job_ds_top_icon"></i>顾问介绍</div>
+     <div class="itwap_job_ds_yq">
+         {yun:}$info.content{/yun}
+     </div>  
+</div>
+<div class="itwap_job_ds" >
+     <div class="itwap_job_ds_top"><i class="itwap_job_ds_top_icon"></i>正在运作的职位</div>
+
+ {yun:}if $t_count>0{/yun}
+ {yun:}ltjoblist uid='auto.uid' item=list{/yun}
+<div class="itwap_job_ds_job_b">
+     <div class="itwap_job_b_nm"><a href="{yun:}url m=wap c=ltjob a=recshow id=$list.id{/yun}">{yun:}$list.job_name|mb_substr:0:12:'utf-8'{/yun}</a></div>
+     <div class="itwap_job_b_city">{yun:}$list.cityid_info{/yun} |{yun:}$list.com_name|mb_substr:0:12:'utf-8'{/yun}</div>
+     <div class="itwap_job_b_jy"><i>  {yun:}$list.salary_info{/yun}</i> | {yun:}$list.exp_info{/yun}经验 | {yun:}$list.edu_info{/yun}</div>
+</div>
+ {yun:}/ltjoblist{/yun}
+{yun:}else{/yun}
+<div class="it_wap_notip"><i class="it_wap_notipiocn"></i>该顾问暂时没有运作的职位</div>
+{yun:}/if{/yun}
+
+</div>
+<div class="itwap_job_ds">
+     <div class="itwap_job_ds_top"><i class="itwap_job_ds_top_icon"></i>合作过的客户</div>
+     {yun:}if $info.client|@count and $info.client{/yun}
+     <div class="itwap_job_ds_kh">
+     {yun:}foreach item=v from=$info.client{/yun}
+      <span class="itwap_job_ds_hzkh">{yun:}$v{/yun}</span>
+      {yun:}/foreach{/yun}
+     </div>
+{yun:}else{/yun}
+ <div class="it_wap_notip"><i class="it_wap_notipiocn"></i>暂时没有合作客户</div>
+{yun:}/if{/yun}
+</div>
+    <!--私信弹出框-->
+    <div id="reply" style=" display:none; width:330px; margin: 0 auto; padding: 0;">
+        <div><textarea name="reply" id="content" rows="4" cols="30"></textarea></div>
+        <div><input type="submit" name="submit" value="发送 " class="lt_recuser_box_tj_list_sub" onclick="send_ltmsg();" />
+        <input class="" type="hidden" id="fid" name="id" value="" /></div>
+    </div>
+    <!--私信弹出框-->
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/lt.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

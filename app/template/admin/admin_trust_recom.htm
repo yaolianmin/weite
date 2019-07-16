@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script> 
+function directs(name){
+	var chk_value =[];    
+	$('input[name="'+name+'"]:checked').each(function(){    
+		chk_value.push($(this).val());   
+	}); 	
+	if(chk_value.length==0){ 
+		parent.layer.msg("请选择要推荐的公司！",2,8);return false;		
+	}else{		
+		parent.layer.confirm("确定推荐吗？",function(){ 
+			parent.layer.closeAll();
+			var length = chk_value.length;
+			$.layer({
+ 				type : 1,
+				title : false,
+				closeBtn : [0 , false],  
+				border : [10 , 0.3 , '#000', true],
+				area : ['150px','50px'],
+				page : {html : '<font style=\'float: left;font-size: 14px; height: 50px;line-height: 50px;text-align: center;width: 150px;\'>发送进度：<span id=\'send_num\'>0</span>/<span>'+length+'</span></font>'}
+			}); 			
+			if(length>0){ 
+				//弹出发送等待页面 1/发送总数 			
+				for(var i=0;i<length;i++){					
+					var com_value = chk_value[i];
+					var uid=$("#comuid"+com_value).attr("date"); 
+					//调用发送函数
+					send_recom_email(uid,com_value,'{yun:}$smarty.get.eid{/yun}',length);  
+					//继续执行
+				}
+				//弹出发送成功 
+				setTimeout(function () {layer.closeAll();parent.layer.msg("发送完成！", 2,9,function(){location.reload();});return false;}, 1000); 
+			}
+			
+		});
+	} 
+} 
+function send_recom_email(comid,jobid,eid,type){//type=0单条发送，其他数组为批量发送总数量	 
+	$.ajax({
+		async: false, 
+		url: 'index.php?m=admin_trust&c=directrecom&comid='+comid+'&jobid='+jobid+'&eid='+eid +'&'+ new Date().getTime(),
+		type: 'GET',
+		dataType: "json",
+		timeout: 6000, 
+		success: function(json){ 
+			//发送成功，修改页面发送数量 
+			if(type=='0'){
+				parent.layer.msg(json.msg, 2, Number(json.type),function(){location.reload();});return false;
+			}else if(type>0&&Number(json.type)=='9'){ 
+				var send_num=$("#send_num").html();
+				$("#send_num").html(parseInt(send_num)+parseInt(1));return true;
+			} 
+		}
+	});
+}
+</script> 
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+
+<title>后台管理</title>
+</head>
+<body class="body_ifm"> 
+<div class="infoboxp">
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">该页面展示了为委托简历推荐的职位。</div>
+</div>
+</div>
+ <div class="admin_new_search_box">
+<div class="admin_new_search_name">搜索类型：</div>
+<form action="index.php" name="myform" method="get">
+    <input name="m" value="admin_trust" type="hidden"/>
+	<input name="c" value="recom" type="hidden"/>
+	<input name="id" value="{yun:}$get_info.id{/yun}" type="hidden"/>
+	<input name="eid" value="{yun:}$row.id{/yun}" type="hidden"/>
+       <div class="admin_Filter_text formselect" did='dtype'>
+        <input type="button" value="{yun:}if $smarty.get.type=='2'{/yun}职位名{yun:}else{/yun}公司名{yun:}/if{/yun}" class="admin_Filter_but" id="btype">
+        <input type="hidden" name="type" id="type" value="{yun:}if $smarty.get.type{/yun}{yun:}$smarty.get.type{/yun}{yun:}else{/yun}1{yun:}/if{/yun}"/>
+        <div class="admin_Filter_text_box" style="display:none" id='dtype'>
+          <ul>
+            <li><a href="javascript:void(0)" onClick="formselect('1','type','公司名')">公司名</a></li>
+            <li><a href="javascript:void(0)" onClick="formselect('2','type','职位名')">职位名</a></li>
+          </ul>
+        </div>
+      </div>  <input type="text" placeholder="输入你要搜索的关键字" value="{yun:}$smarty.get.keyword{/yun}" name='keyword' class="admin_Filter_search">
+      <input type="submit" name='search'  value="搜索" class="admin_Filter_bth">
+    
+</form>
+
+
+  
+
+<div class="clear"></div>
+
+<script>
+function searchmore(){
+    var html=$(".admin_screenlist_box").toggle();
+}
+</script>
+<div class="clear"></div>
+ 
+ </div>
+ 
+
+{yun:}include file="admin/admin_search.htm"{/yun} 
+  <div class="clear"></div>    
+  <div class="table-list">
+  <div class="admin_table_border"> 
+      <form action="index.php?m=reward&c=del" name="myform" method="post"  target="supportiframe" id='myform'>
+    <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+    <input type="hidden" name="eid"  value="{yun:}$smarty.get.eid{/yun}">
+      <table width="100%">
+        <thead>
+        	<tr class="admin_table_top">
+             <th><label for="chkall"><input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/></label></th>
+            {yun:}if $smarty.get.t=="id" && $smarty.get.order=="asc"{/yun}
+            <th><a href="{yun:}searchurl order=desc t=id m=admin_trust c=recom untype='order,t'{/yun}">职位编号<img src="images/sanj.jpg"/></a></th>
+            {yun:}else{/yun}
+			<th><a href="{yun:}searchurl order=asc t=id m=admin_trust c=recom untype='order,t'{/yun}">职位编号<img src="images/sanj2.jpg"/></a></th>
+            {yun:}/if{/yun}
+            <th align="left">公司名称</th>
+            <th align="left">职位名称</th>
+            <th align="left">工作地区</th>
+            <th align="left">职位类别</th>
+            <th align="left">待遇</th> 
+			<th class="admin_table_th_bg">操作</th>
+			</tr>
+        </thead>
+        <tbody>
+        {yun:}foreach item=v key=key from=$rows{/yun}
+        <tr align="center">
+          <td><input type="checkbox" date="{yun:}$v.uid{/yun}" id='comuid{yun:}$v.id{/yun}' value="{yun:}$v.id{/yun}" class="check_all"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+          <td class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td> 
+          <td class="ud" align="left">{yun:}$v.bname{/yun}</td>
+          <td class="ud" align="left"><a href="{yun:}url m=job c=comapply id=$v.id{/yun}" target="_bank">{yun:}$v.name{/yun}</a></td>
+          <td class="ud" align="left">{yun:}$city_name[$v.provinceid]{/yun} - {yun:}$city_name[$v.cityid]{/yun}</td>
+          <td class="gd" align="left">{yun:}$job_name[$v.job_post]{/yun}</td>
+          <td class="td" align="left">{yun:}if $v.minsalary&&$v.maxsalary{/yun}￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}else{/yun}面议{yun:}/if{/yun}</td> 
+          <td><a href="javascript:void(0);" class="status admin_cz_sh"  onclick="send_recom_email('{yun:}$v.uid{/yun}','{yun:}$v.id{/yun}','{yun:}$smarty.get.eid{/yun}','0')">直接推荐</a></td>
+        </tr>
+        {yun:}foreachelse{/yun}
+		<tr align="center"><td colspan="8">暂无合适公司</td></tr>
+        {yun:}/foreach{/yun}
+        <tr style="background:#f1f1f1;">
+			<td align="center"><label for="chkall2"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></label></td>
+          <td colspan="3" > 
+		  <label for="chkAll2">全选</label>
+            <input class="admin_button" type="button" name="delsub" value="批量推荐" onClick="directs('del[]');" />
+            &nbsp;&nbsp;</td>
+          <td colspan="5" class="digg">{yun:}$pagenav{/yun}</td>
+        </tr>
+          </tbody>
+      </table> 
+      </form>
+  </div>
+</div> 
+</div> 
+</body>
+</html>

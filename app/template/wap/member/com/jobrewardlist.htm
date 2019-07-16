@@ -1,0 +1,53 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<ul class="member_ms">
+<li><a href='index.php?c=jobpack'>分享职位管理</a></li>
+<li class="member_ms_cur"><a href='index.php?c=jobpack&t=r'>悬赏职位管理</a></li>
+</ul>
+{yun:}if !empty($rows){/yun}
+	<div class="wap_member_job_show">
+	{yun:}foreach item=v from=$rows{/yun}
+	<div class="wap_member_msg ">
+	<div class="wap_member_date">
+	<span class="yun_m_job_date_n">&nbsp;<a href="{yun:}url m=wap c=job a=view id=$v.jobid{/yun}" class="job_list_jobname com_member_hr_cblue">{yun:}$v.name{/yun}</a></span>
+	<div class="wap_member_date_r">
+	
+	</div>
+	</div>
+	
+
+	<div class="yun_m_job_list_zt">
+    <a href="index.php?c=rewardlog&jobid={yun:}$v.jobid{/yun}">应聘简历：<span class="yun_reward_list_box_n">{yun:}$v.sqnum{/yun}</span> 份  </a>
+    <span class="wap_member_msg_job_s">更新时间：{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</span>
+    <div class="yun_reward_list_box_sj">赏金总额：<span class="yun_reward_list_box_n">￥{yun:}$v.money{/yun}</span></div>
+	<ul class="yun_reward_list_box">
+	<li><div class="yun_reward_list_box_p">投递赏金：</div><span class="yun_reward_list_box_n">￥{yun:}$v.sqmoney{/yun}</span></li>
+    <li><div class="yun_reward_list_box_p">面试赏金：</div><span class="yun_reward_list_box_n">￥{yun:}$v.invitemoney{/yun} </span></li>
+	<li><div class="yun_reward_list_box_p">入职赏金：</div><span class="yun_reward_list_box_n">￥{yun:}$v.offermoney{/yun}</span></li>
+   </ul>
+	</div>
+    
+    <div class="yun_member_bth">
+
+						<a href="index.php?c=rewardlog&jobid={yun:}$v.jobid{/yun}" class=" yun_member_partsub">查看应聘简历</a>
+
+						<a href="{yun:}url m=wap c=job a=view id=$v.jobid{/yun}" class="yun_member_partsub  " >预览职位</a> 
+		
+					
+						
+					</div>
+    	</div>
+
+	{yun:}/foreach{/yun}
+
+	<div class="pages" style="margin-top:10px;"> {yun:}$pagenav{/yun}</div>
+	</div>
+{yun:}else{/yun}
+  <div class="wap_member_no">您还没有发布分享职位。</div>
+  <em class="wap_memberjob_fabu "></em>
+{yun:}/if{/yun}
+<!--没有职位提示-->
+</section>
+</div>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

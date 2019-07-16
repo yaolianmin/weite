@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+	<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+	<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+	<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+	
+	<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+	<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+	<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+	<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+	
+<title>后台管理</title>
+</head>
+
+<body class="body_ifm">
+	<div class="infoboxp">
+		<div class="tabs_info">
+			<ul>
+				<li class="curr"><a href="index.php?m=admin_ltset">猎头设置</a></li> 
+				<li><a href="index.php?m=admin_ltset&c=logo">头像设置</a></li> 
+				<li><a href="index.php?m=admin_ltset&c=set">{yun:}$config.integral_pricename{/yun}设置</a></li> 
+				<li><a href="index.php?m=admin_ltset&c=spend">消费设置</a></li>
+			</ul>
+		</div>
+
+		<div class="admin_new_tip">
+			<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+			<div class="admin_new_tip_list_cont">
+				<div class="admin_new_tip_list">该页面展示了网站的猎头设置信息，可对猎头进行猎头设置操作。</div>
+			</div>
+		</div>
+
+		<div class="clear"></div>
+  
+		<div id="subboxdiv" style="width:100%;height:100%;display:none;position:absolute;"></div>
+		
+		<div class="main_tag mt10">
+			<div class="tag_box">
+				<div>
+					<form class="layui-form">
+						<table width="100%" class="table_form">
+							<tr class="admin_table_trbg">
+								<th width="220" bgcolor="#f0f6fb"><span class="admin_bold">参数说明</span></th>
+								<td bgcolor="#f0f6fb"><span class="admin_bold">参数值</span></td>
+							</tr>
+							
+							<tr>
+								<th width="220">开启猎头会员审核：</th>
+								<td>
+									<div class="layui-form-item">
+										<div class="layui-input-block">
+											<div class="layui-input-inline">
+												<input name="lt_status" id="lt_status_0" value="1" title="不审核" {yun:}if $config.lt_status==1{/yun} checked  {yun:}/if{/yun} type="radio"/>
+												
+												<input name="lt_status" id="lt_status_1" value="0" title="审核" {yun:}if $config.lt_status!=1{/yun} checked {yun:}/if{/yun} type="radio"/>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr class="admin_table_trbg">
+								<th width="220">强制邮箱认证：</th>
+								<td>
+									<input type="checkbox" name="lt_enforce_emailcert" id="lt_enforce_emailcert" lay-skin="switch" lay-text="开启|关闭" {yun:}if $config.lt_enforce_emailcert=="1"{/yun} checked {yun:}/if{/yun} />
+								</td>
+							</tr>
+							
+							<tr>
+								<th width="220">强制手机认证：</th>
+								<td>
+									<input type="checkbox" name="lt_enforce_mobilecert" id="lt_enforce_mobilecert" lay-skin="switch" lay-text="开启|关闭" {yun:}if $config.lt_enforce_mobilecert=="1"{/yun} checked {yun:}/if{/yun} />
+								</td>
+							</tr>
+							
+							<tr class="admin_table_trbg">
+								<th width="220">强制猎头执照认证：</th>
+								<td>
+									<input type="checkbox" name="lt_enforce_licensecert" id="lt_enforce_licensecert" lay-skin="switch" lay-text="开启|关闭" {yun:}if $config.lt_enforce_mobilecert=="1"{/yun} checked {yun:}/if{/yun} />
+								</td>
+							</tr>
+							<tr>
+								<th width="220">猎头发布职位审核：</th>
+								<td>
+									<input type="checkbox" name="lt_job_status" id="lt_job_status" lay-skin="switch" lay-text="开启|关闭" {yun:}if $config.lt_job_status=="0"{/yun} checked {yun:}/if{/yun} />
+								</td>
+							</tr>
+							
+							<tr class="admin_table_trbg">
+								<th width="220">猎头认证审核：</th>
+								<td>
+									<input type="checkbox" name="lt_cert_status" id="lt_cert_status" lay-skin="switch" lay-text="开启|关闭" {yun:}if $config.lt_cert_status=="1"{/yun} checked {yun:}/if{/yun} />
+								</td>
+							</tr>
+							
+							<tr>
+								<th width="220">推荐人才返利：</th>
+								<td>
+									<input type="checkbox" name="lt_rec_rebates" id="lt_rec_rebates" lay-skin="switch" lay-text="开启|关闭" {yun:}if $config.lt_rec_rebates=="1"{/yun} checked {yun:}/if{/yun} />
+								</td>
+							</tr>
+							
+							<tr class="admin_table_trbg" id='rebates_name' {yun:}if $config.lt_rec_rebates==0{/yun}style="display:none"{yun:}/if{/yun}>
+								<th width="220">返利单位：</th>
+								<td>
+									<input type="text " name="lt_rebates_name" class="input-text tips_class" id="lt_rebates_name" value="{yun:}$config.lt_rebates_name{/yun}" >
+									<span class="admin_web_tip">默认为元，例：金币</span>
+								</td>
+							</tr>
+							
+							<tr>
+								<th width="220">猎头注册默认等级：</th>
+								{yun:}if is_array($lt_rows){/yun}
+									<td>
+										<div class="layui-form-item">
+											<div class="layui-input-block">
+												<div class="layui-input-inline">
+													{yun:}foreach item=v from=$lt_rows{/yun}
+														<input name="lt_rating" id="lt_rating_0"  value="{yun:}$v.id{/yun}" title="{yun:}$v.name{/yun}" {yun:}if $config.lt_rating==$v.id{/yun} checked {yun:}/if{/yun} type="radio"/>
+													{yun:}/foreach{/yun}
+												</div>
+											</div>
+										</div>
+									</td>
+								{yun:}else{/yun}
+									<td>
+										暂无等级，<a href="index.php?m=userconfig&c=comclass" style="color:red;">添加会员等级</a>
+										<input type="hidden" name="com_rating" value="0">
+									</td>
+								{yun:}/if{/yun}
+							</tr>
+							
+							<tr class="admin_table_trbg">
+								<td colspan="2" align="center">
+									<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+									<input class="layui-btn layui-btn-normal" id="ltconfig" type="button" name="config" value="提交" />&nbsp;&nbsp;
+									<input class="layui-btn layui-btn-normal" type="reset" value="重置" />
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		layui.use(['layer', 'form'], function(){
+			var layer = layui.layer
+				,form = layui.form
+				,$ = layui.$;
+		});
+
+		$(function(){
+			$("#ltconfig").click(function(){
+				$.post("index.php?m=admin_ltset&c=save",{
+					config : $("#ltconfig").val(),
+ 					lt_status : $("input[name=lt_status]:checked").val(),
+					lt_enforce_emailcert : $("input[name=lt_enforce_emailcert]").is(":checked") ? 1:0,
+					lt_enforce_mobilecert : $("input[name=lt_enforce_emailcert]").is(":checked") ? 1:0,
+ 					lt_enforce_licensecert : $("input[name=lt_enforce_licensecert]").is(":checked") ? 1:0,
+ 					lt_job_status : $("input[name=lt_job_status]").is(":checked") ? 0:1,
+ 					lt_cert_status : $("input[name=lt_cert_status]").is(":checked") ? 1:0,
+					lt_rec_rebates : $("input[name=lt_rec_rebates]").is(":checked") ? 1:0,
+ 					pytoken : $("#pytoken").val(),
+ 					lt_rebates_name : $("#lt_rebates_name").val(),
+					lt_rating : $("input[name=lt_rating]:checked").val()
+				},function(data,textStatus){
+					config_msg(data);
+				});
+			});
+			$("input[name='lt_rec_rebates']").click(function(){
+				$("#rebates_name").toggle();
+			});
+		})
+	</script>
+</body>
+</html>

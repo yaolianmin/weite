@@ -1,0 +1,158 @@
+{yun:}include file="$wapstyle/header_lt.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/itwap.css?v={yun:}$config.cachecode{/yun}" type="text/css"/>
+<div class="itwap_job_title">
+     <div class="itwap_job_title_nm"><a >{yun:}$job.job_name{/yun}</a></div>
+     <div class="stamp_exceed" style="z-index: 100;">
+       {yun:}if $job.status=='2'{/yun}
+	<img title="已过期" src="{yun:}$wap_style{/yun}/images/stamp_gq.png">
+	{yun:}elseif $job.zp_status=='1'{/yun}
+	<img title="已下架" src="{yun:}$wap_style{/yun}/images/stamp.png">
+	{yun:}/if{/yun}
+   </div>
+     <div class="itwap_job_title_wage">年薪：<i class="itwap_job_title_wage_cr">{yun:}if $job.minsalary>0&&$job.maxsalary>0{/yun}￥{yun:}$job.minsalary{/yun}-{yun:}$job.maxsalary{/yun}万{yun:}else if $job.minsalary>0{/yun}￥{yun:}$job.minsalary{/yun}万以上{yun:}else{/yun}面议{yun:}/if{/yun}</i></div>
+     <div class="itwap_job_title_city">{yun:}$job.provinceid_info{/yun} {yun:}$job.cityid_info{/yun} {yun:}$job.three_cityid_info{/yun} | {yun:}$job.exp_info{/yun}经验 |{yun:}$job.edu_info{/yun}</div>
+</div>
+ {yun:}if $config.lt_rec_rebates=="1" && $job.rebates>"0"{/yun}
+<div class="itwap_xs">
+<span class="itwap_xs_lt">猎头悬赏：<em>{yun:}$job.rebates{/yun}</em> {yun:}$config.lt_rebates_name{/yun}</span>
+<div class="itwap_xs_ss">
+{yun:}if $myself{/yun}
+<a href="javascript:void()"onclick="layermsg('本人发布，无法推荐！');">立即推荐</a> 
+{yun:}else{/yun}
+<a href="{yun:}url m=wap c=ltjob a=recuser id=$job.id{/yun}">立即推荐</a>
+ {yun:}/if{/yun} </div>
+</div>
+{yun:}/if{/yun} 
+<div class="itwap_job_ds">
+     <div class="itwap_job_ds_top"><i class="itwap_job_ds_top_icon"></i>职位描述</div>
+     <div class="itwap_job_ds_yq">
+          {yun:}$job.job_desc{/yun}
+     </div>
+     <div class="itwap_job_ds_top"><i class="itwap_job_ds_top_icon"></i>岗位要求</div>
+     <div class="itwap_job_ds_yq">
+          <p>性别要求：{yun:}$job.sex{/yun}</p>
+          {yun:}if $job.language{/yun}<p>语言要求：{yun:}$job.language{/yun}</p>{yun:}/if{/yun}
+          <p>所属部门：{yun:}$job.department{/yun}</p>
+          <p>汇报对象：{yun:}$job.report{/yun}</p>
+          <p>薪资构成：{yun:}$job.constitute{/yun}</p>
+          {yun:}if $job.welfare{/yun}<p>福利待遇：{yun:}$job.welfare{/yun}</p>{yun:}/if{/yun}
+     </div>  
+     <div class="itwap_job_ds_top"><i class="itwap_job_ds_top_icon"></i>任职资格</div>
+     <div class="itwap_job_ds_yq">
+         {yun:}$job.eligible{/yun}
+     </div>         
+     
+</div>
+<div class="itwap_job_ds">
+     <div class="itwap_job_ds_top"><i class="itwap_job_ds_top_icon"></i>企业简介</div>
+     <div class="itwap_job_ds_yq">
+          {yun:}$job.desc{/yun}
+     </div>
+</div>
+<div class="itwap_job_ds">
+     <div class="itwap_job_ds_top"><i class="itwap_job_ds_top_icon"></i>职位发布人</div>
+     <div class="itwap_job_ds_pp">
+          <div class="itwap_job_ds_pp_img"><a href="{yun:}url m=wap  c=ltjob a=hunter uid='`$Info.uid`'{/yun}"><img src="{yun:}$Info.photo{/yun}" width="52" height="52" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_lt_icon{/yun}','2')"/></a></div>
+          <div class="itwap_job_ds_pp_ct">
+               <p><a class="itwap_job_ds_pp_nm" href="{yun:}url m=wap  c=ltjob a=hunter uid='`$Info.uid`'{/yun}"> {yun:}$Info.realname{/yun}</a></p>
+               <p>目前头衔： {yun:}$Info.title_info{/yun}</p>
+               <p>发布职位：{yun:}$user_job_num{/yun}个， <a class="itwap_job_ds_detail" href="{yun:}url m=wap c=ltjob a=hunter uid='`$Info.uid`'{/yun}">[查看详情]</a></p>
+          </div>
+          <div class="itwap_job_ds_gz">
+             {yun:}if $usertype==1{/yun}
+                  <a href="javascript:void(0);" onclick="ltatn('{yun:}$Info.uid{/yun}');" id="guanzhu{yun:}$Info.uid{/yun}">{yun:}if is_array($atn){/yun}取消关注{yun:}else{/yun}+关注{yun:}/if{/yun}</a>
+             {yun:}else{/yun}
+                 {yun:}if $uid{/yun}
+                  <a href="javascript:void(0)" onclick="layermsg('只有个人用户才能关注！')">+关注</a>
+                {yun:}else{/yun}
+                 <a href="javascript:void(0)" onclick="layermsg('请先登录！')">+关注</a>
+              	{yun:}/if{/yun}
+            {yun:}/if{/yun}
+         </div>
+     </div>
+</div>
+<div class="itwap_job_ds_word">
+<input type="hidden" id="job_uid" value="{yun:}$job.uid{/yun}" />
+<input type="hidden" id="jobid" value="{yun:}$job.id{/yun}" />
+<input type="hidden" id="job_name" value="{yun:}$job.job_name{/yun}" />
+<input type="hidden" id="com_name" value="{yun:}$job.com_name{/yun}" />
+<div class="itwap_job_ds_word_top"><i class="itwap_job_ds_word_icon"></i>给我留言</div>
+<div class="itwap_job_ds_textarea"><textarea id="msg_content" name="content" placeholder="请输入您对该职位的疑问。比如所在地、年薪、福利等，我会及时给您回复！期待与您合作！"></textarea></div>
+<div class="itwap_job_ds_yzm">
+<input class="itwap_job_ds_yzm_bx" id="msg_CheckCode" type="text"  placeholder="请输入验证码" value="" maxlength="4" name="authcode"/>
+<img class="itwap_job_ds_yzm_img" id="vcode_img" src="{yun:}$config.sy_wapdomain{/yun}/authcode.inc.php" onclick="checkCode('vcode_img');" style="width:74px;height:33px;border:1px solid #eee;"/>
+ {yun:}if $usertype==1{/yun}
+<input class="itwap_job_but_fs" type="button" onclick="ltmsg('vcode_img')" value="发送">
+{yun:}else{/yun}
+{yun:}if $uid{/yun}
+<input class="itwap_job_but_fs" type="button" value="发送" onclick="layermsg('只有个人用户才能留言')">
+{yun:}else{/yun}
+<input class="itwap_job_but_fs" type="button" value="发送"  onclick="layermsg('请先登录！')">
+{yun:}/if{/yun}
+{yun:}/if{/yun}
+</div>
+</div>
+
+
+
+ <div class="itwap_bottom">
+{yun:}if $usertype==1&&$uid{/yun}
+{yun:}if $userjob{/yun}
+<div class="itwap_bottom_li" style="background:#989390"><a>已申请</a></div>
+{yun:}else{/yun}
+{yun:}if $job.notuserjob==''{/yun}
+<div class="itwap_bottom_li"><a href="javascript:void(0);"  onclick="ypjob('3','{yun:}$uid{/yun}','{yun:}$job.id{/yun}');">立即申请</a></div>
+{yun:}else{/yun}
+<div class="itwap_bottom_li" style="background:#989390"><a>立即申请</a></div>
+{yun:}/if{/yun}
+{yun:}/if{/yun}
+{yun:}if $favjob{/yun}
+<div class="itwap_bottom_ysc"><a href="javascript:;" >已收藏</a></div>
+{yun:}else{/yun}
+<div class="itwap_bottom_sc"><a href="javascript:;" id="ltjob{yun:}$job.id{/yun}" onclick="fav_hjob('{yun:}$job.id{/yun}');">收藏</a></div>
+{yun:}/if{/yun}
+{yun:}else{/yun}
+{yun:}if $uid{/yun}
+{yun:}if $job.notuserjob==''{/yun}
+<div class="itwap_bottom_li"><a href="javascript:void(0);" onclick="layermsg('只有个人用户才能申请')">立即申请</a></div>
+{yun:}else{/yun}
+<div class="itwap_bottom_li" style="background:#989390"><a>立即申请</a></div>
+{yun:}/if{/yun}
+<div class="itwap_bottom_sc"><a href="javascript:void(0);"  onclick="layermsg('只有个人用户才能收藏')">收藏</a></div>
+{yun:}else{/yun}
+{yun:}if $job.notuserjob==''{/yun}
+<div class="itwap_bottom_li"><a href="javascript:void(0);"  onclick="layermsg('请先登录！')">立即申请</a></div>
+{yun:}else{/yun}
+<div class="itwap_bottom_li" style="background:#989390"><a>立即申请</a></div>
+{yun:}/if{/yun}
+<div class="itwap_bottom_sc"><a href="javascript:void(0);"  onclick="layermsg('请先登录！')">收藏</a></div>
+{yun:}/if{/yun}
+{yun:}/if{/yun}
+<div class="itwap_bottom_fx"><a href="javascript:void(0);"  data-url='{yun:}url m=wap c=ltjob a=share id=$job.id{/yun}'id="shareClick">分享</a></div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/prefixfree.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/lt.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src='{yun:}$wap_style{/yun}/js/chat.js?v={yun:}$config.cachecode{/yun}' type='text/javascript'></script>
+{yun:}if $layer{/yun}
+<input id="layermsg" value="{yun:}$layer.msg{/yun}" type="hidden">
+<input id="layerurl" value="{yun:}$layer.url{/yun}" type="hidden">
+<script>$(document).ready(function(){islayer();});</script>
+{yun:}/if{/yun}
+<script>
+	var config = {
+		url:'{yun:}url m=wap c=company a=share id=$row.uid{/yun}',
+		title:'{yun:}$row.name{/yun}-{yun:}$config.sy_webname{/yun}',
+		desc:'',
+		img:'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_sharelogo{/yun}',
+		img_title:'{yun:}$row.name{/yun}',
+		from:'{yun:}$config.sy_webname{/yun}'
+	};var wapurl="{yun:}url m=wap{/yun}"
+</script>
+<div style="width:100%;height:60px;"></div>
+{yun:}include file="$wapstyle/nativeshare.htm"{/yun}
+ 
+</body>
+</html>

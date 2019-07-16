@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>查看会员特权</title>
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/css.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head> 
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+        <div class="search_con fl"> 
+			<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+            <form name="alipayment" action="index.php?c=right&act=buysave" target="supportiframe" method="post" id='myform'  >
+			<table width="100%" border="0" cellspacing="1" cellpadding="1" class="my_table_msg">  
+               <tr>
+                <th height="30">功能名称:</th>
+                <td>
+				{yun:}$row.name{/yun}
+				<input type="hidden" name="type" value="vip" />
+				<input type="hidden" name="vipid" value="{yun:}$smarty.get.vipid{/yun}" />
+				<input type="hidden" name="price" value="{yun:}$row.service_price{/yun}">
+				</td>
+              </tr> 
+              {yun:}if $row.time_start<time() && $row.time_end>time(){/yun}
+              <tr>
+                <th height="30">购买费用:</th>
+                <td><s><span id="span_integral_buy" >{yun:}$row.integral_buy{/yun}
+                  <input type="hidden" name="integral_buy" id='integral_buy' value="{yun:}$row.integral_buy{/yun}" >
+                  {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></s></td>
+              </tr>
+              <tr>
+                <th height="30">优惠费用:</th>
+                <td> 
+					<span id="span_yh_integral" style="color:red;">{yun:}$row.yh_integral{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span> (优惠时间：{yun:}$row.time_start|date_format:"%Y-%m-%d"{/yun} 到 {yun:}$row.time_end|date_format:"%Y-%m-%d"{/yun}) 
+					<input type="hidden" name="yh_integral" id='yh_integral' value="{yun:}$row.yh_integral{/yun}" >
+                  </td>
+              </tr>
+              {yun:}else{/yun}
+              <tr>
+                <th height="30">购买费用:</th>
+                <td> <span id="span_integral_buy" >{yun:}$row.integral_buy{/yun}
+                  <input type="hidden" name="integral_buy" id='integral_buy' value="{yun:}$row.integral_buy{/yun}" >
+                  {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span></td>
+              </tr> 
+              {yun:}/if{/yun} 
+              <tr>
+                <td rowspan="2">&nbsp;</td>
+                <td><p class="bank_msg" style="padding:10px 0">您还有{yun:}if !$statis.integral{/yun}0{yun:}else{/yun}{yun:}$statis.integral{/yun}{yun:}/if{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</p></td>
+              </tr>
+              <tr> 
+                <td height="40"> 
+                <input class="c_btn_02 c_btn_02_w110" type="button" onclick="buy_vip_ad();" value="下一步">
+				<span>没有{yun:}$config.integral_pricename{/yun}？您可以<a href="index.php?c=pay&type=vip&id={yun:}$row.id{/yun}">直接购买</a></span>
+                </td>
+              </tr>
+            
+			</table>
+			</form> 
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<div class="clear"></div>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

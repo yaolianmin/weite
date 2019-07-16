@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/class.public.css?v={yun:}$config.cachecode{/yun}" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/ltindustry.cache.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/ltjob.cache.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/jobadd.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/pop_up.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+
+<script type="text/javascript">
+//---邮箱获取后缀--
+function get_def_email(email,type){
+		var postemail=email.split("@");
+		var configemail = "{yun:}$config.sy_def_email{/yun}";
+		var def_email=configemail.split("|");
+		var emails=[];
+		if($.trim(postemail[1])!=""){
+			$.each(def_email,function(index,data){ 
+				if(data.indexOf(postemail[1])>-1){
+					emails.push(data);
+				};
+			});
+		}else{
+			emails=def_email;
+		}
+		var html='';
+		$.each(emails,function(index,data){ 
+			if(index==0){
+				$class=" reg_email_box_list_hover";
+			}else{
+				$class="";
+			}
+			html+='<div class="reg_email_box_list'+$class+' email'+index+'" aid="'+type+'" onclick="click_email('+index+','+type+');" onmousemove="hover_email('+index+');"><span class="eg_email_box_list_left">'+postemail[0]+'</span>'+data+'</div>';
+		})
+		$(".reg_email_box").html(html);
+		$(".reg_email_box").show();
+}
+function hover_email(id){
+	$(".reg_email_box_list_hover").removeClass("reg_email_box_list_hover");
+	$(".email"+id).addClass("reg_email_box_list_hover");
+	$("#default").val(id);
+}
+function click_email(id,type){
+	var email=$(".email"+id).html();
+	email=email.replace('<span class="eg_email_box_list_left">','');
+	email=email.replace('</span>','');
+	email=email.replace('<SPAN class=eg_email_box_list_left>','');
+	email=email.replace('</SPAN>','');
+	var myreg = /^([a-zA-Z0-9\-]+[_|\_|\.]?)*[a-zA-Z0-9\-]+@([a-zA-Z0-9\-]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	if(myreg.test(email)){
+		$("#email").val(email);
+	}else{
+		$("#email").val('');
+	}
+	$("#email"+type).val(email);
+	$(".reg_email_box").hide();
+	blurinfotype("email");
+}
+</script>
+<style type="text/css">
+.reg_email_box_list{width:100%;height:27px; line-height:27px; font-size:14px;color:#666; text-indent:5px;}
+.reg_email_box_list_hover{ background:#F1FBFF; cursor:pointer}
+.reg_email_box_list .eg_email_box_list_left{color:#C00;}
+.reg_email_box{ position:absolute;width:222px;border:1px solid #D0D0D0; max-height:180px; _height:expression(this.scrollHeight > 160 ? "160px" : "auto"); overflow:auto; overflow-x:hidden;background:#FFF; margin-left:150px; margin-top:33px;}
+</style>
+</head>
+<body>
+<!--header头部-->
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fl">
+		<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+        <form class="layui-form" action="index.php?c=info&act=save" target="supportiframe" method="post" onSubmit="return CheckPost_info();" name="MyForm">
+        
+        <div class="yun_lt_infobox">
+         <div class="yun_lt_infotop">
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>姓名</div>
+          <div class="m_name_right fl">
+            <input type="text" class="m_inner_username_text fl" value="{yun:}$row.realname{/yun}" name="realname" id="realname" onclick="oninfotype('realname');" onblur="blurinfotype('realname')" date="请填写真实姓名">
+            <span id="by_realname"></span> </div>
+          <div class="clear"></div>
+        </div> <div class="m_inner_name">
+          <div class="m_name_left fl">头像</div>
+             <div class="m_name_right fl">
+             <img id="logo" src="{yun:}$user.photo_big{/yun}"  onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_lt_icon{/yun}',2);"/>
+				<div class="m_name_right_pic">	
+					<button type="button" class="yun_bth_pic adminupload" lay-data="{imgid: 'logo',path: 'lietou'}">上传头像</button>
+					<input type="hidden" id="layupload_type" value="2"/>
+				</div>
+             </div>
+               </div>     </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>所在公司</div>
+          <div class="m_name_right reg_re fl">
+            <input type="text" class="m_username_text fl" value="{yun:}$row.com_name{/yun}" name="com_name" id="com_name" onclick="oninfotype('com_name');" onblur="blurinfotype('com_name')" date="请填写所在公司">
+            <span id="by_com_name"></span> </div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>公司座机</div>
+          <div class="m_name_right fl">
+            <input type="text" class="m_username_text fl" value="{yun:}$row.phone{/yun}" name="phone" id="phone" onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')" onclick="oninfotype('phone');" onblur="blurinfotype('phone')" date="请正确填写公司座机">
+            <span id="by_phone"></span> </div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl">联系邮箱</div>
+          <div class="m_name_right fl">
+            {yun:}if $row.email_status==1{/yun}
+            <span class="info_email_ok">{yun:}$row.email{/yun}</span><a href="index.php?c=binding" style="color:#1178c3;padding-left:10px;">重新认证</a>
+              <input type="hidden" id="email" value="{yun:}$row.email{/yun}">
+            {yun:}else{/yun}
+            <input type="text" class="m_username_text fl" value="{yun:}$row.email{/yun}" name="email" id="email" date="请正确填写联系邮箱" onkeyup="get_def_email(this.value,'1');">
+          <span id="by_email"></span>
+			{yun:}/if{/yun}
+           </div>
+          <div class="reg_email_box" id="defemail1" style=" display:none;z-index:200;"></div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>手机号码</div>
+          <div class="m_name_right fl">
+            {yun:}if $row.moblie_status==1{/yun}
+            <span class="info_sj_ok">{yun:}$row.moblie{/yun}</span> <a href="index.php?c=binding" style="color:#1178c3;padding-left:10px; float:left; display:inline-block">重新认证</a>
+              <input type="hidden" id="moblie" value="{yun:}$row.moblie{/yun}">
+            {yun:}else{/yun}
+            <input type="text" class="m_username_text fl" value="{yun:}$row.moblie{/yun}" name="moblie" id="moblie" onclick="oninfotype('moblie');" onblur="blurinfotype('moblie')" date="请正确填写手机号码" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')">
+          <span id="by_moblie"></span>
+			{yun:}/if{/yun}
+           </div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>目前所在地</div>
+          <div class="m_name_right fl">
+		    <div style="width:100px; float:left; margin-right:10px;">
+          <div class="layui-input-inline">
+            <select name="provinceid" id="provinceid" lay-filter="citys">
+              <option value="">请选择</option>
+              {yun:}foreach from=$city_index key=j item=v{/yun}
+              <option value="{yun:}$v{/yun}" {yun:}if $row.provinceid == $v{/yun}selected{yun:}/if{/yun}
+                >{yun:}$city_name[$v]{/yun}
+              </option>
+              {yun:}/foreach{/yun}
+            </select>
+          </div>
+          </div>
+          <div style="width:100px; float:left; margin-right:10px;">
+          <div class="layui-input-inline">
+            <select name="cityid"  id="cityid" lay-filter="citys"  date="请选择所在地">
+              <option value="">请选择</option>
+              {yun:}foreach from=$city_type[$row.provinceid] key=j item=v{/yun}
+              <option value="{yun:}$v{/yun}" {yun:}if $row.cityid==$v{/yun} selected{yun:}/if{/yun}
+                >{yun:}$city_name[$v]{/yun}
+              </option>
+              {yun:}/foreach{/yun}
+            </select>
+          </div>
+          </div>
+              <div style="width:100px; float:left; margin-right:10px;">
+          <div class="layui-input-inline ">
+            <select name="three_cityid"  id="three_cityid" lay-filter="three_cityid">
+              <option value="">请选择</option>
+              {yun:}foreach from=$city_type[$row.cityid] key=j item=v{/yun}
+              <option value="{yun:}$v{/yun}" {yun:}if $row.three_cityid==$v{/yun} selected{yun:}/if{/yun}
+                >{yun:}$city_name[$v]{/yun}
+              </option>
+              {yun:}/foreach{/yun}
+            </select>
+          </div>
+          </div>
+		   <span id="by_cityid" ></span>
+       
+          
+			
+         
+		  </div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>工作经验</div>
+          <div class="m_name_right fl">
+				
+				  <div class="layui-input-inline fl" onblur="blurinfotype('exp')">
+					<select name="exp" id="exp" lay-filter="exp"  date="请选择工作经验">
+					  <option value="">请选择</option>
+					  {yun:}foreach from=$ltdata.lt_exp  item=v{/yun}
+					  <option value="{yun:}$v{/yun}" {yun:}if $row.exp == $v{/yun} selected{yun:}/if{/yun}
+						>{yun:}$ltclass_name[$v]{/yun}
+					  </option>
+					  {yun:}/foreach{/yun}
+					</select>
+				
+				  </div>
+
+          <span id="by_exp"></span></div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>目前头衔</div>
+          <div class="m_name_right fl">
+		  	
+				  <div class="layui-input-inline fl" onblur="blurinfotype('title')">
+					<select name="title" id="title" lay-filter="title"  date="请选择目前头衔">
+					  <option value="">请选择</option>
+					  {yun:}foreach from=$ltdata.lt_title  item=v{/yun}
+					  <option value="{yun:}$v{/yun}" {yun:}if $row.title == $v{/yun} selected{yun:}/if{/yun}
+						>{yun:}$ltclass_name[$v]{/yun}
+					  </option>
+					  {yun:}/foreach{/yun}
+					</select>
+				  </div>
+				
+        
+          <span id="by_title"></span></div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>擅长行业</div>
+          <div class="m_name_right fl">
+          <div id="qw_hy">
+  		{yun:}foreach item=v from=$hy{/yun}
+          <span class="m_name_fw" id="lthy{yun:}$v{/yun}"><em>{yun:}$lthy_name[$v]{/yun}</em>
+            <input type="button" class="m_fw_submit" onclick="del_type2('{yun:}$v{/yun}');"/>
+            <input type="hidden" value="{yun:}$v{/yun}" name="qw_hy[]" />
+            </span> 
+  		{yun:}/foreach{/yun}
+ 		 </div>
+              <input type="hidden" value="" name="hyids" id="hyids" />
+              <input type="hidden" value="" name="hynames" id="hynames" />
+           <a href="javascript:void(0);" onclick="index_industry(5, '#hynames', '#hyids', '', '{yun:}$row.hy{/yun}', input_check_show2);" class="m_name_tj m_name_tj01">重选行业</a>
+           <span id="by_hy"></span></div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>擅长职位</div>
+          <div class="m_name_right fl"> 
+          <div id="job">
+  		{yun:}foreach item=v from=$job{/yun}
+          <span class="m_name_fw" id="sk{yun:}$v{/yun}"><em>{yun:}$ltjob_name[$v]{/yun}</em>
+            <input type="button" class="m_fw_submit" onclick="del_type('{yun:}$v{/yun}');"/>
+            <input type="hidden" value="{yun:}$v{/yun}" name="job[]" />
+            </span>
+  		{yun:}/foreach{/yun}
+ 		 </div>
+              <input type="hidden" value="" name="jobids" id="jobids" />
+              <input type="hidden" value="" name="jobnames" id="jobnames" />
+          <a href="javascript:void(0);" onclick="index_job(5, '#jobnames', '#jobids', '', '{yun:}$row.job{/yun}', input_check_show);" class="m_name_tj m_name_tj01">添加职位</a>
+          <span id="by_job"></span></div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em>顾问介绍</div>
+          <div class="m_name_right fl">
+            <textarea class="m_name_textarea" name="content" id="content" onclick="oninfotype('content');" onblur="blurinfotype('content')" date="请填写顾问介绍">{yun:}$row.content{/yun}</textarea>
+           <span id="by_content"></span></div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl">合作过的用户</div>
+          <div class="m_name_right fl">
+            <textarea class="m_name_textarea" name="client">{yun:}$row.client{/yun}</textarea>
+            <div class="m_d_mz">多个客户以（,半角逗号）隔开</div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_inner_bc">
+            <input type="submit" name="submit" class="layui-btn layui-btn-normal " value="保　存">
+          </div>
+        </div>
+        </form>
+       
+      </div>
+   
+    </div>
+  
+  </div>
+</div></div>
+<!--内容结束--> 
+<input type="hidden" id="jobaddtype" value="ltinfo" />
+<script type="text/javascript">
+layui.use(['form'], function(){
+	  var $ = layui.$,
+	  form = layui.form;
+	  form.on('select(citys)', function(data){
+	    var html = "<option value=''>请选择</option>";
+	    if(data.value){
+		    $.each(ct[data.value], function(k, v){
+		      html += "<option value='" + v + "'>" + cn[v] + "</option>";
+		    });
+	    }
+	    if(data.elem.name=='provinceid'){
+			$("#cityid").html(html);
+			$("#three_cityid").html("<option value=''>请选择</option>");
+			
+			blurinfotype("provinceid");
+		}else{
+			$("#cityshowth").show();
+			$("#three_cityid").html(html);
+			blurinfotype("cityid");
+		}
+		form.render('select');   
+	  });
+	});
+</script>
+<style>
+	.reg_email_box{width:201px;margin-left:145px;}
+</style>
+<script language=javascript src='{yun:}$config.sy_weburl{/yun}/data/plus/city.cache.js?v={yun:}$config.cachecode{/yun}'></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui.upload.js?v={yun:}$config.cachecode{/yun}" type='text/javascript'></script>
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun} 
+{yun:}include file="$lietoustyle/include.htm"{/yun}
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

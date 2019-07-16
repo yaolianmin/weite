@@ -1,0 +1,145 @@
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<div class="clear"></div>
+<div class="lt_login_bg"></div>
+<div class="clear"></div>
+
+<div class="lt_login_bg_box" style="height:660px;">
+
+<div class="lt_login_bg_box_c">
+<div class="login_title fl">猎头/中介注册</div>
+    <ul class="login_left fl">
+          <li>
+        <span class="login_left_s">用&nbsp;户&nbsp; 名：</span> <input class="login_input" type="text" id="username" name="username" onBlur="reg_checkAjax('username');" placeholder="用户名"/>
+            <span class="reg_tips reg_tips_red false" id="ajax_username"><i class="reg_tips_icon"></i>请填写您的用户名！</span></li>
+          <li><span class="login_left_s">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+            <input class="login_input" type="password" id="regpassword" name="password" onBlur="reg_checkAjax('regpassword');" placeholder="请输入密码(6到16位字母数字)" >
+            <span class="reg_tips false" id="ajax_regpassword"><i class="reg_tips_icon"></i>建议使用复杂组合的强密码，6-20个字符</span></li>
+          <li><span class="login_left_s">确认密码：</span>
+            <input class="login_input" type="password" id="passconfirm" name="passconfirm" onBlur="reg_checkAjax('passconfirm');"placeholder="请输入密码(6到16位字母数字)">
+            <span class="reg_tips reg_tips_blue false" id="ajax_passconfirm"><i class="reg_tips_icon"></i>请确认密码！</span></li>
+
+          <li><span class="login_left_s">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
+            <div class="train_reg_pt">
+            
+            <input class="login_input" type="text" id="email1" name="email" onkeyup="get_def_email(this.value,'1');"placeholder="请输入常用电子邮件地址">
+           
+            <div class="reg_email_box none" id="defemail1"></div>
+              <input type="hidden" id="default" value="-1" />
+              <input type="hidden" id="def" value="" />
+              <input type="hidden" id="event" value="" />
+              <input type="hidden" id="allnum" value="0" />
+              <input type="hidden" id="defEmail" value="{yun:}$config.sy_def_email{/yun}" />
+              </div> <span class="reg_tips false" id="ajax_email1"><i class="reg_tips_icon"></i>请输入常用电子邮件地址！</span>
+            </li>
+          <li>
+          <span class="login_left_s">手机号码：</span>
+            <input class="login_input" type="text" id="moblie" name="moblie" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" onBlur="reg_checkAjax('moblie');"placeholder="请输入手机号码">
+            <span class="reg_tips  false" id="ajax_moblie"><i class="reg_tips_icon"></i>请输入手机号码！</span></li>
+			{yun:}if strpos($config.code_web,"注册会员")!==false{/yun}
+        <li>
+  			 {yun:}if $config.code_kind==3{/yun}	
+  				<!--geetest-->
+  			  <span class="login_left_s">验&nbsp;证&nbsp; 码：</span>
+           <div class="ltreg_verification" style="margin-top:15px;"> 
+             <div id="popup-captcha" data-id='subreg' data-type='click'></div>
+    				 <input type='hidden' id="popup-submit">
+           </div>
+			   {yun:}else{/yun}
+               <span class="login_left_s">验&nbsp;证&nbsp; 码：</span>
+			 <div class="ltreg_verificationyz_box ltreg_verificationyz_box120">
+            <input type="text" class="ltreg_verificationyz_box_text logoin_text_yz" id="CheckCode"placeholder="验证码" maxlength="4" onBlur="reg_checkAjax('CheckCode');"  name="authcode"style="width:105px;">
+            <a href="javascript:void(0);" onclick="checkCode('vcode_img');" class="ltreg_verificationyz_box_tp"><img id="vcode_img" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php">看不清？</a>
+           
+			      <input id="code_kind" type="hidden" value="1"/>
+                  </div>
+			       <span class="reg_tips  false" id="ajax_CheckCode"><i class="reg_tips_icon"></i>请输入验证码！</span>
+			   {yun:}/if{/yun}
+		    </li>
+		  {yun:}/if{/yun} 
+
+     {yun:}if $config.reg_real_name_check == "1"{/yun}    
+        <input type="hidden" id="send" value="0" />
+      
+        <li>
+          <span class="login_left_s">短信验证：</span>
+          <input type="text" id="moblie_code" class="login_input" onBlur="reg_checkAjax('moblie_code');"placeholder="短信验证"/ style="width:118px;">
+          <a class="ltreg_verificationyz_b" href="javascript:void(0);" id="subreg" onclick="sendmsg('vcode_img');" ><span id="time">获取短信验证</span></a>
+          <span class="reg_tips false" id="ajax_moblie_code"><i class="reg_tips_icon"></i></span>
+        </li>
+
+        <li>
+          <span class="login_left_s">真实姓名：</span>
+          <input class="login_input" type="text" id="realname" name="realname" onBlur="reg_checkAjax('realname');"placeholder="真实姓名">
+          <span class="reg_tips reg_tips_red false" id="ajax_realname"><i class="reg_tips_icon"></i>请填写您的真实姓名！</span>
+        </li>
+     {yun:}/if{/yun}
+
+         
+          <li>
+             <input type="submit" value="立即注册" class="login_bth" id='subreg' onclick="checkform('vcode_img')">
+          </li> <li >
+          <div style="padding-top:10px;"> <input id="xieyi" type="checkbox" value="1" class="re_checkbox" checked="checked" >
+            <span class="reg_xy">我同意接受</span> <a href="{yun:}$config.sy_weburl{/yun}/about/service.html" target="_blank"> 《{yun:}$config.sy_webname{/yun}用户服务协议》</a></div></li>
+        </ul>
+
+          <div class="login_right fr" >
+        <div class="login_other fl">已有帐号？</div>
+        <div class="login_now fl"><a href="{yun:}url m=lietou c=login{/yun}">立即登录</a></div>
+        <div class="registor_now fl">
+          <div class="registor_span fl">使用以下帐号直接登录:</div>
+          {yun:}if $config.sy_sinalogin==1{/yun}
+          <a class="icon_wb  png" title="使用新浪微博帐号登录" href="{yun:}url m=sinaconnect{/yun}"></a>
+          {yun:}/if{/yun}
+          {yun:}if $config.sy_qqlogin==1{/yun}
+          <a class="icon_qq  png" title="使用腾讯QQ帐号登录" href="{yun:}$config.sy_weburl{/yun}/qqlogin.php" ></a>
+          {yun:}/if{/yun}
+          {yun:}if $config.wx_author==1{/yun}
+          <a class="icon_weixin  png" title="使用微信帐号登录" href="{yun:}url m=wxconnect{/yun}"></a>
+          {yun:}/if{/yun} </div>
+      </div>
+</div>
+
+</div>
+
+<link href="{yun:}$lietou_style{/yun}/css/login.css?v={yun:}$config.cachecode{/yun}" type="text/css" rel="stylesheet" />
+
+
+<div class="clear"></div>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js?v={yun:}$config.cachecode{/yun}"></script>
+<script>
+  DD_belatedPNG.fix('.png,.New_post,.box_bot,.new_post_box_h1 span,.icon,.ser_cz a,.Strat-list ,.logoin_su2,.logoin_after_su2,.logoin_after em,.logoin_after_tx dt,.service_filter_fot,.Strat-list .s,.nav_exit span,.company_focus');
+</script>
+<![endif]-->
+<script>var webname = "{yun:}$config.sy_webname{/yun}";</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /><script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script><script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/public_lt.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/reg_ajax.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/gt.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/pc.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script>
+$(document).ready(function () {		
+	$(document).keydown(function (e) {
+        var ev = document.all ? window.event : e;
+        if (ev.keyCode == 13) {
+            checkform('vcode_img');
+        }
+    });		
+    $("#username,#email1,#regpassword,#passconfirm,#moblie,#txt_CheckCode").keydown(function (e) {
+        var ev = document.all ? window.event : e;
+        if (ev.keyCode == 13) {
+            checkform('vcode_img');
+        } else { return; }
+    });
+    $("#xieyi").keyup(function (event) {
+        var myEvent = event || window.event;
+        if (myEvent.keyCode == 13) { checkform('vcode_img'); } else { return; };
+    });
+})
+
+</script><style>
+.reg_tips{display:none}
+</style>
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

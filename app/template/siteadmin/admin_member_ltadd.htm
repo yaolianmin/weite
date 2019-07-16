@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<h6>猎头会员信息</h6>
+</div>
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+<form name="myform" target="supportiframe" action="index.php?m=admin_lt_member&c=add" method="post" >
+<table width="100%" class="table_form" style="background:#fff;">
+<tr>
+		<th width="60" align="left">会员级别：</th>
+		<td width="250"><select name="rating_name">
+		{yun:}foreach from=$rating_list item=ratings{/yun}
+		<option value="{yun:}$ratings.id{/yun}+{yun:}$ratings.name{/yun}" {yun:}if $ratings.id==$rating{/yun}selected{yun:}/if{/yun}>{yun:}$ratings.name{/yun}</option>
+		{yun:}/foreach{/yun}
+		</select></td>
+	</tr>
+	<tr class="admin_table_trbg" >
+		<th width="60" >用户名：</th>
+		<td width="350"><input type="text"  value="" name="username" class="input-text"></td>
+	</tr>
+	<tr>
+		<th>密码：</th>
+		<td><input type="text" value="" name="password" class="input-text">
+		<font color="gray"></font>
+		</td>
+	</tr>
+		<tr class="admin_table_trbg" >
+		<th>E-mail：</th>
+		<td><input type="text" value="" name="email" class="input-text">
+		<font color="gray"></font>
+		</td>
+	</tr>
+		<tr>
+		<th>联系电话：</th>
+		<td><input type="text" value="" name="moblie" class="input-text">
+		<font color="gray"></font>
+        </td>
+	</tr>
+
+	<tr class="admin_table_trbg">
+    	<tr class="admin_table_trbg" >
+		<th>是否审核：</th>
+		<td><input type="radio" name="status" value="0">未审核
+        <input type="radio" checked name="status" value="1">已审核
+		<font color="gray"></font>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="2">
+        <input class="admin_submit4" type="submit" name="submit" value="&nbsp;添 加&nbsp;" />
+		<input class="admin_submit4" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" />
+        </td>
+	</tr>
+</table>
+<input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+</form>
+</div></div>
+</body>
+</html>

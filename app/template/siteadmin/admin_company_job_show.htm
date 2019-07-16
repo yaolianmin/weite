@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/check_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/ueditor/ueditor.config.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/ueditor/ueditor.all.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+
+<style>
+* {margin: 0 ;padding: 0;}
+body,div{ margin: 0 ;padding: 0;}
+</style>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+  <div class="infoboxp_top">
+    <h6>职位详情</h6>
+  </div>
+  <div class="admin_table_border">
+  <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form action="" target="supportiframe" method="post" onSubmit="return check_form_job()" class="layui-form">
+  <table width="100%" class="table_form" style="background:#fff;">
+
+    <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+		{yun:}if $show.id{/yun}
+      <tr >
+        <th>招聘编号：</th>
+        <td>{yun:}$show.id{/yun}</td>
+      </tr>
+	  {yun:}/if{/yun}
+    <tr class="admin_table_trbg" >
+        <th>招聘名称：</th>
+        <td><input type="text" name="name" id="name" class="input-text" size="30" value="{yun:}$show.name{/yun}"></td>
+      </tr>
+
+      <tr >
+        <th>从事行业：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="hy">
+                    {yun:}foreach from=$industry_index key=j item=v{/yun}
+                    <option value='{yun:}$v{/yun}' {yun:}if $show.hy==$v{/yun}selected{yun:}/if{/yun}>{yun:}$industry_name[$v]{/yun}</option>
+                    {yun:}/foreach{/yun}
+                  </select>
+                 </div>
+               </div>
+            </div></td>
+      </tr>
+  <tr class="admin_table_trbg" >
+        <th>职位类别：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="job1" id="job1" class="job1" lay-filter="job">
+                      <option value="">--请选择--</option>
+                        {yun:}foreach from=$job_index key=j item=v{/yun}
+                      <option value='{yun:}$v{/yun}' {yun:}if $show.job1==$v{/yun}selected{yun:}/if{/yun}>{yun:}$job_name[$v]{/yun}</option>
+                        {yun:}/foreach{/yun}
+                    </select>
+                 </div>
+                 <div class="layui-input-inline">
+                    <select name="job1_son" id="job1_son" class="job1" lay-filter="job">
+                      <option value="">--请选择--</option>
+                        {yun:}foreach from=$job_type[$show.job1] key=j item=va{/yun}
+                      <option value='{yun:}$va{/yun}' {yun:}if $show.job1_son==$va{/yun}selected{yun:}/if{/yun}>{yun:}$job_name[$va]{/yun}</option>
+                        {yun:}/foreach{/yun}
+                    </select>
+                 </div>
+                 <div class="layui-input-inline">
+                    <select name="job_post" id="job1_son1">
+                      <option value="">--请选择--</option>
+                        {yun:}foreach from=$job_type[$show.job1_son] key=j item=val{/yun}
+                      <option value='{yun:}$val{/yun}' {yun:}if $show.job_post==$val{/yun}selected{yun:}/if{/yun}>{yun:}$job_name[$val]{/yun}</option>
+                        {yun:}/foreach{/yun}
+                    </select>
+                 </div>
+               </div>
+            </div></td>
+      </tr>
+      <tr >
+        <th>工作地点：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="provinceid" id="provinceid" lay-filter="citys">
+                      <option value="">请选择</option>
+                        {yun:}foreach from=$city_index key=j item=v{/yun}
+                      <option value='{yun:}$v{/yun}' {yun:}if $show.provinceid==$v{/yun}selected{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                        {yun:}/foreach{/yun}
+                    </select>
+                 </div>
+                 <div class="layui-input-inline">
+                    <select name="cityid" size="1" id="cityid" lay-filter="citys">
+                      <option value="">请选择</option>
+                        {yun:}if $show.provinceid{/yun}
+                        {yun:}foreach from=$city_type[$show.provinceid] key=j item=v{/yun}
+                      <option value='{yun:}$v{/yun}' {yun:}if $show.cityid==$v{/yun}selected{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                        {yun:}/foreach{/yun}
+                        {yun:}/if{/yun}
+                    </select>
+                 </div>
+                 <div class="layui-input-inline">
+                    <select name="three_cityid" id="three_cityid" {yun:}if !$show.three_cityid{/yun} style="display:none;"{yun:}/if{/yun}>
+                    <option value="">请选择</option>
+                    {yun:}if $show.cityid{/yun}
+                    {yun:}foreach from=$city_type[$show.cityid] key=j item=v{/yun}
+                    <option value='{yun:}$v{/yun}' {yun:}if $show.three_cityid==$v{/yun}selected{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                    {yun:}/foreach{/yun}
+                    {yun:}/if{/yun}
+                    </select>
+                 </div>
+               </div>
+            </div></td>
+      </tr>
+    <tr class="admin_table_trbg" >
+        <th width="120">薪水待遇：</th>
+        <td>
+        <div class="admin_job_xz_box">
+          	<input type="text" name="minsalary" id="minsalary" class="admin_job_xz" size="3" value="{yun:}$show.minsalary{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" placeholder="最低薪资"{yun:}if !$show.minsalary&&!$show.maxsalary&&$show.id{/yun} disabled="disabled"{yun:}/if{/yun}>
+            <span class="admin_job_xz_box_dw">元/月</span>
+        </div>
+        <span class="admin_job_xz_box_line">-</span>
+        <div class="admin_job_xz_box">
+          	<input type="text" name="maxsalary" id="maxsalary" class="admin_job_xz" size="5" value="{yun:}if $show.maxsalary{/yun}{yun:}$show.maxsalary{/yun}{yun:}/if{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"placeholder="最高薪资"{yun:}if !$show.minsalary&&!$show.maxsalary&&$show.id{/yun} disabled="disabled"{yun:}/if{/yun}>
+             <span class="admin_job_xz_box_dw">元/月</span>
+        </div>
+        <span class="admin_job_xz_box_line"><input type="checkbox" id="salary_type" name="salary_type" value="1" lay-filter="salary_type"{yun:}if !$show.minsalary&&!$show.maxsalary&&$show.id{/yun} checked="checked"{yun:}/if{/yun} title="面议"></span>
+        </td>
+      </tr>
+     <!-- <tr >
+        <th width="120">工作性质：</th>
+        <td><select name="type">
+            {yun:}foreach from=$comdata.job_type key=j item=v{/yun}
+            <option value='{yun:}$v{/yun}' {yun:}if $show.type==$v{/yun}selected{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+            {yun:}/foreach{/yun}
+          </select></td>
+      </tr>-->
+    <tr class="admin_table_trbg" >
+        <th width="120">招聘人数：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="number">
+                    {yun:}foreach from=$comdata.job_number key=j item=v{/yun}
+                    <option value='{yun:}$v{/yun}' {yun:}if $show.number==$v{/yun}selected{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                    {yun:}/foreach{/yun}
+                  </select>
+                 </div>
+               </div>
+            </div></td>
+      </tr>
+      <tr >
+        <th width="120">工作经验：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="exp">
+                    {yun:}foreach from=$comdata.job_exp key=j item=v{/yun}
+                     <option value='{yun:}$v{/yun}' {yun:}if $show.exp==$v{/yun}selected{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                    {yun:}/foreach{/yun}
+                   </select>
+                 </div>
+               </div>
+            </div></td>
+      </tr>
+   <tr class="admin_table_trbg" >
+        <th width="120">到岗时间：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="report">
+                    {yun:}foreach from=$comdata.job_report key=j item=v{/yun}
+                     <option value='{yun:}$v{/yun}' {yun:}if $show.report==$v{/yun}selected{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                    {yun:}/foreach{/yun}
+                  </select>
+                 </div>
+               </div>
+            </div></td>
+      </tr>
+      <tr >
+        <th width="120">性　　别：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="sex">
+                    {yun:}foreach from=$arr_data.sex key=j item=v{/yun}
+                    <option value='{yun:}$j{/yun}' {yun:}if $show.sex==$j{/yun}selected{yun:}/if{/yun}>{yun:}$v{/yun}</option>            
+                    {yun:}/foreach{/yun}   
+                  </select>
+                 </div>
+               </div>
+            </div></td>
+      </tr>
+	<tr class="admin_table_trbg" >
+        <th width="120">教育程度：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="edu">
+                    {yun:}foreach from=$comdata.job_edu key=j item=v{/yun}
+                    <option value='{yun:}$v{/yun}' {yun:}if $show.edu==$v{/yun}selected{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                    {yun:}/foreach{/yun}
+                   </select>
+                 </div>
+               </div>
+            </div></td>
+      </tr>
+      <tr >
+        <th width="120">婚姻状况：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="marriage">
+                    {yun:}foreach from=$comdata.job_marriage key=j item=v{/yun}
+                    <option value='{yun:}$v{/yun}' {yun:}if $show.marriage==$v{/yun}selected{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+                    {yun:}/foreach{/yun}
+                   </select>
+                 </div>
+               </div>
+            </div></td>
+      </tr>
+	  <!--<tr >
+        <th width="120">商圈：</th>
+        <td>
+			<select name="circle">
+			{yun:}if $circle_type[$row.circlecity]{/yun}
+			{yun:}foreach from=$circle_type[$row.circlecity] item=v{/yun}
+            <option value='{yun:}$v{/yun}' {yun:}if $show.circle==$v{/yun}selected{yun:}/if{/yun}>{yun:}$circle_name[$v]{/yun}</option>
+			{yun:}/foreach{/yun}
+			{yun:}else{/yun}
+			<option value=''>暂无商圈</option>
+			{yun:}/if{/yun}
+          </select>
+		  </td>
+      </tr>-->
+	 <tr class="admin_table_trbg" >
+        <th width="120">语言要求：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   {yun:}foreach from=$comdata.job_lang key=j item=v{/yun}
+                    <input type="checkbox" id="lang{yun:}$v{/yun}" value='{yun:}$v{/yun}' name="lang[]" {yun:}if $show.lang && in_array($v,$show.lang){/yun}checked{yun:}/if{/yun} title="{yun:}$comclass_name[$v]{/yun}" />
+                   {yun:}/foreach{/yun}
+                 </div>
+               </div>
+            </div>
+			</td>
+      </tr>
+      <!-- <tr >
+        <th width="120">福利待遇：</th>
+        <td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   {yun:}foreach from=$comdata.job_welfare key=j item=v{/yun}
+                    <input type="checkbox" value='{yun:}$v{/yun}' id="welfare{yun:}$v{/yun}" name="welfare[]" {yun:}if $show.welfare && in_array($v,$show.welfare){/yun}checked{yun:}/if{/yun} title="{yun:}$comclass_name[$v]{/yun}">
+                   {yun:}/foreach{/yun}
+                 </div>
+               </div>
+            </div>
+		</td>
+      </tr> -->
+  <tr class="admin_table_trbg" >
+        <th width="120">描述职位：</th>
+        <td>
+		<!-- <script id="myEditor" name="content" type="text/plain" style="width:500px;height:200px;">{yun:}$show.description{/yun}</script> -->
+		<textarea  id="myEditor" name="content" style="width:500px;height:200px;">{yun:}$show.description{/yun}</textarea>
+		</td>
+       </tr>
+  <tr class="admin_table_trbg" >
+        <th width="120">结束日期：</th>
+        <td>
+          <input id="edate" class="input-text" type="text" readonly size="15" value="{yun:}$show.edate|date_format:'%Y-%m-%d'{/yun}" name="edate">
+        </td>
+      </tr>
+     <tr>
+        <th width="120">浏览次数：</th>
+        <td><input type="text" class="input-text" name="jobhits" size="10" value="{yun:}$show.jobhits{/yun}"></td>
+      </tr>
+	  {yun:}if $show.id{/yun}
+      <tr class="admin_table_trbg" >
+        <th width="120">状　　态：</th>
+        <td>{yun:}if $show.edate<time(){/yun}<font color="orange">已过期</font>{yun:}elseif $show.state==1{/yun}<font color="blue">已审核</font>{yun:}elseif $show.state==3{/yun}<font color="red">未通过</font>{yun:}else{/yun}<font color="red">未审核</font>{yun:}/if{/yun}</td>
+      </tr>
+	  {yun:}/if{/yun}
+	<tr>
+        <th width="120"></th>
+        <td>
+			{yun:}if $show.id{/yun}
+			<input type="hidden" name="id" value="{yun:}$show.id{/yun}">
+          <input class="layui-btn layui-btn-normal" type="submit" name="update" value="&nbsp;修 改&nbsp;" />
+		  {yun:}else{/yun} <input type="hidden" name="uid" value="{yun:}$uid{/yun}"><input class="layui-btn layui-btn-normal" type="submit" name="update" value="&nbsp;保 存&nbsp;" />{yun:}/if{/yun}
+		  </td>
+      </tr>
+  </table>
+   </form>
+</div>
+</div>
+<input type="hidden" id="circleurl" value='{yun:}url m=ajax c=ajaxcircle{/yun}' />
+<script>
+UE.getEditor('myEditor',{
+	toolbars:[['Source','|','Bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright','insertorderedlist', 'insertunorderedlist','emotion','simpleupload']],
+	wordCount:false,
+    elementPathEnabled:false,
+    initialFrameHeight:200
+});
+</script>
+ <script language="javascript">
+layui.use(['layer', 'form','laydate'], function(){
+    var layer = layui.layer
+    ,form = layui.form
+    ,laydate = layui.laydate
+    ,$ = layui.$;
+	laydate.render({
+		elem: '#edate'
+	});
+	form.on('select(citys)',function(data){
+		$.post(weburl+"/index.php?m=ajax&c=ajax",{str:data.value},function(htm){
+			if(data.elem.name=='provinceid'){
+				$("#cityid").html(htm);
+				$("#three_cityid").html("<option value=''>请选择</option>");
+			}else if(data.elem.name=='cityid'){
+				$("#cityshowth").show();
+				$("#three_cityid").html(htm);
+			}
+			form.render('select');
+		});
+	});
+	form.on('select(job)',function(data){
+		$.post(weburl+"/index.php?m=ajax&c=ajax_job",{str:data.value},function(htm){
+			if(data.elem.name=='job1'){
+				$("#job1_son").html(htm);
+				$("#job1_son1").html("<option value=''>请选择</option>");
+			}else if(data.elem.name=='job1_son'){
+				$("#job1_son1").html(htm);
+			}
+			form.render('select');
+		});
+	});
+	form.on('checkbox(salary_type)',function(data){
+		if(data.elem.checked){
+			$("#minsalary").attr("disabled","disabled");
+			$("#maxsalary").attr("disabled","disabled");
+			$("#minsalary").val(0);$("#maxsalary").val(0);
+		}else if(!data.elem.checked){
+			$("#minsalary").removeAttr("disabled","disabled");
+			$("#maxsalary").removeAttr("disabled","disabled");
+			$("#minsalary").val('{yun:}$show.minsalary{/yun}');
+			$("#maxsalary").val('{yun:}$show.maxsalary{/yun}');
+		}
+	});
+	
+});
+
+var weburl="{yun:}$config.sy_weburl{/yun}";
+</script>
+</body>
+</html>

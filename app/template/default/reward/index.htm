@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>{yun:}$title{/yun}</title>
+<meta name="keywords" content="{yun:}$keywords{/yun}" />
+<meta name="description" content="{yun:}$description{/yun}" />
+<link href="{yun:}$style{/yun}/style/css.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="{yun:}$style{/yun}/style/reward.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+{yun:}if $ishtml{/yun}
+<script src="{yun:}url m=ajax c=wjump{/yun}" language="javascript"></script>
+{yun:}/if{/yun}
+</head>
+<body style="background:#f8f8f8">
+<script>
+var weburl="{yun:}$config.sy_weburl{/yun}",integral_pricename='{yun:}$config.integral_pricename{/yun}',pricename='{yun:}$config.integral_pricename{/yun}',code_web='{yun:}$config.code_web{/yun}',code_kind='{yun:}$config.code_kind{/yun}';</script>
+
+<div class="top">
+  <div class="top_cot">
+    <div class="top_cot_content">
+      <div class="top_left fl">
+        <div class="yun_welcome fl">欢迎来到{yun:}$config.sy_webname{/yun}！</div>
+       </div>
+      <div class="top_right_re fr">
+        <div class="top_right">
+        
+          <div class="yun_topNav fr"> 
+		  <a class="yun_navMore" href="javascript:;">网站导航</a>
+            <div class="yun_webMoredown none">
+              <div class="yun_top_nav_box"> 
+			  <ul class="yun_top_nav_box_l">
+             {yun:}navmap key=key item=maplist{/yun}
+                  <li><a href="{yun:}$maplist.url{/yun}" {yun:}if $maplist.eject{/yun} target="_blank"{yun:}/if{/yun}>{yun:}$maplist.name{/yun}</a></li>
+                {yun:}/navmap{/yun}
+                 </ul>
+                <ul class="yun_top_nav_box_wx">
+               {yun:}nav item=navlist_app hovclass=nav_list_hover nid=11{/yun}          
+            <li> <a class="move_0{yun:}$navlist_app.sort{/yun}"{yun:}if $navlist_app.eject{/yun} target="_blank"{yun:}/if{/yun} href="{yun:}$config.sy_weburl{/yun}/{yun:}$navlist_app.url{/yun}">{yun:}$navlist_app.name{/yun}</a> </li>
+          {yun:}/nav{/yun}
+                </ul>
+                
+                </div>
+            </div>
+          </div> 
+            <span class="fr"><a href="{yun:}$config.sy_weburl{/yun}/wap" class="wap_icon" target="_blank">手机版</a><i class="htop_line">|</i><a href="{yun:}url m=subscribe{/yun}" target="_blank" class="top_dy">订阅</a><i class="htop_line_two">|</i></span>
+            <script language='JavaScript' src='{yun:}url m=ajax c=RedLoginHead{/yun}'></script> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="reward_header">
+<div class="w1200">
+<div class="reward_header_logo"><a href="{yun:}$config.sy_weburl{/yun}" title="{yun:}$config.sy_webname{/yun}最新招聘求职信息"><img  src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_logo{/yun}" alt="{yun:}$config.sy_webname{/yun}"/></a>
+</div>
+<div class="reward_header_nav">
+<ul class="reward_header_nav_list">
+<li class="reward_header_nav_list_cur"><a href="{yun:}url m=reward{/yun}">首页</a></li>
+<li><a href="{yun:}url m=reward c=job{/yun}">悬赏职位</a></li>
+
+</ul>
+</div>
+<div class="reward_header_tel">{yun:}$config.sy_freewebtel{/yun}</div>
+</div>
+</div>
+<div class="reward_header_banner">
+
+  <div class="reward_header_banner_cont">
+<div class="reward_header_fx">
+<div class="reward_header_img"><img src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_reward_sharelogo{/yun}" width="110" height="110"></div>
+<div class="reward_header_p">扫一扫分享到朋友圈领取红包</div></div>
+</div>
+</div>
+
+<div class="job_reward_content">
+<div class="w1200">
+<div class="job_reward_tit"><i class="job_reward_tit_icon"></i>悬赏职位<span class="job_reward_tit_p">投递简历领赏金！<a href="{yun:}url m=reward c=job{/yun}" class="job_reward_tit_p_a">查看更多职位</a></span></div>
+<div class="index_job_red">
+<ul class="index_job_red_list">
+{yun:}rewardjob limit=12 reward=1 item=rlist{/yun}
+
+  <li>
+        <div class="index_job_red_momey">
+          <div class="index_job_red_momey_n">￥{yun:}$rlist.money{/yun}</div>
+        </div>
+        <div >
+          <div class="reward_hb_list"> <i class="reward_hb_list_line"></i> <span class="reward_hb_fonttd">￥{yun:}$rlist.sqmoney{/yun}</span>
+            <div class="reward_hb_list_P">投递简历</div>
+          </div>
+          <div class="reward_hb_list"> <i class="reward_hb_list_line"></i> <span class="reward_hb_fontms">￥{yun:}$rlist.invitemoney{/yun}</span>
+            <div class="reward_hb_list_P">面试职位</div>
+          </div>
+          <div class="reward_hb_list"><span class="reward_hb_fontrz">￥{yun:}$rlist.offermoney{/yun}</span>
+            <div class="reward_hb_list_P">入职成功</div>
+          </div>
+          <a href="{yun:}$rlist.job_url{/yun}" class="reward_hb_ls">领赏</a> </div>
+        <div class="reward_hb_listjobname">
+          <div class="reward_hb_listjobname_l"><a href="{yun:}$rlist.job_url{/yun}">{yun:}$rlist.name{/yun}</a></div>
+          <div class="reward_hb_listjobinfo"> {yun:}if $rlist.job_salary!='面议'{/yun}￥{yun:}/if{/yun}{yun:}$rlist.job_salary{/yun} <span class="index_job_line">|</span>{yun:}$rlist.job_city_two|mb_substr:0:4:"utf-8"{/yun} {yun:}$rlist.job_city_three|mb_substr:0:4:"utf-8"{/yun}<span class="index_job_line">|</span>{yun:}$rlist.job_exp{/yun}经验<span class="index_job_line">|</span>{yun:}$rlist.job_edu{/yun}学历</div>
+        </div>
+      </li>
+      
+
+
+
+<!--
+<li>
+<div class="index_job_red_momey"><div class="index_job_red_momey_n">￥{yun:}$rlist.money{/yun}</div></div>
+ <div class="reward_hb_listjobname">
+  <div class="reward_hb_listjobname_l"><a href="{yun:}$rlist.job_url{/yun}">{yun:}$rlist.name{/yun}</a></div>
+  <i class="reward_hb_listjobmoney">{yun:}if $rlist.job_salary!='面议'{/yun}￥{yun:}/if{/yun}{yun:}$rlist.job_salary{/yun}</i> 
+ </div>
+
+	
+ 
+
+ <div >
+ <div class="reward_hb_list">
+  <i class="reward_hb_list_line"></i>
+  <i class="reward_hb_list_icon"></i><span class="reward_hb_fonttd">{yun:}$rlist.sqmoney{/yun}</span><div class="reward_hb_list_P">投递</div></div> 
+ <div class="reward_hb_list">
+  <i class="reward_hb_list_line"></i>
+  <i class="reward_hb_list_icon reward_hb_list_icon_ms"></i><span class="reward_hb_fontms">{yun:}$rlist.invitemoney{/yun}</span><div class="reward_hb_list_P">面试</div> </div> 
+
+ <div class="reward_hb_list"><i class="reward_hb_list_icon reward_hb_list_icon_rz"></i><span class="reward_hb_fontrz">{yun:}$rlist.offermoney{/yun}</span><div class="reward_hb_list_P">入职</div></div> </div>
+
+</li>-->
+{yun:}/rewardjob{/yun}
+
+</ul>
+</div>
+
+
+
+</div>
+
+</div>
+<!--	<div class="job_reward_content">
+<div class="w1200">
+<div class="job_reward_tit"><i class="job_reward_tit_icon"></i>分享职位 <span class="job_reward_tit_p">扫一扫分享到朋友圈领取红包</span></div>
+<div class="index_job_fx">
+<ul class="index_job_fx_list">
+{yun:}rewardjob limit=12 share=1 item=slist{/yun}
+<li>
+<div class="index_job_fx_momey"><img src="{yun:}$style{/yun}/images/dww.png" width="80" height="80"></div>
+ <div class="hp_urg_job_top"><a href="{yun:}$slist.job_url{/yun}">{yun:}$slist.name{/yun}</a></div>
+ <div class="hp_urg_job_ov hp_urg_job_ov_pd"><i class="hp_urg_job_ct_r">{yun:}if $slist.job_salary!='面议'{/yun}￥{yun:}/if{/yun}{yun:}$slist.job_salary{/yun}</i> {yun:}$slist.job_exp{/yun}经验<i class="index_line">|</i>{yun:}$slist.job_edu{/yun}学历</div>
+ <div  class="hp_urg_job_ov" class="hp_urg_job_city">{yun:}$slist.com_name{/yun}</div>
+</li>
+{yun:}/rewardjob{/yun}
+
+
+</ul>
+</div>
+-->
+</div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /><script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script><script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+{yun:}include file="$tplstyle/footer.htm"{/yun}
+</body>

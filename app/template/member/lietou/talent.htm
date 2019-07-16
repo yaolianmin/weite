@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$lietou_style{/yun}/js/talent.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap my_rebates">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+      
+      <div class="report_uaer_list fl">
+            <ul>
+			    <li class="report_uaer_list_cur"><a href='index.php?c=talent'>简历库</a></li>
+                <li><a href='{yun:}url m=member c=talent act=expect{/yun}'>充实简历库</a> </li>
+            </ul>
+			
+		</div>
+              <div class="clear"></div>
+         <div class="lt_m_box">
+          <div class="lt_m_table">
+          <table>
+                <tbody>
+        {yun:}if !empty($rows){/yun}
+           <tr>                   
+                 <th scope="col" ><span>意向岗位</span></th>
+                  <th scope="col"><span>姓名</span></th>
+                  <th scope="col" ><span>学历</span></th>
+                  <th scope="col" ><span>工作经验</span></th>
+                 <th scope="col" ><span>薪资要求</span></th>
+                   <th scope="col" ><span>期望城市</span></th>
+                     <th scope="col" ><span>联系手机</span></th>
+                  <th scope="col"><span>授权</span></th>
+				  <th scope="col"><span>状态</span></th>
+				  <th scope="col"> 操作</th>
+                </tr>
+         
+        {yun:}/if{/yun}
+          {yun:}foreach item=v from=$rows{/yun}
+            <tr>
+                 <td align="center" >{yun:}$v.jobname{/yun}</td>
+                  <td align="center">{yun:}$v.name{/yun}</td>
+                  <td align="center" >{yun:}$userclass_name[$v.edu]{/yun}</td>
+                  <td align="center">{yun:}$userclass_name[$v.exp]{/yun}</td>
+                  <td align="center">{yun:}if $v.minsalary{/yun}{yun:}$v.minsalary{/yun}{yun:}if $v.maxsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}/if{/yun}{yun:}else{/yun}面议{yun:}/if{/yun}</td>
+                  <td align="center">{yun:}$city_name[$v.provinceid]{/yun} {yun:}$city_name[$v.cityid]{/yun}</td>
+                  <td align="center">{yun:}$v.linktel{/yun}</td>
+                  <td align="center">{yun:}if $v.telstatus=='1'{/yun}已授权{yun:}else{/yun}<a href="javascript:getshow('telstatus','简历授权认证','{yun:}$v.linktel{/yun}','{yun:}$v.id{/yun}');">授权认证</a>{yun:}/if{/yun}</td>
+				  <td align="center">{yun:}if $v.rewardstatus=='1'{/yun}推荐中{yun:}else{/yun}空闲{yun:}/if{/yun}</td>
+				  <td align="center"><a href="index.php?c=talent&act=expect&id={yun:}$v.id{/yun}">编辑</a></td>
+                </tr>
+         
+			 
+            <div class="clear"></div>
+            
+            </div>
+          {yun:}foreachelse{/yun}
+          <tr>
+                    <td colspan="7" class="lt_m_table_end">  
+                    <div class="member_no_content">
+                    <p>暂无简历</p>
+                <div class="lt_src ">   <a href="{yun:}url m=member c=talent act=expect{/yun}">充实简历库</a></div></div></td>
+                </tr>
+         
+          {yun:}/foreach{/yun}
+        <tr>
+                    <td colspan="7" class="lt_m_table_end">  <div class="pages">{yun:}$pagenav{/yun}</div></td>
+                </tr>
+          </tbody></table>
+        
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+
+ </div>
+ <!--绑定手机弹出框-->
+<div id="telstatus" style=" display:none;">
+<div class="Binding_pop_box" style="padding:10px;width:480px;height:255px; overflow:auto; background:#fff;">
+<div class="Binding_pop_box_msg">简历授权认证后，您可以将简历推荐给需要的企业赚取赏金</div>
+<div style="padding:20px 0">
+<div class="Binding_pop_box_list"><span class="Binding_pop_box_list_left"><i class="Binding_pop_box_list_left_i">*</i>手机号码：</span>
+<input type="text" id="linktel" class="Binding_pop_box_list_text Binding_pop_box_list_textw200"/></div>
+<div class="Binding_pop_box_list"><span class="Binding_pop_box_list_left"><i class="Binding_pop_box_list_left_i">*</i>短信验证码：</span>
+<input type="text" id="moblie_code" class="Binding_pop_box_list_text" style="width:90px;"/>
+<a href="javascript:;" onclick="sendmoblie();" class="Binding_pop_bth" id="time">免费发送验证码</a></div>
+<div class="Binding_pop_sub" style="margin-top:20px;">
+<span class="Binding_pop_box_list_left">&nbsp;</span>
+<input class="xubox_botton_emali" onclick="telstatus();" type="submit" value="保存"/>
+<input class="xubox_botton_emali xubox_botton_emali_qx" type="button" value="取消" onclick="layer.closeAll();"/>
+<input type='hidden' id='telid' value=''>
+</div>
+</div>
+</div>
+</div>
+<!--弹出框 end-->
+<script>
+function show_reply(id){
+	$("#reply"+id).toggle();
+}
+
+</script>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

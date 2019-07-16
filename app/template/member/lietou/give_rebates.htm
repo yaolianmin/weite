@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head><body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap"> {yun:}include file="$lietoustyle/left.htm"{/yun}
+    <div class="m_inner_youb fr">
+    <div class="report_uaer_list fl">
+            <ul>
+			    <li class="report_uaer_list_cur"><a href="index.php?c=give_rebates" >推荐给我的人才</a></li>
+			    <li><a href="index.php?c=my_rebates" >我推荐的悬赏</a></li> 
+            </ul>
+		</div>  
+      <div class="m_youb_sent">
+      
+      
+      
+      
+      
+      
+      {yun:}if !empty($rows){/yun}
+        <div class="m_sent_title">
+          <ul>
+            <li class="w146">推荐人</li>
+            <li class="w120">人才姓名</li>
+            <li class="w120">人才手机</li>
+            <li class="w160">人才邮箱</li>
+            <li class="w120">时间</li>
+            <li class="w80">回复</li>
+            <li class="w80">状态</li>
+             <li class="w120">操作</li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+        {yun:}/if{/yun}
+        {yun:}foreach item=v from=$rows{/yun}
+        <div class="m_sent_cont" style="padding-bottom:2px;">
+          <ul>
+            <li class="w146">{yun:}$v.username{/yun}</li>
+            <li class="w120">{yun:}$v.name{/yun}</li>
+            <li class="w120">{yun:}$v.phone{/yun}</li>
+            <li class="w160"> {yun:}$v.email{/yun}</li>
+            <li class="w120">{yun:}$v.datetime|date_format:'%Y-%m-%d %H:%M'{/yun}</li>
+            {yun:}if $v.reply!=""{/yun}
+            <li class="w80  m_look">已回复</li>
+            {yun:}else{/yun}
+            <li class="w80  m_look01"><a href="javascript:void(0)" onclick="show_reply('{yun:}$v.id{/yun}');">我要回复</a></li>
+            {yun:}/if{/yun}
+            <li class="w70" id="statusli{yun:}$v.id{/yun}" onClick="show_div('{yun:}$v.id{/yun}');" style="cursor:pointer;"> <span id="status{yun:}$v.id{/yun}" style="cursor:pointer;"> {yun:}if $v.status=="0"{/yun}未查看{yun:}elseif $v.status=="1"{/yun}已查看{yun:}elseif $v.status=="2"{/yun}已试用{yun:}elseif $v.status=="3"{/yun}未通过{yun:}elseif $v.status=="4"{/yun}已返利{yun:}/if{/yun}</span>
+              <ul class="look_lists" id="statuslist{yun:}$v.id{/yun}" style="display:none">
+                <li><a href="javascript:void(0);" onClick="click_status('0','未查看','{yun:}$v.id{/yun}');">未查看</a></li>
+                <li><a href="javascript:void(0);" onClick="click_status('1','已查看','{yun:}$v.id{/yun}');">已查看</a></li>
+                <li><a href="javascript:void(0);" onClick="click_status('2','已试用','{yun:}$v.id{/yun}');">已试用</a></li>
+                <li><a href="javascript:void(0);" onClick="click_status('3','未通过','{yun:}$v.id{/yun}');">未通过</a></li>
+                <li><a href="javascript:void(0);" onClick="click_status('4','已返利','{yun:}$v.id{/yun}');">已返利</a></li>
+              </ul>
+            </li>
+            <li class="w120"><a href="javascript:void(0);" onclick="showrebate('{yun:}$v.id{/yun}','{yun:}url m=ajax c=showrebates{/yun}')">查看</a><span class="del_span">|</span><a href="javascript:void(0)" onclick="layer_del('确定要删除推荐给我的人才吗？', 'index.php?c=give_rebates&act=del&id={yun:}$v.id{/yun}');" class="List_dete cblue">删除</a></li>
+            
+          </ul>
+          {yun:}if $v.reply{/yun}
+          <div class="admin_reply">
+            <div class="admin_reply_con side_reply_con"> <i></i> <span class="List_Title_conten_tit List_Title_conten_tit_cor">我的回复：</span> {yun:}$v.reply{/yun} <em class="admin_reply_time"> <span class="List_Title_conten_tit">时间：</span> {yun:}$v.reply_time|date_format:"%Y-%m-%d %H:%M"{/yun} </em> </div>
+          </div>
+          {yun:}/if{/yun}
+          <div class="clear"></div>
+          <div class="m_cont_chakan " id="reply{yun:}$v.id{/yun}" style="display:none;">
+            <div><div class="m_ck_arrow"></div></div>
+            <dl class="fl ">
+              <dt class="cont_consult">回复内容：</dt>
+              <dd>
+                <textarea class="hunter_reply fl" id="content{yun:}$v.id{/yun}"></textarea>
+                <input class="hunter_reply_bth fr" value="提交" type="button" onclick="check_reply('{yun:}$v.id{/yun}')">
+              </dd>
+            </dl>
+          </div>
+        </div>
+        {yun:}foreachelse{/yun}
+        <div class="member_no_content"> 暂无信息！</div>
+        {yun:}/foreach{/yun}
+        <div class="pages">{yun:}$pagenav{/yun}</div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<div class="clear"></div>
+</div>
+ <div id="showrebate" style="display:none">
+     <div class="rebates_user_cont">
+     <div style="padding:10px;">
+     <div class="rebates_user" style="width:100%;float:left;">   <font color="red">基本信息</font></div>
+ <div class="rebates_user" style="width:49%;float:left;">   姓名：<span id="rebateuname"></span></div>
+ <div class="rebates_user"> 性别：<span id="rebatesex"></span></div>
+ <div class="rebates_user" style="width:49%;float:left;">  出生年月：<span id="rebatebirthday"></span></div>
+ <div class="rebates_user"> 最高学历：<span id="rebateedu"></span></div>
+ <div class="rebates_user" style="width:100%;float:left;"> 工作经验：<span id="rebateexp"></span></div>
+ <div class="rebates_user" style="width:49%;float:left;"> 联系手机：<span id="rebatetelphone"></span></div>
+  <div class="rebates_user" style="width:49%;float:left;"> 联系邮箱：<span id="rebateemail"></span></div>
+  
+<div class="rebates_user" style="width:100%;float:left;">   <font color="red">求职意向</font></div>
+ <div class="rebates_user" style="width:49%;float:left;"> 从事行业：<span id="rebatehy"></span></div>
+ <div class="rebates_user"> 期望城市： <span id="rebatecity"></span></div>
+ <div class="rebates_user"> 期望薪资：<span id="rebatesalary"></span></div>
+ <div class="rebates_user"> 工作性质：<span id="rebatetype"></span></div>
+ <div class="rebates_user"> 到岗时间：<span id="rebatereport"></span></div>
+ <div class="rebates_user">   期望职位：<span id="rebatejob_classid"></span>
+ 
+<div class="rebates_user" style="width:100%;float:left;">   <font color="red">推荐理由</font></div>
+
+ <div class="rebates_user" style="width:100%;float:left; padding-bottom:20px;"> <div style="width:580px;height:60px; overflow:auto;border:1px solid #eee" id="rebatecontent"></div></div>
+    </div>    </div>
+</div>    </div>
+<!--内容结束--> 
+<script>
+$(function () {
+	$('body').click(function (evt) {
+		if($(evt.target).parents(".look_lists").length==0&& $(evt.target).parents(".w70").length==0) {
+		   $('.look_lists').hide();
+		}
+	});
+});
+function click_status(status,name,id){
+	$.post("index.php?c=give_rebates&act=set",{id:id,status:status},function(data){
+		$("#statuslist"+id).hide();
+		$("#status"+id).html(name);	
+		layer.msg("设置成功！", 2,9,function(){location.reload();});
+	})
+}
+function show_div(id){
+	$(".look_lists").hide();
+	$(".look_posi").removeClass("look_posi");
+	$("#statusli"+id).addClass("look_posi"); 
+	$("#statuslist"+id).show();
+}
+function show_reply(id){
+	var style=$("#reply"+id).css("display");
+	if(style=="none"){
+		$("#reply"+id).show();
+	}else{
+		$("#reply"+id).hide();
+	}
+}
+function check_reply(id){
+	var reply=$.trim($("#content"+id).val());
+	if(reply==""){
+		layer.msg("回复内容不能为空！",2,8);return false;
+	}
+	$.post("index.php?c=give_rebates&act=save",{id:id,reply:reply},function(data){
+		layer.msg("回复成功！",2,9,function(){location.reload();});
+	})
+}
+</script> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

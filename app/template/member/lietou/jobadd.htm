@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<script src="{yun:}$lietou_style{/yun}/js/jobadd.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+
+ 
+
+</head><body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<!--内容部分content-->
+<div class="m_content">
+	<div class="wrap"> {yun:}include file="$lietoustyle/left.htm"{/yun}
+    <div class="m_inner_youb fr">
+		<div class="lt_m_tit"><span class="lt_m_tit_s">发布职位</span></div>
+		<div class="yun_lt_infobox">
+			<div class="m_release_new">
+				<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+				<form class="layui-form" action="index.php?c=jobadd&act=save" method="post" target="supportiframe" onsubmit="return Check_jobadd();" name="MyForm_2">
+					<input type="hidden" name="id" value="{yun:}$row.id{/yun}" />
+					<div class="m_inner_name">
+						
+						<div class="m_name_left fl"><em>*</em> 职位名称：</div>
+							<div class="m_post_right fr">
+								<input type="text" class="m_username_text fl" name="job_name" id="ltjob_name" value="{yun:}$row.job_name{/yun}" onclick="addClass('job_name');" onblur="removeClass('job_name')" style="width:300px;">
+								<span class="m_post_sign fl"> 如：高级经理 </span> 
+							</div>
+							<div class="clear"></div>
+						</div>
+
+						<div class="m_inner_name">
+							<div class="m_name_left fl"><em>*</em> 职位分类：</div>
+							<div class="m_name_right  fl">
+								<div class="layui-input-inline">
+									<select name="jobone" id="jobone" lay-filter="jobone">
+									<option value="">请选择</option>
+									{yun:}foreach from=$ltjob_index key=j item=v{/yun}
+									<option value="{yun:}$v{/yun}" {yun:}if $row.jobone == $v{/yun} selected{yun:}/if{/yun}>{yun:}$ltjob_name[$v]{/yun}</option>
+										{yun:}/foreach{/yun}
+									</select>
+								</div>
+								<div class="layui-input-inline">
+									<select name="jobtwo" lay-filter="jobtwo" id="jobtwo">
+									<option value="">请选择</option>
+									{yun:}foreach from=$ltjob_type[$row.jobone] key=j item=v{/yun}
+									<option value="{yun:}$v{/yun}" {yun:}if $row.jobtwo==$v{/yun} selected{yun:}/if{/yun}>{yun:}$ltjob_name[$v]{/yun}</option>
+									{yun:}/foreach{/yun}
+									</select>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div> 
+
+           <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 工作地点：</div>
+			 <div class="m_name_right  fl">
+			
+					<div class="layui-input-inline">
+						<select name="provinceid" id="provinceid" lay-filter="citys">
+						<option value="">请选择</option>
+						{yun:}foreach from=$city_index key=j item=v{/yun}
+						<option value="{yun:}$v{/yun}" {yun:}if $row.provinceid == $v{/yun} selected{yun:}/if{/yun} >{yun:}$city_name[$v]{/yun} </option>
+						{yun:}/foreach{/yun}
+						</select>
+					</div>
+					<div class="layui-input-inline">
+						<select name="cityid" lay-filter="citys" id="cityid">
+						<option value="">请选择</option>
+					    {yun:}foreach from=$city_type[$row.provinceid] key=j item=v{/yun}
+						<option value="{yun:}$v{/yun}" {yun:}if $row.cityid==$v{/yun} selected{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+						{yun:}/foreach{/yun}
+						</select>
+					</div>
+				  <div class="layui-input-inline">
+						<select name="three_cityid" lay-filter="three_cityid" id="three_cityid">
+					    <option value="">请选择</option>
+					   {yun:}foreach from=$city_type[$row.cityid] key=j item=v{/yun}
+						<option value="{yun:}$v{/yun}" {yun:}if $row.three_cityid==$v{/yun} selected{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+						{yun:}/foreach{/yun}
+						</select>
+				  </div>
+			</div> 
+		    
+			<div class="clear"></div>			
+         </div>
+           <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 职位描述：</div>
+           <div class="m_name_right  fl">
+ 			  <script id="job_desc" name="job_desc" type="text/plain" style="width:500px;"> {yun:}$row.job_desc{/yun} </script>
+            </div>
+			<div class="clear"></div>
+          </div>	    
+          <div class="m_inner_name">
+            <div class="m_post_left fl"><em>*</em>任职资格：</div>
+           <div class="m_name_right  fl">
+ 			  <script id="eligible" name="eligible" type="text/plain" style="width:500px;"> {yun:}$row.eligible{/yun} </script>
+            </div>
+            <div class="clear"></div>
+          </div>
+           <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 截止日期：</div>
+           <div class="m_name_right  fl">
+				<input id="edate" class="m_username_text fl" type="text" value="{yun:}$row.edate|date_format:'%Y-%m-%d'{/yun}" name="edate">
+          </div>
+		  <div class="clear"></div>
+          </div>
+           <div class="m_inner_name">
+            <div class="m_name_left fl"><em>*</em> 所属部门：</div>
+            <div class="m_post_right fr">
+              <input type="text" class="m_username_text fl" name="department" id="department" value="{yun:}$row.department{/yun}" onclick="addClass('department');" onblur="removeClass('department')">
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 汇报对象：</div>
+            <div class="m_post_right fr">
+              <input type="text" class="m_username_text fl" id="report" name="report" value="{yun:}$row.report{/yun}" onclick="addClass('report');" onblur="removeClass('report')">
+            </div>
+            <div class="clear"></div>
+          </div>
+           <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 职位年薪：</div>
+            <div class="m_post_right fr">
+              <div class="add_menutwo z50">
+              <div class="it_job_xzs">
+                <input type="text" id="minsalary" name="minsalary" size="5" value="{yun:}if $row.minsalary{/yun}{yun:}$row.minsalary{/yun}{yun:}/if{/yun}" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" class="it_job_xzs_text" placeholder="最低薪资" />
+                <span class="it_job_xzs_dw"> 万/年</span>
+                </div>
+                <span class="it_job_xzs_line">-</span>
+                  <div class="it_job_xzs">
+							<input type="text" id="maxsalary" name="maxsalary" size="5" maxlength="3" value="{yun:}if $row.maxsalary{/yun}{yun:}$row.maxsalary{/yun}{yun:}/if{/yun}" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" class="it_job_xzs_text" placeholder="最高薪资" />
+                           <span class="it_job_xzs_dw"> 万/年</span>
+                </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+           <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 薪资构成：</div>
+            <div class="m_post_right fr">
+				
+					<div class="layui-input-block">
+						{yun:}foreach item=v from=$ltdata.lt_constitute{/yun}
+							<input name="constitute[]"  title="{yun:}$ltclass_name[$v]{/yun}" value="{yun:}$v{/yun}" {yun:}if in_array($v,$row.constitute){/yun} checked="checked" {yun:}/if{/yun} type="checkbox" lay-skin="primary">
+
+						{yun:}/foreach{/yun}
+				    </div>
+				
+			 </div>
+			<div class="clear"></div>
+		  </div>
+           
+		<div class="m_inner_name">
+			<div class="m_name_left fl"><em>*</em> 年龄要求：</div>
+            <div class="m_post_right fr">
+				<div class="layui-input-inline">
+					<select name="age" id="age" lay-filter="age">
+						<option value="">请选择</option>
+						{yun:}foreach from=$ltdata.lt_age key=j item=v{/yun}
+							<option value="{yun:}$v{/yun}" {yun:}if $row.age == $v{/yun} selected{yun:}/if{/yun}>{yun:}$ltclass_name[$v]{/yun}</option>
+						{yun:}/foreach{/yun}
+					</select>
+				</div>
+            </div>
+            <div class="clear"></div>
+		</div>
+
+           <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 性别要求：</div>
+            <div class="m_post_right fr">
+				<div class="layui-input-inline">
+					<select name="sex" lay-filter="sex" id="sexid">
+						<option value="">请选择</option>
+						{yun:}foreach from=$arr_data.sex item=v key=j{/yun}
+							<option  value="{yun:}$j{/yun}" {yun:}if $row.sex==$j{/yun}selected{yun:}/if{/yun}> {yun:}$v{/yun}</option>
+						{yun:}/foreach{/yun}
+					</select>
+				</div>
+			</div>
+			<div class="clear"></div>
+          </div> 
+           <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 工作经验：</div>
+            <div class="m_post_right fr">
+			
+				  <div class="layui-input-inline">
+					<select name="exp" id="exp" lay-filter="exp">
+					 <option value="">请选择</option>
+					 {yun:}foreach from=$ltdata.lt_exp  item=v{/yun}
+					 <option value="{yun:}$v{/yun}" {yun:}if $row.exp == $v{/yun}selected="selected"{yun:}/if{/yun}>{yun:}$ltclass_name[$v]{/yun} </option>
+					 {yun:}/foreach{/yun}
+					</select>
+				  </div>
+			
+            </div>
+        
+          </div> 
+           <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 学历要求：</div>
+            <div class="m_post_right fr">
+			  	
+				  <div class="layui-input-inline">
+					<select name="edu" id="edu" lay-filter="edu">
+					  <option value="">请选择</option>
+					  {yun:}foreach from=$ltdata.lt_edu  item=v{/yun}
+					  <option value="{yun:}$v{/yun}" {yun:}if $row.edu == $v{/yun} selected{yun:}/if{/yun}>{yun:}$ltclass_name[$v]{/yun} </option>
+					  {yun:}/foreach{/yun}
+					</select>
+				  
+				 </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+			<div class="m_inner_name">
+           <div class="m_name_left fl"> 福利待遇：</div>
+            <div class="m_post_right fr">
+				
+					<div class="layui-input-block">
+						{yun:}foreach item=v from=$ltdata.lt_welfare{/yun}
+							<input name="welfare[]" title="{yun:}$ltclass_name[$v]{/yun}" value="{yun:}$v{/yun}" {yun:}if in_array($v,$row.welfare){/yun} checked="checked" {yun:}/if{/yun} type="checkbox" lay-skin="primary">
+						{yun:}/foreach{/yun}
+					</div>
+				</div>
+			  
+            <div class="clear"></div>
+		  </div>        
+
+          <div class="m_inner_name">
+           <div class="m_name_left fl"> 语言要求：</div>
+            <div class="m_post_right fr">
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						{yun:}foreach item=v key=j from=$ltdata.lt_language{/yun}
+							<input name="language[]"  title="{yun:}$ltclass_name[$v]{/yun}" value="{yun:}$v{/yun}" {yun:}if in_array($v,$row.language){/yun} checked="checked" {yun:}/if{/yun} type="checkbox" lay-skin="primary">
+						{yun:}/foreach{/yun}
+					</div>
+		       </div>
+			</div>
+			<div class="clear"></div>
+          </div>
+          <div class="jobadd_tips_cont">
+            <div class="jobadd_tips"><span class="jobadd_tips_s"> 相关企业信息</span></div>
+			 <div class="clear"></div>
+          </div> 
+          <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 公司名称：</div>
+            <div class="m_post_right fr">
+              <input type="text" class="m_username_text fl" value="{yun:}$row.com_name{/yun}" name="com_name" id="com_name" onclick="addClass('com_name');" onblur="removeClass('com_name')">
+              <span class="m_post_sign fl"> 如：安徽某集团房产企业</span></div>
+            <div class="clear"></div>
+          </div>
+          <div class="m_inner_name">
+          <div class="m_name_left fl"><em>*</em> 公司性质：</div>
+            <div class="m_post_right fr">
+			
+				  <div class="layui-input-inline">
+					<select name="pr" id="pr" lay-filter="pr">
+					  <option value="">请选择</option>
+					  {yun:}foreach from=$comdata.job_pr  item=v{/yun}
+					  <option value="{yun:}$v{/yun}" {yun:}if $row.pr == $v{/yun} selected{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+					  {yun:}/foreach{/yun}
+					 </select>
+				  </div>
+				
+            </div>
+			<div class="clear"></div>
+		  </div>
+         <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 所属行业：</div>
+            <div class="m_post_right fr">
+				
+				  <div class="layui-input-inline">
+					<select name="hyid" id="hy" lay-filter="hy">
+					  <option value="">请选择</option>
+					  {yun:}foreach from=$industry_index  item=v{/yun}
+					  <option value="{yun:}$v{/yun}" {yun:}if $row.hy == $v{/yun} selected{yun:}/if{/yun}
+						>{yun:}$industry_name[$v]{/yun}
+					  </option>
+					  {yun:}/foreach{/yun}
+					</select>
+				
+				 </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+           <div class="m_inner_name">
+           <div class="m_name_left fl"><em>*</em> 公司规模：</div>
+            <div class="m_post_right fr">
+				
+				  <div class="layui-input-inline">
+					<select name="mun" id="mun" lay-filter="mun">
+					  <option value="">请选择</option>
+					  {yun:}foreach from=$comdata.job_mun  item=v{/yun}
+					  <option value="{yun:}$v{/yun}" {yun:}if $row.mun == $v{/yun} selected{yun:}/if{/yun}>{yun:}$comclass_name[$v]{/yun}</option>
+					  {yun:}/foreach{/yun}
+					</select>
+				 
+				 </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        <div class="m_inner_name">
+            <div class="m_name_left fl"><em>*</em> 公司介绍：</div>
+            <div class="m_post_right fr">
+              <textarea class="m_name_textarea m_name_area" name="desc" id="desc" onclick="addClass('desc');" onblur="removeClass('desc')">{yun:}$row.desc{/yun}</textarea>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="m_inner_name">
+            <div class="m_name_left fl"> 推荐人才返利：</div>
+            <div class="m_post_right fr">
+              <input type="text" class="m_username_text  fl" value="{yun:}$row.rebates{/yun}" name="rebates" id="rebates" onclick="addClass('rebates');" onblur="removeClass('rebates')" maxlength="6" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')">
+              <span class="m_post_yuan fl" >元</span>
+			 </div>
+            <div class="clear"></div>
+          </div>
+        <div class="m_inner_name">
+           <div class="m_name_left fl"> 补充说明：</div>
+            <div class="m_post_right fr">
+ 				<script id="other" name="other" type="text/plain" style="width:500px;"> {yun:}$row.other{/yun} </script>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="m_inner_name">
+           <div class="m_name_left fl">&nbsp;</div>
+            <div class="m_post_right fr">
+              <input type="submit" name="submit" class="layui-btn layui-btn-normal " value="提交">
+            </div>
+            <div class="clear"></div>
+          </div>
+        </form>
+		</div>
+      </div>
+    </div>
+	</div>
+
+<!--内容结束-->
+<input type="hidden" id="today" value="{yun:}$today{/yun}" />
+<input type="hidden" id="jobaddtype" value="lietou" />
+
+<script type="text/javascript">
+	var userstyle='{yun:}$user_style{/yun}';
+
+	var weburl="{yun:}$config.sy_weburl{/yun}";
+	var form ,
+	url1 = weburl+"/index.php?m=ajax&c=get_ltjob_option",
+	url = weburl+"/index.php?m=ajax&c=get_city_option";
+
+  layui.use(['layer', 'form','laydate'], function(){
+   form = layui.form;
+   var laydate=layui.laydate,$ = layui.$;
+   laydate.render({elem:'#edate'});
+
+   form.on('select(fz_type)', function(data){
+      if(data.value == 1){
+        $("#fz_type_1").show();
+        $("#fz_type_2").hide();
+      }else{
+        $("#fz_type_2").show();
+        $("#fz_type_1").hide();
+      }
+    });
+	 form.on('select(jobone)', function(data){
+      $.post(url1,{jobtwo : data.value},function(html){
+        $("#jobtwo").html(html);
+        form.render();
+      });
+    });
+  });
+</script>
+<script language=javascript src='{yun:}$config.sy_weburl{/yun}/data/plus/city.cache.js?v={yun:}$config.cachecode{/yun}'></script>
+<script language=javascript src='{yun:}$config.sy_weburl{/yun}/js/city.js?v={yun:}$config.cachecode{/yun}'></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/ueditor/ueditor.config.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/ueditor/ueditor.all.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script language="javascript">
+	UE.getEditor('job_desc',{
+		toolbars:[[ 'Source','|', 'Undo', 'Redo','Bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'fontfamily', 'fontsize',  'forecolor', 'backcolor', 'removeformat', 'autotypeset', 'pasteplain', '|','insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|','simpleupload', '|','link', 'unlink', 'indent', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify']],wordCount:false,elementPathEnabled:false,initialFrameHeight:120
+	});
+	UE.getEditor('eligible',{
+		toolbars:[[ 'Source','|', 'Undo', 'Redo','Bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'fontfamily', 'fontsize',  'forecolor', 'backcolor', 'removeformat', 'autotypeset', 'pasteplain', '|','insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|','simpleupload', '|','link', 'unlink', 'indent', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify']],wordCount:false,elementPathEnabled:false,initialFrameHeight:120
+	});
+	UE.getEditor('other',{
+		toolbars:[[ 'Source','|', 'Undo', 'Redo','Bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'fontfamily', 'fontsize',  'forecolor', 'backcolor', 'removeformat', 'autotypeset', 'pasteplain', '|','insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|','simpleupload', '|','link', 'unlink', 'indent', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify']],wordCount:false,elementPathEnabled:false,initialFrameHeight:120
+	});
+</script>
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

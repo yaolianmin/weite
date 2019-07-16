@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/guanli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<div class="m_content">
+  <div class="wrap"> {yun:}include file="$lietoustyle/left.htm"{/yun}
+   
+    <div class="m_inner_youb fr">
+  <div class="report_uaer_list fl">
+            <ul>
+            <li><a href="index.php?c=jobpack&act=withdraw">赏金提现</a></li>
+			    <li class="report_uaer_list_cur"><a href="index.php?c=jobpack&act=withdrawlist">提现记录</a></li> 
+            </ul>
+		</div>
+        
+   <div class="resume_box_list"style="padding-right:30px;">
+     
+            <div id="gms_showclew"></div>
+         
+                     <div class="clear"></div>
+      <div  class="resume_Prompt_box"><div  class="resume_Prompt"><i class="resume_Prompt_icon"></i>提现说明：单笔提现金额必须达到{yun:}$config.sy_withdraw_minmoney{/yun}元
+{yun:}if $config.sy_withdraw_num>0{/yun} 单次提现收取每笔{yun:}$config.sy_withdraw_pound{/yun}%手续费{yun:}/if{/yun}
+{yun:}if $config.sy_withdraw_money>0{/yun} {yun:}$config.sy_withdraw_money{/yun}元以内及时到账，超过{yun:}$config.sy_withdraw_money{/yun}元需审核。{yun:}/if{/yun}</div></div>
+              <div class="clear"></div> 
+            <div class="com_body">
+  
+           <div class="withdraw_tx_box">
+          <span class="withdraw_tx_box_d"> 可提现金额：</span> <span class="withdraw_tx_box_n">￥{yun:}$statis.packpay{/yun}</span>  元
+
+		  <span class="withdraw_tx_box_d"> 已冻结金额：</span> <span class="withdraw_tx_box_n">￥{yun:}$statis.freeze{/yun}</span>  元
+           </div>
+        
+          
+          <div class="clear"></div>
+          <div class="withdraw_tx_list">
+          <table width="100%" cellpadding="1" cellspacing="0">
+        <tr><th>真实姓名</th><th>提现金额</th><th>手续费</th><th>提现时间</th><th>状态</th><th>原因</th> </tr>
+			{yun:}foreach from=$rows item=v{/yun}
+          <tr><td>{yun:}$v.real_name{/yun}</td><td>￥{yun:}$v.price{/yun}</td><td>￥{yun:}$v.pound_price{/yun}</td><td>{yun:}$v.time|date_format:"%Y-%m-%d %H:%M"{/yun}</td><td>{yun:}$v.order_state_n{/yun}</td><td>{yun:}$v.order_remark{/yun}</td> </tr>
+		 {yun:}/foreach{/yun}
+		 <tr>{yun:}$pagenav{/yun}</tr>
+          </table>
+          
+           </div>
+        </div>
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/rewardpay.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

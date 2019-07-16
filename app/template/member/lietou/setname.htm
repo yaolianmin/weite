@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+<script src="{yun:}$lietou_style{/yun}/js/jobadd.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+</head>
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+          <div class="m_inner_name">
+          <div class="m_name_left fl">新用户名：</div>
+          <div class="m_name_right fl">
+            <input type="text" class="m_name_text" id="username" name="username" value="">
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl">新密码：</div>
+          <div class="m_name_right fl">
+            <input type="password" class="m_name_text" name="password" id="password">
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl">重复新密码：</div>
+          <div class="m_name_right fl">
+            <input type="password" class="m_name_text" id="repassword" name="repassword">
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="m_inner_name">
+          <div class="m_name_left fl">&nbsp;</div>
+          <div class="m_name_right fl">
+            <input type="button" name="submit" class="m_name_button" value=" 修 改 " onclick="Savenamepost();">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+<script src="{yun:}$lietou_style{/yun}/js/jobadd.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+</head>
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+        <div class="lt_m_tit"><span class="lt_m_tit_s">修改密码</span></div>
+          <iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php?c=passwd" target="supportiframe" method="post" id='myform' onSubmit="return CheckPost_pass();">
+        <div style="padding-left:150px; padding-top:30px;">
+        <div class="m_inner_name">
+ <div class="m_name_left fl"><em>*</em> 旧密码：</div>
+          <div class="m_name_right reg_re fl">
+  <input type="password" class="m_username_text" name="oldpassword" id="oldpassword">
+</div>
+	</div>
+            <div class="m_inner_name">
+ <div class="m_name_left fl"><em>*</em> 新密码：</div>
+          <div class="m_name_right reg_re fl">
+       <input type="password" class="m_username_text" name="password" id="password">
+</div>
+	</div>
+               <div class="m_inner_name">
+ <div class="m_name_left fl"><em>*</em> 重复新密码：</div>
+          <div class="m_name_right reg_re fl">
+       <input type="password" class="m_username_text" name="password2" id="password2">
+</div>
+	</div>
+      
+<div class="m_inner_name">
+ <div class="m_name_left fl">&nbsp;</div>
+          <div class="m_name_right reg_re fl">           <input type="submit" name="submit" class="layui-btn layui-btn-normal" value="保　存">
+</div>
+</div>
+ 
+        </form>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

@@ -1,0 +1,33 @@
+<div class="tongji_tit">
+<a href="index.php?m=admin_tongji&c=reg&days=7"{yun:}if $smarty.get.c=='reg'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>会员注册统计<i class="tongji_tit_s"></i></a>
+		<a href="index.php?m=admin_tongji&c=lookjob&days=7" {yun:}if $smarty.get.c=='lookjob'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>职位浏览统计<i class="tongji_tit_s"></i></a> 
+		<a href="index.php?m=admin_tongji&c=lookresume&days=7" {yun:}if $smarty.get.c=='lookresume'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>简历浏览统计<i class="tongji_tit_s"></i></a>
+		<a href="index.php?m=admin_tongji&c=useridmsg&days=7" {yun:}if $smarty.get.c=='useridmsg'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>邀请面试统计<i class="tongji_tit_s"></i></a>
+		<a href="index.php?m=admin_tongji&c=downresume&days=7" {yun:}if $smarty.get.c=='downresume'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>简历下载统计<i class="tongji_tit_s"></i></a>
+		<a href="index.php?m=admin_tongji&c=useridjob&days=7" {yun:}if $smarty.get.c=='useridjob'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>简历投递统计<i class="tongji_tit_s"></i></a>
+		<a href="index.php?m=admin_tongji&c=order&days=7" {yun:}if $smarty.get.c=='order'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>财务统计<i class="tongji_tit_s"></i></a>
+		<a href="index.php?m=admin_tongji&c=ad&days=7" {yun:}if $smarty.get.c=='ad'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>广告统计<i class="tongji_tit_s"></i></a>
+		<a href="index.php?m=admin_tongji&c=company&days=7" {yun:}if $smarty.get.c=='company'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>企业统计<i class="tongji_tit_s"></i></a>
+		<a href="index.php?m=admin_tongji&c=job&days=7" {yun:}if $smarty.get.c=='job'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>职位数据统计<i class="tongji_tit_s"></i></a>
+		<a href="index.php?m=admin_tongji&c=resume&days=7" {yun:}if $smarty.get.c=='resume'{/yun} class="report_uaer_list_on"{yun:}/if{/yun}>简历数据统计<i class="tongji_tit_s"></i></a>
+</div>
+<div class="admin_new_search_box">	<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>	
+     <form action="index.php" name="myform" method="get" onSubmit="return cktimesave()">
+        <input name="m" value="admin_tongji" type="hidden"/>
+		{yun:}if $smarty.get.c{/yun}
+		<input name="c" value="{yun:}$smarty.get.c{/yun}" type="hidden"/>
+		{yun:}/if{/yun}
+        <a href="index.php?m=admin_tongji&c={yun:}$smarty.get.c{/yun}&days=-1" class="tongji_c_bth {yun:}if $smarty.get.days=='-1'{/yun}tongji_c_bth_cur{yun:}/if{/yun}">昨天</a>
+        <a href="index.php?m=admin_tongji&c={yun:}$smarty.get.c{/yun}&days=1"class="tongji_c_bth {yun:}if $smarty.get.days=='1'{/yun}tongji_c_bth_cur{yun:}/if{/yun}">今天</a>
+        <a href="index.php?m=admin_tongji&c={yun:}$smarty.get.c{/yun}&days=7"class="tongji_c_bth  {yun:}if $smarty.get.days=='7'{/yun}tongji_c_bth_cur{yun:}/if{/yun}">一周内</a>
+        <a href="index.php?m=admin_tongji&c={yun:}$smarty.get.c{/yun}&days=30"class="tongji_c_bth  {yun:}if $smarty.get.days=='30'{/yun}tongji_c_bth_cur{yun:}/if{/yun}">一月内</a>
+
+        <span class="admin_new_search_name">时间段：</span>	
+		<input class="admin_Filter_search" type="text" id="date" name="date" value="{yun:}$smarty.get.date{/yun}"/>
+        <script type="text/javascript">
+		layui.use(['laydate'], function(){var laydate = layui.laydate,$ = layui.$;laydate.render({elem: '#date',range:'~'});});
+        </script>
+        <input  class="admin_Filter_bth"  type="submit" name="" value="统计"/>
+ 	   </form>
+       </div>
+

@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"> 
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">微信红包设置功能是控制网站发放红包参数设置，如（红包名称、服务器IP、关注微信公众号和企业、个人红包用户）等相关功能设置！</div>
+</div>
+</div>
+<div class="clear"></div>
+<div class="main_tag mt10">
+<div class="tag_box">
+    <div>
+	<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+	<form name="myform" target="supportiframe" action="index.php?m=wx&c=wxredpack" method="post" enctype="multipart/form-data">
+         <table width="100%" class="table_form">
+         	<tr class="admin_table_trbg">
+                <th colspan="2"><span class="admin_bold">公众号基本信息</span></th>
+            </tr>
+            <tr>
+                <th  width="160">微信红包发送人昵称：</th>
+                <td><input class="input-text tips_class" type="text" name="sy_wxredpack_nick" id="sy_wxredpack_nick" size="20" value="{yun:}$config.sy_wxredpack_nick{/yun}" maxlength="255" ><span class="admin_web_tip">如：XX人才网，建议字数控制在8个字符内</span></td>
+                </tr>
+                <tr>
+				<th width="160">服务器IP：</th>
+                <td><input class="input-text tips_class" type="text" name="sy_wxredpack_ip" id="sy_wxredpack_ip" size="15" value="{yun:}$config.sy_wxredpack_ip{/yun}" maxlength="255" ><span class="admin_web_tip">如：127.0.0.1</span></td>
+				     </tr>
+                  <tr>
+                <th align="right">红包备注：</th>
+                <td><input class="input-text tips_class" type="text" name="sy_wxredpack_remark" id="sy_wxredpack_remark" size="30" value="{yun:}$config.sy_wxredpack_remark{/yun}" maxlength="255" ><span class="admin_web_tip">微信高版本暂无法展示备注信息</span></td>
+            </tr>            
+            <tr class="admin_table_trbg" >
+                <td colspan="4" align="center">
+                <input class="layui-btn layui-btn-normal" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;
+                <input class="layui-btn layui-btn-normal" type="reset" value="重置" />
+                </td>
+            </tr>
+			<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">	
+        </table>
+		</form>            
+            
+	<form name="myform" target="supportiframe" action="index.php?m=wx&c=wxredpack" method="post" enctype="multipart/form-data" class="layui-form">
+         <table width="100%" class="table_form">
+         	<tr class="admin_table_trbg" bgcolor="#f8f8f8">
+                	<th colspan="2"><span class="admin_bold">关注微信发红包</span></th>
+            </tr>
+			 <tr>
+				 <th align="right">活动名称：</th>
+                 <td><input class="input-text tips_class" type="text" name="sy_wxredpack_actname1" id="sy_wxredpack_actname1" size="20" value="{yun:}$config.sy_wxredpack_actname1{/yun}" maxlength="255" >
+				</td>
+                </tr> 
+                
+                 <tr>
+                <th>是否开启：  </th> 
+                 <td> 
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                     <div class="layui-input-inline">
+                       <input type="radio" name="sy_wxredpack_isopen1" checked value='0' id="sy_wxredpack_isopen1_1" title="关闭" >
+                       <input type="radio" {yun:}if $config.sy_wxredpack_isopen1=='1'{/yun}checked{yun:}/if{/yun} name="sy_wxredpack_isopen1" value='1' id="sy_wxredpack_isopen1_2" title="开启" >
+                     </div>
+                   </div>
+                </div>
+				</td>
+                </tr> 
+                 <tr>
+				<th align="right">单次红包金额：</th><td><input class="input-text tips_class" type="text" name="sy_wxredpack_money1" id="sy_wxredpack_money1" size="10" value="{yun:}$config.sy_wxredpack_money1{/yun}" maxlength="255" >元<span class="admin_web_tip">红包金额1-200元，否则将发放失败</span>
+				</td>
+                  </tr> 
+                 <tr>
+				<th>红包祝福语：</th>
+                <td><input class="input-text tips_class" type="text" name="sy_wxredpack_wishing1" id="sy_wxredpack_wishing1" size="30" value="{yun:}$config.sy_wxredpack_wishing1{/yun}" maxlength="255" ><span class="admin_web_tip">如：感谢您关注XX人才网</span>
+				</td>
+            </tr>
+            <tr class="admin_table_trbg" >
+                <td colspan="4" align="center"><input class="layui-btn layui-btn-normal" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;<input class="layui-btn layui-btn-normal" type="reset" value="重置" /></td>
+            </tr>
+			<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">	
+        </table>
+		</form>            
+                        
+	<form name="myform" target="supportiframe" action="index.php?m=wx&c=wxredpack" method="post" enctype="multipart/form-data" class="layui-form">
+         <table width="100%" class="table_form">
+			<tr class="admin_table_trbg"  bgcolor="#f8f8f8">
+                <th colspan="2"><span class="admin_bold">公众号绑定账户发红包</span></th>
+            </tr>
+			 <tr>
+				<th>活动名称：</th>
+                 <td><input class="input-text tips_class" type="text" name="sy_wxredpack_actname2" id="sy_wxredpack_actname2" size="20" value="{yun:}$config.sy_wxredpack_actname2{/yun}" maxlength="255" >
+				</td>
+                </tr>
+                <tr>
+                <th>是否开启：  </th>
+                  <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                     <div class="layui-input-inline">
+                       <input type="radio" name="sy_wxredpack_isopen2" checked value='0' id="sy_wxredpack_isopen2_1" title="关闭" >
+                       <input type="radio" {yun:}if $config.sy_wxredpack_isopen2=='1'{/yun}checked{yun:}/if{/yun} name="sy_wxredpack_isopen2" value='1' id="sy_wxredpack_isopen2_2" title="开启" >
+                     </div>
+                   </div>
+                </div>
+				</td>
+                 </tr>
+			 <tr>
+				<th>单次红包金额：   </th> <td>
+                <input class="input-text tips_class" type="text" name="sy_wxredpack_money2" id="sy_wxredpack_money2" size="10" value="{yun:}$config.sy_wxredpack_money2{/yun}" maxlength="255" >元<span class="admin_web_tip">红包金额1-200元，否则将发放失败</span>
+				</td>
+                </tr>
+                <tr>
+				<th>红包祝福语：</th><td><input class="input-text tips_class" type="text" name="sy_wxredpack_wishing2" id="sy_wxredpack_wishing2" size="30" value="{yun:}$config.sy_wxredpack_wishing2{/yun}" maxlength="255" ><span class="admin_web_tip">如：帐号已绑定，创建简历还能获取更多红包</span>
+				</td>
+            </tr>
+
+            <tr class="admin_table_trbg" >
+                <td colspan="4" align="center"><input class="layui-btn layui-btn-normal" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;<input class="layui-btn layui-btn-normal" type="reset" value="重置" /></td>
+            </tr>
+			<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">	
+        </table>
+		</form>            
+            
+	<form name="myform" target="supportiframe" action="index.php?m=wx&c=wxredpack" method="post" enctype="multipart/form-data" class="layui-form">
+         <table width="100%" class="table_form">
+			<tr  class="admin_table_trbg"  bgcolor="#f8f8f8">
+                 <th colspan="2"><span class="admin_bold">创建首份简历发红包</span></th>
+            </tr>
+			 <tr>
+			  <th >活动名称：</th>
+                <td><input class="input-text tips_class" type="text" name="sy_wxredpack_actname3" id="sy_wxredpack_actname3" size="20" value="{yun:}$config.sy_wxredpack_actname3{/yun}" maxlength="255" >
+				</td>
+</tr>
+                <tr>
+                <th>是否开启：</th><td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                     <div class="layui-input-inline">
+                       <input type="radio" name="sy_wxredpack_isopen3" checked value='0' id="sy_wxredpack_isopen3_1" title="关闭" >
+                       <input type="radio" {yun:}if $config.sy_wxredpack_isopen3=='1'{/yun}checked{yun:}/if{/yun} name="sy_wxredpack_isopen3" value='1' id="sy_wxredpack_isopen3_2" title="开启" >
+                     </div>
+                   </div>
+                </div>
+				</td>
+                </tr>
+                <tr>
+				<th>单次红包金额：</th><td><input class="input-text tips_class" type="text" name="sy_wxredpack_money3" id="sy_wxredpack_money3" size="10" value="{yun:}$config.sy_wxredpack_money3{/yun}" maxlength="255" >元<span class="admin_web_tip">红包金额1-200元，否则将发放失败</span>
+
+				</td>
+                 </tr>
+                <tr>
+				<th>红包祝福语：</th><td><input class="input-text tips_class" type="text" name="sy_wxredpack_wishing3" id="sy_wxredpack_wishing3" size="30" value="{yun:}$config.sy_wxredpack_wishing3{/yun}" maxlength="255" ><span class="admin_web_tip">如：简历创建成功，开始您的求职之旅吧</span>
+				</td>
+            </tr>
+
+            <tr class="admin_table_trbg" >
+                <td colspan="2" align="center"><input class="layui-btn layui-btn-normal" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;<input class="layui-btn layui-btn-normal" type="reset" value="重置" /></td>
+            </tr>
+			<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">	
+        </table>
+		</form>            
+            
+            
+	<form name="myform" target="supportiframe" action="index.php?m=wx&c=wxredpack" method="post" enctype="multipart/form-data" class="layui-form">
+         <table width="100%" class="table_form">
+			<tr  class="admin_table_trbg"  bgcolor="#f8f8f8">
+                 <th colspan="2"><span class="admin_bold">企业首次完善基本资料发红包</span></th>
+            </tr>
+			 <tr>
+				<th>活动名称：</th>
+                 <td><input class="input-text tips_class" type="text" name="sy_wxredpack_actname4" id="sy_wxredpack_actname4" size="20" value="{yun:}$config.sy_wxredpack_actname4{/yun}" maxlength="255" >
+				</td>
+                </tr>
+                <tr>
+                <th>是否开启：</th> <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                     <div class="layui-input-inline">
+                       <input type="radio" name="sy_wxredpack_isopen4" checked value='0' id="sy_wxredpack_isopen4_1" title="关闭" >
+                       <input type="radio" {yun:}if $config.sy_wxredpack_isopen4=='1'{/yun}checked{yun:}/if{/yun} name="sy_wxredpack_isopen4" value='1' id="sy_wxredpack_isopen4_2" title="开启" >
+                     </div>
+                   </div>
+                </div>
+				</td>
+                  </tr>
+			 <tr>
+				<th>单次红包金额：</th> <td><input class="input-text tips_class" type="text" name="sy_wxredpack_money4" id="sy_wxredpack_money4" size="10" value="{yun:}$config.sy_wxredpack_money4{/yun}" maxlength="255" >元<span class="admin_web_tip">红包金额1-200元，否则将发放失败</span>
+
+				</td>
+                </tr>
+                <tr>
+				<th>红包祝福语：</th><td><input class="input-text tips_class" type="text" name="sy_wxredpack_wishing4" id="sy_wxredpack_wishing4" size="30" value="{yun:}$config.sy_wxredpack_wishing4{/yun}" maxlength="255" ><span class="admin_web_tip">如：信息完善成功，发布职位快速寻找合适的人才</span>
+				</td>
+            </tr>
+            <tr class="admin_table_trbg" >
+                <td colspan="2" align="center"><input class="layui-btn layui-btn-normal" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;<input class="layui-btn layui-btn-normal" type="reset" value="重置" /></td>
+            </tr>
+			<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">	
+        </table>
+		</form>
+    </div>
+</div>
+</div>
+</div>
+<script>
+$(".tips_class").hover(function(){ 
+	var msg_id=$(this).attr('id'); 
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.tips(msg, this, {
+		guide: 1, 
+		style: ['background-color:#5EA7DC; color:#fff;top:-7px', '#5EA7DC']
+		}); 
+		$(".xubox_layer").addClass("xubox_tips_border");
+	} 
+},function(){
+	var msg_id=$(this).attr('id');
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.closeAll('tips');
+	} 
+});
+
+layui.use(['layer', 'form'], function(){
+    var layer = layui.layer
+    ,form = layui.form
+    ,$ = layui.$;
+});
+</script>
+</body>
+</html>

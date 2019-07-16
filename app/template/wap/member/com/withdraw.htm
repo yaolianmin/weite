@@ -1,0 +1,50 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/rewardpay.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+
+<div class="wap_member_comp_h1"><span>提现</span></div> 
+  
+<div class="loglist_box">
+我的钱包：<span class="yun_reward_list_box_n">￥{yun:}$statis.packpay{/yun}</span> 
+ <span class="wap_member_msg_job_s"> 冻结金额：<span class="yun_reward_list_box_n">￥{yun:}$statis.freeze{/yun}</span> </span> 
+  </div><div style="padding:10px 10px 0 10px;">
+<div class="admin_new_tip ">
+        <div class="admin_new_tit">操作提示</div>
+        <div class="admin_new_tip_list_cont">
+          <div class="admin_new_tip_list"> 单笔提现金额必须达到{yun:}$config.sy_withdraw_minmoney{/yun}元,
+{yun:}if $config.sy_withdraw_num>0{/yun}单次提现收取每笔{yun:}$config.sy_withdraw_pound{/yun}%手续费{yun:}/if{/yun}
+{yun:}if $config.sy_withdraw_money>0{/yun}{yun:}$config.sy_withdraw_money{/yun}元以内及时到账，超过{yun:}$config.sy_withdraw_money{/yun}元需审核。{yun:}/if{/yun} </div>
+                   
+         
+           </div>
+     </div>
+      </div> 
+<div class="wap_member_Receive">
+
+       <div class="com_box_yq" id='job_box' >
+       <div style="background:#fff;">
+          <form name="pay"  action="index.php?c=withdraw" method="post" onsubmit="return withdraw_form();">
+		 <dl class="resume-cont_wate_list">
+          <dt> <span class="city_01">真实姓名：</span></dt>
+			<dd> <input   id='real_name' name="real_name" value='' class="invite_text"></dd>
+        </dl>
+		 <dl class="resume-cont_wate_list">
+          <dt> <span class="city_01">提现金额：</span></dt>
+			<dd> <input   id='price' name='price'  onkeyup= "this.value=this.value.replace(/[^0-9.]/g,'')" value='' class="invite_text"></dd>
+        </dl>
+       
+      <dl class="resume-cont_wate_list"> 
+        <dd>
+		  {yun:}if $statis.packpay>=$config.sy_withdraw_minmoney{/yun}
+		  <input class="reinputText2" type="submit" value="提现">
+		  {yun:}else{/yun}
+		  <input  type="button" value="不可提现" name=nextstep class="reinputText2" >
+		  
+		  {yun:}/if{/yun}
+		</dd>
+    </dl>
+	</form>
+   </div>
+ </div>
+</div> 
+</div> </div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

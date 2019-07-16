@@ -1,0 +1,39 @@
+{yun:}include file="$wapstyle/member/lheader.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/wap_tck.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<script src="{yun:}$wap_style{/yun}/js/jobadd.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script> 
+<script src="{yun:}$wap_style{/yun}/js/lt.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script> 
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_002.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_003.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css?v={yun:}$config.cachecode{/yun}" type="text/css"> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/ueditor/ueditor.config.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/ueditor/ueditor.all.min.js?v={yun:}$config.cachecode{/yun}"></script> 
+<script type="text/javascript">
+    function Checkjobadds(){
+    	if($.trim($("#day").val())==""){
+			layermsg("请输入延期天数");return false;
+		}
+    }
+</script>
+<section class="wap_member">
+  <div class="wap_member_comp_h1" style="position:relative"><span>延期天数</span>
+   </div>
+
+  <div class="yun_wap_addresume_box">
+    <form action="index.php?c=gotime" method="post"  onSubmit="return Checkjobadds();" >
+    	  <div class="yun_wap_addresume_box_group">
+	        <div class="yun_wap_addresume_box_label"> 延期天数   </div>
+	        <div class="yun_wap_addresume_box_control">
+	          <input type="text" name="day" id="day" placeholder="延期天数" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="yun_wap_addresume_text">
+	        </div>
+	      </div>
+      <input type="hidden" name="gotimeid" value="{yun:}$smarty.get.id{/yun}" />
+      <div class="yun_wap_addresume_box_group" style="background: transparent; border: none;">
+        <input type="submit" name="submit" value="提交操作" class="reinputText2">
+      </div>
+    </form>
+  </div>
+</section>
+</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,90 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+        <div class="com_tit"><span class="com_tit_span">应聘悬赏简历</span></div>
+        <div class="m_lt_ct ">
+          <div class="clear"></div>
+          <div class="admin_new_tip ">
+            <div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+            <div class="admin_new_tip_list_cont">
+              <div class="admin_new_tip_list">查看状态可点击状态后的下拉图标</div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <div class="m_xs mt10">
+            <ul>
+              <li {yun:}if !$smarty.get.state{/yun}class="m_xs_cur"{yun:}/if{/yun}> <a href="index.php?c=jobpack&act=rewardlog&jobid={yun:}$smarty.get.jobid{/yun}">全部</a> </li>
+              {yun:}foreach from=$StateList item=one{/yun}
+              <li {yun:}if $smarty.get.state==$one.id{/yun}class="m_xs_cur"{yun:}/if{/yun} > <a href="index.php?c=jobpack&act=rewardlog&jobid={yun:}$smarty.get.jobid{/yun}&state={yun:}$one.id{/yun}">{yun:}$one.name{/yun}</a> </li>
+              {yun:}/foreach{/yun}
+            </ul>
+          </div>
+          <div class="clear"></div>
+          {yun:}foreach item=v key=key from=$rows{/yun}
+          <div class="jobrewardiog_list">
+            <div class="jobrewardiog_list_c">
+              <div class="jobrewardiog_box_user">
+                <div class="jobrewardiog_box_user_pic"> <img src="{yun:}$Info.resume_photo{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);" width="40" height="40"> </div>
+                <div class="jobrewardiog_box_user_name">{yun:}$v.uname{/yun}</div>
+              </div>
+              <div class="jobrewardiog_cont">
+                <div class="jobrewardiog_job"><span class="jobrewardiog_job_l">应聘职位：<a href="{yun:}url m=job c=comapply id='`$v.jobid`'{/yun}" target="_blank">{yun:}$v.name{/yun}</a></span> <span class="jobrewardiog_job_tj">{yun:}if $v.usertype=='3'{/yun}(猎头中介推荐){yun:}else{/yun}(用户自荐){yun:}/if{/yun}</span> <em class="jobrewardiog_job_time">申请日期：{yun:}$v.datetime|date_format:"%Y-%m-%d %H:%M"{/yun}</em></div>
+                <div class="jobrewardiog_info"><span class="jobrewardiog_job_l">意向：<font color="#dd5a43">{yun:}$v.jobclass{/yun}</font></span><span class="jobrewardiog_info_line">|</span>{yun:}$v.exp{/yun}经验<span class="jobrewardiog_info_line">|</span>{yun:}$v.edu{/yun}学历
+                  <div class="jobrewardiog_cz"> {yun:}if $v.status==0{/yun} <a class="jobrewardiog_cz_a" href="javascript:void(0);" onclick="rewardpay('{yun:}$v.jobid{/yun}','{yun:}$v.id{/yun}','{yun:}$v.sqmoney{/yun}','{yun:}$v.invitemoney{/yun}','{yun:}$v.offermoney{/yun}','{yun:}$v.money{/yun}');">查看简历</a> {yun:}else{/yun} <a class="jobrewardiog_cz_a jobrewardiog_cz_qx" href="index.php?c=jobpack&act=lookresume&id={yun:}$v.id{/yun}" target='_blank'>查看简历</a> {yun:}/if{/yun}
+                    
+                    {yun:}foreach from= $v.log.input item=inputv{/yun} <a class="jobrewardiog_cz_a jobrewardiog_cz_yq" href="javascript:void(0);" onclick="getStatus('{yun:}$v.id{/yun}','{yun:}$inputv.status{/yun}');">{yun:}$inputv.name{/yun}</a> {yun:}/foreach{/yun} </div>
+                </div>
+                <div class="jobrewardiog_zt">
+                  <div class="jobrewardiog_zt_bth"> 状态：{yun:}$v.log.nowmsg{/yun}
+                    {yun:}if $v.log.loglist{/yun}<span class="jobrewardiog_zt_icon" data-id='{yun:}$v.id{/yun}'> </span> {yun:}/if{/yun} </div>
+                  
+                  <!----操作记录---->
+                  <div class="jobrewardiog_show  show{yun:}$v.id{/yun}" style="display:none;"> {yun:}if $v.log.loglist{/yun}
+                    <ul>
+                      {yun:}foreach from=$v.log.loglist item=linfo{/yun}
+                      <li class="m_xs_pr_f_cur"> <span class="jobrewardiog_show_icon"><i class="jobrewardiog_show_icon_c"></i></span>
+                        <div class="jobrewardiog_show_time">{yun:}$linfo.time|date_format:"%Y-%m-%d %H:%M"{/yun}</div>
+                        <div class="jobrewardiog_show_box">{yun:}$linfo.info{/yun}</div>
+                      </li>
+                      {yun:}/foreach{/yun}
+                    </ul>
+                    {yun:}/if{/yun}
+                    
+                    {yun:}if $v.log.endmsg{/yun}
+                    <ul style="padding-bottom:30px;">
+                      <li> <i class="jobrewardiog_show_icon"><i class="jobrewardiog_show_icon_c jobrewardiog_show_icon_f60"></i></i>
+                        <div class="jobrewardiog_show_box "><font color="#FF6600">{yun:}$v.log.endmsg{/yun}</font></div>
+                      </li>
+                    </ul>
+                    {yun:}/if{/yun} </div>
+                  <!----操作记录END----> 
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          {yun:}/foreach{/yun} </div>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="rewardid" value="">
+<script>
+$(function(){
+	$('.jobrewardiog_zt_icon').click(function(){
+		var showid = $(this).attr('data-id');
+		
+		$('.show'+showid).toggle()
+	});
+	$('.sq_jobpack_hb_n').each(function(){
+		var n = $(this).text();
+		if(n.length>33){
+			$(this).text(n.substr(0,33));
+		}
+	});
+})
+</script> 
+{yun:}include file="$comstyle/rewardpay.htm"{/yun} 
+{yun:}include file="$comstyle/footer.htm"{/yun} 

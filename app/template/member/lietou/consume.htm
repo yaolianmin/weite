@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/guanli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+      <div class="report_uaer_list fl">
+            <ul>
+            <li><a href="index.php?c=paymanage" >订单管理</a></li>
+			    <li><a href="index.php?c=paylog" >充值记录</a></li>
+			    <li class="report_uaer_list_cur"><a href="index.php?c=consume" >消费记录</a></li> 
+            </ul>
+		</div>
+        	<div class="search_con mt20 fl">
+			 <div class="lt_m_table">
+          <table>
+                <tbody>
+        {yun:}if !empty($rows){/yun}
+        <tr>   
+                                   
+                 <th scope="col" ><span>消费单号</span></th>
+                  <th scope="col" ><span>{yun:}$config.integral_pricename{/yun}</span></th>
+                  <th scope="col" ><span>消费时间</span></th>
+                    <th scope="col" width="300" >备注</th>
+                </tr>
+                
+        
+          {yun:}/if{/yun}
+       
+			{yun:}foreach item=v from=$rows{/yun} 
+            <tr>   
+                                   
+                 <td  align="center">{yun:}$v.order_id{/yun}</td>
+                  <td align="center" > {yun:}if $v.type==2{/yun}
+			  {yun:}$v.order_price{/yun}元
+			   {yun:}else{/yun}
+			   {yun:}$v.order_price{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}
+			   {yun:}/if{/yun}</td> <td  align="center">{yun:}$v.pay_time|date_format:'%Y-%m-%d %H:%M:%S'{/yun}</td>
+                  <td  align="center">{yun:}$v.pay_remark{/yun}</td>
+                  
+                </tr>
+                
+                
+          
+          {yun:}foreachelse{/yun}
+          <tr>
+                    <td colspan="4"class="lt_m_table_end">
+          <div class="member_no_content"> 您还没有消费记录！</div></td>
+                </tr>
+		  {yun:}/foreach{/yun}
+      
+		 <tr>
+                    <td colspan="4"class="lt_m_table_end"><div class="pages"> {yun:}$pagenav{/yun}</div></td>
+                </tr>
+                      </tbody></table>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

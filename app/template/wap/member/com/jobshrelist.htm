@@ -1,0 +1,45 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="wap_member">
+<ul class="member_ms">
+<li class="member_ms_cur"><a href='index.php?c=jobpack'>分享职位管理</a></li>
+<li><a href='index.php?c=jobpack&t=r'>悬赏职位管理</a></li>
+</ul>
+
+{yun:}if !empty($rows){/yun}
+	<div class="wap_member_job_show">
+	{yun:}foreach item=v from=$rows{/yun}
+	<div class="wap_member_msg ">
+	<div class="wap_member_date">
+	<span class="yun_m_job_date_n">&nbsp;<a href="{yun:}url m=wap c=job a=view id=$v.jobid{/yun}" class="job_list_jobname com_member_hr_cblue">{yun:}$v.name{/yun}</a></span>
+	<div class="wap_member_date_r">
+	
+	</div>
+	</div>
+
+
+	<div class="yun_m_job_list_zt">
+    推广量：{yun:}$v.sharenum{/yun}  <span class="wap_member_msg_job_s">更新时间：{yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun} </span>
+	<ul class="yun_reward_list_box">
+	<li><div class="yun_reward_list_box_p">赏金单价：</div><span class="yun_reward_list_box_n">￥{yun:}$v.packmoney{/yun} </span></li>
+	
+	<li><div class="yun_reward_list_box_p">赏金总额：</div><span class="yun_reward_list_box_n">￥{yun:}$v.packprice{/yun} </span></li>
+
+	<li><div class="yun_reward_list_box_p">剩余赏金：</div><span class="yun_reward_list_box_n">￥{yun:}$v.nowprice{/yun} </span></li>
+</ul>
+	</div>
+
+	</div>
+
+	{yun:}/foreach{/yun}
+
+	<div class="pages" style="margin-top:10px;"> {yun:}$pagenav{/yun}</div>
+	</div>
+{yun:}else{/yun}
+  <div class="wap_member_no">您还没有发布分享职位。</div>
+  <em class="wap_memberjob_fabu "></em>
+{yun:}/if{/yun}
+<!--没有职位提示-->
+</section>
+</div>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

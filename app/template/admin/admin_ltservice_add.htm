@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="./images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="./images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="./images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+
+<title></title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+ <div class="tabs_info">
+    <ul>
+      <li><a href="index.php?m=admin_lt_rating">等级设置</a></li>
+      <li class="curr"><a href="index.php?m=admin_lt_rating&c=server" class="report_uaer_list_on">增值服务</a> </li>
+    </ul>
+  </div>
+  <div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+    <div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+    <div class="admin_new_tip_list_cont">
+      <div class="admin_new_tip_list">猎头会员增值包等级关乎您的收入问题，请谨慎添加和修改并注意整体的合理性。</div>
+    </div>
+  </div>
+  <div class="admin_comclass_add_box" >
+
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form class="layui-form" name="myform" target="supportiframe" action="index.php?m=admin_lt_rating&c=saves" method="post" id="myform" onSubmit="return checkform();">
+        <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+
+
+		<div class="admin_comclass_add_list">
+    <div class="admin_comclass_add_name">增值类型</div>
+    <div class="admin_comclass_add_right">
+            <div class="layui-form-item">
+				 <div class="layui-input-block">
+					<div class="layui-input-inline">
+						<select name="type" id="type" lay-verify="" >
+						<option>请选择</option>
+						 {yun:}foreach from=$zzlist item=v{/yun}
+							<option  value="{yun:}$v.id{/yun}"
+							 {yun:}if $row.name==$v.name{/yun}
+							  selected
+								  {yun:}/if{/yun}
+								  > {yun:}$v.name{/yun}
+								</option>
+							  {yun:}/foreach{/yun}
+							</select>
+						  </div>
+						</div>
+				  </div>
+        </div>
+        </div>
+		
+          <div class="admin_comclass_add_list">
+            <div class="admin_comclass_add_name">套餐设置</div>
+            <div class="admin_comclass_add_right">
+              <ul  class="admin_comclass_add_n">
+                <li> 
+                <span class="admin_comclass_add_n_s">服务价格</span>
+                  <input class="admin_comclass_add_n_text" type="text" name="service_price" id="service_price" value="{yun:}$listinfo.service_price{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
+                 <span class="admin_comclass_add_n_dw">元</span></li>
+              
+                <li>  <span class="admin_comclass_add_n_s">下载简历</span>                  
+					<input class="admin_comclass_add_n_text" type="text" name="resume" id="resume" value="{yun:}$listinfo.resume{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
+                 <span class="admin_comclass_add_n_dw">份</span></li>
+                <li> <span class="admin_comclass_add_n_s">发布职位</span>
+                  <input class="admin_comclass_add_n_text" type="text" name="lt_job_num" id="lt_job_num" value="{yun:}$listinfo.lt_job_num{/yun}"onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
+                  <span class="admin_comclass_add_n_dw">份</span></li>
+                <li> <span class="admin_comclass_add_n_s">刷新职位</span>
+                  <input class="admin_comclass_add_n_text" type="text" name="lt_breakjob_num" id="lt_breakjob_num" value="{yun:}$listinfo.lt_breakjob_num{/yun}"onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')">
+                 <span class="admin_comclass_add_n_dw">份</span></li>
+                <input name="id" type="hidden" value="{yun:}$row.id{/yun}">
+				<input name="tid" type="hidden" value="{yun:}$listinfo.id{/yun}">
+              </ul>
+            </div>
+          </div>
+          <div class="admin_comclass_add_list">
+			{yun:}if !$listinfo{/yun}
+					<input class="layui-btn layui-btn-normal" name="useradd" type="submit" value="保存" id="submit"> 
+					{yun:}else{/yun}
+					<input class="layui-btn layui-btn-normal" name="userupdate" type="submit" value="更新" id="dosubmit">
+					{yun:}/if{/yun} 
+           </div>
+        
+      </form>
+
+</div>
+<script type="text/javascript">
+  layui.use(['layer', 'form'], function(){
+    var layer = layui.layer
+    ,form = layui.form
+    ,$ = layui.$;
+  });
+
+
+function checkform(){
+	if($("#service_price").val()==''){
+		parent.layer.msg("服务价格不能为空",2,8);return false;
+	}
+}
+
+$(".tips_class").hover(function(){ 
+	var msg_id=$(this).attr('id'); 
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.tips(msg, this, {
+		guide: 1, 
+		style: ['background-color:#5EA7DC; color:#fff;top:-7px', '#5EA7DC']
+		}); 
+		$(".xubox_layer").addClass("xubox_tips_border");
+	} 
+},function(){
+	var msg_id=$(this).attr('id');
+	var msg=$('#'+msg_id+' + font').html();
+	if($.trim(msg)!=''){
+		layer.closeAll('tips');
+	} 
+});
+</script>
+</body>
+</html>

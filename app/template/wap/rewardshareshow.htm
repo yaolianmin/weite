@@ -1,0 +1,43 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+<style>
+.desc  img{max-width:100%}
+</style>
+<!--浏览页面-->
+<div class="reward_box" style="">
+<div class="reward_box_bg">
+<div class="reward_box_tip">
+<i class="reward_box_tip_icon"></i>
+<div class="reward_box_tip_h1">转发被浏览可拿赏金</div>
+<div class="">被浏览<span class="reward_box_tip_h1_m">￥{yun:}$row.packmoney{/yun}</span>元/次</div>
+</div>
+</div>
+<div class="reward_box_pd">
+<div class="reward_box_pd_b">
+<div class="reward_box_pd_line"></div>
+<div class="reward_box_pd_line_bg"></div>
+<div class="reward_box_comname"><span class="reward_box_p_jobname">招聘：{yun:}$row.name{/yun}</span></div>
+<div class="reward_box_p">{yun:}$row.com_name{/yun}</div>
+<div class="reward_box_p">{yun:}$row.salary{/yun}、经验{yun:}$row.exp_n{/yun}、学历{yun:}$row.edu_n{/yun}</div>
+<div class="reward_box_p_b">
+<div class="reward_box_pd_c"></div>
+<div class="reward_box_pd_rc"></div>
+<div class="reward_box_p">工作地点：{yun:}$row.address{/yun}</div>
+<div class="reward_box_p">任职要求：</div>
+<div class="reward_box_p desc">{yun:}$row.description{/yun}</div>
+</div>
+</div>
+<div class="reward_box_bth">
+{yun:}if $smarty.cookies.uid{/yun}
+<a href="{yun:}url m=wap c=job a=applyjobuid jobid=$row.id share=1{/yun}" class="reward_box_bth_a">投个简历</a>
+{yun:}else{/yun}
+<a href="{yun:}url m=wap c=job a=view id=$row.id{/yun}" class="reward_box_bth_a">投个简历</a>
+
+{yun:}/if{/yun}
+<a href="{yun:}url m=wap c=reward a=share{/yun}">我要赏金</a></div>
+</div>
+</div>
+
+<!--浏览页面 end-->
+
+
+{yun:}include file="$wapstyle/footer.htm"{/yun}

@@ -1,0 +1,49 @@
+{yun:}include file="$wapstyle/header_lt.htm"{/yun}
+<div class="itwap_top">
+     <ul>
+         <li class="lietou popup" style="width:49%;" data-pop="grade"><a href="javascript:void(0);" class="searchOptions_list">{yun:}if $city_name[$smarty.get.cityid] || $city_name[$smarty.get.provinceid]{/yun}{yun:}$city_name[$smarty.get.cityid]{/yun}{yun:}$city_name[$smarty.get.provinceid]{/yun}{yun:}elseif $city_name[$smarty.get.three_cityid]{/yun}{yun:}$city_name[$smarty.get.three_cityid]{/yun}{yun:}elseif $config.cityid&& $config.sy_web_site=='1'{/yun}{yun:}$city_name[$config.cityid]{/yun}{yun:}else{/yun}区域{yun:}/if{/yun} <i style="right:10px;" class="itwap_top_icon"></i></a></li>
+         <li class="lthy popup" style="width:49%;" data-pop="lthy"><a href="javascript:void(0);" class="searchOptions_list">{yun:}if $lthy_name[$smarty.get.hyid]{/yun}{yun:}$lthy_name[$smarty.get.hyid]{/yun}{yun:}else{/yun}行业{yun:}/if{/yun}<i style="right:10px;" class="itwap_top_icon"></i></a></li>
+     </ul><input type="hidden" id="searchurl" value="{yun:}$searchurl{/yun}" />
+</div>
+{yun:}lietoulist limit=20 keyword='auto.keyword' hyid='auto.hyid' provinceid='auto.provinceid' cityid='auto.cityid' three_cityid='auto.three_cityid' order='auto.order' ispage=1 islt=4 item=list{/yun}
+<div class="lt_service">
+     <div class="lt_service_img"><a href="{yun:}url m=wap c=ltjob a=hunter uid=$list.uid{/yun}"><img style="width:60px;height:60px;" src="{yun:}$list.photo_big{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_lt_icon{/yun}',2);"/></a></div>
+     <div class="lt_service_ct">
+          <div class="lt_service_ct_tit"><a href="{yun:}url m=wap c=ltjob a=hunter uid=$list.uid{/yun}">{yun:}$list.realname{/yun}</a></div>
+          <div class="lt_service_st"><i class="lt_service_st_color">擅长行业：</i>{yun:}$list.hy{/yun}</div>
+          {yun:}if $list.ltjoblist{/yun}
+          <div class="lt_service_st"><i class="lt_service_st_color">最新职位：</i>
+		  {yun:}foreach from=$list.ltjoblist item=ltjob{/yun}
+		  <a href='{yun:}url m=wap c=ltjob a=recshow id=$ltjob.id{/yun}'>{yun:}$ltjob.job_name{/yun}</a>
+		   {yun:}/foreach{/yun}
+		   </div>
+           {yun:}/if{/yun}
+          <div class="lt_service_wt">
+		  {yun:}if $usertype&&$usertype==1{/yun}
+		  <a href="javascript:void(0);" onclick="entrust('{yun:}$list.uid{/yun}','{yun:}$list.realname{/yun}');">委托简历</a>
+		  {yun:}elseif $usertype&&$usertype!=1{/yun} 
+		  <a href="javascript:layermsg('只有求职者才能委托');">委托简历</a>
+		  {yun:}else{/yun} 
+		  <a href="javascript:$('#reg_mune').toggle();">委托简历</a>
+		  {yun:}/if{/yun}
+		  </div>
+     </div>
+</div>
+{yun:}lietoulistelse{/yun}
+{yun:}if $smarty.get.keyword!="" {/yun}
+<div class="wap_member_no">没有搜索到委托求职<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='ltjob' a='service'{/yun}">重新搜索</a></div></div>
+{yun:}else{/yun}
+<div class="wap_member_no">暂无委托求职<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c='ltjob' a='service'{/yun}">重新搜索</a></div></div>
+{yun:}/if{/yun}
+{yun:}/lietoulist{/yun}
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+<script>var pricename = "{yun:}$config.integral_pricename{/yun}";</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/lt.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/search.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/app/template/wap/js/demo.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script> 
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/demo.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+{yun:}include file="$wapstyle/publictwo.htm"{/yun}
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

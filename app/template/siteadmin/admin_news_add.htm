@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<script>var weburl = '{yun:}$config.sy_weburl{/yun}';</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+
+<title>后台管理</title>
+<script src="{yun:}$config.sy_weburl{/yun}/js/ueditor/ueditor.config.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/ueditor/ueditor.all.min.js?v={yun:}$config.cachecode{/yun}"></script>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"> 
+<div style="height:10px;"></div>
+
+  <div class="infoboxp_top">
+     <span class="admin_title_span">添加新闻</span>
+  </div>
+  <div class="clear"></div>
+  <div class="admin_table_border">
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form name="myform" target="supportiframe" action="index.php?m=admin_news&c=addnews" method="post" encType="multipart/form-data" onSubmit="return checkform(this);" class="layui-form">
+      <table width="100%" class="table_form"  style="background:#fff;">
+        <tr >
+          <th width="120">新闻类别：</th>
+          <td>
+            
+            <div class="layui-input-inline">
+		      <select name="nid">
+			    {yun:}if $news.nid{/yun}
+		 		  {yun:}foreach item=v from=$one_class{/yun}
+	                    {yun:}if $v.id eq $news.nid{/yun}
+	                    <option value="{yun:}$v.id{/yun}" selected>{yun:}$v.name{/yun}</option>
+	                    {yun:}else{/yun}
+	                    <option value="{yun:}$v.id{/yun}" >{yun:}$v.name{/yun}</option>
+	                    {yun:}/if{/yun}
+	                    {yun:}foreach item=val from=$two_class[$v.id]{/yun}
+	                        {yun:}if $val.id eq $news.nid{/yun}
+	                        <option value="{yun:}$val.id{/yun}" selected>{yun:}$val.name{/yun}</option>
+	                        {yun:}else{/yun}
+	                    	<option value="{yun:}$val.id{/yun}" > 　┗{yun:}$val.name{/yun}</option>
+	                        {yun:}/if{/yun}
+	                    {yun:}/foreach{/yun}
+	                {yun:}/foreach{/yun}
+	            {yun:}else{/yun}
+	                <option value="">请选择</option>
+	            {yun:}/if{/yun}
+		        
+		        {yun:}if !$news.nid{/yun}
+			        {yun:}foreach item=v from=$one_class{/yun}
+	                <option value="{yun:}$v.id{/yun}">{yun:}$v.name{/yun}</option>
+	                	  {yun:}foreach item=val from=$two_class[$v.id]{/yun}
+	                           <option value="{yun:}$val.id{/yun}"> 　┗{yun:}$val.name{/yun}</option>
+	                      {yun:}/foreach{/yun}                    
+	                {yun:}/foreach{/yun}
+                {yun:}/if{/yun}
+                
+		      </select>
+		    </div>
+            
+          </td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>新闻标题：</th>
+          <td>
+          	
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <input type="text" name="title" id="title" size="40" lay-verify="required" placeholder="请输入新闻标题" value="{yun:}$news.title{/yun}"  style="display:inline;width:330px;height:35px;" autocomplete="off" class="layui-input input-text">
+              <input type="hidden" name='color' id="color" value="{yun:}$news.color{/yun}" /> 
+          	<font color="{yun:}$news.color{/yun}">字体颜色</font><input type="button" id="colorpicker" value="打开取色器" class="layui-btn layui-btn-normal" style="background:#F60; margin-left:5px;"/>
+            </div>
+          </div>
+          
+            
+          </td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>作　　者：</th>
+          <td>
+          
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <input type="text" name="author" id="author"  lay-verify="required" placeholder="请输入作者" value="{yun:}$news.author{/yun}" size="20"  style="display:inline;width:220px;height:35px;"  autocomplete="off" class="layui-input input-text">
+            </div>
+          </div>
+          
+          </td>
+        </tr>
+        <tr >
+          <th>来　　源：</th>
+          <td>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <input type="text" name="source" id="source"  lay-verify="required" placeholder="请输入来源" value="{yun:}$news.source{/yun}" size="50"   style="display:inline;width:220px;height:35px;"  autocomplete="off" class="layui-input input-text">
+            </div>
+          </div>
+          </td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>关 键 词：</th>
+          <td>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <input type="text" name="keyword" id="keyword"  lay-verify="required" placeholder="请输入关键词" value="{yun:}$news.keyword{/yun}" size="50"   style="display:inline;width:220px;height:35px;"  autocomplete="off" class="layui-input input-text" style="display:inline;">
+              <span class="admin_web_tip">多个关键字，请用,隔开</span>
+            </div>
+          </div>
+            </td>
+        </tr>
+        <tr >
+          <th>描　　述：</th>
+          <td>
+          
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <textarea name="description" cols="55" rows="3" class="admin_comdit_textarea"  style="display:inline;width:452px;height:72px;padding-left:10px;"  placeholder="请输入描述" >{yun:}$news.description{/yun}</textarea>
+            </div>
+          </div>
+
+          </td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>新闻内容： </th>
+          <td>
+		  <!-- <textarea  id="content" name="content" cols="100" rows="8" style="width:800px;height:300px;">{yun:}$news.content{/yun}</textarea> -->
+		  <script id="myEditor" name="content" type="text/plain" style="width:800px;height:300px;">{yun:}$news.content{/yun}
+		  </script>
+		  </td>
+        </tr>
+        <tr >
+			<th>缩 略 图：</th>
+			<td>
+				<input type="file" class="input-text" name="uploadpic" />
+				{yun:}if $news.s_thumb{/yun}
+					<a href="javascript:void(0)" onClick="news_preview('../{yun:}$news.newsphoto{/yun}')"class="admin_chlose_img_look" style="color: #09F;">查看图片</a>
+				{yun:}/if{/yun}
+  			</td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>类　　型：</th>
+            <td> 
+		      <div class="layui-form-item">
+		        <div class="layui-input-block">
+		          {yun:}foreach item=property_row from=$property{/yun}
+		          <input name="describe[]" title="{yun:}$property_row.name{/yun}" value="{yun:}$property_row.name{/yun}" {yun:}if in_array($property_row.name,$describe){/yun} checked="checked" {yun:}/if{/yun} type="checkbox">
+		        {yun:}/foreach{/yun}
+		        
+		        </div>
+		      </div>
+		    </td>
+        </tr>
+        <tr >
+          <th>排　　序：</th>
+          <td>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <input type="text" name="sort" id="sort"  lay-verify="required" placeholder="请输入排序" value="{yun:}$info.sort{/yun}" size="10"  autocomplete="off" class="layui-input input-text">
+            </div>
+          </div>
+          
+          </td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <td align="center" colspan="2"> 
+            {yun:}if $info.id{/yun}
+            <input type="hidden" name="id" size="40" value="{yun:}$info.id{/yun}"/>
+            <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+            <input class="layui-btn layui-btn-normal" type="submit" name="updatenews" value="&nbsp;更 新&nbsp;"  />
+            {yun:}else{/yun}
+            <input class="layui-btn layui-btn-normal" type="submit" name="newsadd" value="&nbsp;添 加&nbsp;"  />
+            {yun:}/if{/yun}
+            <input class="layui-btn layui-btn-normal" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+        </tr>
+      </table>
+	  <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+    </form>
+  </div>
+</div>
+<div id="news_preview"  style="display:none;width:560px ">
+	<div style="height:300px; overflow:auto;width:560px;" >
+		<div class="job_box_div" style="text-align:center;margin-top:10px;"></div>
+	</div>
+</div>
+<style>
+.layui-form-item {
+    margin-bottom: 0px;
+    clear: both;
+}
+</style>
+{yun:}include file="$adminstyle/checkdomain.htm"{/yun}
+<script type="text/javascript">
+	var ue = UE.getEditor('myEditor');
+
+  layui.use(['layer', 'form','element'], function(){
+    var layer = layui.layer
+    ,form = layui.form
+	,element = layui.element
+    ,$ = layui.$;
+
+  });
+
+function news_preview(url){
+	$(".job_box_div").html("<img src='"+url+"' style='max-width:500px' />");//
+ 	$.layer({
+		type : 1,
+		title : '查看图片',
+		closeBtn : [0 , true],
+		offset : ['20%' , '30%'],
+		border : [10 , 0.3 , '#000', true],
+		area : ['560px','auto'],
+		page : {dom : '#news_preview'}
+	}); 
+}
+function checkform(myform){
+	if (myform.nid.value=="") {
+		parent.layer.msg('请选择新闻类别！', 2,8,function(){myform.title.focus();});return false;
+	}
+	if (myform.title.value=="") {
+		parent.layer.msg('请填写新闻标题！', 2,8,function(){myform.title.focus();});return false;
+	}
+	var content = UE.getEditor('myEditor').getContent();
+	if (content=="") {
+		parent.layer.msg('请填写新闻内容！', 2,8,function(){myform.content.focus();});return false;
+	}
+}
+</script>
+</body>
+</html>

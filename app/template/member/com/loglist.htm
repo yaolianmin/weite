@@ -1,0 +1,44 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+         <div class="com_tit"><span class="com_tit_span">赏金管理</span> 
+        </div>
+  
+        <div class="com_body">
+          <div class="clear"></div>
+          <div class="packloglost_box"> 
+		  我的钱包：<span class="packloglost_box_money">￥{yun:}$statis.packpay{/yun}</span> 
+		  冻结金额：<span class="packloglost_box_money">￥{yun:}$statis.freeze{/yun}</span> 
+		  <a href="index.php?c=jobpack&act=withdraw" class="packloglost_box_money_bth">提现</a> </div>
+			{yun:}if $rows{/yun}
+		  <div class="packloglost_box_l_b">
+            <div class="packloglost_box_tit">赏金收益列表</div>
+            
+            
+            <ul class="packloglost_box_list">
+			{yun:}foreach from=$rows item=v{/yun}
+              <li>
+                <div class="packloglost_box_yt">微信转发职位：{yun:}$v.jobname{/yun} </div>
+                <div class="packloglost_box_time">时间：{yun:}$v.time|date_format:"%Y-%m-%d %H:%M:%S"{/yun} </div>
+                <span class="packloglost_box_list_n"><font color="#f00">+{yun:}$v.packmoney{/yun}</font> 元</span> </li>
+             {yun:}/foreach{/yun}
+            </ul>
+          </div>
+          
+          
+          <div class="clear"></div>
+          <div class="diggg">{yun:}$pagenav{/yun}</div>
+          <div class="clear"></div>
+          
+          {yun:}else{/yun}
+          <div class="msg_no">您还没有赏金收益。</div>
+          {yun:}/if{/yun}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun} 

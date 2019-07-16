@@ -1,0 +1,73 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun} 
+    <script>
+function checknum(){
+	var time=$("#buy_time").val();
+	var integral=$("#integral").val();
+	$("#integral_buy").val(time*integral);
+	$("#span_integral_buy").html(time*integral+'{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}');
+}
+</script>
+    <div class=right_box>
+      <div class=admincont_box>
+        <div class="com_tit"><span class="com_tit_span"> 购买广告位</span><span class=remind></span></div>
+        <div class="com_body">
+          <div class="admin_new_tip ">
+            <div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+            <div class="admin_new_tip_list_cont">
+              <div class="admin_new_tip_list"> 您还有{yun:}if !$statis.integral{/yun}0{yun:}else{/yun}{yun:}$statis.integral_format{/yun}{yun:}/if{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} </div>
+            </div>
+          </div>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <div class="admin_note2">
+            <form name='alipayment' action="index.php?c=buysave" method='post' enctype="multipart/form-data" target="supportiframe" id='myform'>
+              <div class="com_release_box">
+                <input type="hidden" name="type" value="ad" />
+                <input type="hidden" name="aid" value="{yun:}$smarty.get.id{/yun}" />
+                <input type="hidden" name="unit_buy" value="{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}" />
+                <input type="hidden" id="integral" name="integral" value="{yun:}$row.integral_buy{/yun}">
+                <ul>
+                  <li>
+                    <div class="com_release_name"><i class="ff0">*</i> 广告类别 </div>
+                    <div class="com_release_buyad_name">{yun:}$row.class_name{/yun}</div>
+                    <input type="hidden" name="adname" value="{yun:}$row.class_name{/yun}" class="com_info_text">
+                  </li>
+                  <li>
+                    <div class="com_release_name"><i class="ff0">*</i> 广告名称 </div>
+                    <input type="text" name="ad_name" value="{yun:}$ad.ad_name{/yun}" id='ad_name'  class="com_info_text">
+                  </li>
+                  <li>
+                    <div class="com_release_name"><i class="ff0">*</i> 广告效果图 </div>
+					<button type="button" class="layui-btn layui-btn-normal" id="noupload">选择文件</button>
+					<input type="hidden" id="laynoupload" value="1"/>
+                  </li>
+                  <li>
+                    <div class="com_release_name"><i class="ff0">*</i> 广告链接 </div>
+                    <input type="text" name="pic_src" value="{yun:}$row.href{/yun}" id='pic_src'  class="com_info_text">
+                  </li>
+                  <li>
+                    <div class="com_release_name"><i class="ff0">*</i> 购买时间 </div>
+                    <input id="buy_time" type="text" name="buy_time" value="1"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:40px;" onblur="checknum();"  class="com_info_text">
+                    <em style=" line-height:30px;"> 月</em></li>
+                  <li>
+                    <div class="com_release_name"><i class="ff0">*</i> 购买费用 </div>
+                   <div class="com_release_buyad_name">   <span id="span_integral_buy" >{yun:}$row.integral_buy{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}</span>
+                   </div>
+                    <input type="hidden" name="integral_buy" id='integral_buy' value="{yun:}$row.integral_buy{/yun}" >
+                  </li>
+                  <li>
+                    <input type="hidden" name="banksub" value="提交"/>
+                    <input type="button"  onclick="buyad();"value="确认订单" class="btn_01">
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui.upload.js?v={yun:}$config.cachecode{/yun}" type='text/javascript'></script>
+{yun:}include file="$comstyle/footer.htm"{/yun}

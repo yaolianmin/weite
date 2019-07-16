@@ -1,0 +1,133 @@
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+    <div class="clear"></div>
+    <div class="content">
+        <!--猎头内容页-->
+        <div class="headerhunter_cont">
+     
+                <div class="headerhunter_cont_box">
+        <div class="headerhunter_cont_photo"><img src="{yun:}$info.photo_big{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_lt_icon{/yun}',2);" width="100" height="100"/></div>
+        <div class="headerhunter_cont_c">
+              <div class="headerhunter_cont_name">{yun:}$info.realname{/yun}</div>
+              <div class="headerhunter_cont_p">TD：{yun:}$info.rzid{/yun}<span class="headerhunter_cont_gun">{yun:}$info.ant_num{/yun}人已关注</span>
+             <span class="headerhunter_cont_gun">上次登录：{yun:}$user.login_date|date_format:"%Y-%m-%d"{/yun}</span>
+                </div>
+              <div class="headerhunter_cont_bth_box">
+               {yun:}if $usertype==1{/yun}
+                    <a href="javascript:void(0);" onclick="ltatn('{yun:}$info.uid{/yun}');" id="guanzhu{yun:}$info.uid{/yun}" class="headerhunter_cont_gz">{yun:}if is_array($atn){/yun}取消关注{yun:}else{/yun}+关注{yun:}/if{/yun}</a>
+                    {yun:}else{/yun}
+                        {yun:}if $uid{/yun}
+                            <a href="javascript:void(0)" onclick="layer.msg('只有个人用户才能关注', 2, 8)" class="headerhunter_cont_gz">+ 关注</a>
+                        {yun:}else{/yun}
+                            <a href="javascript:void(0)" onclick="showlogin('1');" class="headerhunter_cont_gz">+ 关注</a>
+                        {yun:}/if{/yun}
+                    {yun:}/if{/yun}
+             {yun:}if $usertype==1{/yun}
+                        <a href="javascript:entrust('{yun:}$info.uid{/yun}','{yun:}$info.realname{/yun}');" class="headerhunter_cont_wt">委托简历</a>
+                        {yun:}else{/yun}
+                            {yun:}if $uid{/yun}
+                                <a href="javascript:void(0)" onclick="layer.msg('只有个人用户才能委托简历', 2, 8)" class="headerhunter_cont_wt">委托简历</a>
+                            {yun:}else{/yun}
+                                <a href="javascript:void(0)" onclick="showlogin('1');" class="headerhunter_cont_wt">委托简历</a>
+                            {yun:}/if{/yun}
+                        {yun:}/if{/yun}
+                        </div>
+             
+               </div>
+              <div class="headerhunter_cont_r">  
+                    <ul class="headerhunter_cont_list fl">
+                     <li><span>从业年限：</span>{yun:}$info.exp_info{/yun}</li>
+                        <li><span>擅长行业：</span>{yun:}$info.hy_info{/yun}</li>
+                        <li><span>擅长职位：</span>{yun:}$info.job_info{/yun}</li>
+                    </ul>
+              
+               </div>
+               </div>
+        </div>
+        
+        
+        <div class="job_main fl">
+    
+            <div class="job_point  fl">
+            <div class="job_resp_title f16 fb fl">
+                    <span class="job_lt_line"></span>
+                        顾问介绍
+                    </div>
+                {yun:}if $info.content{/yun}
+                <div class="job_details fl">{yun:}$info.content{/yun}</div>
+                {yun:}else{/yun}
+                <div class="hunter_nodetails fl">该顾问暂时没有顾问介绍</div>
+                {yun:}/if{/yun}
+            </div>
+            <div class="hunter_point  fl">
+                 <div class="job_resp_title f16 fb fl">
+                    <span class="job_lt_line"></span>
+                        正在运作的职位
+                    </div>
+              
+                {yun:}if $t_count>0{/yun}
+                <ul class="hunter_con fl">
+                <li>
+                  <div class="hunter_con_job fl">职位</div>
+                         <div class="hunter_con_city fl">公司/地点</div>
+                          <div class="hunter_con_money fl">
+                          <div class="hunter_con_le fl">薪资</div></div>
+                        </li>
+                    {yun:}ltjoblist uid='auto.uid' item=list{/yun}
+                     
+                    <li>
+                        <div class="hunter_con_job fl"><a href="{yun:}$list.job_url{/yun}">{yun:}$list.job_name|mb_substr:0:22:'utf-8'{/yun}</a></div>
+                        <div class="hunter_con_city fl">{yun:}$list.com_name|mb_substr:0:22:'utf-8'{/yun}<font color="#999"> 丨 </font>{yun:}$list.cityid_info{/yun}</div>
+                        <div class="hunter_con_money fl">
+                            <div class="hunter_con_le fl">年薪：</div>
+                            {yun:}if $list.maxsalary{/yun}￥{yun:}$list.minsalary{/yun}-{yun:}$list.maxsalary{/yun}万{yun:}else{/yun}￥{yun:}$list.minsalary{/yun}万以上{yun:}/if{/yun}
+                        </div>
+                    </li>
+                    {yun:}/ltjoblist{/yun}
+                </ul>
+                {yun:}else{/yun}
+                <div class="hunter_nocon fl">该顾问暂时没有运作的职位</div>
+                {yun:}/if{/yun}
+            </div>
+        </div>
+        <div class="job_sidebar fr" style="padding-bottom:10px;">
+            <div class="job_sidebar_lt_hz">
+             <div class="job_resp_title f16 fb fl" style="width:100px;">
+                    <span class="job_lt_line"></span>
+                        合作过的客户
+                    </div>
+        
+            {yun:}if $info.client|@count and $info.client{/yun}
+            <ul class="hunter_coorlist fl">
+                {yun:}foreach item=v from=$info.client{/yun}
+                <li>{yun:}$v{/yun}</li>
+                {yun:}/foreach{/yun}
+            </ul>
+            {yun:}else{/yun}
+            <div class="hunter_nocoor fl">暂时没有合作客户</div>
+            {yun:}/if{/yun}
+        </div>
+        </div>
+    </div>
+    <!--私信弹出框-->
+    <div id="reply" class="none" style=" width:330px; margin: 0 auto; padding: 0;">
+        <table class="table_form " id="infobox">
+            <tr>
+                <td><textarea name="reply" id="content" rows="4" cols="35" class="infor_text"></textarea></td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+				<input type="button" name="submit" value="发送 " class="Reply_cont_submit" onclick="send_msg();" />
+				<input class="" type="hidden" id="fid" name="id" value="" />
+				</td>
+            </tr>
+            
+        </table>
+    </div>
+    <!--私信弹出框-->
+    <div class="clear"></div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /><script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script><script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/public_lt.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun}  
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

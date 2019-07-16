@@ -1,0 +1,90 @@
+{yun:}include file="$lietoustyle/header.htm"{/yun}  
+
+<div class="clear"></div>
+<div class="lt_login_bg"></div>
+<div class="clear"></div>
+<div class="lt_login_bg_box">
+
+<div class="lt_login_bg_box_c"><div class="login_title fl">欢迎登录</div>
+   <ul class="login_left fl">
+        
+        <li>
+         <span class="login_left_s">用户名：</span> <input class="login_input fl" type="text" value="用户名" onclick="if(this.value=='用户名'){this.value=''}" onblur="if(this.value==''){this.value='用户名'}" name="username" id="username">
+        </li>
+        <li><span class="login_left_s">密&nbsp;&nbsp; 码：</span>
+          <input class="login_input fl" type="text" value="密码" id="pw" >
+          <input class="login_input fl none" type="password" value="" name="password" id="password">
+        </li>
+		{yun:}if stripos($config.code_web,"前台登录")!==false{/yun}
+		<li>
+		 {yun:}if $config.code_kind==3{/yun}	
+				<!---geetest----->
+                  <span class="login_left_s">验证码：</span>
+                <div class="ltlogin_verification">
+				<div id="popup-captcha" data-id='sublogin' data-type='click'></div>
+				<input type='hidden' id="popup-submit">
+                </div>
+			{yun:}else{/yun}
+			 <span class="login_left_s">验证码：</span>
+			<input type="text" class="login_input logoin_text_yz fl" value="验证码" id="txt_CheckCode" maxlength="4" name="authcode" style="width:105px;" onclick="if(this.value=='验证码'){this.value=''}" onblur="if(this.value==''){this.value='验证码'}">
+			<img id="vcode_img" onclick="checkCode('vcode_img');" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php" style="margin-top:20px; float:left; margin-left:5px;">
+			<a href="javascript:void(0);" onclick="checkCode('vcode_img');" class="registe_a" style="margin-top:25px; margin-left:5px; float:left; line-height:30px; display:inline-block">看不清？</a>
+			<input id='code_kind' type='hidden' value='1'/>
+			
+           	{yun:}/if{/yun}		
+		</li>
+		{yun:}/if{/yun}
+       
+        <li>
+		<input type="hidden" name="cookie" value="{yun:}$cookie{/yun}" id="cookie" />
+        <input class="login_bth" value="立即登录" type="button" id='sublogin' onclick="lchecklogin('{yun:}url m=lietou c=loginsave{/yun}','vcode_img');" name="">
+        </li> 
+        <li class="login_account">
+          <div class="login_forget fr"><a href="{yun:}url m=forgetpw{/yun}">忘记密码？</a></div>
+        </li>
+		
+      </ul>
+ <div class="login_right fr">
+        <div class="login_other fl">还没有帐号？</div>
+        <div class="login_now fl"><a href="{yun:}url m=lietou c=register{/yun}">立即注册</a></div>
+        <div class="registor_now fl">
+          <div class="registor_span fl">使用以下帐号直接登录:</div>
+          {yun:}if $config.sy_sinalogin==1{/yun}
+          <a class="icon_wb png" title="使用新浪微博帐号登录" href="{yun:}url m=sinaconnect{/yun}"></a>
+          {yun:}/if{/yun}
+          {yun:}if $config.sy_qqlogin==1{/yun}
+          <a class="icon_qq png" title="使用腾讯QQ帐号登录" href="{yun:}$config.sy_weburl{/yun}/qqlogin.php" ></a>
+          {yun:}/if{/yun}
+          {yun:}if $config.wx_author==1{/yun}
+          <a class="icon_weixin png" title="使用微信帐号登录" href="{yun:}url m=wxconnect{/yun}"></a>
+          {yun:}/if{/yun} </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="hunter_reg_bg">
+<link href="{yun:}$lietou_style{/yun}/css/login.css?v={yun:}$config.cachecode{/yun}" type="text/css" rel="stylesheet" />
+<div class="login_mian">
+  <div class="wapper">
+    <div class="login_con"> 
+   
+     
+</div>
+</div>
+<div class="clear"></div>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js?v={yun:}$config.cachecode{/yun}"></script>
+<script>
+  DD_belatedPNG.fix('.png,.New_post,.box_bot,.new_post_box_h1 span,.icon,.ser_cz a,.Strat-list ,.logoin_su2,.logoin_after_su2,.logoin_after em,.logoin_after_tx dt,.service_filter_fot,.Strat-list .s,.nav_exit span,.company_focus');
+</script>
+<![endif]-->
+<script>var webname = "{yun:}$config.sy_webname{/yun}";</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /><script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script><script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/public_lt.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/gt.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/geetest/pc.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+{yun:}include file="$lietoustyle/footer.htm"{/yun}  

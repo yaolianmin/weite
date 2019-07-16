@@ -1,0 +1,245 @@
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<div class="content">
+<div class="rec_user_jobbox">
+<div class="rec_user_jobbox_sj">
+<div class="rec_user_jobbox_sjname">赏金</div>
+<div class="rec_user_jobbox_sjn">￥{yun:}$jobinfo.rebates{/yun}</div>
+</div>
+<div class="rec_user_jobinfo">
+<div class="rec_user_jobinfoname"> <a href="{yun:}url m=lietou c=jobshow id=$jobinfo.id{/yun}">{yun:}$jobinfo.job_name|mb_substr:0:30:'utf-8'{/yun}</a></div>
+<div class="rec_user_jobinfocomname">{yun:}$jobinfo.com_name{/yun}</div>
+<div class="rec_user_jobinfojobdate">更新日期：{yun:}$jobinfo.lastupdate|date_format:"%Y-%m-%d"{/yun}</div>
+</div>
+
+<div class="rec_user_jobbox_cont">
+<div class="rec_user_jobbox_cont_list">年薪：<span class="rec_user_jobbox_cont_list_xz">{yun:}if $jobinfo.minsalary>0&&$jobinfo.maxsalary>0{/yun}￥{yun:}$jobinfo.minsalary{/yun}-{yun:}$jobinfo.maxsalary{/yun}万{yun:}else if $jobinfo.minsalary>0{/yun}￥{yun:}$jobinfo.minsalary{/yun}万以上{yun:}else{/yun}面议{yun:}/if{/yun}</span></div>
+<div class="rec_user_jobbox_cont_list">学历要求：{yun:}$jobinfo.edu_info{/yun} </div>
+<div class="rec_user_jobbox_cont_list">工作地点：{yun:}$jobinfo.provinceid_info{/yun} {yun:}$jobinfo.cityid_info{/yun} {yun:}$jobinfo.three_cityid_info{/yun}</div>
+<div class="rec_user_jobbox_cont_list">截止日期：{yun:}$jobinfo.edate|date_format:"%Y-%m-%d"{/yun}</div>
+<div class="rec_user_jobbox_cont_p">
+职位描述：{yun:}$jobinfo.job_desc{/yun}
+</div></div>
+
+
+
+
+</div>
+<div class="rec_user_jobbox">
+<div class="rec_user_fr_tit">推荐人才入职得赏金</div>
+<div class="rec_user_fr_tit_p">为避免纠纷，请确认您所输入的人才信息的准确性</div>
+<div class="rec_user_jobbox_left">
+ <form action="" method="post" target="supportiframe" id="myform" onsubmit="return checkform_msg()">
+	  <input type="hidden" id="uid" value="{yun:}$uid{/yun}" />
+	  <input type="hidden" name="job_uid" id="job_uid" value="{yun:}$jobinfo.uid{/yun}" />
+	  <input type="hidden" name="job_id" id="job_id" value="{yun:}$jobinfo.id{/yun}" />
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>真实姓名： </div>
+          <input class="reward_person_input fl"  type="text" id="uname" name="uname">
+        </div>
+           <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>性别： </div>
+          <label> 
+          <div class="reward_person_name_in_box">
+          <input type="radio" name="sex" value="1" class="reward_person_name_in" checked="checked"/>
+          <span class="reward_person_name_in_s">男</span>
+          </div>
+          </label>
+            <label> 
+            <div class="reward_person_name_in_box">
+          <input type="radio" name="sex" value="2" class="reward_person_name_in"/>
+           <span class="reward_person_name_in_s">女</span>
+               </div>
+           </label>
+          </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>出生年月： </div>
+          <input class="reward_person_input fl"  type="text" id="birthday" name="birthday">
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>最高学历： </div>
+          <div class="reward_person_search_add  fl cur140">
+          <input type="button" value="请选择" class="reward_person_search_select" id="edu_name"/>
+          <input  type="hidden" id="edu" name="edu">
+          <ul class="reward_person_search_select_list none">
+          {yun:}foreach from=$userdata.user_edu item=v{/yun}
+          <li codename="{yun:}$userclass_name[$v]{/yun}" code="{yun:}$v{/yun}"> <a href="javascript:;"> {yun:}$userclass_name[$v]{/yun} </a> </li>
+          {yun:}/foreach{/yun}
+          </ul>
+          </div>
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>工作经验： </div>
+          <div class="reward_person_search_add fl cur110">
+          <input type="button" value="请选择" class="reward_person_search_select" id="exp_name"/>
+          <input  type="hidden" id="exp" name="exp">
+          <ul class="reward_person_search_select_list none">
+          {yun:}foreach from=$userdata.user_word item=v{/yun}
+          <li codename="{yun:}$userclass_name[$v]{/yun}" code="{yun:}$v{/yun}"> <a href="javascript:;"> {yun:}$userclass_name[$v]{/yun} </a> </li>
+          {yun:}/foreach{/yun}
+          </ul>
+          </div>
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>手机号码： </div>
+          <input class="reward_person_input fl"  type="text" name="telphone" id="telphone" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')">
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl">联系邮箱： </div>
+          <input class="reward_person_input fl"  type="text" name="email" id="email">
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>从事行业： </div>
+          <div class="reward_person_search_add fl cur160">
+          <input type="button" value="请选择" class="reward_person_search_select" id="hy_name"/>
+          <input  type="hidden" id="hy" name="hy">
+          <ul class="reward_person_search_select_list none">
+          {yun:}foreach from=$industry_index item=v{/yun}
+          <li codename="{yun:}$industry_name[$v]{/yun}" code="{yun:}$v{/yun}"> <a href="javascript:;"> {yun:}$industry_name[$v]{/yun} </a> </li>
+          {yun:}/foreach{/yun}
+          </ul>
+          </div>
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>期望职位： </div>
+          <div class="reward_person_search_add fl">
+          <input type="button" value="请选择" class="reward_person_search_select" id="job_name" onclick="index_job(5, '#job_name', '#job');"/>
+          <input  type="hidden" id="job" name="job_classid">
+          </div>
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>期望城市： </div>
+          <div class="reward_city_list_w fl cur150">
+          <input type="button" value="请选择" class="reward_city_select" id="province_name" onclick="reward_show('reward_province');"/>
+          <input  type="hidden" id="province" name="provinceid">
+          <ul class="reward_city_list none" id="reward_province">
+          {yun:}foreach from=$city_index item=v{/yun}
+          <li> <a href="javascript:;" onclick="reward_city('{yun:}$v{/yun}','province','{yun:}$city_name[$v]{/yun}','city');"> {yun:}$city_name[$v]{/yun} </a> </li>
+          {yun:}/foreach{/yun}
+          </ul>
+          </div>
+          <div class="reward_city_list_w fl cur150">
+          <input type="button" value="请选择" class="reward_city_select" id="city_name" onclick="reward_show('reward_city');"/>
+          <input  type="hidden" id="city" name="cityid">
+          <ul class="reward_city_list none" id="reward_city">
+          </ul>
+          </div>
+          <div class="reward_city_list_w fl cur150 none" id="cityshowth">
+          <input type="button" value="请选择" class="reward_city_select" id="three_city_name" onclick="reward_show('reward_three_city');"/>
+          <input  type="hidden" id="three_city" name="three_cityid">
+          <ul class="reward_city_list none" id="reward_three_city">
+          </ul>
+          </div>
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>期望薪资： </div>
+          <div class="">
+          <input type="text" id="minsalary" name="minsalary" size="5" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" class="reward_person_input fl" style="width:100px;"/>
+          <span class="fl" style="line-height:30px; padding:0px 5px;">-</span>
+          <input type="text" id="maxsalary" name="maxsalary" size="5" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"class="reward_person_input fl"style="width:100px;"><span style="line-height:30px;color:#999; float:left; margin-left:10px;">万/年</span>
+          </div>
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>工作性质： </div>
+          <div class="reward_person_search_add fl cur130">
+          <input type="button" value="请选择" class="reward_person_search_select" id="type_name"/>
+          <input  type="hidden" id="type" name="type">
+          <ul class="reward_person_search_select_list none">
+          {yun:}foreach from=$userdata.user_type item=v{/yun}
+          <li codename="{yun:}$userclass_name[$v]{/yun}" code="{yun:}$v{/yun}"> <a href="javascript:;"> {yun:}$userclass_name[$v]{/yun} </a> </li>
+          {yun:}/foreach{/yun}
+          </ul>
+          </div>
+        </div>
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl"><span class="reward_hot">*</span>到岗时间： </div>
+          <div class="reward_person_search_add fl">
+          <input type="button" value="请选择" class="reward_person_search_select" id="report_name"/>
+          <input  type="hidden" id="report" name="report">
+          <ul class="reward_person_search_select_list none">
+          {yun:}foreach from=$userdata.user_report item=v{/yun}
+          <li codename="{yun:}$userclass_name[$v]{/yun}" code="{yun:}$v{/yun}"> <a href="javascript:;"> {yun:}$userclass_name[$v]{/yun} </a> </li>
+          {yun:}/foreach{/yun}
+          </ul>
+          </div>
+        </div>
+      
+        <div class="reward_person_items fl">
+          <div class="reward_person_name fl">
+            <span class="reward_hot">*</span>
+            推荐描述： </div>
+          <textarea class="reward_person_text fl"  type="text" id="content" name="content"></textarea>
+        </div>
+                <div class="reward_person_items fl">
+          <div class="reward_person_name fl">&nbsp; </div>
+        <input class="reward_person_bth fl" name="submit" type="submit" value="立即推荐">
+          </div>
+        </form>
+        </div>
+           <div class="rec_user_jobbox_right "> 
+           <div class="rec_user_jobbox_right_tip ">  温馨提示：</div>
+           1.好友姓名请不要用先生女士等称谓代替；<br/>
+          2.好友手机号码请尽量准确，以免联系不上；<br/>
+          3.企业面试候选人之前不会透露个人信息给客户，防止骚扰。 </div>
+      </div>
+      </div>
+      </div>
+</div>
+
+
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js?v={yun:}$config.cachecode{/yun}"></script>
+<script>
+  DD_belatedPNG.fix('.png,.New_post,.box_bot,.new_post_box_h1 span,.icon,.ser_cz a,.Strat-list ,.logoin_su2,.logoin_after_su2,.logoin_after em,.logoin_after_tx dt,.service_filter_fot,.Strat-list .s,.nav_exit span,.company_focus');
+</script>
+<![endif]-->
+<script>var webname = "{yun:}$config.sy_webname{/yun}";var weburl="{yun:}$config.sy_weburl{/yun}";</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /><script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script><script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/public_lt.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/class.public.css?v={yun:}$config.cachecode{/yun}" type="text/css" />
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/js/datepicker/css/font-awesome.min.css?v={yun:}$config.cachecode{/yun}" type="text/css"/>
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/city.cache.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/job.cache.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/datepicker/foundation-datepicker.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script type="text/javascript">
+$('#birthday').fdatepicker({format: 'yyyy-mm-dd',startView:4,minView:2});
+function reward_show(id){
+	$("#"+id).show();
+}
+function reward_city(id,type,name,typeid){
+	$('#'+type).val(id);
+	$("#"+type+'_name').val(name);
+	
+	if(type=='province'){
+		$("#city_name").val('请选择');
+		$("#three_city_name").val('请选择');
+		$("#city").val('');
+		$("#three_city").val('');
+		$("#cityshowth").hide();
+	}
+	if(type=='city'){
+		$("#three_city_name").val('请选择');
+		$("#three_city").val('');
+		$("#cityshowth").hide();
+	}
+	$.post(weburl+'/index.php?m=ajax&c=reward_city',{type:type,id:id,typeid:typeid},function(data){
+		if(data){
+			$('#reward_'+type).hide();
+			$('#reward_'+typeid).html(data);
+			if(type=='city'){
+				$("#cityshowth").show();
+			}
+			
+		}
+	});
+}
+function rewards(id,type,name){
+	$('#'+type).val(id);
+	$("#"+type+'_name').val(name);
+	$('#reward_'+type).hide();
+}
+</script> 
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

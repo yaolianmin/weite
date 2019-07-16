@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /> 
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script> 
+<script src="js/check_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<h6>猎头会员信息</h6>
+</div>
+
+
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form name="myform" target="supportiframe" action="index.php?m=admin_lt_member&c=edit" method="post" class="layui-form">
+<table width="100%" class="table_form" style="background:#fff;">
+<tr>
+		<th >会员级别：</th>
+		<td width="250">
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="rating_name" lay-filter="" id="rating_name">
+                      <option value="">请选择</option>
+                      {yun:}foreach from=$rating_list item=ratings{/yun}
+                      <option value="{yun:}$ratings.id{/yun}+{yun:}$ratings.name{/yun}" {yun:}if $ratings.id==$rating{/yun}selected{yun:}/if{/yun}>{yun:}$ratings.name|mb_substr:0:4:'utf-8'{/yun}</option>
+                      {yun:}/foreach{/yun}
+                    </select>
+                 </div>
+                 <div class="layui-form-mid layui-word-aux"><a href="javascript:;" onClick="editrat();">修改会员级别</a></div>
+               </div>
+            </div></td>
+        {yun:}if is_array($com_info){/yun}
+        <th>登录次数：</th>
+		<td>{yun:}$com_info.login_hits{/yun}
+		<font color="gray"></font>
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+  	<tr class="admin_table_trbg" >
+		<th  >用户名：</th>
+		<td width="350">{yun:}if is_array($com_info){/yun}{yun:}$com_info.username{/yun}{yun:}else{/yun}<input type="text" value="" name="username" class="input-text">{yun:}/if{/yun}</td>
+         {yun:}if is_array($com_info){/yun}
+        <th>注册IP：</th>
+		<td>{yun:}$com_info.reg_ip{/yun}
+		<font color="gray"></font>
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+	<tr>
+		<th>密码：</th>
+		<td><input type="text" value="" name="password" class="input-text">
+		<font color="gray">不修改请留空!</font>
+		</td>
+        {yun:}if is_array($com_info){/yun}
+        <th width="120">注册时间：</th>
+		<td>{yun:}$com_info.reg_date|date_format:'%Y-%m-%d'{/yun}
+		<font color="gray"></font>
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+  	<tr class="admin_table_trbg" >
+		<th>E-mail：</th>
+		<td><input type="text" value="{yun:}$com_info.email{/yun}" name="email" class="input-text">
+		<font color="gray"></font>
+		</td>
+        {yun:}if is_array($com_info){/yun}
+        	<th>登录IP：</th>
+		<td>{yun:}$com_info.login_ip{/yun}
+		<font color="gray"></font>
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+		<tr>
+		<th>联系电话：</th>
+		<td><input type="text" value="{yun:}$com_info.moblie{/yun}" name="moblie" class="input-text">
+		<font color="gray"></font>
+        </td>
+        {yun:}if is_array($com_info){/yun}
+        	<th>最近登录时间：</th>
+		<td>{yun:}$com_info.login_date|date_format:'%Y-%m-%d'{/yun}
+		<font color="gray"></font>
+		
+		</td>
+        {yun:}/if{/yun}
+	</tr>
+  	<tr class="admin_table_trbg" >
+		<th>真实姓名：</th>
+		<td><input type="text" size="30" name="realname" class="input-text" value="{yun:}$row.realname{/yun}"></td>
+		<th>所属公司：</th>
+		<td><input type="text" size="45" name="com_name" class="input-text" value="{yun:}$row.com_name{/yun}"></td>
+	</tr>    
+    <tr>
+		<th>公司座机：</th>
+		<td><input type="text" size="30" name="phone" class="input-text" value="{yun:}$row.phone{/yun}"></td>
+		<th>目前所在地：</th>
+		<td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="provinceid" lay-filter="citys" id="provinceid">
+                      <option value="">请选择</option>
+                      {yun:}foreach from=$city_index key=j item=v{/yun}
+                      <option value="{yun:}$v{/yun}" {yun:}if $row.provinceid==$v{/yun}selected{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                      {yun:}/foreach{/yun}
+                    </select>
+                 </div>
+                 <div class="layui-input-inline">
+                   <select name="cityid" lay-filter="citys" id="cityid">
+                      <option value="">请选择</option>
+                      {yun:}foreach from=$city_type[$row.provinceid] key=j item=v{/yun}
+                      <option value="{yun:}$v{/yun}" {yun:}if $row.cityid==$v{/yun}selected{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                      {yun:}/foreach{/yun}
+                    </select>
+                 </div>
+                 <div class="layui-input-inline">
+                   <select name="three_cityid" lay-filter="" id="three_cityid">
+                      <option value="">请选择</option>
+                      {yun:}foreach from=$city_type[$row.cityid] key=j item=v{/yun}
+                      <option value="{yun:}$v{/yun}" {yun:}if $row.three_cityid==$v{/yun}selected{yun:}/if{/yun}>{yun:}$city_name[$v]{/yun}</option>
+                      {yun:}/foreach{/yun}
+                    </select>
+                 </div>
+               </div>
+            </div>
+            </td>
+	</tr>  
+     	<tr class="admin_table_trbg" >
+		<th>工作经验：</th>
+		<td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="exp" id="exp">
+                     {yun:}foreach from=$ltdata.lt_exp key=j item=v{/yun}
+                    <option value='{yun:}$v{/yun}' {yun:}if $row.exp==$v{/yun}selected{yun:}/if{/yun}>{yun:}$ltclass_name[$v]{/yun}</option>
+                    {yun:}/foreach{/yun}
+                  </select>
+                 </div>
+               </div>
+            </div></td>
+		<th>目前头衔：</th>
+		<td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="title">
+                     {yun:}foreach from=$ltdata.lt_title key=j item=v{/yun}
+                    <option value='{yun:}$v{/yun}' {yun:}if $row.title==$v{/yun}selected{yun:}/if{/yun}>{yun:}$ltclass_name[$v]{/yun}</option>
+                    {yun:}/foreach{/yun}
+                  </select>
+                 </div>
+               </div>
+            </div></td>
+	</tr> 
+    <tr>
+		<th>发布职位数：</th>
+		<td><input type="text" name="lt_job_num" size="15" class="input-text" value="{yun:}$statis.lt_job_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+		<th>刷新职位数：</th>
+		<td><input type="text" name="lt_breakjob_num" size="15" class="input-text" value="{yun:}$statis.lt_breakjob_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+	</tr> 
+    	<tr class="admin_table_trbg" >
+		<th>下载简历数：</th>
+		<td colspan="3"><input type="text" name="lt_down_resume" size="15" class="input-text" value="{yun:}$statis.lt_down_resume{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+	</tr> 
+    <tr>
+		<th>合作过的客户：</th>
+		<td><textarea name="client" id="client" cols="70" rows="4">{yun:}$row.client{/yun}</textarea></td>
+        <th>&nbsp;</th>
+		<td>&nbsp;</td>
+	</tr> 
+   	<tr class="admin_table_trbg" >
+		<th>顾问介绍：</th>
+		<td><textarea name="content" id="content" cols="70" rows="6">{yun:}$row.content{/yun}</textarea></td>
+         <th>&nbsp;</th>
+		<td>&nbsp;</td>
+	</tr> 
+	<tr>
+		<th>状态：</th>
+		<td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                    <input type="radio" {yun:}if $com_info.status=='0'{/yun}checked{yun:}/if{/yun} name="status" value="0" title="未审核">  
+                    <input type="radio" {yun:}if $com_info.status=='1'{/yun}checked{yun:}/if{/yun} name="status" value="1" title="已审核">
+                    <input type="radio" {yun:}if $com_info.status=='2'{/yun}checked{yun:}/if{/yun} name="status" value="2" title="锁定">
+                 </div>
+               </div>
+            </div>
+		</td>
+         <th>&nbsp;</th>
+		<td>&nbsp;</td>
+	</tr>
+   	<tr class="admin_table_trbg" >
+		<td align="center" colspan="2">
+        <input type="hidden" name="uid" value="{yun:}$com_info.uid{/yun}" id="uid"/>
+        <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+        <input class="layui-btn layui-btn-normal" type="submit" name="com_update" value="&nbsp;修 改&nbsp;" />
+		<input class="layui-btn layui-btn-normal" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+         <th>&nbsp;</th>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+<input type="hidden" id='pytoken' name="pytoken" value="{yun:}$pytoken{/yun}">
+</form>
+</div>
+</div>
+<script>
+layui.use(['layer', 'form'], function(){
+    var layer = layui.layer
+    ,form = layui.form
+    ,$ = layui.$;
+	
+	form.on('select(citys)',function(data){
+		$.post(weburl+"/index.php?m=ajax&c=ajax",{str:data.value},function(htm){
+			if(data.elem.name=='provinceid'){
+				$("#cityid").html(htm);
+				$("#three_cityid").html("<option value=''>请选择</option>");
+			}else if(data.elem.name=='cityid'){
+				$("#three_cityid").html(htm);
+			}
+			form.render('select');
+		});
+	});
+});
+var weburl="{yun:}$config.sy_weburl{/yun}";
+function editrat(){
+	var rat = $("#rating_name").val();
+	var uid = $("#uid").val();
+	var pytoken = $('#pytoken').val();
+	$.post("index.php?m=admin_lt_member&c=rating",{rat:rat,uid:uid,pytoken:pytoken},function(data){
+		if(data==1){ 
+			parent.layer.msg('操作成功！', 2, 9);
+		}else{ 
+			parent.layer.msg('网络繁忙，请稍后再试！', 2, 8);
+		}
+	
+	})
+}
+</script>
+</body>
+</html>

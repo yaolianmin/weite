@@ -1,0 +1,259 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun}
+
+<div class="clear"></div>
+
+<ul class="member_ms">
+<li class="pack member_ms_cur"  data-id='sharejob'>分享推广</li>
+<li class="pack"  data-id='rewardjob'>悬赏推广</li>
+</ul>
+
+<div id="sharejob" class="reward-share">
+<form name="alipayment"  id="payform" action="index.php?c=getOrder" method="post" onsubmit="return payforms();">
+<div class="addreward_bx_tit"><i class="addreward_bx_tit_icon"></i>赏金设置</div>
+<div class="addreward_bx">
+
+
+<div class="addreward_bx_p"><span class="addreward_bx_p_s">单次浏览金额：</span>
+<input type="text" value="" name="packmoney" id="packmoney" class="addreward_bx_text"><div class="addreward_bx_p_s_tip">元（不得低于0.01元）</div></div>
+<div class="addreward_bx_p"><span class="addreward_bx_p_s">发放数量：</span>
+<input type="text" value="" name="packnum" id="packnum"  class="addreward_bx_text"></div>
+<div class="addreward_bx_p"><span class="addreward_bx_p_s">应付金额：</span><i class="addreward_bx_p_i"  id="price">0</i> 元 </div>
+{yun:}if $paytype.wxpay{/yun}
+		<div class="pay_f_list">
+			<label>
+				<i class="pay_f_list_wx"></i><span class="pay_f_list_box">微信支付</span>
+				<input type='radio' name='paytype' value='wxpay' class="pay_f_list_radio">
+		  	</label>
+		</div>
+	{yun:}/if{/yun} 
+	{yun:}if $paytype.alipay{/yun}
+    	<div class="pay_f_list">
+        	<label>
+        		<i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+            	<input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+          	</label>
+       	</div>
+	{yun:}/if{/yun}  
+	{yun:}if $paytype.wxpay || $paytype.alipay{/yun}	
+		<div class="getserbver_box_bth">
+        	<div class="pay_com_lsit_right"><input type="submit" value="确认支付" name=nextstep  class="reinputText2"></div>
+      	</div>
+	{yun:}else{/yun} 
+	  	<div class="pay_com_list">
+	        <div class="pay_com_lsit_right">
+	          <span>网站已关闭支付功能，请联系管理员！</span>
+	        </div>
+      	</div>
+	{yun:}/if{/yun} 
+ 	
+ 	{yun:}if $config.sy_freewebtel{/yun}<div class="getserbver_box_tel"><a href="tel:{yun:}$config.sy_freewebtel{/yun}">客服电话：{yun:}$config.sy_freewebtel{/yun}</a></div>{yun:}/if{/yun}
+	
+	<input  name='jobid' type="hidden" value="{yun:}$smarty.get.jobid{/yun}"/>
+	<input id="server" name='server' type="hidden" value="sharejob"/>
+</form>
+
+
+
+<div class="addreward_bx_msg">
+<div class="addreward_bx_msg_tit">提示：</div>
+<div class="">
+1. 发布分享推广，所有用户都可帮助您将职位分享至朋友圈，第一时间扩散至当地社交圈<br>
+2. 设置合理分享金额，更容易让用户关注并帮您分享<br>
+3. 职位分享至朋友圈，每个微信用户浏览只计算一次，不重复扣费，一份分享赏金获得一个关注<br>
+4. 系统自动推荐职位至赏单榜，更快一步发现您职位</div>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+
+<div id="rewardjob" class="reward-share none">
+
+<form  id="rewardform" action="index.php?c=addrewardjob" method="post"  onsubmit="return rewardforms();">
+
+<div class="addreward_bx_tit"><i class="addreward_bx_tit_icon"></i>赏金设置</div>
+<div class="addreward_bx">
+
+
+<div class="addreward_bx_p"><span class="addreward_bx_p_s">投递赏金：</span>
+<input type="text" value=""  name="sqmoney" id="sqmoney"  class="addreward_bx_text"><div class="addreward_bx_p_s_tip">元（不得低于1元）</div></div>
+<div class="addreward_bx_p"><span class="addreward_bx_p_s">面试赏金：</span>
+<input type="text" value="" name="invitemoney" id="invitemoney" class="addreward_bx_text"><div class="addreward_bx_p_s_tip">元（不得低于1元）</div></div>
+<div class="addreward_bx_p"><span class="addreward_bx_p_s">入职赏金：</span>
+<input type="text" value=""name="offermoney" id="offermoney" class="addreward_bx_text"><div class="addreward_bx_p_s_tip">元（不得低于1元）</div></div>
+</div>
+<div class="addreward_bx_tit" style="margin-top:0px;"><i class="addreward_bx_tit_icon"></i>申请条件设置</div>
+<div class="addreward_bx">
+<div class="clear">
+<div class="job_redpack_list_box">
+<div class="job_redpack_list_c_s job_redpack_list_c_s_cur"  data-id='exp'>
+<i class="job_redpack_list_c_icon job_redpack_list_c_icon_gz"></i>
+工作经历	
+</div>
+<div class="job_redpack_list_c_s job_redpack_list_c_s_cur" data-id='edu'>
+<i class="job_redpack_list_c_icon job_redpack_list_c_icon_jy"></i>
+教育经历</div>
+<div class="job_redpack_list_c_s job_redpack_list_c_s_cur" data-id='project'>
+<i class="job_redpack_list_c_icon job_redpack_list_c_icon_xm"></i>
+项目经历	
+</div>
+<div class="job_redpack_list_c_s job_redpack_list_c_s_cur" data-id='skill'>
+<i class="job_redpack_list_c_icon job_redpack_list_c_icon_jn"></i>
+技能证书	
+</div>
+</div>
+<input type='hidden' id='expid' name='exp' value='1'>
+<input type='hidden' id='eduid' name='edu' value='1'>
+<input type='hidden' id='projectid' name='project' value='1'>
+<input type='hidden' id='skillid' name='skill' value='1'>
+
+<input name='jobid' type="hidden" value="{yun:}$smarty.get.jobid{/yun}"/>
+<input id="server" name='server' type="hidden" value="rewardjob"/>
+
+<input type="submit" value="发布悬赏" class="job_redpack_list_bth">
+
+</div>
+
+</form>
+
+
+<div class="addreward_bx_msg">
+
+<div class="">
+
+<div class="addreward_bx_msg_tit">提示：</div>
+1. 发布赏金职位能更有效的吸引求职者投递简历<br>
+2. 投递、面试、入职三项赏金模式至少设置一项即可，如：您只想提高投递量，则可以单独设置投递赏金，如：您发布的职位为中高端职位，可全部设置，赏金越丰厚吸引力越强<br>
+3. 赏金职位除首页、职位搜索重点展示外，另有单独模块独立展示，展示区域更广，效果更强<br>
+<div class="addreward_bx_msg_tit">重点说明：</div>
+1. 按需付费：赏金职位无需预付款，求职者投递后，企业自主选择查看某份简历（预先展示简历学历、工作经验等主体信息），确定查看某份简历时支付相应赏金即可，不占用企业资金<br>
+2 . 资金明确：赏金发放记录明晰，每份赏金都必须企业确认后才会发放，企业若长时间停滞不进行下一步流程确认，系统才会根据个人申请自动判断是否发放赏金<br>
+3 . 流程严控：为防止赏金流程因为某一方原因出现停滞，系统会自动根据预定期限进行判断，个人预定期限内未回应状态下，企业可取消赏单，剩余赏金将会自动归还至企业赏金账户，企业可自主提现</div>
+
+</div>
+</div>
+</div>
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script>
+
+function payforms(){
+	
+	
+	var paytype=$('input:radio[name="paytype"]:checked').val();
+
+	if(paytype==null){
+		layermsg('请选择支付方式！', 2,8);
+		return false;
+	}
+	return true;
+}
+
+
+function rewardforms(){
+	
+	var sqmoney = $('#sqmoney').val();
+	var invitemoney = $('#invitemoney').val();
+	var offermoney = $('#offermoney').val();
+	var jobid = $('#jobid').val();
+	if(!sqmoney && !invitemoney && !offermoney){
+		
+		layermsg('投递、面试、入职金额至少设置一项');
+		return false;
+
+	}else{
+		if(!sqmoney){
+			sqmoney= 0;
+		}
+		if(!invitemoney){
+			invitemoney= 0;
+		}
+		if(!offermoney){
+			offermoney= 0;
+		}
+		if((parseFloat(sqmoney)+parseFloat(invitemoney)+parseFloat(offermoney))<1){
+			
+			
+			layermsg('悬赏总金额不得低于1元');
+			return false;
+		}
+		
+	}
+
+	
+	return true;
+	
+}
+
+
+$(function(){  
+
+	$('#packmoney').keyup(function(){
+	
+		var packmoney = $('#packmoney').val();
+
+		var packnum = $('#packnum').val();
+		
+		var price = parseFloat(packmoney)*parseInt(packnum);
+		
+		if(price>0){
+			$('#price').html(price);
+		}else{
+			$('#price').html(0);
+		}
+	});
+
+	$('#packnum').keyup(function(){
+	
+		var packmoney = $('#packmoney').val();
+
+		var packnum = $('#packnum').val();
+		
+		var price = parseFloat(packmoney)*parseInt(packnum);
+		
+		if(price>0){
+			$('#price').html(price);
+		}else{
+			$('#price').html(0);
+		}
+	});
+
+	$('.pack').click(function(){
+		
+		$('.member_ms_cur').removeClass('member_ms_cur');
+		$(this).addClass('member_ms_cur');
+		var dataid = $(this).attr('data-id');
+		$('.reward-share').hide();
+		$('#'+dataid).show();
+	});
+	$('.admin_tg_chlose').click(function(){
+		
+		var jobpaytype = $('#jobpaytype').val();
+		if(jobpaytype=='1'){
+			$(this).removeClass('admin_tg_chlose_cur');
+			$('#jobpaytype').val('0');
+		}else{
+			$(this).addClass('admin_tg_chlose_cur');
+			$('#jobpaytype').val('1');
+		}
+	
+	});
+	$('.job_redpack_list_c_s').click(function(){
+		
+		var dataid = $(this).attr('data-id');
+
+		var datavalue = $('#'+dataid+'id').val();
+		if(datavalue=='1'){
+			$(this).removeClass('job_redpack_list_c_s_cur');
+			$('#'+dataid+'id').val('0');
+		}else{
+			$(this).addClass('job_redpack_list_c_s_cur');
+			$('#'+dataid+'id').val('1');
+		}
+	
+	});
+}); 
+</script>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

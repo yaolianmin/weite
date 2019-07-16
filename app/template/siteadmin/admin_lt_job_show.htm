@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="infoboxp_top_bg"></div>
+<div class="infoboxp_top">
+<h6>职位详情</h6>
+</div>
+	<table width="100%" class="table_form">
+   		<tr><th>招聘方公司显示名称：</th><td>{yun:}$show.com_name{/yun}</td></tr>
+		<tr><th>招聘方公司备注名称：</th><td>{yun:}$show.real_name{/yun}</td></tr>
+        <tr><th>公司性质：</th><td>{yun:}$show.pr{/yun}</td></tr>
+        <tr><th>所属行业：</th><td>{yun:}$show.hy{/yun}</td></tr>
+        <tr><th>公司规模：</th><td>{yun:}$show.mun{/yun}</td></tr>
+        <tr><th>公司介绍：</th><td>{yun:}$show.desc{/yun}</td></tr>
+        <tr><th>职位名称：</th><td>{yun:}$show.job_name{/yun}</td></tr>
+        <tr><th>职位类别：</th><td>{yun:}$show.jobone{/yun}</td></tr>
+        <tr><th>所属部门：</th><td>{yun:}$show.department{/yun}</td></tr>
+        <tr><th>汇报对象：</th><td>{yun:}$show.report{/yun}</td></tr>
+        <tr><th>工作地点：</th><td>{yun:}$show.city{/yun}</td></tr>
+        <tr><th>截止日期：</th><td>{yun:}$show.edate|date_format:"%Y-%m-%d"{/yun}</td></tr>
+        <tr><th>职位年薪：</th><td>{yun:}$show.salary{/yun}</td></tr>
+        <tr><th>薪资构成：</th><td>{yun:}$show.constitute{/yun}</td></tr>
+        <tr><th>社保福利：</th><td>{yun:}$show.social{/yun}</td></tr>
+        <tr><th>居住福利：</th><td>{yun:}$show.live{/yun}</td></tr>
+        <tr><th>年假福利：</th><td>{yun:}$show.years{/yun}</td></tr>
+        <tr><th>职位描述：</th><td>{yun:}$show.job_desc{/yun}</td></tr>
+        <tr><th>年龄要求：</th><td>{yun:}$show.age{/yun}</td></tr>
+        <tr><th>性别要求：</th><td>{yun:}$show.sex{/yun}</td></tr>
+        <tr><th>工作经验：</th><td>{yun:}$show.exp{/yun}</td></tr>
+        <tr><th>语言要求：</th><td>{yun:}$show.language{/yun}</td></tr>
+        <tr><th>任职资格：</th><td>{yun:}$show.eligible{/yun}</td></tr>
+        <tr><th>补充说明：</th><td>{yun:}$show.other{/yun}</td></tr>
+         <tr>   <th width="120">状　　态：</th>
+            <td>{yun:}if $rows.state==1{/yun}<font color="blue">已审核</font>{yun:}else{/yun}<font color="red">未审核</font>{yun:}/if{/yun}</td>
+        </tr>
+	</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>会员服务</title>
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/css.css?v={yun:}$config.cachecode{/yun}" type="text/css" />
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css" />
+</head> 
+<body>
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+       <div class="report_uaer_list fl">
+            <ul>
+			    <li class="report_uaer_list_cur"><a href="index.php?c=right" >套餐会员</a></li>
+                <li><a href="index.php?c=right&act=time" >时间会员</a></li> 
+			    <li><a href="index.php?c=right&act=added" >增值包</a></li> 
+            </ul>
+			
+		</div>
+              <div class="clear"></div>
+              
+      <div class="package_box">
+	     
+   
+          
+
+        <div class="search_con fl">
+        <iframe id="fdingdan"  name="fdingdan" onload="returnmessage('fdingdan');" style="display:none"></iframe>
+		{yun:}foreach from=$rows key=key item=list{/yun}
+			{yun:}if $list.service_time>0{/yun}	
+            <div class="com_grade_box fl">
+               <ul>
+                  <li>
+                  <div class="com_grade_rline"></div>
+                  <div class="com_grade_tit">{yun:}$list.name{/yun}</div>
+                  <div class="com_grade_money">
+                  
+                    <span>
+				  {yun:}if $list.time_start < time() && $list.time_end > time(){/yun}
+				  <span class="com_grade_money_n">￥{yun:}$list.yh_price{/yun}</span>
+				  {yun:}else{/yun}
+				 <span class="com_grade_money_n">￥{yun:}$list.service_price{/yun}</span>
+				  {yun:}/if{/yun}
+			  </span>
+			 	 {yun:}if $list.time_start < time() && $list.time_end > time(){/yun}
+			  <i class="serve_zz_h_nmb_tcjg">￥{yun:}$list.service_price{/yun}</i>
+                {yun:}/if{/yun}/
+			 	 <span>{yun:}if $list.service_time>0{/yun}{yun:}$list.service_time{/yun}天{yun:}else{/yun}永久{yun:}/if{/yun}
+			 	 </span>
+                  </div>
+                      {yun:}if $list.type==1{/yun}
+              <div class="com_grade_list"><i class="com_grade_list_icon"></i><span class="com_grade_list_name">可发布职位数：</span>       
+              <span class="com_grade_list_n">{yun:}$list.lt_job_num{/yun}个</span>
+              </div>
+             <div class="com_grade_list">
+              <i class="com_grade_list_icon"></i><span class="com_grade_list_name">可下载简历数：</span>   
+              <span class="com_grade_list_n">{yun:}$list.lt_resume{/yun}次</span>
+              </div>
+			  <div class="com_grade_list">
+			  <i class="com_grade_list_icon"></i><span class="com_grade_list_name">刷新职位数：</span>   
+				 <span class="com_grade_list_n">{yun:}$list.lt_breakjob_num{/yun}次</span>
+             </div>
+             {yun:}else{/yun} 
+             <div class="com_grade_list">{yun:}$list.explains{/yun} </div>
+             {yun:}/if{/yun} 
+              <div class="serve_zz_but">
+               <form name="alipayment" target="fdingdan" action="index.php?c=pay&act=dingdan" method="post" id='myform{yun:}$list.id{/yun}' >
+              <input type="hidden" value="{yun:}$list.id{/yun}" name="comvip" />
+           <a href="javascript:buyvip('{yun:}$list.id{/yun}');" class="added_list_gm">立即购买</a>
+           	  </form>
+				</div>
+                                      
+            <div class="clear"></div>
+            <div class="yhtime_box">
+               {yun:}if $list.time_start < time() && $list.time_end > time() && $list.coupon{/yun}
+               赠送：{yun:}$list.coupon{/yun}
+                 {yun:}/if{/yun}
+               {yun:}if $list.time_start < time() && $list.time_end > time(){/yun} 
+           <div class="yhtime">
+           <div class="">活动优惠时间：</div>
+           {yun:}$list.time_start|date_format:'%Y-%m-%d'{/yun}至{yun:}$list.time_start|date_format:'%Y-%m-%d'{/yun}</div>
+            {yun:}/if{/yun}
+            </div>
+                  </li>           
+               </ul>
+          </div>
+          
+            {yun:}/if{/yun}
+		  {yun:}/foreach{/yun} 
+    </div>
+  </div>
+  </div>
+  </div>  
+  </div>
+  </div>  
+<script>
+function buyvip(id){
+	$('#myform'+id).submit();
+}
+</script>
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

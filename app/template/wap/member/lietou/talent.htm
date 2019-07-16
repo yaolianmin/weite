@@ -1,0 +1,43 @@
+{yun:}include file="$wapstyle/member/lheader.htm"{/yun}
+<section class="wap_member">
+<div class="wap_member_comp_h1"><span>简历库</span>
+<a href="index.php?c=talentexpect" class="wap_member_comp_cs">充实简历库</a></div>
+</section>
+<section>
+<div class="wap_member_job_show">
+
+{yun:}if !empty($rows){/yun}
+
+{yun:}foreach item=v from=$rows{/yun}
+<div class="com_member_hr ">
+<div class="com_member_hr_name"><span class="yun_m_job_date_n">&nbsp;
+ {yun:}$v.jobname{/yun}
+</span>
+
+{yun:}if $v.telstatus=='1'{/yun}<span class="wap_member_com_lokr">已授权</span>{yun:}else{/yun}<a href="index.php?c=telstatus&id={yun:}$v.id{/yun}" class="wap_member_com_lokr">授权认证</a>{yun:}/if{/yun}
+
+</div>
+<div class="com_member_user_box">
+<div class="com_member_hr_tj">
+<div class="com_member_hr_p1">
+	<span class="member_c9">姓名：</span>{yun:}$v.name{/yun}  &nbsp;&nbsp;&nbsp;
+	<span class="member_c9">经验：</span><span class="">{yun:}$userclass_name[$v.exp]{/yun}</span>   &nbsp;&nbsp;&nbsp;
+	<span class="member_c9">学历：</span><span class="">{yun:}$userclass_name[$v.edu]{/yun}</span>
+</div>	
+<div class="com_member_hr_p1"><span class="member_c9">工作地区：</span>{yun:}$city_name[$v.provinceid]{/yun} {yun:}$city_name[$v.cityid]{/yun}</div>
+</div>
+<div class="com_member_hr_p1"><span class="member_c9">期望薪资：</span>{yun:}if $v.minsalary{/yun}{yun:}$v.minsalary{/yun}{yun:}if $v.maxsalary{/yun}-{yun:}$v.maxsalary{/yun}{yun:}/if{/yun}{yun:}else{/yun}面议{yun:}/if{/yun}</div>
+<div class="com_member_hr_cz" style=" text-align:center"><a href="index.php?c=talentexpect&id={yun:}$v.id{/yun}" class="" style="color:#06F">编辑</a> </div>
+</div>
+</div>
+{yun:}/foreach{/yun}
+{yun:}else{/yun}
+<div class="wap_member_no">您还没有简历<br><a href="index.php?c=talentexpect" class="wap_member_no_submit">充实简历库</a></div>
+{yun:}/if{/yun}
+
+</div>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+</section>
+</div>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

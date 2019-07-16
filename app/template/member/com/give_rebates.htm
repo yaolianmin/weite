@@ -1,0 +1,156 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box >
+        
+  <div class="com_tit"><span class="com_tit_span">猎头悬赏</span></div>
+      <div class="job_list_tit">
+         <ul class="">
+         <li {yun:}if $smarty.get.c=="my_rebates"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=my_rebates">我推荐的悬赏</a></li>
+         <li {yun:}if $smarty.get.c=="give_rebates"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=give_rebates">推荐给我的人才</a></li>
+        </ul>
+         </div>
+       <div class="com_body" style="min-height:500px;">  
+        <div class=admin_note2>
+            <div class="com_Release_job mt20">
+         <table class="com_table" >
+          {yun:}if $rows{/yun}
+            <tr>
+              <th width="12%" align="center" bgcolor="#F7FAFF">推荐人</th>
+              <th width="11%" align="center" bgcolor="#F7FAFF">人才姓名</th>
+              <th width="14%" align="center" bgcolor="#F7FAFF">人才手机</th>
+              <th width="20%" align="center" bgcolor="#F7FAFF">人才邮箱</th>
+              <th width="16%" align="center" bgcolor="#F7FAFF">时间</th>
+              <th width="8%" align="center" bgcolor="#F7FAFF">回复</th>
+              <th width="9%" align="center" bgcolor="#F7FAFF">标记状态</th>
+               <th width="10%" align="center" bgcolor="#F7FAFF">操作</th>
+            </tr>
+            {yun:}/if{/yun}
+            {yun:}foreach item=row from=$rows{/yun}
+            <tr>
+              <td  height="26"align="center" bgcolor="#FFFFFF">{yun:}$row.username{/yun}</td>
+              <td  height="26"align="center" bgcolor="#FFFFFF">{yun:}$row.name{/yun}</td>
+              <td  height="26"align="center" bgcolor="#FFFFFF">{yun:}$row.phone{/yun}</td>
+              <td  height="26"align="center" bgcolor="#FFFFFF">{yun:}$row.email{/yun}</td>
+              <td  height="26"align="center" bgcolor="#FFFFFF">{yun:}$row.datetime|date_format:'%Y-%m-%d %H:%M'{/yun}</td>
+              <td align="center" bgcolor="#FFFFFF">{yun:}if $row.reply!=""{/yun}<font color="#FF0000">已回复</font> {yun:}else{/yun}<span onclick="reply_msg('{yun:}$row.id{/yun}','{yun:}$row.username{/yun}','{yun:}$row.content{/yun}');" style="cursor:pointer">未回复</span>{yun:}/if{/yun}</td>
+              <td align="center" bgcolor="#FFFFFF" class=" status_a"  pid="{yun:}$row.id{/yun}">
+              <div aid="{yun:}$row.id{/yun}" style="cursor:pointer;" class="Com_table_cz">
+                  <div class="Com_table_hover" id="status_{yun:}$row.id{/yun}"> <span id="status{yun:}$row.id{/yun}">{yun:}if $row.status=="0"{/yun}未查看{yun:}elseif $row.status=="1"{/yun}已查看{yun:}elseif $row.status=="2"{/yun}已试用{yun:}elseif $row.status=="3"{/yun}未通过{yun:}elseif $row.status=="4"{/yun}已返利{yun:}/if{/yun}</span>
+                    <div class="Com_table_list_box" id="statuslist{yun:}$row.id{/yun}"> 
+                    <span id="status0_{yun:}$row.id{/yun}" onMouseMove="move_status('0','{yun:}$row.id{/yun}')" onClick="click_status('0','未查看','{yun:}$row.id{/yun}');">未查看</span> 
+                    <span id="status1_{yun:}$row.id{/yun}" onMouseMove="move_status('1','{yun:}$row.id{/yun}')" onClick="click_status('1','已查看','{yun:}$row.id{/yun}');">已查看</span>
+                     <span id="status2_{yun:}$row.id{/yun}" onMouseMove="move_status('2','{yun:}$row.id{/yun}')" onClick="click_status('2','已试用','{yun:}$row.id{/yun}');">已试用</span> 
+                     <span id="status3_{yun:}$row.id{/yun}" onMouseMove="move_status('3','{yun:}$row.id{/yun}')" onClick="click_status('3','未通过','{yun:}$row.id{/yun}');">未通过</span> 
+                     <span id="status4_{yun:}$row.id{/yun}" onMouseMove="move_status('4','{yun:}$row.id{/yun}')" onClick="click_status('4','已返利','{yun:}$row.id{/yun}');">已返利</span> 
+                     </div>
+                  </div>
+                </div></td>
+               <td height="26"align="center" bgcolor="#FFFFFF"><a href="javascript:void(0);" onclick="showrebate('{yun:}$row.id{/yun}','{yun:}url m=ajax c=showrebates{/yun}')" class="com_bth cblue">查看</a> <a href="javascript:void(0)" onclick="layer_del('确定要删除推荐给我的人才吗？', 'index.php?c=give_rebates&act=del&id={yun:}$row.id{/yun}');" class="com_bth cblue">删除</a></td>
+            </tr>
+            {yun:}/foreach{/yun}
+          </table>
+		{yun:}if !$rows{/yun}
+		  <div class="msg_no">还没有人给您推荐猎头悬赏的人才！</div>
+		 {yun:}/if{/yun}
+          <div class="clear" style="margin-bottom:10px;"></div>
+          <div class="diggg">{yun:}$pagenav{/yun}</div>
+		<div id="reply" style="display:none" class="reply_hf_ly">
+          <div style="text-align:center">
+            <div class="Reply_cont">
+              </div>
+			<iframe id="supportiframe" name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+            <FORM name=MyForm onsubmit="return check_msg();" target='supportiframe' action='index.php?c=give_rebates&act=save' method="post" >
+              <div>
+                <input type="hidden" id="msgid" name="id" value="" />
+                <textarea cols="60" rows="5" name="reply" id="content" class="textarea_Reply_cont" ></textarea>
+              </div>
+              <div>
+                <input type="submit" name="submit" value="回复" class="Reply_cont_submit"  />
+              </div>
+            </form>
+          </div>
+        </div>
+        </div>
+	   <div id="showrebate" style="display:none">
+		 <div class="rebates_user_cont">
+		 <div class="give_rebates_tit"> 基本信息</div>
+	 <div class="give_rebates_list">   姓名：<span id="rebateuname"></span></div>
+	 <div class="give_rebates_list"> 性别：<span id="rebatesex"></span></div>
+	 <div class="give_rebates_list">  出生年月：<span id="rebatebirthday"></span></div>
+	 <div class="give_rebates_list"> 最高学历：<span id="rebateedu"></span></div>
+	 <div class="give_rebates_list"> 工作经验：<span id="rebateexp"></span></div>
+	 <div class="give_rebates_list"> 联系手机：<span id="rebatetelphone"></span></div>
+	  <div class="give_rebates_list"> 联系邮箱：<span id="rebateemail"></span></div>
+	  
+		 <div class="give_rebates_tit">求职意向</div>
+
+	  <div class="give_rebates_list">期望城市： <span id="rebatecity"></span></div>
+	  <div class="give_rebates_list">期望薪资：<span id="rebatesalary"></span></div>
+	  <div class="give_rebates_list">工作性质：<span id="rebatetype"></span></div>
+	  <div class="give_rebates_list"> 到岗时间：<span id="rebatereport"></span></div>
+	  <div class="give_rebates_list_p"> 期望职位：<span id="rebatejob_classid"></span></div>
+		<div class="give_rebates_list_p">从事行业：<span id="rebatehy"></span></div>
+	 
+		 <div class="give_rebates_tit">推荐理由</div>
+	 <div class="give_rebates_textarea"> <textarea class="give_rebates_textarea_p" id="rebatecontent"></textarea></div>
+		</div>
+	</div>    
+</div>
+          <script>
+$(document).ready(function(){
+	$(".Com_table_cz").hover(function(){
+		var aid=$(this).attr("aid");
+		$("#statuslist"+aid).show();	
+		$(".Com_table_hover").attr("class","");
+		$("#status_"+aid).attr("class","Com_table_hover");
+	},function(){
+		var aid=$(this).attr("aid");
+		$("#statuslist"+aid).hide();	
+	})   
+})
+function show_div(id){
+	$("#statusli"+id).addClass("Com_table_list"); 
+	$("#statuslist"+id).show();
+}
+function reply_msg(id,name,content){
+	$(".Reply_cont").html('<div class="Reply_cont_name"> 推荐人：<font color="#0066FF">'+name+'</font></div>'+content);
+	$("#msgid").val(id);
+	$.layer({
+		type : 1,
+		title :'回复留言', 
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['460px','320px'],
+		page : {dom :"#reply"}
+	});
+} 
+function check_msg(){
+	if($("#content").val()==""){
+		layer.msg('回复内容不能为空！', 2, 8);return false; 
+	}	
+}
+function click_status(status,name,id){
+	$.post("index.php?c=give_rebates&act=set",{id:id,status:status},function(data){
+		$("#statuslist"+id).hide();
+		$("#status"+id).html(name);	
+		var data=eval('('+data+')');
+		if(data.url=='1'){
+			parent.layer.msg(data.msg, Number(data.tm), Number(data.st),function(){location.reload();});return false;
+		}else{
+			parent.layer.msg(data.msg, Number(data.tm), Number(data.st),function(){location.href=data.url;});return false;
+		}
+	})
+}
+function move_status(status,id){
+	$("#statuslist"+id+" span").attr("class","");
+	$("#status"+status+"_"+id).attr("class","Com_table_list_box_atc");
+}
+</script> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

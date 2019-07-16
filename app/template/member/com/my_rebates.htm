@@ -1,0 +1,106 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody">
+{yun:}include file="$comstyle/left.htm"{/yun}
+<div class=right_box>
+  <div class=admincont_box >
+  
+  <div class="com_tit"><span class="com_tit_span">猎头悬赏</span></div>
+  <div class="job_list_tit">
+         <ul class="">
+         <li {yun:}if $smarty.get.c=="my_rebates"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=my_rebates">我推荐的悬赏</a></li>
+         <li {yun:}if $smarty.get.c=="give_rebates"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=give_rebates">推荐给我的人才</a></li>
+        </ul>
+         </div>
+     <div class="com_body"> 
+    <div id="reply" style="display:none" class="reply_hf_ly">
+      <div style="text-align:center">
+        <div class="Reply_cont_h1"><em>查看回复：</em><span onclick="$('#reply').hide();">取消</span></div>
+        <div>
+          <div class="Reply_cont">
+            <div class="Reply_cont_name"></div>
+          </div>
+          <textarea cols="60" rows="5" name="reply" id="content" class="textarea_Reply_cont"></textarea>
+        </div> 
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class=admin_note2>
+    <div class="com_Release_job mt20">
+      <table class="com_table" >
+      {yun:}if $rows{/yun}
+        <tr>
+          <th width="12%"  align="center" bgcolor="#F7FAFF">职位名称</th>
+          <th width="11%" align="center" bgcolor="#F7FAFF">企业名称</th>
+          <th width="14%" align="center" bgcolor="#F7FAFF">悬赏金额</th>
+          <th width="16%" align="center" bgcolor="#F7FAFF">时间</th>
+          <th width="8%" align="center" bgcolor="#F7FAFF">回复</th>
+          <th width="9%" align="center" bgcolor="#F7FAFF">状态</th>
+           <th width="10%" align="center" bgcolor="#F7FAFF">操作</th>
+        </tr>
+        {yun:}/if{/yun}
+        {yun:}foreach item=row from=$rows{/yun}
+        <tr>
+          <td  height="26"align="center" bgcolor="#FFFFFF"> {yun:}if $row.type==2{/yun} 
+        		<a href="{yun:}url m=lietou c=jobcomshow id='`$row.job_id`'{/yun}" target="_blank" class="List_Title_span_com"  title="{yun:}$row.job_name{/yun}">{yun:}$row.job_name{/yun}</a> <font color="#FF0000">[企业]</font> 
+        		{yun:}else{/yun} 
+        		<a href="{yun:}url m=lietou c=jobshow id='`$row.job_id`'{/yun}" target="_blank" class="List_Title_span_com" title="{yun:}$row.job_name{/yun}">{yun:}$row.job_name{/yun}</a> <font color="#FF0000">[猎头]</font> 
+        		{yun:}/if{/yun} </td>
+          <td  height="26"align="center" bgcolor="#FFFFFF"> {yun:}if $row.type==3{/yun} 
+					<a href="{yun:}url m=lietou c=headhunter uid='`$row.job_uid`'{/yun}" target="_blank" title="{yun:}$row.com_name{/yun}" class="List_Ope_a">{yun:}$row.com_name{/yun} </a> 
+				{yun:}else{/yun} 
+				<a href="{yun:}url m=company c=show id='`$row.job_uid`'{/yun}" target="_blank" title="{yun:}$row.com_name{/yun}"class="List_Ope_a">{yun:}$row.com_name{/yun} </a> 
+				{yun:}/if{/yun}</td>
+          <td  height="26"align="center" bgcolor="#FFFFFF">{yun:}$row.rebates{/yun}</td>
+          <td  height="26"align="center" bgcolor="#FFFFFF">{yun:}$row.datetime|date_format:'%Y-%m-%d %H:%M'{/yun}</td>
+          <td align="center" bgcolor="#FFFFFF">{yun:}if $row.reply!=""{/yun}<font onclick="reply_msg('{yun:}$row.reply{/yun}','{yun:}$row.datetime|date_format:'%Y-%m-%d %H:%M'{/yun}');" style="cursor:pointer" color="#FF0000">已回复</font> {yun:}else{/yun}<span>未回复</span>{yun:}/if{/yun}</td>
+          <td  height="26"align="center" bgcolor="#FFFFFF">{yun:}if $row.status=="0"{/yun}未查看{yun:}elseif $row.status=="1"{/yun}已查看{yun:}elseif $row.status=="2"{/yun}已试用{yun:}elseif $row.status=="3"{/yun}未通过{yun:}elseif $row.status=="4"{/yun}已返利{yun:}/if{/yun}</td>
+        <td height="26"align="center" bgcolor="#FFFFFF"><a href="javascript:void(0);" onclick="showrebate('{yun:}$row.id{/yun}','{yun:}url m=ajax c=showrebates{/yun}')"class="com_bth cblue">查看</a><a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=my_rebates&act=del&id={yun:}$row.id{/yun}');" class="com_bth cblue">删除</a></td>
+             </tr>
+        {yun:}/foreach{/yun}
+      </table>
+	    {yun:}if !$rows{/yun}
+         <div class="msg_no">
+          <p> 您还没有推荐猎头悬赏记录！</p>
+         <a href="{yun:}url m=lietou c=post{/yun}" class="com_msg_no_bth com_submit" target="_blank">我要推荐猎头悬赏</a>
+        </div>
+		{yun:}/if{/yun}
+      <div class="diggg" style="margin-top:10px;">{yun:}$pagenav{/yun}</div>
+  <div id="showrebate" style="display:none">
+     <div class="rebates_user_cont" style="padding:10px;">
+     <div class="rebates_user" style="width:100%;float:left;">   <div class="com_detail_jb"><span class="com_detail_l">基本信息</span></div></div>
+ <div class="rebates_user" style="width:49%;float:left;">  <i class="rebates_nm"> 姓名：</i><span class="rebates_name" id="rebateuname"></span></div>
+ <div class="rebates_user"> <i class="rebates_nm">性别：</i><span id="rebatesex"></span></div>
+ <div class="rebates_user" style="width:49%;float:left;">  <i class="rebates_nm">出生年月：</i><span id="rebatebirthday"></span></div>
+ <div class="rebates_user"><i class="rebates_nm"> 最高学历：</i><span id="rebateedu"></span></div>
+ <div class="rebates_user" style="width:49%;float:left;"> <i class="rebates_nm">工作经验：</i><span id="rebateexp"></span></div>
+ <div class="rebates_user" style="width:49%;float:left;"><i class="rebates_nm"> 联系手机：</i><span id="rebatetelphone"></span></div>
+  <div class="rebates_user" style="width:49%;float:left;"> <i class="rebates_nm">联系邮箱：</i><span id="rebateemail"></span></div>
+  
+<div class="rebates_user" style="width:100%;float:left;">   <div class="com_detail_jb"><span class="com_detail_l">求职意向</span></div></div>
+ <div class="rebates_user"><i class="rebates_nm"> 从事行业：</i><span id="rebatehy"></span></div>
+ <div class="rebates_user"><i class="rebates_nm"> 期望城市：</i> <span id="rebatecity"></span></div>
+ <div class="rebates_user"><i class="rebates_nm"> 期望薪资：</i><span class="rebates_rage" id="rebatesalary"></span></div>
+ <div class="rebates_user"><i class="rebates_nm"> 工作性质：</i><span id="rebatetype"></span></div>
+ <div class="rebates_user"><i class="rebates_nm"> 到岗时间：</i><span id="rebatereport"></span></div>
+ <div class="rebates_user">  <i class="rebates_nm"> 期望职位：</i><span id="rebatejob_classid"></span>
+ 
+<div class="rebates_user" style="width:100%;float:left;">   <div class="com_detail_jb"><span class="com_detail_l">推荐理由</span></div></div>
+ <div class="rebates_user_box"> <textarea class="rebates_user_box_bx" id="rebatecontent"></textarea></div>
+    </div>
+</div>    </div>
+      <script>
+function reply_msg(content,time){
+$("#reply").show();
+$("#content").val(content);
+$(".Reply_cont_name").html("回复时间："+time);
+} 
+</script> 
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

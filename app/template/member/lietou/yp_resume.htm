@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+
+</head>
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap"> {yun:}include file="$lietoustyle/left.htm"{/yun}
+    <div class="m_inner_youb fr">
+        <div class="clear"></div>
+                   <div class="lt_m_tit"><span class="lt_m_tit_s">应聘来的简历</span></div>
+           <div class="lt_m_box">
+          <div class="lt_m_table">
+          <table>
+                <tbody>
+      {yun:}if !empty($list){/yun}
+        <tr>                    <th width="15">&nbsp;</th >         
+                 <th scope="col" ><span>姓名</span></th>
+                  <th scope="col"><span>期望行业</span></th>
+                  <th scope="col" ><span>意向职位</span></th>
+                  <th scope="col" ><span>工作地点</span></th>
+                 <th scope="col" ><span>  更新时间</span></th>
+                  <th scope="col">操作</th>
+                </tr>
+         {yun:}/if{/yun}
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php?c=yp_resume&act=del" target="supportiframe" method="post" id='myform'>
+        
+        {yun:}if !empty($list){/yun}
+         {yun:}foreach item=v from=$list{/yun}
+          <tr>   <td width="15"> <input type="checkbox" name="delid[]" value="{yun:}$v.id{/yun}" class="m_cont_check"> </td >                          
+                 <td scope="col" >
+                 <a target="_blank" class="m_name" href="{yun:}url m=resume c=show id=$v.id type=2{/yun}">{yun:}$v.name|mb_substr:0:8:"utf-8"{/yun}</a></td>
+                  <td scope="col" align="center"><span>{yun:}$v.hy{/yun}</span></td>
+                  <td scope="col"  align="center"><span>{yun:}$v.joblist{/yun}</span></td>
+                  <td scope="col"  align="center"><span>{yun:}$v.cityid{/yun} {yun:}$v.three_cityid{/yun}</span></td>
+                 <td scope="col"  align="center"><span>  {yun:}$v.lastupdate|date_format:"%Y-%m-%d"{/yun}</span></td>
+                  <td scope="col" align="center"><a  href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=yp_resume&act=del&del={yun:}$v.id{/yun}');" class="cont_del">删除</a></td>
+                </tr>
+                
+         
+          {yun:}/foreach{/yun}
+          {yun:}else{/yun}
+         <tr>
+                    <td colspan="7" class="lt_m_table_end">  <div class="member_no_content">你还没有应聘来的简历<div class="lt_src"><a href="index.php?c=search_resume">主动搜索人才</a></div></div>
+          {yun:}/if{/yun}
+           </div></td>
+                </tr>
+         {yun:}if !empty($list){/yun}
+        <tr>
+                    <td colspan="7" class="lt_m_table_end"> <div class="m_browse_del m_browse_del01">
+        <input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)' class="m_del_che">
+          全选<a href="javascript:void(0);" onclick="return really('delid[]');">批量删除</a> </div>
+        
+        <div class="pages">{yun:}$pagenav{/yun}</div></td>
+                </tr>
+        {yun:}/if{/yun}
+        </form>
+         </tbody></table>
+    
+    </div>
+    <div class="clear"></div>
+  </div>
+</div></div>
+<div class="clear"></div>
+</div>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

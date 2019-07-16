@@ -1,0 +1,97 @@
+
+<!--职位弹出框-->
+<div class="sPopupDiv" id="jobdiv" style="width: 705px; display:none;">
+  <div class="sPopupTitle290">
+    <h1 class="student_tips_h1"> <span>已选择</span> </h1>
+    <div class="dialog-content" style="width:500px;">
+      <ul class="selected clearfix"  id="jobname">
+        {yun:}foreach item=v from=$job{/yun}
+        <li id="job_{yun:}$v{/yun}"> <a class="clean g3" href="javascript:void(0);">
+          <input id="chk_{yun:}$v{/yun}" type="hidden" name="job" value="{yun:}$v{/yun}+{yun:}$ltjob_name[$v]{/yun}" checked="" onclick="box_delete2('{yun:}$v{/yun}');" class="lt_joadd_chk">
+          <span class="text">{yun:}$ltjob_name[$v]{/yun}</span> <span class="delete" onclick="box_delete('{yun:}$v{/yun}');">移除</span> </a> </li>
+        {yun:}/foreach{/yun}
+      </ul>
+    </div>
+    <div class="tips_ture"> <a class="tips_sub1" onclick="input_check_show()" href="javascript:;">确定</a> <a class="tips_sub2" onclick="Close('hydiv')" href="javascript:;">取消</a> </div>
+  </div>
+  <div class="clear"></div>
+  <div class="sPopupBlock">
+    <table id="jobTab" width="100%" cellspacing="0" cellpadding="0" border="0">
+      <tbody>
+      
+      {yun:}foreach item=v key=j from=$ltjob_index{/yun}
+      <tr {yun:}if $j%2=="0"{/yun}class="zebraCol0"{yun:}else{/yun}class="zebraCol1"{yun:}/if{/yun}>
+        <td class="leftClass jobtypeLCla" valign="middle" nowrap="nowrap">{yun:}$ltjob_name[$v]{/yun}</td>
+        <td class="jobtypeItems"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+              <tr> {yun:}foreach item=val key=key from=$ltjob_type[$v]{/yun}
+                <td class="blurItem" width="33%"><span class="availItem">
+                  <input type="checkbox" id="zn{yun:}$val{/yun}" value="{yun:}$val{/yun}+{yun:}$ltjob_name[$val]{/yun}" onclick="checked_input('{yun:}$val{/yun}','job','jobname');" {yun:}if in_array($val,$job){/yun}checked="checked"{yun:}/if{/yun}/>
+                  {yun:}$ltjob_name[$val]{/yun}</span></td>
+                {yun:}if ($key+1)%3=="0"{/yun} </tr>
+              <tr> {yun:}/if{/yun}
+                {yun:}/foreach{/yun} </tr>
+            </tbody>
+          </table></td>
+      </tr>
+      {yun:}/foreach{/yun}
+      <tr>
+        <td></td>
+        <td><div class="sButtonBlock" style="width:auto"> <a class="orgButton" onclick="input_check_show()" href="javascript:;">确定</a> <a class="blueButton" onclick="Close('jobdiv')" href="javascript:;">取消</a> </div></td>
+      </tr>
+        </tbody>
+      
+    </table>
+    <div class="clear"></div>
+  </div>
+</div>
+<!--职位弹出框--> 
+
+<!--行业弹出框-->
+<div class="sPopupDiv" id="hydiv" style="width: 705px; visibility: visible; display:none; top:20px;">
+  <div class="sPopupTitle290">
+    <h1 class="student_tips_h1"> <span>已选择</span> </h1>
+    <div class="dialog-content" style="width:500px;">
+      <ul class="selected clearfix" id="hyname">
+        {yun:}foreach item=v from=$hy{/yun}
+        <li id="hy_{yun:}$v{/yun}"> <a class="clean g3" href="javascript:void(0);">
+          <input id="chk_{yun:}$v{/yun}" type="hidden" name="hy" value="{yun:}$v{/yun}+{yun:}$lthy_name[$v]{/yun}" checked="" onclick="box_delete2('{yun:}$v{/yun}');" class="lt_joadd_chk">
+          <span class="text">{yun:}$lthy_name[$v]{/yun}</span> <span class="delete" onclick="box_delete2('{yun:}$v{/yun}');">移除</span> </a> </li>
+        {yun:}/foreach{/yun}
+      </ul>
+    </div>
+    <div class="tips_ture"> <a class="tips_sub1" onclick="input_check_show2()" href="javascript:;">确定</a> <a class="tips_sub2" onclick="Close('hydiv')" href="javascript:;">取消</a> </div>
+  </div>
+  <div class="clear"></div>
+  <div class="clear"></div>
+  <div class="sPopupBlock">
+    <table id="jobTab" width="100%" cellspacing="0" cellpadding="0" border="0">
+      <tbody>
+      
+      {yun:}foreach item=v key=j from=$lthy_index{/yun}
+      <tr {yun:}if $j%2=="0"{/yun}class="zebraCol0"{yun:}else{/yun}class="zebraCol1"{yun:}/if{/yun}>
+        <td class="leftClass jobtypeLCla" valign="middle" nowrap="nowrap">{yun:}$lthy_name[$v]{/yun}</td>
+        <td class="jobtypeItems"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+              <tr> {yun:}foreach item=val key=key from=$lthy_type[$v]{/yun}
+                <td class="blurItem" width="33%"><span class="availItem">
+                  <input type="checkbox" id="hy{yun:}$val{/yun}" value="{yun:}$val{/yun}+{yun:}$lthy_name[$val]{/yun}" onclick="checked_input2('{yun:}$val{/yun}');" {yun:}if in_array($val,$hy){/yun}checked="checked"{yun:}/if{/yun}/>
+                  {yun:}$lthy_name[$val]{/yun}</span></td>
+                {yun:}if ($key+1)%3=="0"{/yun} </tr>
+              <tr> {yun:}/if{/yun}
+                {yun:}/foreach{/yun} </tr>
+            </tbody>
+          </table></td>
+      </tr>
+      {yun:}/foreach{/yun}
+      <tr>
+        <td></td>
+        <td><div class="sButtonBlock" style="width:auto"> <a class="orgButton" onclick="input_check_show2()" href="javascript:;">确定</a> <a class="blueButton" onclick="Close('hydiv')" href="javascript:;">取消</a> </div></td>
+      </tr>
+        </tbody>
+      
+    </table>
+    <div class="clear"></div>
+  </div>
+</div>
+<!--行业弹出框--> 

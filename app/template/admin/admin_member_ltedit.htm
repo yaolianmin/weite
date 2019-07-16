@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/ltindustry.cache.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/ltjob.cache.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/class.public.css?v={yun:}$config.cachecode{/yun}" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="js/check_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+<div class="infoboxp">
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">猎头会员信息</div>
+<div class="admin_new_tip_list">
+  <span class="admin_new_comsj">{yun:}if is_array($com_info){/yun}
+登录次数：{yun:}$com_info.login_hits{/yun} <font color="gray"></font></td>
+          {yun:}/if{/yun} 
+</span>
+   <span class="admin_new_comsj"> {yun:}if is_array($com_info){/yun}注册IP：{yun:}$com_info.reg_ip{/yun} 
+          {yun:}/if{/yun} </span>
+  <span class="admin_new_comsj">{yun:}if is_array($com_info){/yun}注册时间：{yun:}$com_info.reg_date|date_format:'%Y-%m-%d'{/yun} 
+          {yun:}/if{/yun} </span>
+   <span class="admin_new_comsj"> {yun:}if is_array($com_info){/yun}登录IP：{yun:}$com_info.login_ip{/yun}   {yun:}/if{/yun} </span>
+      <span class="admin_new_comsj"> 
+    {yun:}if is_array($com_info){/yun}
+     最近登录时间：{yun:}$com_info.login_date|date_format:'%Y-%m-%d'{/yun} <font color="gray"></font></td>
+          {yun:}/if{/yun} </span></div>
+          
+</div>
+</div>
+<div class="clear"></div>
+
+ 
+  <script>
+var weburl="{yun:}$config.sy_weburl{/yun}";
+function editrat(){
+	var rat = $("#rating_name_val").val();
+	var uid = $("#uid").val();
+	var pytoken = $('#pytoken').val();
+	$.post("index.php?m=admin_lt_member&c=rating",{rat:rat,uid:uid,pytoken:pytoken},function(data){
+		if(data==1){ 
+			parent.layer.msg('操作成功！', 2, 9);
+		}else{ 
+			parent.layer.msg('网络繁忙，请稍后再试！', 2, 8);
+		}
+	
+	})
+}
+function check_lt(){
+	var phone=$.trim($("#phone").val());
+	var moblie=$.trim($("#moblie").val());
+	var email=$.trim($("#email").val());
+	if(email!='' && check_email(email)==false){
+		parent.layer.msg('请输入正确的邮箱！', 2, 8);return false;
+	}
+	if(moblie==''){
+		parent.layer.msg('请输入联系电话！', 2, 8);return false;
+	}
+	if(moblie!='' && isjsMobile(moblie)==false){
+		parent.layer.msg('请输入正确的联系电话！', 2, 8);return false;
+	}
+	if(phone!='' && isjsTell(phone)==false){
+		parent.layer.msg('请输入正确的公司座机！', 2, 8);return false;
+	}
+}
+</script>
+ <div class="tag_box mt10"> 
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form class="layui-form" name="myform" target="supportiframe" action="index.php?m=admin_lt_member&c=edit" method="post" onsubmit="return check_lt()">
+      <table width="100%" class="table_form" >
+       <tr class="admin_table_trbg">
+          <th colspan="4" bgcolor="#f0f6fb"><span class="admin_bold">会员信息</span></th>
+    </tr>
+        <tr>
+          <th width="160" >会员级别：</th>
+          <td>        
+         
+            	
+				 <div class="layui-input-block" style="float:left">
+					<div class="layui-input-inline">
+						<select name="rating_name"  id="rating_name" lay-verify="" >
+						<option>请选择</option>
+						 {yun:}foreach from=$rating_list item=v{/yun}
+							<option value="{yun:}$v.id{/yun},{yun:}$v.name{/yun}"
+							 {yun:}if $statis.rating_name==$v.name{/yun}
+							  selected
+								  {yun:}/if{/yun}
+								  > {yun:}$v.name{/yun}
+								</option>
+							  {yun:}/foreach{/yun}
+							</select>
+						  </div>
+						</div>
+				  
+            
+            <a class="rate_xg" href="javascript:;" onClick="editrat();">修改会员级别</a></td>
+        
+            </tr>
+
+        <tr class="admin_table_trbg" >
+          <th  >用户名：</th>
+          <td ><input type="text"  value="{yun:}$com_info.username{/yun}" name="username" id="username" class="input-text">
+            <a href="javascript:;" onClick="editname('{yun:}$com_info.username{/yun}');">修改用户名</a></td>
+            </tr>
+        <tr>
+          <th>密码：</th>
+          <td><input type="text" value="" name="password" class="input-text">
+            <span class="admin_web_tip">不修改请留空!</span></td>
+             </tr>
+
+      <tr class="admin_table_trbg">
+          <th colspan="4" bgcolor="#f0f6fb"><span class="admin_bold">基本信息</span></th>
+          <tr class="admin_table_trbg" >
+          <th>真实姓名：</th>
+          <td><input type="text" size="30" name="realname" class="input-text" value="{yun:}$row.realname{/yun}"></td>
+            </tr><tr>  <th>所属公司：</th>
+          <td><input type="text" size="45" name="com_name" class="input-text" value="{yun:}$row.com_name{/yun}"></td>
+        </tr>
+        <tr>
+          <th>联系电话：</th>
+          <td><input type="text" value="{yun:}$com_info.moblie{/yun}" name="moblie" id="moblie"class="input-text" onKeyUp="this.value=this.value.replace(/[^0-9-.]/g,'')" maxlength="11">
+            <font color="gray"></font></td>
+             </tr>
+
+      
+
+        <tr>
+          <th>公司座机：</th>
+          <td><input type="text" size="30" name="phone" id="phone"class="input-text" value="{yun:}$row.phone{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9-.]/g,'')" ></td>
+              </tr><tr class="admin_table_trbg" >
+          <th>E-mail：</th>
+          <td><input type="text" value="{yun:}$com_info.email{/yun}" name="email" id="email" class="input-text">
+            <font color="gray"></font></td>
+             </tr>
+<tr><th>目前所在地：</th>
+          <td>
+      		 
+					  <div class="layui-input-inline">
+						<select name="provinceid" id="provinceid" lay-filter="citys">
+						  <option value="">请选择</option>
+						  {yun:}foreach from=$city_index key=j item=v{/yun}
+						  <option value="{yun:}$v{/yun}" {yun:}if $row.provinceid == $v{/yun} selected{yun:}/if{/yun}
+							>{yun:}$city_name[$v]{/yun}
+						  </option>
+						  {yun:}/foreach{/yun}
+						</select>
+					  </div>
+					  <div class="layui-input-inline">
+						<select name="cityid" lay-filter="citys" id="cityid">
+						  <option value="">请选择</option>
+						  {yun:}foreach from=$city_type[$row.provinceid] key=j item=v{/yun}
+						  <option value="{yun:}$v{/yun}" {yun:}if $row.cityid==$v{/yun} selected{yun:}/if{/yun}
+							>{yun:}$city_name[$v]{/yun}
+						  </option>
+						  {yun:}/foreach{/yun}
+						</select>
+					  </div>
+					  <div class="layui-input-inline">
+						<select name="threecityid" lay-filter="threecityid" id="three_cityid">
+						  <option value="">请选择</option>
+						  {yun:}foreach from=$city_type[$row.cityid] key=j item=v{/yun}
+						  <option value="{yun:}$v{/yun}" {yun:}if $row.threecityid==$v{/yun} selected{yun:}/if{/yun}
+							>{yun:}$city_name[$v]{/yun}
+						  </option>
+						  {yun:}/foreach{/yun}
+						</select>
+					  </div>
+					
+            
+            
+            
+            
+            
+            
+            </td>
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>工作经验：</th>
+          <td>
+		
+				 <div class="layui-input-block">
+					<div class="layui-input-inline">
+						<select name="exp"  id="exp" lay-verify="" >
+						<option>请选择</option>
+						 {yun:}foreach from=$ltdata.lt_exp item=v{/yun}
+							<option value="{yun:}$v{/yun}"
+							 {yun:}if $row.exp==$v{/yun}
+							  selected
+								  {yun:}/if{/yun}
+								  > {yun:}$ltclass_name[$v]{/yun}
+								</option>
+							  {yun:}/foreach{/yun}
+							</select>
+						  </div>
+						</div>
+				  
+			</td>
+             </tr>
+		<tr> <th>目前头衔：</th>
+          <td>
+			
+		
+				 <div class="layui-input-block">
+					<div class="layui-input-inline">
+						<select name="title"  id="title" lay-verify="" >
+						<option>请选择</option>
+						 {yun:}foreach from=$ltdata.lt_title item=v{/yun}
+							<option value="{yun:}$v{/yun}"
+							 {yun:}if $row.title==$v{/yun}
+							  selected
+								  {yun:}/if{/yun}
+								  > {yun:}$ltclass_name[$v]{/yun}
+								</option>
+							  {yun:}/foreach{/yun}
+							</select>
+						  </div>
+						</div>
+			
+			</td>
+        </tr>
+         <tr class="admin_table_trbg" >
+          <th>擅长行业：</th>
+          <td>
+          
+          <div class="admin_td_h">
+                <input id="hyids" type="hidden" name='hy' value="{yun:}$row.hy{/yun}">
+                <input id="hynames" class="expect_text"  type="button" onclick="index_industry(5, '#hynames', '#hyids', '', '{yun:}$row.hy{/yun}');" style=" float:left;" value="{yun:}if $hyname{/yun}{yun:}$hyname{/yun}{yun:}else{/yun}请选择行业{yun:}/if{/yun}">
+                
+                
+              </div></td>
+            </tr>
+		<tr>  <th>擅长职位：</th>
+          <td><div class="admin_td_h">
+                <input id="jobids" type="hidden" name='job' value="{yun:}$row.job{/yun}">
+                <input id="jobnames" class="expect_text"  type="button" onclick="index_job(5, '#jobnames', '#jobids','','{yun:}$row.job{/yun}');" style=" float:left;" value="{yun:}if $jobname{/yun}{yun:}$jobname{/yun}{yun:}else{/yun}请选择职位{yun:}/if{/yun}">
+              </div></td>
+        </tr>
+        <tr>
+          <th>发布职位数：</th>
+          <td><input type="text" name="lt_job_num" size="15" class="input-text" value="{yun:}$statis.lt_job_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+            </tr>
+		<tr>  <th>刷新职位数：</th>
+          <td><input type="text" name="lt_breakjob_num" size="15" class="input-text" value="{yun:}$statis.lt_breakjob_num{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+          </tr>
+        <tr class="admin_table_trbg" >
+          <th>下载简历数：</th>
+                  <td colspan="3"><input type="text" name="lt_down_resume" size="15" class="input-text" value="{yun:}$statis.lt_down_resume{/yun}" onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"/></td>
+        
+        </tr>
+        <tr>
+          <th>合作过的客户：</th>
+          <td colspan="3"><textarea name="client" id="client" cols="70" rows="4" class="admin_comdit_textarea">{yun:}$row.client{/yun}</textarea></td>
+    
+        </tr>
+        <tr class="admin_table_trbg" >
+          <th>顾问介绍：</th>
+                   <td colspan="3"><textarea name="content" id="content" cols="70" rows="6" class="admin_comdit_textarea">{yun:}$row.content{/yun}</textarea></td>
+       
+        </tr>
+        <tr>
+          <th>状态：</th>
+              <td colspan="3">
+			 
+			<div class="layui-form-item">
+            <div class="layui-input-block">
+                      <input name="status" id="status0" {yun:}if $com_info.status=='0'{/yun}checked{yun:}/if{/yun} value="0" title="未审核" type="radio"/>
+					<input name="status" id="status1" {yun:}if $com_info.status=='1'{/yun}checked{yun:}/if{/yun} value="1" title="已审核" type="radio"/>
+					<input name="status" id="status2" {yun:}if $com_info.status=='2'{/yun}checked{yun:}/if{/yun} value="2" title="锁定" type="radio"/>
+                 </div>
+           </div>
+            <font color="gray"></font></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><input type="hidden" name="uid" value="{yun:}$com_info.uid{/yun}" id="uid"/>
+            <input type="hidden" name="lasturl" value="{yun:}$lasturl{/yun}">
+            <input class=" layui-btn layui-btn-normal" type="submit" name="com_update" value="&nbsp;修 改&nbsp;" />
+            <input class="layui-btn layui-btn-normal" type="reset" name="reset" value="&nbsp;重 置 &nbsp;" /></td>
+          
+        </tr>
+      </table>
+      <input type="hidden" id='pytoken' name="pytoken" value="{yun:}$pytoken{/yun}">
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+var weburl="{yun:}$config.sy_weburl{/yun}";
+var form ,url = weburl+"/index.php?m=ajax&c=get_city_option";
+
+  layui.use(['layer', 'form'], function(){
+   form = layui.form;
+   var $ = layui.$;
+
+   form.on('select(fz_type)', function(data){
+      if(data.value == 1){
+        $("#fz_type_1").show();
+        $("#fz_type_2").hide();
+      }else{
+        $("#fz_type_2").show();
+        $("#fz_type_1").hide();
+      }
+    });
+  });//end layui.use()
+</script>
+<script language=javascript src='{yun:}$config.sy_weburl{/yun}/data/plus/city.cache.js?v={yun:}$config.cachecode{/yun}'></script>
+<script language=javascript src='{yun:}$config.sy_weburl{/yun}/js/city.js?v={yun:}$config.cachecode{/yun}'></script>
+</body>
+</html>

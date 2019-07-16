@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="tabs_info">
+	<ul>
+		<li><a href="index.php?m=admin_comset">企业设置</a></li>
+		<li><a href="index.php?m=admin_comset&c=logo">头像设置</a></li> 
+		<li><a href="index.php?m=admin_comset&c=set">{yun:}$config.integral_pricename{/yun}设置</a></li> 
+		<li><a href="index.php?m=admin_comset&c=comspend">消费设置</a></li>  
+		<li><a href="index.php?m=admin_comset&c=rating">套餐设置</a></li>  
+		<li class="curr"><a href="index.php?m=admin_comset&c=reward">职位推广设置</a></li> 
+	</ul>
+</div>
+    
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">该页面展示了网站企业职位推广设置管理</div>
+</div>
+</div>
+<div class="clear"></div>
+<div class="main_tag mt10">
+<div class="tag_box"><div>
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form action="index.php?m=admin_comset&c=savereward" method="post" enctype= "multipart/form-data" target="supportiframe" class="layui-form">
+<table width="100%" class="table_form">
+  <tr class="admin_table_trbg">
+         <th width="260" bgcolor="#f0f6fb"><span class="admin_bold">参数说明</span></th>
+          <td bgcolor="#f0f6fb"><span class="admin_bold">参数值</span></td>
+    </tr>
+	 <tr>
+		<th width="220">手机认证才能申请悬赏职位：</th>
+		<td>
+        <div class="iradio_flat_height">
+          <div class="layui-form-item">
+            <div class="layui-input-inline">
+              <input type="checkbox" name="sy_reward_tel_switch" lay-skin="switch" lay-text="开启|关闭"
+                {yun:}if $config.sy_reward_tel=="1"{/yun}
+               checked
+                {yun:}/if{/yun}
+               lay-filter="sy_reward_tel_switch"
+                />
+              <input type="hidden" name="sy_reward_tel" value="{yun:}$config.sy_reward_tel{/yun}"/>
+              <span class="admin_web_tip">注:开启后只有手机经过认证的求职者才可申请悬赏职位</span>
+            </div>
+          </div>
+        </div>
+   	</td>
+	</tr>
+	<tr class="admin_table_trbg">
+		<th width="220">同时申请职位：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="sy_reward_sqnum" id="sy_reward_sqnum" value="{yun:}$config.sy_reward_sqnum{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>份 &nbsp;<span class="admin_web_tip">说明：求职者同时可申请悬赏职位的最大数量，计数不包含已结束或已取消的记录</span></td>
+	</tr>
+	 <tr class="admin_table_trbg">
+		<th width="220">悬赏流程期限：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="sy_reward_hour" id="sy_reward_hour" value="{yun:}$config.sy_reward_hour{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>小时 <span class="admin_web_tip">说明：设定预定义期限，如企业或求职者在规定期限内未回应，则对方有权终止悬赏</span></td>
+	</tr>
+	
+	<tr class="admin_table_trbg">
+		<th width="220">最低提现额度：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="sy_withdraw_minmoney" id="sy_withdraw_minmoney" value="{yun:}$config.sy_withdraw_minmoney{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>元 &nbsp;<span class="admin_web_tip">说明：必须超过相应金额才允许提现</span></td>
+	</tr>
+
+	<tr class="admin_table_trbg">
+		<th width="220">提现审核额度：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="sy_withdraw_money" id="sy_withdraw_money" value="{yun:}$config.sy_withdraw_money{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>元 &nbsp;<span class="admin_web_tip">说明：超过规定金额必须后台管理员审核后才可提现</span></td>
+	</tr>
+	
+	<tr class="admin_table_trbg">
+		<th width="220">提现次数：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="sy_withdraw_num" id="sy_withdraw_num" value="{yun:}$config.sy_withdraw_num{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>次 &nbsp;<span class="admin_web_tip">说明：设每个账户单日可提现次数</span></td>
+	</tr>
+   <tr class="admin_table_trbg">
+		<th width="220">提现手续费：</th>
+		<td><input class="input-text tips_class input_text_rp" type="text" name="sy_withdraw_pound" id="sy_withdraw_pound" value="{yun:}$config.sy_withdraw_pound{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/>% &nbsp;<span class="admin_web_tip">说明：每次提现扣除的手续费比例</span></td>
+	</tr>
+	 <tr class="admin_table_trbg">
+		<th width="160">分享赏金职位二维码：</th>
+		<td>
+		<button type="button" class="yun_bth_pic adminupload" lay-data="{name: 'sy_reward_sharelogo',imgid: 'imgreward'}">上传图片</button>
+		<input type="hidden" id="layupload_type" value="2"/>
+		<input type="hidden" id="upload_path" value="logo"/>
+		<input type="hidden" name="sy_reward_sharelogo" value="{yun:}$config.sy_reward_sharelogo{/yun}"/>
+        <img id="imgreward" src="{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_reward_sharelogo{/yun}" style="max-width:300px;_width:300px" {yun:}if !$config.sy_reward_sharelogo{/yun}class="none"{yun:}/if{/yun}>
+         &nbsp;<span class="admin_web_tip">说明：请将链接：{yun:}url m=wap c=reward a=share{/yun}  生成二维码</span>
+		 </td>
+		</tr>
+	<tr class="admin_table_trbg">
+		<td colspan="2" align="center">
+        <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+        <input class="layui-btn layui-btn-normal"  type="submit" name="config" value="提交" />&nbsp;&nbsp;
+        <input class="layui-btn layui-btn-normal" type="reset" value="重置" /></td>
+	</tr>
+</table>
+</form>
+</div>
+
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	var weburl = '{yun:}$config.sy_weburl{/yun}';
+	layui.use(['form'], function(){
+		var form = layui.form
+		,$ = layui.$;
+
+		form.on('switch(sy_reward_tel_switch)',function(data){
+		  var v = this.checked ? 1 : 0;
+		  $("input[name=sy_reward_tel]").val(v);
+		});
+	});
+</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui.upload.js?v={yun:}$config.cachecode{/yun}" type='text/javascript'></script> 
+</body>
+</html>

@@ -1,0 +1,84 @@
+{yun:}include file="$wapstyle/member/lheader.htm"{/yun}
+<div class="index_header">
+<div class="com_header_img"><div class="com_header_bg"><a href="index.php?c=uppic"><img src="{yun:}$user.photo_big{/yun}"  onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_lt_icon{/yun}',2);"></a></div></div> 	
+<div class="member_header_info">
+<div class="m_user_name">你好！{yun:}$username{/yun}</div>
+<div class="member_header_info_cz"><a href="index.php?c=uppic">修改头像</a><span class="member_header_info_line">|</span><a href="index.php?c=info">编辑</a><span class="member_header_info_line">|</span><a href="{yun:}url m=wap c=ltjob a=hunter uid=$uid{/yun}">访问主页</a></div>
+<div class="member_header_hy">{yun:}$statis.rating_name{/yun}  <a href="index.php?c=pay">充值</a></div>
+</div>
+</div>
+<section>
+<div class="m_index_msg">
+<dl class="m_index_msg_list">
+<a href="index.php?c=yp_resume">
+<dt>{yun:}$ypnum{/yun}</dt>
+<dd>应聘来的简历</dd>
+</a>
+</dl>
+<dl class="m_index_msg_list">
+<a href="index.php?c=job&s=1">
+<dt>{yun:}$jobnum{/yun}</dt>
+<dd>招聘中的职位</dd>
+</a>
+</dl>
+<dl class="m_index_msg_list">
+<a href="index.php?c=down_resume">
+<dt>{yun:}$downnum{/yun}</dt>
+<dd>下载简历记录</dd>
+</a>
+</dl>
+</div>
+</section>
+<div class="index_section">
+
+<section class="wap_member">
+<div class="wap_member_mrecord">
+
+<a href="index.php?c=job&s=1" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_job"></i>职位管理</a>
+<a href="javascript:void(0)" onclick="jobadd_url('{yun:}$addltjobnum{/yun}','{yun:}$config.integral_lt_job{/yun}','lietou','{yun:}$config.com_integral_online{/yun}','{yun:}$config.integral_proportion{/yun}');" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_fbjob"></i>发布新职位</a>
+</div>
+
+</section>
+<section class="wap_member">
+<div class="wap_member_mrecord">
+<a href="{yun:}url m=wap c=ltresume{/yun}" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_rck"></i>人才库</a>
+<a href="index.php?c=yp_resume" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_yp"></i>应聘来的简历</a>
+<a href="index.php?c=entrust_resume" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_wt"></i>委托来的简历</a>
+<a href="index.php?c=down_resume" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_yxz"></i>已下载的简历</a>
+<a href="index.php?c=look_resume" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_eye"></i>浏览过的简历</a>
+
+</div>
+
+</section>
+
+<section class="wap_member">
+<div class="wap_member_mrecord">
+<a href="index.php?c=rewardlog" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icontj"></i>赏金职位</a>
+<a href="index.php?c=talent" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_rck"></i>简历库</a>
+
+<a href="index.php?c=my_rebates" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icontj"></i>我推荐的悬赏</a>
+<a href="index.php?c=give_rebates" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_tj"></i>推荐给我的人才</a>
+<a href="index.php?c=reward_list" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_jf"></i>{yun:}$config.integral_pricename{/yun}兑换</a>
+<a href="{yun:}url m=wap c=ask{/yun}" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_wd"></i>我的问答</a>
+</div>
+</section>
+<section class="wap_member">
+<div class="wap_member_mrecord">
+<a href="index.php?c=mypay" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_rck"></i>账户管理</a>
+<a href="index.php?c=loglist" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_rck"></i>赏金收益</a>
+<a href="index.php?c=withdrawlist" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_rck"></i>提现记录</a>
+<a href="index.php?c=paylog" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_zh"></i>订单管理</a>
+<a href="index.php?c=binding" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_rz"></i>认证管理</a>
+<a href="index.php?c=passwd" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_xg"></i>修改密码</a>
+</div>
+
+</section>
+<section class="wap_member">
+<div class="wap_member_mrecord">
+<a href="javascript:;" onclick="islogout('{yun:}url m=wap c=loginout{/yun}','确认退出吗？');" class="wap_member_mrecord_list"><i class="lt_index_icon lt_index_icon_tc"></i>退出登录</a>
+</div>
+</section>
+</div>
+</div>
+
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

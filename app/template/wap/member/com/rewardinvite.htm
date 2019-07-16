@@ -1,0 +1,71 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_002.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$wap_style{/yun}/js/mobiscroll/mobiscroll_003.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/animate.min.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/mobiscroll/css/mobiscroll.css?v={yun:}$config.cachecode{/yun}" type="text/css"> 
+<script src="{yun:}$wap_style{/yun}/js/rewardpay.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script language="javascript"> 
+
+$(function () {
+	var currYear = (new Date()).getFullYear();
+	var opt = {
+		preset: 'date', //日期
+		theme: 'android-ics light', //皮肤样式
+		display: 'modal', //显示方式 
+		mode: 'scroller', //日期选择模式
+		dateFormat: 'yy-mm-dd', // 日期格式
+		setText: '确定', //确认按钮名称
+		cancelText: '取消',//取消按钮名籍我
+		dateOrder: 'yyyymmdd', //面板中日期排列式
+		dayText: '日', monthText: '月', yearText: '年',
+		endYear: currYear //结束年份
+	};
+	$("#intertime").mobiscroll('setDate', $("#intertime").val(), true).date(opt);  
+});
+</script>
+<div class="wap_member_comp_h1"><span>邀请面试</span></div> 
+<div class="wap_member_Receive">
+       <div class="com_box_yq" id='job_box' >
+       <div style="background:#fff;">
+        <dl class="resume-cont_wate_list">
+         <dt> <span class="city_01">面试职位：</span></dt>
+          <dd>
+          <div class="yq_in_selectOption" style="width:100%">
+          	{yun:}$job.name{/yun}
+          </div>
+          </dd>
+        </dl>
+		 <dl class="resume-cont_wate_list">
+          <dt> <span class="city_01">联系人：</span></dt>
+			<dd> <input   id='linkman' value='{yun:}$company.linkman{/yun}' class="invite_text"></dd>
+        </dl>
+       <dl class="resume-cont_wate_list">
+          <dt> <span class="city_01">联系电话：</span></dt>
+		  <dd>  <input id='linktel' value='{yun:}$company.linktel{/yun}' class="invite_text" onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')"></dd> 
+        </dl>
+	 <dl class="resume-cont_wate_list" >
+          <dt style="width:auto;"> <span class="city_01">面试时间：</span> </dt>
+            <dd><input id='intertime' class="invite_text"></dd> 
+        </dl>
+		 <dl class="resume-cont_wate_list">
+          <dt> <span class="city_01">面试地址：</span></dt>
+			<dd><input id='address' value='{yun:}$company.address{/yun}'class="invite_text"></dd> 
+        </dl>
+		<dl class="resume-cont_wate_list">
+			<dt><span class="city_01">面试备注：</span></dt>
+			<dd><textarea id="content"  class="textAreaMsg tip"></textarea></dd>  
+		</dl>
+      <dl class="resume-cont_wate_list" id="resume_job"> 
+        <dd>
+		
+		<input type="hidden" id="rewardid" value="{yun:}$reward.id{/yun}"> 
+		<input type="hidden" id="jobid" value="{yun:}$job.id{/yun}"> 
+
+		<input class="reinputText2" onclick="invite();" type="button" value="邀请面试"  ></dd>
+    </dl>
+   </div>
+ </div>
+</div> 
+</div> </div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

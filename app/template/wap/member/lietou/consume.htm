@@ -1,0 +1,25 @@
+{yun:}include file="$wapstyle/member/lheader.htm"{/yun} 
+<link rel="stylesheet" href="{yun:}$config.sy_weburl{/yun}/app/template/wap/css/yun_wap_member.css?v={yun:}$config.cachecode{/yun}" type="text/css"/>
+<ul class="member_ms">
+	<li><a href="index.php?c=paylog">订单管理</a>	</li>
+	<li class="member_ms_cur"><a href="index.php?c=consume">财务明细</a>	</li>
+</ul>
+<div class="wap_member_post_list">
+
+{yun:}foreach from=$rows item=log{/yun}
+<div class="com_member_hr">
+<div class="user_member_box">
+<div class="com_member_hr_p1"><span class="member_c9">流水单号：</span>{yun:}$log.order_id{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">{yun:}$config.integral_pricename{/yun}：</span>{yun:}$log.order_price{/yun}{yun:}if $log.type==2{/yun}元{yun:}else{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}{yun:}/if{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">时间：</span>{yun:}$log.pay_time{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">备注：</span>{yun:}$log.pay_remark{/yun}&nbsp;</div>
+</div>
+</div>
+{yun:}foreachelse{/yun} 
+<div class="wap_member_no">暂无相关信息</div>
+{yun:}/foreach{/yun} 
+
+</div>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

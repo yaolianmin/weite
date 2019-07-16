@@ -1,0 +1,109 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_w1200">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+    <div class="yun_m_rightbox fltR mt20 re">
+    
+      <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">我的悬赏</span> <i class="member_right_h1_icon user_bg"></i></div>
+      <div class="job_list_tit"> 
+		<ul class="">
+   	  <li class="job_list_tit_cur"><a href="index.php?c=rebates">我推荐的悬赏</a></li>
+      <li><a href="index.php?c=jobpack">我参与的悬赏</a></li>
+     </ul> 
+	</div>
+        <div id="gms_showclew"></div>
+        <div class="resume_box_list mt20">
+        {yun:}if !empty($rows){/yun}
+            <div class="rebates_tit ">
+                <div class="rebates_span rebates_jobname">职位名称</div>
+                <div class="rebates_span rebates_comname">企业名称</div>
+                <div class="rebates_span rebates_money">悬赏金额</div>
+                <div class="rebates_span rebates_time">时间</div>
+                <div class="rebates_span rebates_zt">状态</div>
+                <div class="rebates_span rebates_cz">操作</div>
+            </div>
+            {yun:}/if{/yun}
+            {yun:}foreach item=log from=$rows{/yun}
+            <div class="rebates_list">
+                <div class="rebates_span rebates_jobname">
+                 {yun:}if $log.type==2{/yun} 
+        		<a href="{yun:}url m=lietou c=jobcomshow id='`$log.job_id`'{/yun}" target="_blank" class="job_Consulting_jobname_a"  title="{yun:}$log.job_name{/yun}">{yun:}$log.job_name{/yun}</a> <font color="#FF0000">[企业]</font> 
+        		{yun:}else{/yun} 
+        		<a href="{yun:}url m=lietou c=jobshow id='`$log.job_id`'{/yun}" target="_blank" class="job_Consulting_jobname_a" title="{yun:}$log.job_name{/yun}">{yun:}$log.job_name{/yun}</a> <font color="#FF0000">[猎头]</font> 
+        		{yun:}/if{/yun} 
+                   </div>
+                <div class="rebates_span rebates_comname">
+                 {yun:}if $log.type==3{/yun} 
+					<a href="{yun:}url m=lietou c=headhunter uid='`$log.job_uid`'{/yun}" target="_blank" title="{yun:}$log.com_name{/yun}" class="List_Ope_a">{yun:}$log.com_name{/yun} </a> 
+				{yun:}else{/yun} 
+				<a href="{yun:}url m=company c=show id='`$log.job_uid`'{/yun}" target="_blank" title="{yun:}$log.com_name{/yun}"class="List_Ope_a">{yun:}$log.com_name{/yun} </a> 
+				{yun:}/if{/yun}
+                     </div>
+                 <div class="rebates_span rebates_money">&nbsp;{yun:}$log.rebates{/yun}元</div>
+                  <div class="rebates_span rebates_time">{yun:}$log.datetime|date_format:'%Y-%m-%d %H:%M'{/yun}</div>
+                 <div class="rebates_span rebates_zt">
+                {yun:}if $log.status=="0"{/yun}
+                <span class="Not_browse">未查看</span>
+                {yun:}elseif $log.status=="1"{/yun}
+                <span class="yes_browse">已查看</span>
+                {yun:}elseif $log.status=="2"{/yun}  已试用
+                {yun:}elseif $log.status=="3"{/yun}  未通过
+                {yun:}elseif $log.status=="4"{/yun} 已返利
+                {yun:}/if{/yun}
+                </div>
+               <div class="rebates_span rebates_cz">
+                    <a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=rebates&act=del&id={yun:}$log.id{/yun}');" class="List_dete cblue">删除</a>
+                </div>
+                <div class="rebates_pop">
+                 <div class="rebates_pop_box">
+                <span class="List_Title_conten_tit">我推荐的人才：</span>
+                    {yun:}$log.name{/yun} <a href="javascript:void(0);" onclick="showrebate('{yun:}$log.id{/yun}','{yun:}url m=ajax c=showrebates{/yun}')" class="cblue ml10">查看推荐信息</a>
+                    {yun:}if $log.reply!=""{/yun}
+                    <a href="javascript:void(0);" class="seemsg" id="{yun:}$log.id{/yun}">&nbsp;</a>
+                    {yun:}else{/yun}
+                    <div class="rebates_pop_hf_tip"><span class="job_Consulting_zt"><i class="job_Consulting_zticon"></i>该企业还未回复,请耐心等待</span></div>
+                    {yun:}/if{/yun}
+                
+                <div class="job_Consulting_com" id="msg{yun:}$log.id{/yun}" >
+            
+                    <span class="List_Title_conten_tit">企业回复内容：</span><span class="List_Title_conten_c">{yun:}$log.reply{/yun}</span>
+                
+                    <div class="job_Consulting_hftime">回复时间：{yun:}$log.reply_time|date_format:'%Y-%m-%d %H:%M'{/yun}</div>
+                </div></div>
+            </div>
+            </div>
+            {yun:}foreachelse{/yun}
+            <div class="msg_no">
+            <p>亲爱的用户，您还没有任何猎头悬赏，想要获得更多工作机会</p>
+            <p>立即搜索您感兴趣的猎头悬赏吧！</p>
+            <a href="{yun:}url m=lietou c=post{/yun}" target="_blank"class="msg_no_sq uesr_submit">立即搜索猎头悬赏>></a>
+			</div>
+            {yun:}/foreach{/yun}
+            <div class="clear"></div>
+            <div class="diggg">{yun:}$pagenav{/yun}</div>
+        </div>
+    </div>
+    <div id="showrebate" style="display:none">
+     <div class="rebates_user_cont">
+     <div class="rebates_user_tit"> 基本信息</div>
+ <div class="rebates_user_list">   姓名：<span id="rebateuname"></span></div>
+<div class="rebates_user_list">   性别：<span id="rebatesex"></span></div>
+<div class="rebates_user_list">   出生年月：<span id="rebatebirthday"></span></div>
+<div class="rebates_user_list">  最高学历：<span id="rebateedu"></span></div>
+ <div class="rebates_user_list">  工作经验：<span id="rebateexp"></span></div>
+ <div class="rebates_user_list">   联系手机：<span id="rebatetelphone"></span></div>
+<div class="rebates_user_list">  联系邮箱：<span id="rebateemail"></span></div>
+  
+<div class="rebates_user_tit"> 求职意向</div>
+ <div class="rebates_user_list rebates_user_listw100">   期望职位：<span id="rebatejob_classid"></span></div>
+ <div class="rebates_user_list rebates_user_listw100"> 从事行业：<span id="rebatehy"></span></div>
+ <div class="rebates_user_list"> 期望城市： <span id="rebatecity"></span></div>
+ <div class="rebates_user_list"> 期望薪资：<span id="rebatesalary"></span></div>
+ <div class="rebates_user_list"> 工作性质：<span id="rebatetype"></span></div>
+ <div class="rebates_user_list"> 到岗时间：<span id="rebatereport"></span></div>
+
+ 
+<div class="rebates_user_tit">推荐理由</div>
+ <div class="rebates_user"> <textarea class="rebates_textareabox"id="rebatecontent" readonly="readonly"></textarea></div>
+    </div>
+</div>    </div>
+{yun:}include file="$userstyle/footer.htm"{/yun} 

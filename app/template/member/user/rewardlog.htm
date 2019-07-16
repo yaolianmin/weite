@@ -1,0 +1,87 @@
+{yun:}include file="$userstyle/header.htm"{/yun}
+<div class="yun_user_member_w1100">
+    {yun:}include file="$userstyle/left.htm"{/yun}
+      <div class="mian_right fltR mt20">
+        <div class="member_right_index_h1 fltL"> <span class="member_right_h1_span fltL">悬赏申请</span> <i class="member_right_h1_icon user_bg"></i></div>
+   
+        <div class="resume_box_list">
+		
+            <div class="m_lt_ct fr">
+         <div class="m_xs fl">
+              <ul>
+                  <li {yun:}if !$smarty.get.state{/yun}class="m_xs_cur"{yun:}/if{/yun}><a href="index.php?c=lt_resume">全部</a></li>
+                    {yun:}foreach from=$StateList item=one{/yun}
+					 <li {yun:}if $smarty.get.state==$one.id{/yun}class="m_xs_cur"{yun:}/if{/yun} > <a href="index.php?c=lt_resume&state={yun:}$one.id{/yun}">{yun:}$one.name{/yun}</a></li>
+					{yun:}/foreach{/yun}
+			  </ul>
+         </div>
+		  {yun:}foreach item=v key=key from=$rows{/yun}
+         <div class="m_xs_bx fl">
+				
+              <div class="m_xs_bx_class fl">
+              <div class="m_xs_bx_f fl">
+                   <div class="m_xs_bx_s fl">
+                        <span class="m_xs_bx_s_nm fl">{yun:}$v.uname{/yun}</span>
+                        <span class="m_xs_bx_s_hb fl">求职意向：<i>{yun:}$v.jobclass{/yun}<i></span>
+                   </div>
+                   <div class="m_xs_bx_x fl">
+                        <span class="m_xs_bx_x_w fl">应聘职位：<a href="{yun:}url m=job c=comapply id='`$v.jobid`'{/yun}" target="_blank">{yun:}$v.name{/yun}</a></span>
+                        <span class="m_xs_bx_x_z fl"><span class="fl">学历：<i>{yun:}$v.edu{/yun}</i></span> <span class="fl" style="margin-left:20px;">工作经验：<i>{yun:}$v.exp{/yun}<i></span></span>
+                   </div>
+              </div>
+			
+			  <div class="m_xs_bx_r fr"><i class="m_xs_bx_r_icon fl"></i><span>{yun:}$v.log.nowmsg{/yun}</span></div>
+				
+			
+			<!----操作记录---->
+
+				
+				<div class="m_xs_pr fl">
+				
+					<div class="m_xs_pr_f fl">
+					{yun:}if $v.log.loglist{/yun}
+						<ul>
+							{yun:}foreach from=$v.log.loglist item=linfo{/yun}
+							<li class="m_xs_pr_f_cur">
+							<i class="m_xs_pr_f_icon"></i>{yun:}$linfo.time|date_format:"%Y-%m-%d %H:%M"{/yun} {yun:}$linfo.info{/yun}</li>
+							{yun:}/foreach{/yun}
+						</ul>
+					 {yun:}/if{/yun}
+						{yun:}if $v.log.endmsg{/yun}
+						<ul style="padding-bottom:30px;">
+							<li><i class="m_xs_pr_f_icon"></i>
+                             <div class="jobrewardlog_box jobrewardlog_box_ddai">{yun:}$v.log.endmsg{/yun}</div></li>		
+						</ul>
+						{yun:}/if{/yun}
+					</div>
+				
+				 <!----操作记录END---->
+				
+				<!----当前可操作----->
+				<div class="m_xs_bx_r fr">
+				
+
+				<a class="m_xs_js fl" href="javascript:void(0);" onclick="rewardpay('{yun:}$v.jobid{/yun}','{yun:}$v.id{/yun}','{yun:}$v.sqmoney{/yun}','{yun:}$v.invitemoney{/yun}','{yun:}$v.offermoney{/yun}','{yun:}$v.money{/yun}');">查看简历</a>
+
+				{yun:}foreach from= $v.log.input item=inputv{/yun}
+				<a class="m_xs_jj fl" href="javascript:void(0);" onclick="getStatus('{yun:}$v.id{/yun}','{yun:}$inputv.status{/yun}');">{yun:}$inputv.name{/yun}</a>
+				{yun:}/foreach{/yun}
+				
+				
+				
+				
+				</div>
+				<!----当前可操作END----->
+				</div>
+             </div>
+			
+			{yun:}/foreach{/yun}
+    </div>
+            <div class="clear"></div>
+            <div class="diggg">{yun:}$pagenav{/yun}</div>
+        </div>
+    </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/rewardpay.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+<input type="hidden" id="rewardid" value="">
+{yun:}include file="$userstyle/footer.htm"{/yun} 

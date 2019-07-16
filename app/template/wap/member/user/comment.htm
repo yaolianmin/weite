@@ -1,0 +1,172 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+
+<section class="wap_member">
+<div class="wap_member_comp_h1"><span>面试评价</span></div>
+     <div class="evaluate_com_info">
+       <div class="evaluate_com_name">{yun:}$jobInfo.com_name{/yun} </div>
+       <div class="evaluate_job_name">对本次面试{yun:}$jobInfo.name{/yun}职位体验如何？</div>
+      </div>
+
+     <script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/raty/jquery.raty.js?v={yun:}$config.cachecode{/yun}"></script>
+     <form action='index.php?c=commentsave' method='post'  onsubmit='return checkform();' >
+     <div class="evaluate_com_mypj_zt">
+       <div class="evaluate_com_mypj">我的总体评价</div>
+      <ul class="evaluate_com_mypj_list">
+		{yun:}foreach from=$comdata.job_tags key=key item=v{/yun}
+
+				<li class="evaluate_changetag {yun:}if in_array($v,$msgInfo.tag){/yun}evaluate_changetag_cur{yun:}/if{/yun}" data-tag="{yun:}$v{/yun}" tag-class="1"><em>{yun:}$comclass_name[$v]{/yun}</em></li> 
+			
+		 
+		 {yun:}/foreach{/yun}
+      </ul>
+      </div>
+
+        <div class="evaluate_com_pjbox">
+            <div class="evaluate_com_mypj">我的评分</div>
+	  <input type='hidden' name='tag' id='tagid' value='{yun:}$msgInfo.tag{/yun}'>
+      <div class="evaluate_com_pjlist">
+          <div class="evaluate_com_pjtit">描述评分：</div>
+                <div class="com_pjia_liststar">
+            <div id="desscoreid"  data-score="{yun:}$msgInfo.desscore{/yun}" style="cursor: pointer; width: 280px;">
+             
+            </div>
+			 <input type="hidden" id="desscore" name="desscore" value=''>
+          </div>
+          </div>
+              <div class="evaluate_com_pjlist">
+      <div class="evaluate_com_pjtit">面试官评分：</div>
+          <div class="com_pjia_liststar">
+            <div id="hrscoreid" data-score="{yun:}$msgInfo.hrscore{/yun}"  style="cursor: pointer; width: 280px;">
+            </div>
+			<input type="hidden" id="hrscore" name="hrscore" value=''>
+              </div>
+      
+      </div>
+          <div class="evaluate_com_pjlist">
+                  <div class="evaluate_com_pjtit">企业环境评分：</div>
+                  <div class="com_pjia_liststar">
+            <div id="comscoreid" data-score="{yun:}$msgInfo.comscore{/yun}" style="cursor: pointer; width: 280px;">
+            </div>
+			<input type="hidden" id="comscore" name="comscore" value=''>
+              </div>
+                  </div>      </div>
+                  
+                      <div class="evaluate_com_msbox">
+                      <div class="evaluate_com_mstit">面试过程如何，面试官如何,讲讲你的面试心得体会~</div>
+      <textarea  id="content" name="content" class="evaluate_textarea" placeholder="亲，写点面试过程吧，你的面试经历对其他求职者有很大帮助的。">{yun:}$msgInfo.content{/yun}</textarea>
+      </div>
+      
+      
+             <div class="evaluate_com_msbox">
+      <div class="evaluate_com_mstit">对公司的第一印象如何，公司环境如何，提出你的独特见解~~</div>
+     <textarea  id="othercontent" name="othercontent" class="evaluate_textarea">{yun:}$msgInfo.othercontent{/yun}</textarea>
+      </div>
+           <div class="evaluate_com_fb">
+      <input type='hidden' name='id' id='applyid' value='{yun:}$msg.id{/yun}'>
+        
+		<div class="com_pjia_bot">
+		{yun:}if !$msgInfo{/yun}
+		<input type="submit" name='submit' value="发表评价" class="evaluate_bth">
+		
+		<input type='checkbox' name='isnm' id='isnm' value='1'> 匿名评价
+		{yun:}else{/yun}
+			{yun:}if $msgInfo.isnm=='1'{/yun}
+				匿名评价
+			{yun:}/if{/yun}
+		{yun:}/if{/yun}
+		</div>
+
+		
+          </div>
+      </div>
+      
+      
+
+	</form>
+  </div>  </div>  </div>
+<script type="text/javascript">
+rat('desscoreid','desscore',1);
+rat('hrscoreid','hrscore',1);
+rat('comscoreid','comscore',1);
+function checkform(){
+
+	var  id			= $('#applyid').val();
+	var  desscore	=  $('#desscore').val();
+	var  hrscore	=  $('#hrscore').val();
+	var  comscore	=  $('#comscore').val();
+	var  content    =  $('#content').val();
+	if(!comscore || comscore=='undefined' || !hrscore || hrscore=='undefined' || !desscore || desscore=='undefined'  || !content ){
+		layermsg('请填写完整评论信息！', 2, 8);
+		return false;
+	}
+	//var layer_load('正在提交，请稍候...',0);
+
+	return true;
+}
+function rat(star,result,m){
+
+	star= '#' + star;
+	result= '#' + result;
+
+
+	$(star).raty({
+		hints: ['1','2', '3', '4', '5'],
+		number: 5,
+		path: "{yun:}$config.sy_weburl{/yun}/js/raty",
+		starOff: 'star-off-big.png',
+		starOn: 'star-on-big.png',
+		size: 24,
+		start: 40,
+		showHalf: true,
+		target: result,
+		targetKeep : true,
+		click: function (score, evt) {
+			
+		},
+		score: function() {
+			return $(this).attr('data-score');
+		} 
+	});
+}
+{yun:}if !$msgInfo{/yun}
+$(function(){
+	$(".evaluate_changetag").click(function(){
+		
+		var tag=$(this).attr('tag-class');
+		if(tag=='1'){
+			$(this).addClass('evaluate_changetag_cur');
+			$(this).attr('tag-class','2');
+		}else{
+			$(this).removeClass('evaluate_changetag_cur');
+			$(this).attr('tag-class','1');
+		}
+		var tag_value;
+		var tagi = 0;
+		$(".evaluate_changetag_cur").each(function(){
+			if($(this).attr('tag-class')=='2'){
+				var info =$(this).attr("data-tag");
+		        tag_value+=","+info;
+				tagi++;
+
+			}
+		});
+		if(tagi>3){
+			layermsg('最多只能选择三项！', 2,8);
+			if(tag=='1'){
+				$(this).removeClass('evaluate_changetag_cur');
+			}
+			return false;
+		}
+		if(tag_value){ 
+		    tag_value = tag_value.replace("undefined,","");
+		    $("#tagid").val(tag_value); 
+	    }else{
+			$("#tagid").val(''); 
+		}
+	});
+
+});
+{yun:}/if{/yun}
+</script>
+</section>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

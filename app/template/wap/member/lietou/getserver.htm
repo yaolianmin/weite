@@ -1,0 +1,414 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun}
+<script>
+var integral='{yun:}$statis.pay{/yun}';
+var jobid='{yun:}$info.id{/yun}';
+
+//加减乘除
+function accAdd(arg1,arg2){ 
+	var r1,r2,m; 
+	try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0} 
+	try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0} 
+	m=Math.pow(10,Math.max(r1,r2)) 
+	return (arg1*m+arg2*m)/m 
+} 
+function accSub(arg1,arg2){ 
+	return accAdd(arg1,-arg2); 
+} 
+function accMul(arg1, arg2) {
+	var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+	try { m += s1.split(".")[1].length } catch (e) { }
+	try { m += s2.split(".")[1].length } catch (e) { }
+	return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+}
+function accDiv(arg1,arg2){    
+	var t1=0,t2=0,r1,r2;    
+	try{t1=arg1.toString().split(".")[1].length}catch(e){}    
+	try{t2=arg2.toString().split(".")[1].length}catch(e){}    
+	with(Math){        
+		r1=Number(arg1.toString().replace(".",""));        
+		r2=Number(arg2.toString().replace(".",""));        
+		return (r1/r2)*pow(10,t2-t1);    
+	}
+}
+
+function myFunction(_this) {
+    _this.value = _this.value.replace(/[^0-9]/g, '');
+}
+
+function checkNum(integral,integral_pro){
+	var dkjf = $("#dkjf").val();
+	
+	if(dkjf){
+		$("#dkhdiv").show();
+	}
+	var need = $(".pricehtml").text();
+	var need_jifen = accMul(need, integral_pro);
+	if(parseInt(integral) >= parseInt(need_jifen)){
+		if(parseInt(dkjf) > parseInt(need_jifen)){
+			$("#dkjf").val(need_jifen);
+			var dkjfh = accSub(need , accDiv(need_jifen,integral_pro));
+		}else{
+			var dkjfh = accSub(need, accDiv(dkjf,integral_pro));
+		}	
+ 	}else{
+		if(parseInt(dkjf) > parseInt(integral)){
+			$("#dkjf").val(integral);
+			var dkjfh = accSub(need , accDiv(integral,integral_pro));
+		}else{
+			var dkjfh = accSub(need, accDiv(dkjf,integral_pro));
+ 		}
+ 	}
+	if(dkjfh <= 0){
+		$("#dkjfh_pricehtml").html(0);
+		$("#zffs").hide();
+		$("#dkzf_btn").show();
+	}else{
+		$("#dkjfh_pricehtml").html(dkjfh);
+		$("#zffs").show();
+		$("#dkzf_btn").hide();
+	}
+}
+
+/**
+ *	全额抵扣功能
+ */
+function qrzf(type,jobid){
+	var jobid = jobid;
+ 	
+	if(type=='refreshjob'){
+		layer_load('执行中，请稍候...');
+		$.post("index.php?c=dkzf",{jobid:jobid},function(data){
+			layer.closeAll();
+			var data=eval('('+data+')');
+			if(data.error=='0'){ //成功
+				layermsg(data.msg,2,function(){location.href="index.php?c=job";});return false;
+			}else{
+				if(data.url){
+					layermsg(data.msg,2,function(){location.href="index.php?c=pay";});return false;
+				}else{
+					layermsg(data.msg,2,function(){location.reload();});return false;
+				}
+			}
+		});
+	}else if(type=='downresume'){
+		layer_load('执行中，请稍候...');
+		$.post("index.php?c=dkzf",{eid:jobid},function(data){
+			layer.closeAll();
+			var data=eval('('+data+')');
+			if(data.error=='0'){ //成功
+				layermsg(data.msg,2,function(){location.href="{yun:}url m=wap c=ltresume a=show id=$smarty.get.id{/yun}";});return false;
+			}else{
+				if(data.url){
+					layermsg(data.msg,2,function(){location.href="index.php?c=pay";});return false;
+				}else{
+					layermsg(data.msg,2,function(){location.reload();});return false;
+				}
+			}
+		});
+	} else if(type=='issuejob'){
+		layer_load('执行中，请稍候...');
+		$.post("index.php?c=dkzf",{issuejob:1},function(data){
+			layer.closeAll();
+			var data=eval('('+data+')');
+			if(data.error=='0'){ //成功
+				layermsg(data.msg,2,function(){location.href="index.php?c=jobadd";});return false;
+			}else{
+				if(data.url){
+					layermsg(data.msg,2,function(){location.href="index.php?c=pay";});return false;
+				}else{
+					layermsg(data.msg,2,function(){location.reload();});return false;
+				}
+			}
+		});
+	} 
+}
+
+function pay_form(type){
+	var paytype=$('input:radio[name="paytype"]:checked').val();
+	if(paytype==null){
+		layermsg('请选择一种支付方式！', 2);return false; 
+	}else if(paytype=='wxpay'){
+		$("#paymentform").attr("action","index.php?c=wxpay&id={yun:}$order.id{/yun}");
+	}else if(paytype=='alipay'){
+		$("#paymentform").attr("action","{yun:}$config.sy_weburl{/yun}/api/wapalipay/alipayto.php?dingdan={yun:}$order.order_id{/yun}&dingdanname={yun:}$order.order_id{/yun}&alimoney={yun:}$order.order_price{/yun}");
+	}
+	return true;
+}
+</script>
+
+<section class="wap_member">
+
+
+
+{yun:}if $smarty.get.server=='1'{/yun}
+<div class="wap_member_comp_h1"><span>刷新职位</span></div>
+<!--刷新猎头职位-->  
+	<div class="getserbver_box">
+		<form action="index.php?c=getOrder" method="post" onsubmit="return pay_form('refresh_job');">
+			<ul class="getserbver_box_list">
+				<li>
+					<div class="getserbver_box_list_p">
+						所需{yun:}if $config.com_integral_online==3{/yun}{yun:}$config.integral_pricename{/yun}：{yun:}else{/yun}金额：{yun:}/if{/yun}
+						{yun:}if $config.com_integral_online==3{/yun}
+							<span class="getserbver_box_s pricehtml">{yun:}$config.integral_proportion * $config.integral_lt_jobefresh{/yun} </span>{yun:}$config.integral_pricename{/yun}
+						{yun:}else{/yun}
+							<span class="getserbver_box_s pricehtml">{yun:}$config.integral_lt_jobefresh{/yun}</span>元
+						{yun:}/if{/yun}
+  					</div>
+				</li>
+
+				{yun:}if $config.com_integral_online==3{/yun}
+					<li>
+						<div class="getserbver_box_list_p">
+							账户{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span> 
+							（1元 = {yun:}$config.integral_proportion{/yun}{yun:}$config.integral_pricename{/yun}）
+						</div>
+					</li>
+				{yun:}/if{/yun}
+				
+				{yun:}if $config.com_integral_online==1{/yun}
+					<li>
+						<div class="getserbver_box_list_p">
+							抵扣{yun:}$config.integral_pricename{/yun}：<input type="text" name="dkjf" id="dkjf" onkeyup="checkNum('{yun:}$statis.integral{/yun}','{yun:}$config.integral_proportion{/yun}');" oninput="myFunction(this)" class="getserbver_box_list_r_zdy_bth">
+						</div>
+					</li>
+					<li>
+						<div class="getserbver_box_list_p">账户{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span> （1元 = {yun:}$config.integral_proportion{/yun}{yun:}$config.integral_pricename{/yun}）</div>
+					</li>
+				{yun:}/if{/yun}
+				<li id="dkhdiv" style="display:none">
+					<div class="getserbver_box_list_p">抵后金额：<span id="dkjfh_pricehtml" class="getserbver_box_s"></span>元</div>
+				</li>
+
+			</ul>
+			
+			<div id="zffs" {yun:}if $config.integral_lt_jobefresh==0 || $config.com_integral_online==3{/yun} style="display:none"{yun:}/if{/yun}>
+				{yun:}if $paytype.wxpay{/yun}
+					<div class="pay_f_list">
+						<label>
+							<i class="pay_f_list_wx"></i><span class="pay_f_list_box">微信支付</span>
+							<input type='radio' name='paytype' value='wxpay' class="pay_f_list_radio">
+						</label>
+					</div>
+				{yun:}/if{/yun} 
+
+				{yun:}if $paytype.alipay{/yun}
+					<div class="pay_f_list">
+						<label>
+							<i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+							<input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+						</label>
+					</div>
+				{yun:}/if{/yun}  
+
+				{yun:}if $paytype.wxpay||$paytype.alipay{/yun}	
+					<div class="getserbver_box_bth">
+						<div class="pay_com_lsit_right"><input type="submit" value="确认支付" name=nextstep  class="reinputText2"></div>
+					</div>
+				{yun:}else{/yun} 
+					<div class="pay_com_list">
+						<div class="pay_com_lsit_right">
+						  <span>网站已关闭支付功能，请联系管理员！</span>
+						</div>
+					</div>
+				{yun:}/if{/yun}
+			</div>
+			<div class="getserbver_box_bth" id="dkzf_btn" {yun:}if $config.integral_lt_jobefresh!=0 && $config.com_integral_online!=3{/yun} style="display:none"{yun:}/if{/yun}>
+				<div class="pay_com_lsit_right">
+					<input type="button" value="确认支付" onClick="qrzf('refreshjob','{yun:}$smarty.get.id{/yun}');" class="reinputText2">
+				</div>
+			</div>
+			
+ 			{yun:}if $config.sy_freewebtel{/yun}
+				<div class="getserbver_box_tel">
+					<a href="tel:{yun:}$config.sy_freewebtel{/yun}">客服电话：{yun:}$config.sy_freewebtel{/yun}</a>
+				</div>
+			{yun:}/if{/yun}
+			
+   			<input name="server" id="server" type="hidden" value="refresh_job"/>
+  			<input name="jobid" id="jobid" type="hidden" value="{yun:}$smarty.get.id{/yun}"/>
+		</form>
+	</div>
+
+{yun:}elseif $smarty.get.server=='2'{/yun}
+<div class="wap_member_comp_h1"><span>下载简历</span></div>
+<!--下载简历-->  
+	<div class="getserbver_box">
+		<form action="index.php?c=getOrder" method="post" onsubmit="return pay_form('downresume');">
+			<ul class="getserbver_box_list">
+				<li>
+					<div class="getserbver_box_list_p">
+						所需{yun:}if $config.com_integral_online==3{/yun}{yun:}$config.integral_pricename{/yun}：{yun:}else{/yun}金额：{yun:}/if{/yun}
+						{yun:}if $config.com_integral_online==3{/yun}
+							<span class="getserbver_box_s pricehtml">{yun:}$config.integral_proportion * $config.integral_lt_downresume{/yun} </span>{yun:}$config.integral_pricename{/yun}
+						{yun:}else{/yun}
+							<span class="getserbver_box_s pricehtml">{yun:}$config.integral_lt_downresume{/yun}</span>元
+						{yun:}/if{/yun}
+ 					</div>
+				</li>
+
+				{yun:}if $config.com_integral_online==3{/yun}
+					<li>
+						<div class="getserbver_box_list_p">
+							账户{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span> 
+							（1元 = {yun:}$config.integral_proportion{/yun}{yun:}$config.integral_pricename{/yun}）
+						</div>
+					</li>
+				{yun:}/if{/yun}
+				
+				{yun:}if $config.com_integral_online==1{/yun}
+					<li>
+						<div class="getserbver_box_list_p">
+							抵扣{yun:}$config.integral_pricename{/yun}：<input type="text" name="down_dkjf" id="dkjf" onkeyup="checkNum('{yun:}$statis.integral{/yun}','{yun:}$config.integral_proportion{/yun}');" oninput="myFunction(this)" class="getserbver_box_list_r_zdy_bth">
+						</div>
+					</li>
+					<li>
+						<div class="getserbver_box_list_p">账户{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span> （1元 = {yun:}$config.integral_proportion{/yun}{yun:}$config.integral_pricename{/yun}）</div>
+					</li>
+				{yun:}/if{/yun}
+				<li id="dkhdiv" style="display:none">
+					<div class="getserbver_box_list_p">抵后金额：<span id="dkjfh_pricehtml" class="getserbver_box_s"></span>元</div>
+				</li>
+
+			</ul>
+			
+			<div id="zffs" {yun:}if $config.integral_lt_downresume==0 || $config.com_integral_online==3{/yun} style="display:none"{yun:}/if{/yun}>
+				{yun:}if $paytype.wxpay{/yun}
+					<div class="pay_f_list">
+						<label>
+							<i class="pay_f_list_wx"></i><span class="pay_f_list_box">微信支付</span>
+							<input type='radio' name='paytype' value='wxpay' class="pay_f_list_radio">
+						</label>
+					</div>
+				{yun:}/if{/yun} 
+
+				{yun:}if $paytype.alipay{/yun}
+					<div class="pay_f_list">
+						<label>
+							<i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+							<input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+						</label>
+					</div>
+				{yun:}/if{/yun}  
+
+				{yun:}if $paytype.wxpay||$paytype.alipay{/yun}	
+					<div class="getserbver_box_bth">
+						<div class="pay_com_lsit_right"><input type="submit" value="确认支付" name=nextstep  class="reinputText2"></div>
+					</div>
+				{yun:}else{/yun} 
+					<div class="pay_com_list">
+						<div class="pay_com_lsit_right">
+						  <span>网站已关闭支付功能，请联系管理员！</span>
+						</div>
+					</div>
+				{yun:}/if{/yun}
+			</div>
+			<div class="getserbver_box_bth" id="dkzf_btn" {yun:}if $config.integral_lt_downresume!=0 && $config.com_integral_online !=3{/yun} style="display:none"{yun:}/if{/yun}>
+				<div class="pay_com_lsit_right">
+					<input type="button" value="确认支付" onClick="qrzf('downresume','{yun:}$smarty.get.id{/yun}');" class="reinputText2">
+				</div>
+			</div>
+			
+ 			{yun:}if $config.sy_freewebtel{/yun}
+				<div class="getserbver_box_tel">
+					<a href="tel:{yun:}$config.sy_freewebtel{/yun}">客服电话：{yun:}$config.sy_freewebtel{/yun}</a>
+				</div>
+			{yun:}/if{/yun}
+			
+   			<input name="server" id="server" type="hidden" value="downresume"/>
+  			<input name="eid" id="eid" type="hidden" value="{yun:}$smarty.get.id{/yun}"/>
+		</form>
+	</div>
+{yun:}elseif $smarty.get.server=='3'{/yun}
+<div class="wap_member_comp_h1"><span>发布职位</span></div>
+<!-- 发布高级职位-->  
+	<div class="getserbver_box">
+		<form action="index.php?c=getOrder" method="post" onsubmit="return pay_form('issueltjob');">
+			<ul class="getserbver_box_list">
+				<li>
+					<div class="getserbver_box_list_p">
+						所需{yun:}if $config.com_integral_online==3{/yun}{yun:}$config.integral_pricename{/yun}：{yun:}else{/yun}金额：{yun:}/if{/yun}
+						{yun:}if $config.com_integral_online==3{/yun}
+							<span class="getserbver_box_s pricehtml">{yun:}$config.integral_proportion * $config.integral_lt_job{/yun} </span>{yun:}$config.integral_pricename{/yun}
+						{yun:}else{/yun}
+							<span class="getserbver_box_s pricehtml">{yun:}$config.integral_lt_job{/yun}</span>元
+						{yun:}/if{/yun}
+ 					</div>
+				</li>
+
+				{yun:}if $config.com_integral_online==3{/yun}
+					<li>
+						<div class="getserbver_box_list_p">
+							账户{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span> 
+							（1元 = {yun:}$config.integral_proportion{/yun}{yun:}$config.integral_pricename{/yun}）
+						</div>
+					</li>
+				{yun:}/if{/yun}
+				
+				{yun:}if $config.com_integral_online==1{/yun}
+					<li>
+						<div class="getserbver_box_list_p">
+							抵扣{yun:}$config.integral_pricename{/yun}：<input type="text" name="job_dkjf" id="dkjf" onkeyup="checkNum('{yun:}$statis.integral{/yun}','{yun:}$config.integral_proportion{/yun}');" oninput="myFunction(this)" class="getserbver_box_list_r_zdy_bth">
+						</div>
+					</li>
+					<li>
+						<div class="getserbver_box_list_p">账户{yun:}$config.integral_pricename{/yun}：<span class="getserbver_box_s">{yun:}$statis.integral{/yun}</span> （1元 = {yun:}$config.integral_proportion{/yun}{yun:}$config.integral_pricename{/yun}）</div>
+					</li>
+				{yun:}/if{/yun}
+				<li id="dkhdiv" style="display:none">
+					<div class="getserbver_box_list_p">抵后金额：<span id="dkjfh_pricehtml" class="getserbver_box_s"></span>元</div>
+				</li>
+
+			</ul>
+			
+			<div id="zffs" {yun:}if $config.integral_lt_job == 0 || $config.com_integral_online==3{/yun} style="display:none"{yun:}/if{/yun}>
+				{yun:}if $paytype.wxpay{/yun}
+					<div class="pay_f_list">
+						<label>
+							<i class="pay_f_list_wx"></i><span class="pay_f_list_box">微信支付</span>
+							<input type='radio' name='paytype' value='wxpay' class="pay_f_list_radio">
+						</label>
+					</div>
+				{yun:}/if{/yun} 
+
+				{yun:}if $paytype.alipay{/yun}
+					<div class="pay_f_list">
+						<label>
+							<i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+							<input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+						</label>
+					</div>
+				{yun:}/if{/yun}  
+
+				{yun:}if $paytype.wxpay||$paytype.alipay{/yun}	
+					<div class="getserbver_box_bth">
+						<div class="pay_com_lsit_right"><input type="submit" value="确认支付" name=nextstep  class="reinputText2"></div>
+					</div>
+				{yun:}else{/yun} 
+					<div class="pay_com_list">
+						<div class="pay_com_lsit_right">
+						  <span>网站已关闭支付功能，请联系管理员！</span>
+						</div>
+					</div>
+				{yun:}/if{/yun}
+			</div>
+			<div class="getserbver_box_bth" id="dkzf_btn" {yun:}if $config.integral_lt_job != 0 && $config.com_integral_online != 3{/yun} style="display:none"{yun:}/if{/yun}>
+				<div class="pay_com_lsit_right">
+					<input type="button" value="确认支付" onClick="qrzf('issuejob','');" class="reinputText2">
+				</div>
+			</div>
+			
+ 			{yun:}if $config.sy_freewebtel{/yun}
+				<div class="getserbver_box_tel">
+					<a href="tel:{yun:}$config.sy_freewebtel{/yun}">客服电话：{yun:}$config.sy_freewebtel{/yun}</a>
+				</div>
+			{yun:}/if{/yun}
+			
+   			<input name="server" id="server" type="hidden" value="issue_job"/>
+  			<input name="issuejob" type="hidden" value="1"/>
+ 		</form>
+	</div>
+{yun:}/if{/yun} 
+</section>
+<div class="clear"></div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

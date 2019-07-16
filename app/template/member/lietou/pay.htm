@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}"></script>
+</head>
+
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<!--内容部分content-->
+ <style>.my_table_msg th{ text-align:right}</style>
+<div class="m_content">
+  <div class="wrap">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+            <div class="lt_m_tit"><span class="lt_m_tit_s">账户充值</span></div>
+		<div class="com_body">
+        <div class='admin_note_pay2'>
+          <div class="admin_note2">
+            <iframe id="fdingdan"  name="fdingdan" onload="returnmessage('fdingdan');" style="display:none"></iframe>
+           
+              <form name="alipayment" target="fdingdan" action="index.php?c=pay&act=dingdan" method="post" onsubmit="return pay_form('请输入充值数量！');">
+			   <table width="100%" border="0" cellspacing="0" cellpadding="0"  class="my_table_msg">
+                <tr>
+                  <th height="30">填写您要充值的{yun:}$config.integral_pricename{/yun}：</th>
+                  <td><input type="hidden" name="pay_type" value="{yun:}$smarty.post.usertype{/yun}"/>
+                    <input type="text" name="price_int" id="price_int" size="20" value="0" int="{yun:}$config.integral_proportion{/yun}" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"  style="border:1px solid #ddd; line-height:30px; height:30px; padding:1px;">
+                    当前比例：1元={yun:}$config.integral_proportion{/yun}{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}{yun:}if $config.integral_min_recharge>0{/yun}，单次最低充值{yun:}$config.integral_min_recharge{/yun}{yun:}$config.integral_pricename{/yun}。{yun:}/if{/yun}</td>
+                </tr>
+                <tr>
+                  <th height="30">所需金额：</th>
+                  <td><span id="span_com_vip_price" class="span_price_cr">0</span> 元
+                    <input type="hidden" name="price" size="10"  id="com_vip_price"></td>
+                </tr>
+                <tr>
+                  <th height="30">备　　注：</th>
+                  <td><textarea name="remark" id='remark'  wrap="physical"  class="bank_textarea"></textarea>
+                    <p style="line-height:23px;">(请备注你的姓名及其联系方式)</p></td>
+                </tr>
+                <tr>
+                  <th>&nbsp;</th>
+                  <td><p class="bank_msg">请确认您要充值的{yun:}$config.integral_pricename{/yun}.</p></td>
+                </tr>
+                <tr>
+                  <th>&nbsp;</th>
+                  <td height="40">
+                  <input class="post_text_but fl" type="submit" value="确认订单" name="submit">
+                  </td>
+                </tr>
+				 </table>
+              </form>
+            </div>
+        </div>
+      </div>
+
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<script> 
+{yun:}if $smarty.get.id&&$smarty.get.type=='vip'{/yun}
+$(document).ready(function(){
+	check_rating_coupon('{yun:}$smarty.get.id{/yun}');
+});
+{yun:}/if{/yun}
+</script> 
+<input name='integral_min_recharge' value="{yun:}$config.integral_min_recharge{/yun}" type="hidden"/>
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

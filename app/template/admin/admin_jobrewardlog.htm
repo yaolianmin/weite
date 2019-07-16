@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/jobpack.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css">
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script type="text/javascript">
+function cktimesave(){
+	var stime=$("#stime").val();
+	var etime=$("#etime").val();
+	if(stime&&etime&&toDate(stime)>toDate(etime)){
+		layer.msg("结束时间必须大于开始时间！",2,8);return false;
+	}
+}
+</script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="tabs_info">
+    <ul>
+      <li  {yun:}if $smarty.get.t==""{/yun}class="curr"{yun:}/if{/yun}><a  href="index.php?m=admin_jobpack">分享职位</a></li>
+      <li {yun:}if $smarty.get.t=="r"{/yun}class="curr"{yun:}/if{/yun}><a href="index.php?m=admin_jobpack&t=r">赏金职位</a></li>
+    </ul>
+  </div>
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">该页面展示了单个职位赏金的详细信息。</div>
+</div>
+</div>
+<div class="clear"></div>
+
+  <div class="table-list">
+    <div class="">
+       <div class=admincont_box>
+    <div class="m_lt_ct fr">
+		  {yun:}foreach item=v key=key from=$rows{/yun}
+         <div class="m_xs_bx fl" style="background:#fff">
+				
+              <div class="m_xs_bx_class fl">
+              <div class="m_xs_bx_f fl">
+                   <div class="m_xs_bx_s fl">
+                        <span class="m_xs_bx_s_nm fl">{yun:}$v.uname{/yun}</span>
+                        <span class="m_xs_bx_s_hb fl">求职意向：<i>{yun:}$v.jobclass{/yun}</i></span>
+                   </div>
+                   <div class="m_xs_bx_x fl">
+                        <span class="m_xs_bx_x_w fl">应聘职位：<a href="{yun:}url m=job c=comapply id='`$v.jobid`'{/yun}" target="_blank">{yun:}$v.name{/yun}</a></span>
+                        <span class="m_xs_bx_x_z fl"><span class="fl">学历：<i>{yun:}$v.edu{/yun}</i></span> <span class="fl" style="margin-left:20px;">工作经验：<i>{yun:}$v.exp{/yun}</i></span></span>
+                   </div>
+                   <div class="">状态：{yun:}$v.log.nowmsg{/yun}</div>
+              </div>
+				<!----当前可操作----->
+				<div class="m_xs_bx_r fr">
+				{yun:}if $v.usertype==3{/yun}
+				<a class="m_xs_js fl" href="index.php?m=lt_talent&c=show&uid={yun:}$v.uid{/yun}&id={yun:}$v.eid{/yun}&look=admin">查看简历</a>
+				{yun:}else{/yun}
+				<a class="m_xs_js fl" href="{yun:}$config.sy_weburl{/yun}/resume/index.php?c=show&id={yun:}$v.eid{/yun}&look=admin" target="_blank">查看简历</a>
+				{yun:}/if{/yun}
+				{yun:}if $v.status=='26'{/yun}
+				<a class="m_xs_jj fl" href="javascript:void(0);" onclick="getStatus('{yun:}$v.id{/yun}');">仲裁</a>
+				{yun:}/if{/yun}
+				</div>
+				<!----当前可操作END----->
+            
+			<!----操作记录---->
+				<div class="m_xs_pr fl">
+				
+					<div class="m_xs_pr_f fl">
+					{yun:}if $v.log.loglist{/yun}
+						<ul>
+							{yun:}foreach from=$v.log.loglist item=linfo{/yun}
+							<li class="m_xs_pr_f_cur">
+							<i class="m_xs_pr_f_icon"></i>{yun:}$linfo.time|date_format:"%Y-%m-%d %H:%M"{/yun} {yun:}$linfo.info{/yun}</li>
+							{yun:}/foreach{/yun}
+						</ul>
+					 {yun:}/if{/yun}
+						{yun:}if $v.log.endmsg{/yun}
+						<ul>
+							<li><i class="m_xs_pr_f_icon"></i>{yun:}$v.log.endmsg{/yun}</li>		
+						</ul>
+						{yun:}/if{/yun}
+					</div>
+				 <!----操作记录END---->
+				</div>
+             </div>
+			  </div>
+			{yun:}/foreach{/yun}
+    </div>
+</div>
+    </div>
+  </div>
+  </div>
+  <!--管理弹出框-->
+<div id="arb" class="" style="width:650px; display:none;">
+<div class="admin_usertck_box">
+
+
+
+<div class="admin_userinfo_box">
+<div class="admin_userinfo_box_username">【申请人】：<em id="m_username"></em> <span class="admin_userinfo_box_useruid">【联系手机】：<em id="m_usertel"></em></span></div>
+<div class="admin_userinfo_box_qyname">【悬赏企业】：<span id="m_comname"></span><span class="admin_userinfo_box_useruid">【联系方式】：</span><em id="m_comtel"></em></div>
+</div>
+<div class="admin_operation_box">
+
+<div class="admin_jobrewadlog_list">
+<span class="admin_jobrewadlog_list_name">仲裁原因：</span>
+&nbsp;<em id="m_loginfo"></em>
+</div>
+<div class="admin_jobrewadlog_list">
+<span class="admin_jobrewadlog_list_name">上传凭证：</span>
+<div class="admin_jobrewadlog_look">&nbsp;<em id="m_arbpic"></em></div>
+</div>
+
+<div class="admin_jobrewadlog_list">
+<span class="admin_jobrewadlog_list_name">申请自述：</span>
+&nbsp;<em id="m_arbinfo"></em>
+</div>
+
+<div class="admin_jobrewadlog_list" ><span class="admin_operation_list_name">仲裁说明：</span><em id="m_email"><textarea id='rcontent' class="admin_jobrewadlog_textarea"></textarea></em>
+
+<div class="admin_jobrewadlog_tip"><span class="admin_userinfo_box_qyname_s">请管理员务必电话联系供求双方，了解具体情况后再作出判断！</span></div>
+</div>
+
+<div class="admin_jobrewadlog_bth">
+ 
+
+
+<a href="javascript:void(0);" onclick="getArb('28');" class="admin_jobrewadlog_bth_qy" id="m_check" >退款给企业</a>
+<a href="javascript:void(0);" onclick="getArb('29');" class="admin_jobrewadlog_bth_gr" id="m_guwen">发放赏金给个人</a>
+</div>
+
+</div>
+</div>
+</div>
+<input type='hidden' id='rewardid' value=''>
+<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+<!--管理弹出框 end-->
+<script>
+function getStatus(rewardid){
+
+		$('#rewardid').val(rewardid);
+		var pytoken = $('#pytoken').val();
+		$.post('index.php?m=admin_jobpack&c=getreward',{rewardid:rewardid,pytoken:pytoken},function(data){
+
+			var data=eval('('+data+')');
+			$('#m_username').html(data.username);
+			$('#m_comname').html(data.comname);
+			$('#m_usertel').html(data.telphone);
+			$('#m_comtel').html(data.linktel);
+			$('#m_loginfo').html(data.loginfo);
+			if(data.arbpic){
+				$('#m_arbpic').html('<a href=".'+data.arbpic+'" target="_blank">查看凭证</a>');
+			}
+			
+			$('#m_arbinfo').html(data.arbinfo);
+			$.layer({
+					type : 1,
+					title :'仲裁',
+					closeBtn : [0 , true],
+					border : [10 , 0.3 , '#000', true],
+					area : ['650px','414px'],
+					offset: ['20px', ''],
+					page : {dom :"#arb"}
+				});
+		});
+}
+
+function getArb(status){
+	
+	var rewardid = $('#rewardid').val();
+	var content = $('#rcontent').val();
+	var pytoken = $('#pytoken').val();		
+	if(!rewardid){
+		layer.msg('请选择需要操作的赏单！', 2, 8);
+	}
+	if(!status){
+		layer.msg('请选择您的仲裁操作！', 2, 8);
+	}
+	if(!content){
+		layer.msg('请填写相关仲裁说明！', 2, 8);
+	}
+	$.post('index.php?m=admin_jobpack&c=getarb',{rewardid:rewardid,status:status,content:content,pytoken:pytoken},function(data){
+			
+			var data=eval('('+data+')');
+
+			if(data.error=='ok'){
+				
+				parent.layer.msg('操作成功', 2, 9,function(){window.location.reload();window.event.returnValue = false;return false;});
+			}else{
+				parent.layer.msg(data.error, 3, 8);
+			}
+			
+			
+		
+		});
+
+}
+</script>
+</body>
+</html>

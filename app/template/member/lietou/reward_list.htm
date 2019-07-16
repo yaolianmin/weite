@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap">
+
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+       <div class="report_uaer_list fl">
+      <ul>
+		<li><a href="index.php?c=integral" >{yun:}$config.integral_pricename{/yun}任务</a></li>
+		<li><a href="index.php?c=integral_reduce" >{yun:}$config.integral_pricename{/yun}规则</a></li> 
+		<li class="report_uaer_list_cur"><a href="index.php?c=reward_list" >{yun:}$config.integral_pricename{/yun}兑换</a></li> 
+      </ul>
+		</div>
+        <div class="clear"></div>
+        <div class="m_s_browse">
+        {yun:}if !empty($rows){/yun}
+          <div class="m_browse_list mt20">
+            <ul>
+              <li class="reward_t_w200">商品名称</li>
+              <li class="reward_t_w130">消耗{yun:}$config.integral_pricename{/yun}</li>
+              <li class="reward_t_w130">兑换数量</li>
+              <li class="reward_t_w130">兑换时间</li>
+              <li class="reward_t_w160">状态</li>
+            </ul>
+            <div class="clear"></div>
+          </div>
+          <div class="m_browse_cont">
+          {yun:}foreach from=$rows item=v{/yun}
+            <ul>
+              <li class="reward_t_w200">{yun:}$v.name|mb_substr:0:10:'utf-8'{/yun}</li>
+              <li class="reward_t_w130">{yun:}$v.integral{/yun}</li>
+              <li class="reward_t_w130">{yun:}$v.num{/yun}(件)</li>
+              <li class="reward_t_w130">{yun:}$v.ctime|date_format:"%Y-%m-%d"{/yun}</li>
+            
+              <li class="reward_t_w160">
+				{yun:}if $v.status=="0"{/yun} <span class="wate_verify" style="margin-right:10px;">等待审核</span> <a href="javascript:void(0)" onclick="layer_del('确定要取消？', 'index.php?c=reward_list&act=del&id={yun:}$v.id{/yun}');">取消兑换</a>{yun:}elseif $v.status=="1"{/yun} <span class="y_verify">已审核</span> {yun:}elseif $v.status=="2"{/yun} <span class="n_verify">未通过</span> <br/> <a href="javascript:;" class="looklist" onclick="layer.alert('{yun:}$v.statusbody{/yun}', -1, !1);">查看原因</a> {yun:}/if{/yun} 
+				</li>
+              <li class="reward_t_w780" style="text-align:left">
+              <span class="reward_t_s">联系人：{yun:}$v.linkman{/yun}</span><span class="reward_t_s">联系电话：{yun:}$v.linktel{/yun}</span>{yun:}if $v.express{/yun}<span class="reward_t_s">物流信息：{yun:}$v.express{/yun}</span>{yun:}/if{/yun}{yun:}if $v.expnum{/yun}<span class="reward_t_s">单号：{yun:}$v.expnum{/yun}</span>{yun:}/if{/yun}
+                <div class="reward_t_s_bz"> 备注：</font>{yun:}$v.body{/yun}</div>
+              </li>
+            </ul> 
+             {yun:}/foreach{/yun}
+		 <div class="pages">{yun:}$pagenav{/yun}</div> </div>
+		 <div class="recharge_tips fl">
+          <div class="wxts">温馨提示：</div>
+         您已兑换（<span style="color:#f60;">{yun:}$num{/yun}</span>）份礼品，还有<span style="color:#f60;">{yun:}$statis.integral{/yun}</span>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}。 <a href="{yun:}url m=redeem{/yun}" class="cblue"  target="_blank" >我要兑换</a><br>
+		  </div>
+            {yun:}else{/yun}
+         <div class="member_no_content">您共有<span style="color:#f60;">{yun:}$statis.integral{/yun}</span>{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}，还没有兑换礼品记录，<a href="{yun:}url m=redeem {/yun}" target="_bank" class="cblue">我要兑换</a>。</div>
+         
+{yun:}/if{/yun}
+          <div class="clear"></div>
+        </div>
+        
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

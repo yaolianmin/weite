@@ -1,0 +1,80 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun}
+<script>
+var integral='{yun:}$statis.pay{/yun}';
+var jobid='{yun:}$info.id{/yun}';
+
+$(document).ready(function () { 
+	
+});
+
+function pay_form(){
+ 	
+	
+	var paytype=$('input:radio[name="paytype"]:checked').val();
+	if(paytype==null){
+		layermsg('请选择一种支付方式！', 2);return false; 
+	}
+	return true;
+}
+</script>
+
+<section class="wap_member">
+<div class="wap_member_comp_h1"><span>支付赏金</span></div>
+
+
+<!--自动刷新-->   
+
+<div class="getserbver_box"> 
+
+	<form action="index.php?c=getOrder" method="post" onsubmit="return pay_form();">
+	
+	<ul class="getserbver_box_list"> 
+		
+		
+		<li><div class="getserbver_box_list_p">投递赏金：<span class="getserbver_box_s">{yun:}$rewardJob.sqmoney{/yun}</span> 元</div></li>
+		
+		<li><div class="getserbver_box_list_p">面试赏金：<span class="getserbver_box_s">{yun:}$rewardJob.invitemoney{/yun}</span> 元</div></li>
+
+		<li><div class="getserbver_box_list_p">入职赏金：<span class="getserbver_box_s">{yun:}$rewardJob.offermoney{/yun}</span> 元</div></li>
+
+		<li><div class="getserbver_box_list_p">总赏金：<span class="getserbver_box_s pricehtml">{yun:}$rewardJob.money{/yun}</span>元</div></li>
+ 	</ul>
+ 	
+	{yun:}if $paytype.wxpay{/yun}
+		<div class="pay_f_list">
+			<label>
+				<i class="pay_f_list_wx"></i><span class="pay_f_list_box">微信支付</span>
+				<input type='radio' name='paytype' value='wxpay' class="pay_f_list_radio">
+		  	</label>
+		</div>
+	{yun:}/if{/yun} 
+	{yun:}if $paytype.alipay{/yun}
+    	<div class="pay_f_list">
+        	<label>
+        		<i class="pay_f_list_zfb"></i><span class="pay_f_list_box">支付宝支付 </span>
+            	<input type='radio' name='paytype' value='alipay' class="pay_f_list_radio">
+          	</label>
+       	</div>
+	{yun:}/if{/yun}  
+	{yun:}if $paytype.wxpay || $paytype.alipay{/yun}	
+		<div class="getserbver_box_bth">
+        	<div class="pay_com_lsit_right"><input type="submit" value="确认支付" name=nextstep  class="reinputText2"></div>
+      	</div>
+	{yun:}else{/yun} 
+	  	<div class="pay_com_list">
+	        <div class="pay_com_lsit_right">
+	          <span>网站已关闭支付功能，请联系管理员！</span>
+	        </div>
+      	</div>
+	{yun:}/if{/yun} 
+ 	
+ 	{yun:}if $config.sy_freewebtel{/yun}<div class="getserbver_box_tel"><a href="tel:{yun:}$config.sy_freewebtel{/yun}">客服电话：{yun:}$config.sy_freewebtel{/yun}</a></div>{yun:}/if{/yun}
+	
+	<input id="rewardid" name='rewardid' type="hidden" value="{yun:}$rewardJob.id{/yun}"/>
+	<input id="jobid" name='jobid' type="hidden" value="{yun:}$rewardJob.jobid{/yun}"/>
+	<input id="server" name='server' type="hidden" value="rewardjob"/>
+	</form>
+</div> 
+</section>
+<div class="clear"></div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,370 @@
+<!----职位推广----------jobpay--->
+<div class="yun_resume_buy" id="jobpay" style="display:none;">
+	<div class="job_redpack_box">
+		<ul class="job_redpack_tit">
+			<li class="job_redpack_tit_cur pack" data-id='sharejob'>分享推广<i class="job_redpack_tit_line"></i></li>
+			<li class="pack" data-id='rewardjob'>悬赏推广<i class="job_redpack_tit_line"></i></li>
+		</ul>
+
+		<!--分享红包-->
+		<div  class='reward-share' id="sharejob">
+			
+	
+			<div class="job_redpack_h1"><i class="job_redpack_h1_icon job_redpack_h1_hb"></i>赏金设置</div>
+			<div class="job_redpack_list">
+				<div class="job_redpack_list_name">单次浏览赏金</div>
+				<input type="text" name="packmoney" id="packmoney" onkeyup= "this.value=this.value.replace(/[^0-9.]/g,'')" class="job_redpack_text" > 
+				<span class="job_redpack_list_n">元（不得低于0.01元）</span>
+			</div>
+		
+			<div class="job_redpack_list">
+				<div class="job_redpack_list_name">发放数量</div>
+				<input type="text" name="packnum" id="packnum" onkeyup= "this.value=this.value.replace(/[^0-9.]/g,'')" class="job_redpack_text" oninput="myFunction(this)"> 
+			</div>
+
+			<div class="clear"></div>
+
+			<!---付款区域------>
+			<form name="alipayment"  id="payform" action="../api/alipay/alipayto.php" method="post" target="_blank" onsubmit="return payforms();">
+				<div  class="job_redpack_cz">
+					<div  class="job_redpack_list">
+						<div class="job_redpack_list_name">应付金额</div>
+						<span class="added_de_box_fk_je" id="price">0</span> 元
+					</div>
+ 
+					<div  class="job_redpack_list">
+
+						{yun:}if $config.alipay=='1' || $config.wxpay=='1'{/yun}
+								
+							<div class="job_redpack_list_name">支付方式</div> 
+
+							{yun:}if $config.wxpay=='1'{/yun}	
+								<div class="job_redpack_pay">
+									<a href="javascript:;" onclick="getOrder('wxpay');">
+										<div class="job_redpack_pay_bor"><img src="{yun:}$com_style{/yun}/images/wx_pay.png"></div>微信支付
+									</a>
+								</div> 
+							{yun:}/if{/yun}
+								
+							{yun:}if $config.alipay=='1'{/yun}
+								<div class="job_redpack_pay">
+									<a href="javascript:;" onclick="getOrder('alipay');">
+										<div class="job_redpack_pay_bor job_redpack_pay_bor_pd">
+											<img src="{yun:}$com_style{/yun}/images/ap_pay.png">
+										</div>支付宝支付
+									</a>
+								</div>
+							{yun:}/if{/yun}
+
+						{yun:}else{/yun}
+							<div class="con_banner_no" style="width:300px;"><span></span><em>网站已关闭支付接口，请联系管理员</em></div>	
+						{yun:}/if{/yun}
+						<input type="hidden" value="" id="pay_type" name="pay_type" value=''/>
+						<input type="hidden" name="dingdan" id="order_id" value=""/>
+						<input type="hidden" value="分享推广赏金"  name="subject" value=''/>
+						<input type="hidden" name="pay_bank" value="directPay">
+					</div>
+							 
+				</div>
+			</form>
+			<div class="clear"></div>
+			<div class="job_redpack_tip">
+				<div class="job_redpack_tip_ts">提示：</div>
+				<p>1. 发布分享推广，所有用户都可帮助您将职位分享至朋友圈，第一时间扩散至当地社交圈</p>
+				<p>2. 设置合理分享金额，更容易让用户关注并帮您分享</p>
+				<p>3. 职位分享至朋友圈，每个微信用户浏览只计算一次，不重复扣费，一份分享赏金获得一个关注</p>
+				<p>4. 系统自动推荐职位至赏单榜，更快一步发现您职位</p>
+			</div>
+		
+			
+			<input type="hidden" name="orderid" id="orderid" value=""/>
+		</div>
+		<!--分享红包END-->
+		<!--悬赏红包-->
+		<form  id="rewardform" action="index.php?c=jobpack&act=rewardjob" method="post" onsubmit="return rewardforms();">
+			<div id="rewardjob" class="reward-share none">
+				<div class="job_redpack_xs_box">
+				    
+					<div class="job_redpack_h1"><i class="job_redpack_h1_icon job_redpack_h1_hb"></i>赏金设置</div>
+				
+					<div class="job_redpack_list">
+						<div class="job_redpack_list_name">投递赏金：</div>
+						<input type="text" name="sqmoney" id="sqmoney" onkeyup= "this.value=this.value.replace(/[^0-9.]/g,'')" class="job_redpack_text" value=''> 
+						<span class="job_redpack_list_n">元（不得低于1元）</span>
+					</div>
+				
+					<div class="job_redpack_list">
+						<div class="job_redpack_list_name">面试赏金：</div>
+						<input type="text" name="invitemoney" id="invitemoney" onkeyup= "this.value=this.value.replace(/[^0-9.]/g,'')" value='' class="job_redpack_text"> 
+						<span class="job_redpack_list_n">元（不得低于1元）</span>
+					</div>
+
+					<div class="job_redpack_list">
+						<div class="job_redpack_list_name">入职赏金：</div>
+						<input type="text" name="offermoney" id="offermoney" onkeyup= "this.value=this.value.replace(/[^0-9.]/g,'')" class="job_redpack_text"> 
+						<span class="job_redpack_list_n">元（不得低于1元）</span>
+					</div>
+
+					<div class="clear"></div>
+					<div class="clear"></div>
+
+					<div class="job_redpack_h1"><i class="job_redpack_h1_icon job_redpack_h1_tj"></i>申请条件设置</div>
+					
+					<div  class="job_redpack_list">
+						<div class="job_redpack_list_c">
+								
+							<div class="job_redpack_list_c_s job_redpack_list_c_s_cur" data-id='rexpid'>
+								<i class="job_redpack_list_c_icon job_redpack_list_c_icon_gz"></i>工作经历	
+							</div>
+								
+							<div class="job_redpack_list_c_s job_redpack_list_c_s_cur" data-id='reduid'>
+								<i class="job_redpack_list_c_icon job_redpack_list_c_icon_jy"></i>教育经历
+							</div>
+								
+							<div class="job_redpack_list_c_s job_redpack_list_c_s_cur" data-id='rprojectid'>  
+								<i class="job_redpack_list_c_icon job_redpack_list_c_icon_xm"></i>项目经历 
+							</div>
+								
+							<div class="job_redpack_list_c_s job_redpack_list_c_s_cur" data-id='rskillid'>  
+								<i class="job_redpack_list_c_icon job_redpack_list_c_icon_jn"></i>技能证书
+							</div>
+
+							<div id="rewardmsg" class="job_redpack_tips"></div>
+
+						</div>
+					</div>
+
+					<input type='hidden' id='rexpid' name='exp' value='1'>
+					<input type='hidden' id='reduid' name='edu' value='1'>
+					<input type='hidden' id='rprojectid' name='project' value='1'>
+					<input type='hidden' id='rskillid' name='skill' value='1'>
+						
+					<div  class="job_redpack_cz">
+						<div  class="job_redpack_list" style=" margin-top:10px; padding-bottom:5px;">   
+							<div class="job_redpack_list_name">&nbsp;</div>
+							<input type="hidden" value="" id="packtype" name="packtype" value='1'/>
+							<input type='submit' name='' value='发布悬赏' class='job_redpack_list_c_bth'>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="job_redpack_tip">
+						<div class="job_redpack_tip_ts">提示：</div>
+						<p>1. 发布赏金职位能更有效的吸引求职者投递简历</p>
+						<p>2. 投递、面试、入职三项赏金模式至少设置一项即可，如：您只想提高投递量，则可以单独设置投递赏金，如：您发布的职位为中高端职位，可全部设置，赏金越丰厚吸引力越强</p>
+						<p>3.  赏金职位除首页、职位搜索重点展示外，另有单独模块独立展示，展示区域更广，效果更强</p>
+		
+						<div class="job_redpack_tip_ts">重点说明：</div>
+						<p>1.  按需付费：赏金职位无需预付款，求职者投递后，企业自主选择查看某份简历（预先展示简历学历、工作经验等主体信息），确定查看某份简历时支付相应赏金即可，不占用企业资金</p>
+						<p>2 . 资金明确：赏金发放记录明晰，每份赏金都必须企业确认后才会发放，企业若长时间停滞不进行下一步流程确认，系统才会根据个人申请自动判断是否发放赏金</p>
+						<p>3 . 流程严控：为防止赏金流程因为某一方原因出现停滞，系统会自动根据预定期限进行判断，个人预定期限内未回应状态下，企业可取消赏单，剩余赏金将会自动归还至企业赏金账户，企业可自主提现</p>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--悬赏红包END-->
+	</div>
+</div>
+<!----职位推广END------------->
+
+<input type='hidden' id='jobid' value=''>
+
+<script>
+	var pro = '{yun:}$config.integral_proportion{/yun}';
+
+	function rewardlistpay(jobid){
+		$('#jobid').val(jobid);
+		$.layer({
+			type : 1,
+			fix: false,
+			zIndex:666,
+			offset: [($(window).height() - 600)/2 + 'px', ''],
+			title : '职位推广', 
+			border : [0 , 0.3 , '#000', true],
+			area : ['850px','600px'],
+			page : {dom : '#jobpay'},
+			close: function(){
+						
+				$('#jobid').val('');
+						
+			}
+		});
+	}
+	function wxorderstatus(orderid) { 
+		$.post('index.php?c=payment&act=wxpaystatus',{orderid:orderid},function(data){
+			if(data==1){
+				window.location.href='';
+			}
+		});
+	}
+
+	function payforms(){
+		var pay_type=$("#pay_type").val();
+		
+		if(pay_type==''){
+			layer.msg('请选择支付方式！', 2,8);
+
+		}else if(pay_type == 'wxpay'){ 
+			var orderId = $("#orderid").val();
+			
+			$.post('index.php?c=payment&act=wxurl',{orderId:orderId},function(data){
+				$('.wx_payment_ewm').html(data);
+				$.layer({
+					type : 1,
+					title :'微信扫码支付', 
+					closeBtn : [0 , true],
+					border : [10 , 0.3 , '#000', true],
+					area : ['320px','400px'],
+					page : {dom :"#wxpayTx"}
+				});
+				setInterval("wxorderstatus("+orderId+")", 3000); 
+			})
+
+			return false;  
+		} else{
+		
+			$.layer({
+				type : 1,
+				title :'提示',
+				closeBtn : [0 , true],
+				border : [10 , 0.3 , '#000', true],
+				area : ['450px','280px'],
+				page : {dom :"#payshow"}
+			});
+		}
+	}
+
+	function rewardforms(){
+		var sqmoney = $('#sqmoney').val();
+		var invitemoney = $('#invitemoney').val();
+		var offermoney = $('#offermoney').val();
+		var jobid = $('#jobid').val();
+		var exp = $('#rexpid').val();
+		var edu = $('#reduid').val();
+		var project = $('#rprojectid').val();
+		var skill = $('#rskillid').val();
+		if(!sqmoney && !invitemoney && !offermoney){
+			$('#rewardmsg').html('投递、面试、入职金额至少设置一项');
+			return false;
+
+		}else{
+			if(!sqmoney){
+				sqmoney= 0;
+			}
+			if(!invitemoney){
+				invitemoney= 0;
+			}
+			if(!offermoney){
+				offermoney= 0;
+			}
+			if((parseFloat(sqmoney)+parseFloat(invitemoney)+parseFloat(offermoney))<1){
+				$('#rewardmsg').html('悬赏总金额不得低于1元');
+				return false;
+			}
+		}
+
+		$.post('index.php?c=jobpack&act=rewardjob',{sqmoney:sqmoney,invitemoney:invitemoney,offermoney:offermoney,jobid:jobid,exp:exp,edu:edu,project:project,skill:skill},function(data){
+			var data=eval('('+data+')');
+			if(data.error==1){
+					layer.msg('悬赏职位发布成功！', 2, 9,function(){window.location.href = "index.php?c=jobpack&t=r";window.event.returnValue = false;return false;});
+			}else{
+				$('#rewardmsg').html(data.msg);
+			}
+		});
+		return false;
+	}
+
+	function getOrder(pay_type){
+		
+		$('#pay_type').val(pay_type);
+
+		var jobid = $('#jobid').val();
+
+		var packmoney = $('#packmoney').val();
+
+		var packnum = $('#packnum').val();
+
+		var price = accMul(packmoney, packnum);
+
+		if(price<1){
+			layer.msg('抵扣前推广总金额不得低于1元！', 2,8);
+		}else{
+			var index = layer.load('执行中，请稍候...',0);
+			$.ajax({
+				async: false, 
+				type: "POST",
+				global: false,
+				url :"index.php?c=jobpack&act=pay",
+				data:{jobid:jobid,packnum:packnum,packmoney:packmoney},
+				success :function(data){
+					layer.close(index);
+					var data=eval('('+data+')');
+					if(data.error==1){
+						layer.msg(data.msg, 2,8);
+					}else if(data.error==0){
+						$('#order_id').val(data.orderid);
+						$('#orderid').val(data.id);
+						//提交表单
+						$('#payform').submit();
+					}
+				}
+			});
+		}
+		 
+	}
+
+	$(function(){  
+		$('#packmoney').keyup(function(){
+			var packmoney = $('#packmoney').val();
+			var packnum = $('#packnum').val();
+			var price = accMul(packmoney, packnum);
+ 			if(price>0){
+				$('#price').html(price);
+			}else{
+				$('#price').html(0);
+			}
+		});
+
+		$('#packnum').keyup(function(){
+			var packmoney = $('#packmoney').val();
+			var packnum = $('#packnum').val();
+			var price = accMul(packmoney, packnum);
+ 			if(price>0){
+				$('#price').html(price);
+			}else{
+				$('#price').html(0);
+			}
+		});
+
+		$('.pack').click(function(){
+			$('.job_redpack_tit_cur').removeClass('job_redpack_tit_cur');
+			$(this).addClass('job_redpack_tit_cur');
+			var dataid = $(this).attr('data-id');
+			$('.reward-share').hide();
+			$('#'+dataid).show();
+		});
+		$('.admin_tg_chlose').click(function(){
+			var jobpaytype = $('#jobpaytype').val();
+			if(jobpaytype=='1'){
+				$(this).removeClass('admin_tg_chlose_cur');
+				$('#jobpaytype').val('0');
+			}else{
+				$(this).addClass('admin_tg_chlose_cur');
+				$('#jobpaytype').val('1');
+			}
+		});
+		$('.job_redpack_list_c_s').click(function(){
+			var dataid = $(this).attr('data-id');
+			var datavalue = $('#'+dataid).val();
+			if(datavalue== 1){
+				$(this).removeClass('job_redpack_list_c_s_cur');
+				$('#'+dataid).val('0');
+			}else{
+				$(this).addClass('job_redpack_list_c_s_cur');
+				$('#'+dataid).val('1');
+			}
+		});
+	}); 
+	function myFunction(_this) {
+		_this.value = _this.value.replace(/[^0-9]/g, '');
+	}
+</script>

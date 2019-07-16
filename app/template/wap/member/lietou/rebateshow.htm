@@ -1,0 +1,34 @@
+{yun:}include file="$wapstyle/member/lheader.htm"{/yun}
+  <section>
+    <div class="user_contnet mt10">
+      <div class="user_contnet_box ">
+        <div class="wap_title"><span class="">基本信息</span></div>
+        <ul class="user_contnet_ul">
+        <li><span class="user_contnet_info_n">姓名：</span>{yun:}$resume.uname{/yun}</li>
+          <li><span class="user_contnet_info_n">性别：</span>{yun:}$resume.sex{/yun}</li>
+          <li class="com_show_li"><span class="user_contnet_info_n">出生年月：</span>{yun:}$resume.birthday{/yun} </li>
+          <li class="com_show_li"><span class="user_contnet_info_n">最高学历：</span>{yun:}$userclass_name[$resume.edu]{/yun}</li>
+          <li class="com_show_li"><span class="user_contnet_info_n">工作经验：</span>{yun:}$userclass_name[$resume.exp]{/yun}</li>
+           <li class="com_show_li"><span class="user_contnet_info_n">联系手机：</span>{yun:}$resume.telphone{/yun}</li>
+            {yun:}if $resume.email{/yun}<li class="com_show_li"><span class="user_contnet_info_n">联系邮箱：</span>{yun:}$resume.email{/yun}</li>{yun:}/if{/yun}
+        </ul>
+      </div>
+      <div class="user_contnet_box mt10 ">
+        <div class="wap_title"><span class="">求职意向</span></div>
+        <ul class="user_contnet_ul">
+          <li class="com_show_li"><span class="user_contnet_info_n">从事行业：</span><span class="user_list_yxjob">{yun:}$industry_name[$resume.hy]{/yun}</span></li>
+          <li class="com_show_li"><span class="user_contnet_info_n">期望职位：</span>{yun:}$resume.jobname{/yun}</li>
+          <li class="com_show_li"><span class="user_contnet_info_n">期望城市：</span>{yun:}$resume.city{/yun}</li>
+          <li class="com_show_li"><span class="user_contnet_info_n">期望薪资：</span>{yun:}$resume.rsalary{/yun}</li>
+          <li class="com_show_li"><span class="user_contnet_info_n">工作性质：</span>{yun:}$userclass_name[$resume.type]{/yun}</li>
+          <li class="com_show_li"><span class="user_contnet_info_n">到岗时间：</span>{yun:}$userclass_name[$resume.report]{/yun}</li>
+        </ul>
+      </div>
+      <div class="user_contnet_box mt10 ">
+        <div class="wap_title"><span class="">推荐理由</span></div>
+        {yun:}$rebate.content{/yun} 
+        </div>
+	      </div>
+  </section>
+ 
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

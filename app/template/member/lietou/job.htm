@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<!--内容部分content-->
+<div class="m_content">
+	<div class="wrap">
+		<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+		<form action="index.php" target="supportiframe" method="get" id='myform'>
+			<input type="hidden" name="c" value="job" />
+			<input type="hidden" name="act" value="del" />
+			{yun:}include file="$lietoustyle/left.htm"{/yun}
+			<div class="m_inner_youb fr">
+                   <div class="clear"></div>
+                   <div class="lt_m_tit"><span class="lt_m_tit_s">职位管理</span></div>
+           <div class="lt_m_box">
+          <div class="lt_m_table">
+          <table>
+                <tbody>
+                
+              
+              
+            
+          
+					{yun:}if $joblist{/yun}
+                      <tr>   
+                      <th width="15">&nbsp;</th >                         
+                 <th scope="col" ><span>职位名称</span></th>
+                  <th scope="col"><span>招聘状态</span></th>
+                  <th scope="col" ><span>截止日期</span></th>
+                  <th scope="col" ><span>更新日期</span></th>
+                  <th scope="col">操作</th>
+                </tr>
+                
+					{yun:}/if{/yun}
+
+					{yun:}foreach from=$joblist item=job{/yun}
+                      <tr>
+                      <td width="15"><input type="checkbox" class="sent_check mt0" value="{yun:}$job.id{/yun}" name="del[]"></td >         
+                <td >
+									{yun:}if $s=="1"{/yun}<a href="{yun:}url m=lietou c=jobshow id=$job.id{/yun}" target="_blank" title="预览" class="m_name">{yun:}/if{/yun}
+										{yun:}$job.job_name{/yun}
+									{yun:}if $s=="1"{/yun}</a>{yun:}/if{/yun}</td>
+                <td align="center">{yun:}if $job.zp_status==1 && $job.status==1{/yun}
+									
+										已下架
+										<a href="javascript:void(0)" onclick="layer_del('', 'index.php?c=job&act=jobset&id={yun:}$job.id{/yun}&zp=0');" style="margin-left:5px;">【上架】</a>
+									
+								{yun:}elseif $job.zp_status==0 && $job.status==1{/yun}
+									
+										招聘中
+										<a href="javascript:void(0)" onclick="layer_del('', 'index.php?c=job&act=jobset&id={yun:}$job.id{/yun}&zp=1');" style="margin-left:5px;">【下架】</a>
+									
+								{yun:}elseif $job.status==1{/yun}
+								已审核
+								{yun:}elseif $job.status==2{/yun}
+									已过期
+								{yun:}elseif $job.status==0{/yun}
+									待审核
+								{yun:}elseif $job.status==3{/yun}
+								未通过
+								{yun:}/if{/yun}
+									</td>
+                <td align="center">{yun:}$job.edate|date_format:"%Y-%m-%d"{/yun}</td>
+                <td  align="center">{yun:}$job.lastupdate|date_format:"%Y-%m-%d"{/yun}</td>
+                <td  align="center">
+                <a href="javascript:void(0);" onclick="urgent('{yun:}$job.id{/yun}','{yun:}$job.edate|date_format:"%Y-%m-%d"{/yun}')" class="cont_del">延期 </a><span class="del_span">|</span>
+                <a href="index.php?c=jobadd&act=edit&id={yun:}$job.id{/yun}" class="cont_del">编辑</a>
+									<span class="del_span">|</span>
+									{yun:}if $job.status==1{/yun}
+										<a href="javascript:void(0)" onclick="ltRefreshJob('{yun:}$job.id{/yun}');" class="cont_del">刷新</a> 
+										<span class="del_span">|</span>
+									{yun:}/if{/yun}
+									<a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=job&act=del&id={yun:}$job.id{/yun}');" class="cont_del">删除</a></td>
+                </tr>  
+                
+					
+					{yun:}foreachelse{/yun}
+                    <tr>
+                    <td colspan="6" class="lt_m_table_end">
+						<div class="member_no_content"> 
+						<p>	你还没有{yun:}if $zp_status=="1"{/yun}下架{yun:}elseif $s=="1"{/yun}发布中{yun:}elseif $s==0{/yun}待审核{yun:}elseif $s==2{/yun}已过期{yun:}elseif $s==3{/yun}未通过{yun:}/if{/yun}的职位</p><a href="javascript:void(0);" onclick="jobadd_url('{yun:}$addltjobnum{/yun}','{yun:}$config.integral_lt_job{/yun}','lietou','{yun:}$config.com_integral_online{/yun}','{yun:}$config.integral_proportion{/yun}');" title="发布职位"  class="lietou_nomsg_a">发布职位</a>                            
+						</div>
+</td>
+                </tr>  
+					{yun:}/foreach{/yun}
+						
+					{yun:}if !empty($joblist){/yun}
+                     <tr>
+                    <td colspan="6"class="lt_m_table_end">
+						<div class="m_browse_del m_browse_del01">
+							<input id="checkAll" type="checkbox" class="m_del_che" onclick='m_checkAll(this.form)'>全选
+							<a href="javascript:void(0);" onclick="return really('del[]');" class="m_mass m_mass01">批量删除职位</a> 
+						</div>
+                        
+                        </td>
+                        </tr>
+					{yun:}/if{/yun}
+			
+		</form>
+
+	 <tr>
+                    <td colspan="6" class="lt_m_table_end"><div class="pages">{yun:}$pagenav{/yun}</div>
+ </td>
+                </tr>  
+    </tbody></table></div></div>
+</div>
+<div class="clear"></div>
+<!--延期弹出框-->
+<div id="urgent"  style="display:none; ">
+ <div class="job_box_div"   style="width:300px; ">
+ 	<div class="job_box_msg" style="margin-left:10px;_margin-left:5px;padding:5px;">
+      <p id="gotime_edate"></p>
+    </div>
+    <form action='index.php?c=jobadd&act=gotime' target="supportiframe" method="post" id='gotimef'>
+      <input type="hidden" name="gotimeid" id="gotimeid" value=""/>
+      <div class="job_box_inp"  style="padding:10px 5px 5px 20px"> <span style="float:left; margin-right:0px; line-height:40px;">延期天数：</span>
+        <input name="day" value="" class="com_info_text placeholder" type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" style="width:100px; float:left"/>
+        <span class="fltL box_infobox_span" style="padding-left:10px; line-height:40px;">天</span> </div>
+      <span class="job_box_botton" style="width:100%;"> <a class="job_box_yes job_box_botton2" href="javascript:void(0);" onclick="$('#gotimef').submit();">确定</a> </span>
+    </form>
+  </div>
+</div>
+<script>
+function urgent(id,urgenttime){
+	$("#gotimeid").val(id);
+	$("#gotime_edate").html('当前职位到期时间：<font color="red">'+urgenttime+'</font>');
+	$.layer({
+		type : 1,
+ 		title : '延期天数',
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['340px','210px'],
+ 		page : {dom : '#urgent'}
+	});
+}
+</script>
+<!--内容结束--> 
+ {yun:}include file="$lietoustyle/footer.htm"{/yun}

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+	<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+	<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+	<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+	
+	<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+	<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+	<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+	<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+	
+<title>后台管理</title>
+</head>
+
+<body class="body_ifm">
+	<div class="infoboxp">
+		<div class="tabs_info">
+			<ul>
+				<li><a href="index.php?m=admin_ltset">猎头设置</a></li> 
+				<li><a href="index.php?m=admin_ltset&c=logo">头像设置</a></li> 
+				<li class="curr"><a href="index.php?m=admin_ltset&c=set">{yun:}$config.integral_pricename{/yun}设置</a></li> 
+				<li><a href="index.php?m=admin_ltset&c=spend">消费设置</a></li>
+			</ul>
+		</div>
+
+		<div class="admin_new_tip">
+			<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+			<div class="admin_new_tip_list_cont">
+				<div class="admin_new_tip_list">
+					该页面展示了网站的猎头{yun:}$config.integral_pricename{/yun}设置信息，可对猎头进行猎头{yun:}$config.integral_pricename{/yun}设置操作。
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+  
+		<div id="subboxdiv" style="width:100%;height:100%;display:none;position:absolute;"></div>
+
+		<div class="main_tag mt10">
+			<div class="clear"></div>
+			<div class="tag_box"><div>
+			
+			<form class="layui-form">
+				<table width="100%" class="table_form">
+					<tr class="admin_table_trbg">
+						<th width="220" bgcolor="#f0f6fb"><span class="admin_bold">参数说明</span></th>
+						<td bgcolor="#f0f6fb"><span class="admin_bold">参数值</span></td>
+					</tr>
+					
+					<tr class="admin_table_trbg">
+						<th width="220">猎头执照认证：</th>
+						<td>
+							<input type="checkbox" name="integral_ltcert_type" id="integral_ltcert_type" lay-skin="switch" lay-text="加|减" {yun:}if $config.integral_ltcert_type=="1"{/yun} checked {yun:}/if{/yun} />
+							
+							<input class="input-text" type="text" name="integral_ltcert" id="integral_ltcert" value="{yun:}$config.integral_ltcert{/yun}" size="20" maxlength="255" onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')"/> {yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun} 
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2" align="center">
+							<input class="layui-btn layui-btn-normal" id="integral" type="button" name="config" value="提交" />&nbsp;&nbsp;
+							<input class="layui-btn layui-btn-normal" type="reset" value="重置" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	<input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+    <script type="text/javascript">
+		layui.use(['layer', 'form'], function(){
+			var layer = layui.layer
+				,form = layui.form
+				,$ = layui.$;
+		});
+
+		$(function(){
+			$("#integral").click(function(){
+				$.post("index.php?m=admin_ltset&c=save",{
+					config : $("#integral").val(),
+      				integral_ltcert_type : $("input[name=integral_ltcert_type]").is(":checked") ? 1 : 2,	
+ 					integral_ltcert : $("#integral_ltcert").val(),
+					pytoken : $("#pytoken").val()
+				},function(data,textStatus){
+					config_msg(data);
+				});
+			});
+		})
+	</script>
+    
+</body>
+</html>

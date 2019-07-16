@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js?v={yun:}$config.cachecode{/yun}"></script>
+<script>
+	DD_belatedPNG.fix('.png,.inter_con .inter_con_new,.vip_pic_xg a,.vip_mes h2 a');
+</script>
+<![endif]-->
+<script src="{yun:}$lietou_style{/yun}/js/jobadd.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/pop_up.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script>
+$(document).ready(function(){
+	$("#newyqresume").hover(function(){
+		
+		$("#newyqresumeshow").show();
+		
+	},function(){
+		$("#newyqresumeshow").hide();	
+	})
+})
+</script>
+</head>
+
+<body>
+	{yun:}include file="$lietoustyle/header.htm"{/yun}
+<div class="m_content">
+		<div class="wrap"> 
+<div class="lietou_index_left" >
+{yun:}if $user.yyzz_status == "0"{/yun}
+			<div class="lietou_tips">
+				
+				<div class="lietou_tips_p">您还没进行职业资格验证，人才搜索不到您，会影响您的招聘效果哦，赶快去进行验证吧。</div>
+				<a href="index.php?c=binding">立即认证</a> 
+			</div>
+		{yun:}/if{/yun}
+		
+
+			<div class="lietou_index_dt_box">
+			
+				<div class="lietou_index_dt">
+					<dl class="lietou_index_dt_list">
+						<a href="index.php?c=job&s=1">
+							<dt>招聘中职位</dt>
+							<dd {yun:}if $jobnum>0{/yun}class="invite_zpz"{yun:}/if{/yun}>{yun:}$jobnum{/yun}<i>(个)</i></dd>
+						</a>
+					</dl>
+					
+					<dl class="lietou_index_dt_list">
+						<a href="index.php?c=yp_resume">
+							<dt class="lietou_index_dt_list_djl">应聘来的简历</dt>
+							<dd {yun:}if $ypnum>0{/yun}class="invite_zpz"{yun:}/if{/yun}>{yun:}$ypnum{/yun}<i>(份)</i></dd>
+						</a>
+					</dl>
+        
+					<dl class="lietou_index_dt_list">
+						<a href="index.php?c=down_resume">
+							<dt class="lietou_index_dt_list_xjl">已下载简历</dt>
+							<dd  {yun:}if $downnum>0{/yun}class="invite_zpz"{yun:}/if{/yun}>{yun:}$downnum{/yun}<i>(份)</i></dd>
+						</a>
+					</dl>
+					
+                    	<dl class="lietou_index_dt_list" style="border:none">
+						<a href="index.php?c=down_resume">
+							<dt class="lietou_index_dt_list_xjl">被访问次数</dt>
+							<dd  {yun:}if $downnum>0{/yun}class="invite_zpz"{yun:}/if{/yun}>{yun:}$user.hits{/yun}<i>(次)</i></dd>
+						</a>
+					</dl>	
+                    </div>
+			</div>
+            <div class="lietou_index_date">
+              <div class="lietou_index_date_tit">
+              <ul>
+<li {yun:}if $smarty.get.type==''{/yun}class="lietou_index_date_tit_cur" {yun:}/if{/yun}><a href="index.php">新应聘简历</a><i class="lietou_index_date_tit_curline"></i></li>
+<li {yun:}if $smarty.get.type=='recresume'{/yun} class="lietou_index_date_tit_cur" {yun:}/if{/yun}><a href="index.php?type=recresume">待处理的推荐简历</a><i class="lietou_index_date_tit_curline"></i></li>
+<li><a a href="index.php?c=right" target="_blank">猎头服务</a><i class="lietou_index_date_tit_curline"></i></li>
+</ul></div>
+ {yun:}if $smarty.get.type==''{/yun}
+  {yun:}if $yqresume{/yun}
+<!--新应聘简历-->
+<div class="lt_m_table" style="width:870px; margin-left:10px;">
+         
+         <table>
+                <tbody>
+              <tr>                   
+                 <th scope="col"><span>姓名</span></th>
+                  <th scope="col"><span>期望行业</span></th>
+                  <th scope="col"><span>意向职位</span></th>
+                  <th scope="col"><span>工作地点</span></th>
+                 <th scope="col"><span>  更新时间</span></th>
+                  <th scope="col">操作</th>
+                </tr>
+                   
+         	{yun:}foreach from=$yqresume item=v{/yun}
+                 <tr>                   
+                 <td  align="center">{yun:}$v.name{/yun}</td>
+                  <td align="center"><span>{yun:}$v.hyname{/yun}</span></td>
+                  <td align="center"><span>{yun:}$v.jobclassname{/yun}</span></td>
+                  <td  align="center"><span>{yun:}$v.cityname{/yun}</span></td>
+                 <td align="center"><span> {yun:}$v.lastupdate_n{/yun}</span></td>
+                  <td  align="center"><a href="{yun:}url m=resume c=show type=2 id=$v.eid{/yun}"  target="_blank"  class="cont_del">查看</a></td>
+                </tr>
+                 {yun:}/foreach{/yun}
+                
+         </tbody></table>
+     </div>
+{yun:}if count($yqresume) gt 10{/yun}<div class="looresume_more" ><a href="index.php?c=yp_resume">查看更多</a></div>{yun:}/if{/yun}
+    {yun:}else{/yun}
+  <!--没有内容-->
+<div class="lietou_nomsg">
+<p>暂无未处理的简历，您可以去人才库里面找找心仪的精英！</p>
+<a href="index.php?c=search_resume" class="lietou_nomsg_a">找简历</a>
+</div>
+  {yun:}/if{/yun}
+  {yun:}/if{/yun}
+  {yun:}if $smarty.get.type=='recresume'{/yun}
+  <!--待处理推荐简历-->
+  {yun:}if $recresume{/yun}
+  <div class="lt_m_table" style="width:870px; margin-left:10px;">
+         
+         <table>
+                <tbody>
+              <tr>                   
+                 <th scope="col"><span>姓名</span></th>
+                  <th scope="col"><span>期望行业</span></th>
+                  <th scope="col"><span>意向职位</span></th>
+                  <th scope="col"><span>工作地点</span></th>
+                 <th scope="col"><span>  更新时间</span></th>
+                  <th scope="col">操作</th>
+                </tr>
+                {yun:}foreach from=$recresume item=v{/yun}
+                 <tr>                   
+                 <td >
+                 <a class="" target="_blank" href="###">{yun:}$v.name{/yun}</a></td>
+                  <td align="center"><span>{yun:}$v.hyname{/yun}</span></td>
+                  <td align="center"><span>{yun:}$v.jobclassname{/yun}</span></td>
+                  <td  align="center"><span>{yun:}$v.cityname{/yun}</span></td>
+                 <td align="center"><span> {yun:}$v.lastupdate_n{/yun}</span></td>
+                  <td  align="center"><a href="index.php?c=give_rebates"  target="_blank"  class="cont_del">查看</a></td>
+                </tr>
+                {yun:}/foreach{/yun}
+         </tbody></table>
+     </div>
+{yun:}if count($recresume) gt 10{/yun} <div class="looresume_more"><a href="index.php?c=give_rebates">查看更多</a></div>{yun:}/if{/yun}
+  {yun:}else{/yun}
+  <!--没有内容-->
+<div class="lietou_nomsg">
+<p>暂无未处理的简历，您可以去人才库里面找找心仪的精英！</p>
+<a href="index.php?c=search_resume" class="lietou_nomsg_a">找简历</a>
+</div>
+  {yun:}/if{/yun}
+  {yun:}/if{/yun}
+</div>
+      
+</div>
+  <div class="lietou_index_right">
+<div class="lietou_index_rightbox">
+<div class="lietou_index_rightbox_tit"><span class="lietou_index_rightbox_tit_s">会员服务</span></div>
+<div class="lietou_index_rightbox_fw">
+
+<p> 会员级别：{yun:}$statis.rating_name{/yun}<a href="index.php?c=right" class="index_vip_sj">升级</a></p>
+					<p>
+						目前{yun:}$config.integral_pricename{/yun}：
+						<i class="lietou_index_rightbox_fw_c">{yun:}$statis.integral_format{/yun}</i> {yun:}$config.integral_priceunit{/yun} {yun:}$config.integral_pricename{/yun}
+					</p>
+					<p>增值包：什么是<a href="index.php?c=right&act=added" class="index_vip_zzb">增值包</a>？</p>
+					
+					<div class="inter_det"> 
+						<a href="index.php?c=pay&type=integral" class="inter_det_cz">充值</a> 
+						<a href="index.php?c=paylog" class="inter_det_cz">明细</a> 
+						<a href="index.php?c=integral" class="inter_det_why">如何获得{yun:}$config.integral_pricename{/yun}？</a> 
+					</div>
+<div class="lietou_index_rightbox_fw_tit">服务热线</div>
+<div class="">联系电话：{yun:}$config.sy_freewebtel{/yun}</div>
+<div class="">联系QQ：{yun:}$config.sy_qq{/yun}<a href="http://wpa.qq.com/msgrd?v=3&uin={yun:}$config.sy_qq{/yun}&site=qq&menu=yes" class="" target="_blank">
+					<img src="{yun:}$lietou_style{/yun}/images/firmicon06.png">
+				</a> </div>
+</div>
+</div>  
+<div class="lietou_index_rightbox">
+<div class="lietou_index_rightbox_tit"><span class="lietou_index_rightbox_tit_s">精英推荐</span></div>
+<div class="lietou_index_rightbox_fw" style="padding-top:0px; padding-bottom:0px;">
+<ul class="index_user_box">
+					{yun:}userlist rec=1 height_status=2 item=userlist limit=4{/yun}
+						<li>
+							<div class="ess_pic"> 
+								<a href="{yun:}url m=resume c=show id=$userlist.id type=2{/yun}"  target="_blank"> 
+									<img src="{yun:}$userlist.photo{/yun}" width="40" height="40" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);"/>
+								</a> 
+							</div>
+							<div class="ess_mes">
+								<span><a  target="_blank" href="{yun:}url m=resume c=show id=$userlist.id type=2{/yun}">{yun:}$userlist.username_n{/yun}</a></span>
+								<p>意向职位：<i>{yun:}$userlist.job_post|mb_substr:0:15:'utf-8'{/yun}</i></p>
+								<p>工作经验：<i>{yun:}$userlist.exp_n{/yun}</i></p>
+							</div>
+						</li>
+					{yun:}/userlist{/yun}
+				</ul>
+               <div class="lietou_index_rightbox_jlk"> <a href="index.php?c=search_resume">进入简历库>></a></div>
+</div>
+</div>
+</div>                
+                
+					
+			
+			<div class="clear"></div>
+
+		
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

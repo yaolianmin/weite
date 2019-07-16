@@ -1,0 +1,47 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+    <div class=right_box>
+      <div class=admincont_box>
+       <div class="com_tit"><span class="com_tit_span">赏金收益</span></div>
+        <div class="job_list_tit">
+          <ul class="">
+			 <li class=""><a href="index.php?c=jobpack&act=withdraw">赏金提现</a></li>
+            <li class="job_list_tit_cur"><a href="index.php?c=jobpack&act=withdrawlist">提现记录</a></li>
+          </ul>
+        </div>
+            <div class="clear"></div>
+        <div class="com_body">
+         <div class="admin_new_tip mt20">
+            <div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+            <div class="admin_new_tip_list_cont">
+              <div class="admin_new_tip_list">单笔提现金额必须达到{yun:}$config.sy_withdraw_minmoney{/yun}元 ,
+{yun:}if $config.sy_withdraw_num>0{/yun} 单次提现收取每笔{yun:}$config.sy_withdraw_pound{/yun}%手续费{yun:}/if{/yun}
+{yun:}if $config.sy_withdraw_money>0{/yun} {yun:}$config.sy_withdraw_money{/yun}元以内及时到账，超过{yun:}$config.sy_withdraw_money{/yun}元需审核。{yun:}/if{/yun} </div>
+   <div class="admin_new_tip_list"> <span class="withdraw_tx_box_d"> 可提现金额：</span> <span class="withdraw_tx_box_n">￥{yun:}$statis.packpay{/yun}</span>  元
+
+		  <span class="withdraw_tx_box_d" style="margin-left:50px;"> 已冻结金额：</span> <span class="withdraw_tx_box_n">￥{yun:}$statis.freeze{/yun}</span>  元
+            </div>  </div>
+          </div>
+          
+          <div class="clear"></div>
+        
+          
+          <div class="clear"></div>
+          <div class="mt20">
+           <table class="com_table">
+        <tr><th>真实姓名</th><th>提现金额</th><th>手续费</th><th>提现时间</th><th>状态</th><th>原因</th> </tr>
+			{yun:}foreach from=$rows item=v{/yun}
+          <tr><td>{yun:}$v.real_name{/yun}</td><td>￥{yun:}$v.price{/yun}</td><td>￥{yun:}$v.pound_price{/yun}</td><td>{yun:}$v.time|date_format:"%Y-%m-%d %H:%M"{/yun}</td><td>{yun:}$v.order_state_n{/yun}</td><td>{yun:}$v.order_remark{/yun}</td> </tr>
+		 {yun:}/foreach{/yun}
+		 <tr><td colspan="6" style="border:none;"><div class="diggg">{yun:}$pagenav{/yun}</div></td></tr>
+          </table>
+          
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/rewardpay.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+{yun:}include file="$comstyle/footer.htm"{/yun} 

@@ -1,0 +1,282 @@
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<div class="content">
+	<!--工作内容页-->
+	<div class="job_main fl">
+		<div class="job_point fl">
+        <div><div class="stamp_exceed">
+		{yun:}if $job.status=='2'{/yun}
+		<img title="已过期" src="{yun:}$lietou_style{/yun}/images/stamp_gq.png">
+		{yun:}elseif $job.zp_status=='1'{/yun}
+		<img title="已下架" src="{yun:}$lietou_style{/yun}/images/stamp.png">
+		{yun:}/if{/yun}
+        </div> </div>
+			<div class="job_point_title fl">
+				<h1 class="job_point_h fl">{yun:}$job.job_name{/yun}</h1>
+			<div class="job_years_money fl">
+				<div class="job_resp_salary">
+					<span class="job_resp_nx">年薪：</span>{yun:}if $job.minsalary>0&&$job.maxsalary>0{/yun}￥{yun:}$job.minsalary{/yun}-{yun:}$job.maxsalary{/yun}万{yun:}else if $job.minsalary{/yun}￥{yun:}$job.minsalary{/yun}万以上{yun:}else{/yun}面议{yun:}/if{/yun}
+				</div>
+			</div>                
+                
+				{yun:}if $config.lt_rec_rebates=="1" && $job.rebates>"0"{/yun}
+				<div class="job_prize fr">
+				<div class="job_prize_name fl">悬赏：{yun:}$job.rebates{/yun}{yun:}$config.lt_rebates_name{/yun} </div>
+				  {yun:}if $uid{/yun}
+				  {yun:}if $myself{/yun}
+				  <input class="job_prize_bth" value="立即推荐" onclick="myself();" type="submit">
+				  {yun:}else{/yun}
+				  <input class="job_prize_bth" value="立即推荐" onclick="window.location.href='{yun:}url m=lietou c=recuser id=$job.id{/yun}'" type="submit">
+				  {yun:}/if{/yun} 
+				  {yun:}else{/yun}
+				  <input class="job_prize_bth" value="立即推荐" onclick="showlogin('1');" type="submit">
+				  {yun:}/if{/yun} 
+				</div>
+				{yun:}/if{/yun} 
+			</div>
+			<div class="job_point_com fl">
+				<div class="job_point_company fl">
+					
+					<span class="job_point_company_g"><i class="job_point_company_g_c">所属部门：</i>{yun:}$job.department{/yun}</span>
+					<span class="job_point_company_g"><i class="job_point_company_g_c">汇报对象：</i>{yun:}$job.report{/yun}</span>
+			
+					<span class="job_point_company_g"><i class="job_point_company_g_c">访问：</i>{yun:}$job.hits+1{/yun}次</span>
+					<span class="job_point_company_g"><i class="job_point_company_g_c">更新时间：</i>{yun:}$job.lastupdate|date_format:"%Y-%m-%d %H:%M:%S"{/yun}</span>
+				</div>
+			</div>
+            
+            {yun:}if $job.welfare{/yun}
+			<ul class="job_point_reward fl">          
+             <li>{yun:}foreach from=$job.welfare item=wlist{/yun} <span class="job_point_reward_bq">{yun:}$ltclass_name[$wlist]{/yun}</span> {yun:}/foreach{/yun}</li>           
+			</ul>
+            {yun:}/if{/yun} 
+            
+            
+		</div>
+		<div class="job_point fl">
+			<div class="job_resp_title f16 fb fl">
+                      <span class="job_lt_line"></span>    
+				岗位要求
+			</div>
+			   <ul class="job_show_jobuserzw_list">
+           <li><div class="c9 fl">年龄要求：</div>{yun:}$job.age_info{/yun} </li>
+       
+            
+				<li>
+					<div class="c9 fl">
+						工作地点：
+					</div>
+					{yun:}$job.provinceid_info{/yun} {yun:}$job.cityid_info{/yun} {yun:}$job.three_cityid_info{/yun}
+				</li>
+				<li>
+					<div class="c9 fl">
+						工作年限：
+					</div>
+					{yun:}$job.exp_info{/yun}
+				</li>
+				<li>
+					<div class="c9 fl">
+						学历要求：
+					</div>
+					{yun:}$job.edu_info{/yun}
+				</li>
+				<li>
+					<div class="c9 fl">
+						性别要求：
+					</div>
+					{yun:}$job.sex{/yun}
+				</li>
+				{yun:}if $job.language{/yun}
+				<li>
+					<div class="c9 fl">
+						语言要求：
+					</div>
+					{yun:}$job.language{/yun}
+				</li>
+				{yun:}/if{/yun}
+			
+			</ul>
+
+			<div class="clear"></div>
+			<div class="job_resp_bth" style="padding-top:20px;">
+            {yun:}if $usertype==1&&$uid{/yun}
+				{yun:}if $userjob&&$job.notuserjob==''{/yun}
+				<a href="javascript:void(0);" class="job_resp_apply job_resp_apply_have" >已经申请</a>
+				{yun:}elseif $job.notuserjob==''{/yun}
+				<a href="javascript:void(0);" class="job_resp_apply" onclick="ypjob('2','{yun:}$uid{/yun}','{yun:}$job.id{/yun}');">立即申请</a>
+				{yun:}/if{/yun}
+				
+				{yun:}if $favjob{/yun}
+				<a href="javascript:void(0);" class="job_resp_last job_resp_collect job_resp_collect_have">已收藏</a>
+				{yun:}else{/yun}
+				<a href="javascript:void(0);" class="job_resp_last job_resp_collect" id="ltjob{yun:}$job.id{/yun}" onclick="fav_hjob('{yun:}$job.id{/yun}');">收藏</a>
+				{yun:}/if{/yun}
+            {yun:}else{/yun}
+            	{yun:}if $uid{/yun}
+					{yun:}if $job.notuserjob==''{/yun}
+                    <a href="javascript:;" class="job_resp_apply" onclick="layer.msg('只有个人用户才能申请', 2, 8)">立即申请</a>
+					{yun:}/if{/yun}
+                    <a href="javascript:;" class="job_resp_last job_resp_collect" onclick="layer.msg('只有个人用户才能收藏', 2, 8)">收藏</a>
+                {yun:}else{/yun}
+					{yun:}if $job.notuserjob==''{/yun}
+                    <a href="javascript:;" class="job_resp_apply" onclick="showlogin('1');">立即申请</a>
+					{yun:}/if{/yun}
+                    <a href="javascript:;" class="job_resp_last job_resp_collect" onclick="showlogin('1');">收藏</a>
+                {yun:}/if{/yun}
+            {yun:}/if{/yun}
+				<span style="position:relative; float:left" class="share_block">
+				   <a href="javascript:;" class="job_resp_last job_resp_share">
+					分享
+				</a>
+                  <div class="newJsbg none">
+					<div class="newJsbd"> <em class="njsImg png"></em>
+						<a href="javascript:;" title="新浪微博" onclick="return shareTO('sina','{yun:}$job.job_name{/yun}');"><i class="shareIcon01"></i></a>
+						<a href="javascript:;" title="腾讯微博" onclick="return shareTO('qqwb','{yun:}$job.job_name{/yun}');"><i class="shareIcon02"></i></a>
+						<a href="javascript:;" title="QQ空间" onclick="return shareTO('qq','{yun:}$job.job_name{/yun}');"><i class="shareIcon03"></i></a>
+						<a href="javascript:;" title="人人网" onclick="return shareTO('renren','{yun:}$job.job_name{/yun}');"><i class="shareIcon04"></i></a>
+					</div>
+				  </div>
+                </span>
+				 
+				
+			</div>
+		</div>
+		<div class="job_point fl">
+			<div class="job_resp_title f16 fb fl">
+                      <span class="job_lt_line"></span>    职位描述
+			</div>
+			<div class="job_details fl">
+				{yun:}$job.job_desc{/yun}
+			</div>
+		</div>
+		<div class="job_point fl">
+		<div class="job_resp_title f16 fb fl">
+                      <span class="job_lt_line"></span>    任职资格
+			</div>
+			<div class="job_details fl">
+				{yun:}$job.eligible{/yun}
+			</div>
+		</div>
+		<div class="job_point fl">
+			<div class="job_resp_title f16 fb fl">
+                      <span class="job_lt_line"></span>    企业简介
+			</div>
+			<div class="job_company_text fl">
+				{yun:}$job.desc{/yun}
+			</div>
+		</div>
+
+	</div>
+	<div class="job_sidebar fr">
+
+    <div class="job_sidebar_top fl">
+		<div class="service_title fl">
+			<div class="famous_title_h1 c5 f14 fb fl">
+				公司信息
+			</div>
+		</div>
+		<div class="job_sidebar_con fl">
+			<dl class="job_sidebar_user fl">
+				<dt>
+					<a href="{yun:}url m=company c=show id=$job.uid{/yun}" target="_blank">
+						<img src="{yun:}$Info.logo{/yun}" width="185" height="75" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_unit_icon{/yun}','2')"/>
+					</a>
+				</dt> 
+			</dl>
+			<ul class="job_sidebar_list fl">
+				<li>
+					<div class="job_sidebar_com">
+						<a href="{yun:}url m=company c=show id=$job.uid{/yun}" target="_blank"> {yun:}$job.com_name{/yun} </a>
+					</div>
+				</li>
+				<li>
+					<i class="job_sidebar_list_icon job_sidebar_list_icon_h"></i>
+					<span class="job_sidebar_list_ct">{yun:}$job.hy_info{/yun}</span>
+				</li>
+				<li>
+					<i class="job_sidebar_list_icon job_sidebar_list_icon_g"></i>
+					<span class="job_sidebar_list_ct">{yun:}$job.com_mun{/yun}</span>
+				</li>
+				<li>
+					<i class="job_sidebar_list_icon job_sidebar_list_icon_x"></i>
+					<span class="job_sidebar_list_ct">{yun:}$job.com_pr{/yun}</span>
+				</li> 
+                
+			
+				<li>
+                {yun:}if $usertype==1{/yun}
+					<input class="job_sidebar_bth" type="button" value="{yun:}$Info.atn{/yun}" onclick="atn('{yun:}$Info.uid{/yun}','{yun:}url m=ajax c=atn_company{/yun}');" id="guanzhu{yun:}$Info.uid{/yun}">
+                {yun:}else{/yun}
+                	{yun:}if $usertype!=1{/yun}
+                		<input class="job_sidebar_bth" type="button" value="{yun:}$Info.atn{/yun}" onclick="layer.msg('只有个人用户才能关注', 2, 8)">
+                    {yun:}else{/yun}
+                		<input class="job_sidebar_bth" type="button" value="{yun:}$Info.atn{/yun}" onclick="showlogin('1');">
+                    {yun:}/if{/yun}
+                {yun:}/if{/yun}
+				</li>
+			</ul>  
+            <div class="clear"></div>
+             
+		</div>
+        </div>                   
+    <div class="job_sidebar_top fl">
+			<div class="job_sidebar_message fl"> 
+				<form action="" method="post" target="supportiframe" id="myform" onsubmit="return com_msg()">
+					<input type="hidden" name="job_uid" value="{yun:}$job.uid{/yun}" />
+					<input type="hidden" name="jobid" value="{yun:}$job.id{/yun}" />
+					<input type="hidden" name="job_name" value="{yun:}$job.job_name{/yun}" />
+					<input type="hidden" name="com_name" value="{yun:}$job.com_name{/yun}" />
+					<input type="hidden" name="type" value="2" />
+					<div class="job_message_title fl">
+						<img src="{yun:}$lietou_style{/yun}/images/job_talk.png" />
+						给我留言
+					</div>
+					<div class="fl"><textarea class="job_message_con" id="msg_content" name="content" placeholder="请输入您对该职位的疑问。比如所在地、年薪、福利等，我会及时给您回复！期待与您合作"></textarea></div>
+		<div class="affirm affirm_yz"> 
+			<input class="zx_yx_input fl" id="msg_CheckCode" type="text"  placeholder="请输入验证码" value="" maxlength="4" name="authcode" >
+			<img  class="fl" id="vcode_imgs" src="{yun:}$config.sy_weburl{/yun}/app/include/authcode.inc.php" onclick="checkCode('vcode_imgs');">
+		</div>
+                    {yun:}if $usertype==1{/yun}
+					<input class="job_message_bth fl" name="submit" type="submit" value="发送">
+                    {yun:}else{/yun}
+                        {yun:}if $uid{/yun}
+                            <input class="job_message_bth fl" type="button" value="发送" onclick="layer.msg('只有个人用户才能留言', 2, 8)">
+                        {yun:}else{/yun}
+                            <input class="job_message_bth fl" type="button" value="发送" onclick="showlogin('1');">
+                        {yun:}/if{/yun}
+                    {yun:}/if{/yun}
+				</form>
+			</div>
+       </div>
+</div>
+
+    </div>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js?v={yun:}$config.cachecode{/yun}"></script>
+<script>
+  DD_belatedPNG.fix('.png,.New_post,.box_bot,.new_post_box_h1 span,.icon,.ser_cz a,.Strat-list ,.logoin_su2,.logoin_after_su2,.logoin_after em,.logoin_after_tx dt,.service_filter_fot,.Strat-list .s,.nav_exit span,.company_focus');
+</script>
+<![endif]-->
+<script>var webname = "{yun:}$config.sy_webname{/yun}";</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /><script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script><script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/public_lt.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<script>
+$(function(){
+	$('.job_sidebar_message').delegate('#content','focus',function(){
+		if($.trim($(this).val())==$(this).attr('placeholder')){
+			$(this).val('');
+		}
+	});	
+	$('.share_block').hover(
+		function(){
+			$('.newJsbg').show();							   
+		},function(){
+			$('.newJsbg').hide();	
+		}
+	);		
+});	 
+</script>
+	
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

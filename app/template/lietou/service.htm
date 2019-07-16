@@ -1,0 +1,158 @@
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<div class="clear"></div> 
+<div class="lt_jobsearch">
+<div class="lt_w1200">
+<div class="lt_jobsearch_box fl">
+
+ <div class="hunter_search content_search" id="searchtype1">
+      <form id="formSimpleSearch" method="get" action="index.php" {yun:}if $searchtype=="1"{/yun}style="display:none;"{yun:}/if{/yun} onsubmit="return checkfrom(this)">
+        {yun:}if  !$config.sy_lietoudir{/yun}
+        <input type="hidden" value="lietou" name="m" />
+        {yun:}/if{/yun}
+        <input type="hidden" name="c" value="service" />
+      
+            <input class="lt_jobsearch_box_text fl" name="keyword" type="text" value="{yun:}if $smarty.get.keyword{/yun}{yun:}$smarty.get.keyword{/yun}{yun:}else{/yun}请输入你要查找的信息{yun:}/if{/yun}" onclick="if(this.value=='请输入你要查找的信息'){this.value=''}" onblur="if(this.value==''){this.value='请输入你要查找的信息'}" />
+        
+        <input class="lt_jobsearch_box_bth fl" type="submit" value="搜 索"/>
+        <a class="search_more_bth fl" href="javascript:;">展开高级搜索</a>
+        
+      </form>
+      <form id="formAdvanceSearch" method="get" action="index.php" {yun:}if $searchtype!='1'{/yun}style="display:none;"{yun:}/if{/yun}  onsubmit="return checkfrom(this)"> 
+        {yun:}if  !$config.sy_lietoudir{/yun}
+        <input type="hidden" value="lietou" name="m" />
+        {yun:}/if{/yun}
+        <input type="hidden" name="c" value="service" />
+        <div class="">
+          
+             <div class="search_add fl" onclick="index_industry(5, '#hybutton', '#hy','left:100px;top:100px; position:absolute;','{yun:}$smarty.get.hyid{/yun}');" >
+            <input class="search_select fl" type="button" id="hybutton" value="{yun:}if $hyname{/yun}{yun:}$hyname{/yun}{yun:}else{/yun}请选择行业{yun:}/if{/yun}"/>
+            <input type="hidden" name="hyid" id="hy" value="{yun:}$smarty.get.hyid{/yun}" />
+          </div>
+          <div class="search_add fl" onclick="index_job(5, '#jobbutton', '#job','left:100px;top:100px; position:absolute;','{yun:}$smarty.get.jobid{/yun}');">
+            <input class="search_select fl" type="button" id="jobbutton" value="{yun:}if $jobname{/yun}{yun:}$jobname{/yun}{yun:}else{/yun}请选择职位{yun:}/if{/yun}" />
+            <input type="hidden" name="jobid" id="job" value="{yun:}$smarty.get.jobid{/yun}" />
+          </div>   <input name="keyword" class="lt_jobsearch_box_text lt_jobsearch_box_bthbr fl" type="text" value="{yun:}if $smarty.get.keyword{/yun}{yun:}$smarty.get.keyword{/yun}{yun:}else{/yun}请输入你要查找的信息{yun:}/if{/yun}" onclick="if(this.value=='请输入你要查找的信息'){this.value=''}" onblur="if(this.value==''){this.value='请输入你要查找的信息'}" style="width:390px;"/>
+            <input class="lt_jobsearch_box_bth fl" type="submit" value="搜索"/>
+          <a class="search_more_bth search_more_bthsq fl" href="javascript:;">收起高级搜索</a> </div>
+        <div class="search_more fl">
+          </div>
+         
+      </form>
+      <div class="clear"></div>
+       <div class="content_search_tag c5 fl"><div class="search_tag_list fl"> {yun:}if $smarty.get.keyword{/yun} <a href="{yun:}searchurl m=lietou c=service untype='keyword'{/yun}" class="Search_jobs">{yun:}$smarty.get.keyword{/yun}</a> {yun:}/if{/yun} 
+          {yun:}if $hyname{/yun}<a href="{yun:}searchurl m=lietou c=service untype='hyid'{/yun}" class="Search_jobs">{yun:}$hyname{/yun}</a>{yun:}/if{/yun}
+          {yun:}if $jobname{/yun}<a href="{yun:}searchurl m=lietou c=service untype='jobid'{/yun}" class="Search_jobs">{yun:}$jobname{/yun}</a>{yun:}/if{/yun}
+         
+        </div></div>
+
+
+</div></div>
+</div>
+</div>
+
+
+
+<div class="content"> 
+  <!--搜索-->
+
+  <div class="service_main fl"> 
+    <div class="service_main_con fl">
+    <div class="lt_joblist_tit_box">
+    <ul class="lt_joblist_tit"><ul class="lt_joblist_tit_list"><li class="lt_joblist_tit_list_cur"><a href="{yun:}url m=lietou c=service{/yun}">所有猎头</a></li></ul>
+    <span class="lt_joblist_n">共有<b>{yun:}$total{/yun}</b>位猎头顾问</span>
+    </ul></div>
+     
+      <div class="service_lists fl"> 
+	  {yun:}lietoulist limit=20 keyword='auto.keyword' hyid='auto.hyid' jobid='auto.jobid' order='auto.order' ispage=1 item=list{/yun}
+        <div class="service_items fl">
+          <dl class="service_items_left fl">
+            <dt> <img src="{yun:}$list.photo_big{/yun}" onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_lt_icon{/yun}',2);" /> </dt>
+          </dl>
+          <ul class="service_items_con fl">
+            <li><a href="{yun:}$list.name_url{/yun}" class="service_items_con_it_name">{yun:}$list.realname{/yun}</a><img src="{yun:}$config.sy_weburl{/yun}{yun:}$list.com_pic{/yun}" onerror="hidepic(this)" width="10" height="10"/> </li>
+            <li>
+              <div class="c9 fl">擅长行业：</div>
+              {yun:}$list.hy{/yun}</li>
+              {yun:}if $list.joblist{/yun}
+            <li>
+              <div class="c9 fl">最新职位：</div>
+             {yun:}$list.joblist{/yun} </li>
+            <li class="service_items_looks"> <a href="{yun:}$list.name_url{/yun}" class="service_icon service_icons01">查看职位（{yun:}$list.jobnum{/yun}）</a>  <span class="service_items_looks_gz">已有 <font color="#f60" id="atn{yun:}$list.uid{/yun}">{yun:}$list.ant_num{/yun}</font> 位关注了TA</span></li>
+            {yun:}/if{/yun}
+          </ul>
+          <div class="service_items_focus fr">
+          
+           
+{yun:}if $usertype{/yun} <a class="ser_wt" href="javascript:void(0);" onclick="entrust('{yun:}$list.uid{/yun}','{yun:}$list.realname{/yun}');" class="service_icon  service_icons04">委托简历</a> {yun:}else{/yun} <a href="javascript:void(0);" onclick="showlogin('1');" class="service_icon  service_icons04">委托简历</a> {yun:}/if{/yun}            
+            
+            {yun:}if $usertype==1{/yun} <a href="javascript:void(0)" onclick="ltatn('{yun:}$list.uid{/yun}','lt1');" id="guanzhu{yun:}$list.uid{/yun}"><img class="png" src="{yun:}$lietou_style{/yun}/images/{yun:}if $list.atn=='1'{/yun}focus_no_add.png{yun:}else{/yun}focus_add.png{yun:}/if{/yun}" />{yun:}if $list.atn==1{/yun}取消关注{yun:}else{/yun}关注{yun:}/if{/yun}</a> {yun:}else{/yun}
+              {yun:}if $uid{/yun} <a href="javascript:void(0)" onclick="layer.msg('只有个人用户才能关注', 2, 8)">+关注</a> {yun:}else{/yun} <a href="javascript:void(0)" onclick="showlogin('1');">+关注</a> {yun:}/if{/yun}
+              {yun:}/if{/yun} </div>
+         
+        </div>
+        {yun:}lietoulistelse{/yun}
+        <div class="seachno">
+          <div class="seachno_left"><img src="{yun:}$lietou_style{/yun}/images/search-no.gif" /></div>
+          <div class="listno-content"> <strong>很抱歉，没有找到满足条件的猎头</strong> <br />
+            <span> 建议您： <br />
+            1、适当减少已选择的条件 <br />
+            2、适当删减或更改搜索关键字 <br />
+            </span> </div>
+        </div>
+        {yun:}/lietoulist{/yun} </div>
+      <div class="clear"></div>
+      <div class="pages"> {yun:}$pagenav{/yun}</div>
+    </div>
+    <!--最新职位-->
+    <div class="service_new fr">
+      <div class="service_title fl">
+        <div class="famous_title_h1 c5 f14 fb fl">最新职位</div>
+        <div class="service_title_more fr"><a href="{yun:}url m=lietou c=post{/yun}">MORE >></a></div>
+      </div>
+      <ul class="service_new_list fl">
+        {yun:}ltjoblist item=joblist limit=10{/yun}
+        <li><a href="{yun:}$joblist.job_url{/yun}">{yun:}$joblist.job_name{/yun}</a></li>
+        {yun:}/ltjoblist{/yun}
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="reply" class="none" style=" width:330px; margin: 0 auto; padding: 0;">
+  <table class="table_form " id="infobox">
+    <tr>
+      <td><textarea name="reply" id="content" rows="4" cols="35" class="text" style="resize:none; width:323px;height:90px;"></textarea></td>
+    </tr>
+    <tr>
+      <td style="text-align:center"><input type="button" name="submit" value=" 提交 " class="Reply_cont_submit" onclick="send_msg();" /></td>
+    </tr>
+    <input type="hidden" id="fid" name="id" value="" />
+  </table>
+</div>
+<script>
+function hidepic($this){
+	$($this).hide();
+}
+</script>
+<!--[if IE 6]>
+<script src="{yun:}$config.sy_weburl{/yun}/js/png.js?v={yun:}$config.cachecode{/yun}"></script>
+<script>
+  DD_belatedPNG.fix('.png,.New_post,.box_bot,.new_post_box_h1 span,.icon,.ser_cz a,.Strat-list ,.logoin_su2,.logoin_after_su2,.logoin_after em,.logoin_after_tx dt,.service_filter_fot,.Strat-list .s,.nav_exit span,.company_focus');
+</script>
+<![endif]-->
+<script>var webname = "{yun:}$config.sy_webname{/yun}";var pricename = "{yun:}$config.integral_pricename{/yun}";</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" /><script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script><script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$lietou_style{/yun}/js/public_lt.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script>
+<link rel="stylesheet" href="{yun:}$style{/yun}/style/class.public.css?v={yun:}$config.cachecode{/yun}" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/ltjob.cache.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/data/plus/ltindustry.cache.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+<script src="{yun:}$config.sy_weburl{/yun}/js/class.public.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+<script src="{yun:}$lietou_style{/yun}/js/search_lt.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+{yun:}include file="$tplstyle/public_search/index_search.htm"{/yun}
+{yun:}include file="$lietou_member_style/include.htm"{/yun} 
+{yun:}include file="$tplstyle/public_search/login.htm"{/yun} 
+{yun:}include file="$lietoustyle/footer.htm"{/yun}
+<style>
+body{ background:#fff}
+</style>

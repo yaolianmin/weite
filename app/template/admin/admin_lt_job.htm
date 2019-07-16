@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div id="status_div"  style="display:none; width: 390px; ">
+  <div class=""   >
+    <form class="layui-form" action="index.php?m=admin_lt_job&c=status" target="supportiframe" method="post" id="formstatus" >
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+     		 <table cellspacing='1' cellpadding='1' class="admin_examine_table">
+     <tr>
+    <th width="80">审核操作：</th>
+     <td align="left">
+		<div class="layui-form-item">
+            <div class="layui-input-block">
+                    <input name="status" id="status0" value="0" title="未审核" type="radio"/>
+					<input name="status" id="status1" value="1" title="正常" type="radio"/>
+					<input name="status" id="status3" value="3" title="未通过" type="radio"/>
+                 </div>
+           </div>	
+              
+         
+        </td>
+        </tr>
+       <tr>
+            <th>审核说明：</th>
+          <td><textarea id="alertcontent" name="statusbody" class="admin_explain_textarea"></textarea></td>
+        </tr>
+        <tr>
+         <td colspan='2' align="center"><input type="submit" onclick="loadlayer();" value='确认' class="admin_examine_bth" >
+        
+            <input type="button" onClick="layer.closeAll();" class="admin_examine_bth_qx" value='取消'></td>
+        </tr>
+      </table>
+      <input name="pid" value="0" type="hidden">
+    </form>
+  </div>
+</div>
+<div id="infobox2" style="display:none;">
+ 	<div class="admin_com_t_box"> 
+    <form action="index.php?m=admin_lt_job&c=ctime" target="supportiframe" method="post" id="formstatus" onSubmit="return tcdiv();">
+      <input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+     <div class="admin_com_smbox_list"><span class="admin_com_smbox_span">延长时间：</span>
+  <input class="admin_com_smbox_text" value="" name="endtime"  onKeyUp="this.value=this.value.replace(/[^0-9]/g,'')"> <span class="admin_com_smbox_list_s">天</span>    </div>
+    <div class="admin_com_smbox_opt"><input type="submit"  value='确认'class="admin_examine_bth"><input type="button"  onClick="layer.closeAll();"  class="admin_examine_bth_qx" value='取消'></div>
+    
+     
+      <input name="jobid" value="0" type="hidden">
+    </form>
+  </div>
+</div>
+<div class="infoboxp">
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">该页面展示了网站所有的猎头职位管理信息，可对猎头职位进行审核，删除操作。</div>
+<div class="admin_new_tip_list">可输入名称关键字进行搜索，也可进行详细的高级搜索。</div>
+</div>
+</div>
+
+<div class="clear"></div>
+
+<div class="admin_new_search_box"> 
+  <form action="index.php" name="myform" method="get">
+      <input name="m" value="admin_lt_job" type="hidden"/>
+      <input type="hidden" name="status" value="{yun:}$smarty.get.status{/yun}"/>
+      <input type="hidden" name="salary" value="{yun:}$smarty.get.salary{/yun}"/>
+      <input type="hidden" name="ex" value="{yun:}$smarty.get.ex{/yun}"/>
+	<div class="admin_new_search_name">搜索类型：</div>
+   <div class="admin_Filter_text formselect"  did='dltname'>
+        <input type="button" value="{yun:}if $smarty.get.ltname=='1'||$smarty.get.ltname==''{/yun}用户名{yun:}elseif $smarty.get.ltname=='2'{/yun}职位名称{yun:}elseif $smarty.get.ltname=='3'{/yun}公司名称{yun:}/if{/yun}" class="admin_Filter_but"  id="bltname">
+        <input type="hidden" id='ltname' value="{yun:}if $smarty.get.ltname{/yun}{yun:}$smarty.get.ltname{/yun}{yun:}else{/yun}1{yun:}/if{/yun}" name='ltname'>
+        <div class="admin_Filter_text_box" style="display:none" id='dltname'>
+          <ul>
+            <li><a href="javascript:void(0)" onClick="formselect('1','ltname','用户名')">用户名</a></li>           
+            <li><a href="javascript:void(0)" onClick="formselect('2','ltname','职位名称')">职位名称</a></li>
+            <li><a href="javascript:void(0)" onClick="formselect('3','ltname','公司名称')">公司名称</a></li>
+          </ul>
+        </div>
+      </div>
+      <input class="admin_Filter_search" type="text" name="keyword"  size="25">
+      <input class="admin_Filter_bth" type="submit" name="news_search" value="检索"/>
+    </form>
+	
+	<a  href="javascript:void(0)" onclick="$('.admin_screenlist_box').toggle();"   class="admin_new_search_gj">高级搜索</a>
+
+
+  
+  {yun:}include file="admin/admin_search.htm"{/yun}
+  </div>
+<div class="clear"></div> 
+  <div class="table-list">
+    <div class="admin_table_border">
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form action="index.php" name="myform" method="get" target="supportiframe" id='myform'>
+        <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+        <input name="m" value="admin_lt_job" type="hidden"/>
+        <input name="c" value="del" type="hidden"/>
+        <table width="100%">
+          <thead>
+            <tr class="admin_table_top">
+              <th style="width:20px;"><label for="chkall">
+                  <input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/>
+                </label></th>
+              <th width="60"> {yun:}if $smarty.get.t=="id" && $smarty.get.order=="asc"{/yun} <a href="{yun:}searchurl order=desc t=id m=admin_lt_job untype='order,t'{/yun}">编号<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="{yun:}searchurl order=asc t=id m=admin_lt_job untype='order,t'{/yun}">编号<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun}</th>
+              <th align="left">用户名</th>
+              <th align="left" width="15%">职位名称</th>
+              <th align="left" width="15%">公司名称</th>
+              <th align="left">职位年薪</th>
+              <th align="left">工作地点</th>
+              <th>工作经验</th>
+              <th>状态</th>
+              <th>推荐</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+          {yun:}foreach item=v key=key from=$rows{/yun}
+          <tr align="center" {yun:}if ($key+1)%2=='0'{/yun}class="admin_com_td_bg"{yun:}/if{/yun} id="list{yun:}$v.id{/yun}">
+            <td style="width:20px;"><input type="checkbox" value="{yun:}$v.id{/yun}" class="check_all"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+            <td class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td>
+            <td  align="left">{yun:}$v.username{/yun}</td>
+            <td class="gd" align="left"> {yun:}if $v.usertype==3{/yun} <a href="{yun:}url m=lietou c=jobshow id=$v.id{/yun}" target="_blank" class="admin_cz_sc"> {yun:}else{/yun} <a href="{yun:}url m=lietou c=jobcomshow id=$v.id{/yun}" target="_blank" class="admin_cz_sc"> {yun:}/if{/yun} 
+              {yun:}$v.job_name{/yun}</a></td>
+            <td class="ud" align="left">{yun:}$v.com_name{/yun}</td>
+            <td class="td" align="left">
+            	{yun:}if $v.minsalary&&$v.maxsalary{/yun}
+            		￥{yun:}$v.minsalary{/yun}-{yun:}$v.maxsalary{/yun}万
+            	{yun:}else if $v.minsalary{/yun}
+            		￥{yun:}$v.minsalary{/yun}万以上
+            	{yun:}else{/yun}
+            		面议
+            	{yun:}/if{/yun}
+            </td>
+            <td align="left">{yun:}$v.cityid{/yun}</td>
+            <td >{yun:}$v.exp{/yun}</td>
+            <td> {yun:}if $v.edate<=time(){/yun}<span class="admin_com_Lock">已过期</span> {yun:}elseif $v.status==1{/yun}<span class="admin_com_Audited">已审核</span> {yun:}elseif $v.status==0{/yun}<span class="admin_com_noAudited">未审核</span> {yun:}elseif $v.status==2{/yun}<span class="admin_com_Lock">已过期</span> {yun:}elseif $v.status==3{/yun}<span class="admin_com_tg">未通过</span> {yun:}/if{/yun} </td>
+            <td id="rec{yun:}$v.id{/yun}">{yun:}if $v.rec=="1"{/yun}<a href="javascript:void(0);" onClick="rec_up('index.php?m=admin_lt_job&c=recommend','{yun:}$v.id{/yun}','0','rec');"><img src="../config/ajax_img/doneico.gif"></a>{yun:}else{/yun}<a href="javascript:void(0);" onClick="rec_up('index.php?m=admin_lt_job&c=recommend','{yun:}$v.id{/yun}','1','rec');"><img src="../config/ajax_img/errorico.gif"></a>{yun:}/if{/yun}</td>
+            <td><a href="javascript:void(0);" class="status admin_new_c_bth admin_new_c_bthsh" status="{yun:}$v.status{/yun}" pid="{yun:}$v.id{/yun}">审核</a> 
+             {yun:}if $v.usertype==3{/yun} <a href="{yun:}url m=lietou c=jobshow id=$v.id{/yun}" target="_blank" class="admin_new_c_bth admin_new_c_bth_yl"> {yun:}else{/yun} <a href="{yun:}url m=lietou c=jobcomshow id=$v.id{/yun}" target="_blank" class="admin_new_c_bth admin_new_c_bth_yl"> {yun:}/if{/yun} 预览</a> 
+            <a href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=admin_lt_job&c=del&del={yun:}$v.id{/yun}');" class="admin_new_c_bth admin_new_c_bth_sc">删除</a></td>
+          </tr>
+          {yun:}/foreach{/yun}
+          <tr style="background:#f1f1f1;">
+            <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+            <td colspan="4"><label for="chkAll2">全选</label>
+              &nbsp;
+              <input class="admin_button"  type="button"  name="delsub" value="删除所选" onClick="return really('del[]')" />
+              &nbsp;&nbsp;
+              <input class="admin_button"  type="button" name="delsub" value="批量审核" onClick="audall('1');" />
+              &nbsp;&nbsp;
+              <input class="admin_button"  type="button" name="delsub" value="批量延期" onClick="audall2('0');" /></td>
+            <td colspan="7" class="digg">{yun:}$pagenav{/yun}</td>
+          </tr>
+            </tbody>
+          
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  layui.use(['layer', 'form'], function(){
+    var layer = layui.layer
+    ,form = layui.form
+    ,$ = layui.$;
+  });
+
+
+function audall(status){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ //由于复选框一般选中的是多个,所以可以循环输出
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg('您还未选择任何信息！', 2, 8);return false;
+	}else{
+		$("input[name=pid]").val(codewebarr);
+		status_div('猎头职位审核','390','240');
+	}
+}
+function audall2(status){
+	var codewebarr="";
+	$(".check_all:checked").each(function(){ //由于复选框一般选中的是多个,所以可以循环输出
+		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+	});
+	if(codewebarr==""){
+		parent.layer.msg('您还未选择任何信息！', 2, 8);return false;
+	}else{
+		$("input[name=jobid]").val(codewebarr);
+ 		$("#alertcontent").val('');
+		$("input[name='status']").attr('checked',false);
+ 		$.layer({
+			type : 1,
+			title :'猎头职位延期', 
+			closeBtn : [0 , true],			
+			border : [10 , 0.3 , '#000', true],
+			area : ['290px','180px'],
+			page : {dom :"#infobox2"}
+		});
+	}
+}
+$(function(){
+	$(".status").click(function(){
+		$("#status"+$(this).attr("status")).attr("checked","checked");
+		 layui.use(['form'],function(){
+			var form = layui.form;
+			form.render();
+		});
+		$("input[name=pid]").val($(this).attr("pid"));
+		var id=$(this).attr("pid");
+		$.get("index.php?m=admin_lt_job&c=lockinfo&id="+id,function(msg){
+			$("#alertcontent").val(msg);
+			status_div('猎头职位审核','390','240');
+		});
+	});
+
+});
+</script>
+</body>
+</html>

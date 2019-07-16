@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />  
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script> 
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"> 
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">赠送时，请正确填写用户名和选择要赠送的优惠券。 </div>
+</div>
+</div>
+<div class="clear"></div>
+<div style="height:10px;"></div>
+
+<div class="admin_table_border">
+<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe> 
+<form name="myform" action="index.php?m=coupon&c=gift" method="post"  target="supportiframe" class="layui-form" >
+	<table width="100%" class="table_form">
+        <tr class="admin_table_trbg">
+			<th width="140">用户名:</th>
+			<td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <input class="layui-input input-text" type="text" name="username" size="40" value=""/>
+                 </div>
+               </div>
+            </div></td>
+		</tr>
+        <tr>
+			<th width="140">优惠券:</th>
+			<td>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                 <div class="layui-input-inline">
+                   <select name="coupon" lay-filter="" id="coupon_val">
+                      <option value="">请选择</option>
+                      {yun:}foreach from=$coupon item=v{/yun}
+                        <option value="{yun:}$v.id{/yun}">{yun:}$v.name{/yun}</option>
+                      {yun:}/foreach{/yun}
+                    </select>
+                 </div>
+               </div>
+            </div>
+			  </td>
+		</tr>
+
+		<tr class="admin_table_trbg">
+        <th></th>
+			<td>
+    		<input class="layui-btn layui-btn-normal" type="submit" name="submit" value="&nbsp;赠 送&nbsp;" />
+			</td>
+		</tr>
+	</table>
+	<input type="hidden" name="pytoken" value="{yun:}$pytoken{/yun}">
+</form>
+</div>
+</div>
+<script language="javascript"> 
+layui.use(['layer', 'form'], function(){
+    var layer = layui.layer
+    ,form = layui.form
+    ,$ = layui.$;
+});
+</script>
+</body>
+</html>

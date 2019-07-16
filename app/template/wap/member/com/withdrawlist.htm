@@ -1,0 +1,38 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="main_member_cot_box">
+<div class="wap_member_comp_h1" style="position:relative"><span><a href="index.php?c=loglist">提现记录</a>	</div>
+
+<div class="loglist_tips">
+提示：单笔提现金额必须达到{yun:}$config.sy_withdraw_minmoney{/yun}元。
+{yun:}if $config.sy_withdraw_num>0{/yun}<br>单次提现收取每笔{yun:}$config.sy_withdraw_pound{/yun}%手续费{yun:}/if{/yun}
+{yun:}if $config.sy_withdraw_money>0{/yun}<br>{yun:}$config.sy_withdraw_money{/yun}元以内及时到账，超过{yun:}$config.sy_withdraw_money{/yun}元需审核。{yun:}/if{/yun}
+</div>
+<div class="loglist_box">
+
+<div class="loglist_box_list"><div class="">我的钱包</div><span class="packloglost_box_money">￥{yun:}$statis.packpay{/yun}</span> </div>
+<div class="loglist_box_list"><div class="">冻结金额</div><span class="packloglost_box_money">￥{yun:}$statis.freeze{/yun}</span> </div>
+  <a href="index.php?c=withdraw" class="loglist_bth">提现</a>
+</div>
+<div class="wap_member_post_list">
+{yun:}foreach item=v from=$rows{/yun}
+<div class="com_member_hr">
+<div class="user_member_box">
+<div class="com_member_hr_p1"><span class="member_c9">真实姓名：</span>{yun:}$v.real_name{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">提现金额：</span>{yun:}$v.price{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">手续费：</span>{yun:}$v.pound_price{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">状态：</span>{yun:}$v.order_state_n{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">提现时间：</span>{yun:}$v.time|date_format:"%Y-%m-%d %H:%M:%S"{/yun}</div>
+{yun:}if $v.order_remark{/yun}
+<div class="com_member_hr_p1"><span class="member_c9">原因：</span>{yun:}$v.order_remark{/yun}</div>
+{yun:}/if{/yun}
+</div>
+
+</div>
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">暂无相关信息</div>
+{yun:}/foreach{/yun}
+</div>
+</section>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

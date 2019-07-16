@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">该页面展示了网站推荐的人才信息。</div>
+</div>
+</div>
+
+<div class="infoboxp_top mt10">
+    <h6>推荐的人才详情</h6>
+  </div>
+  <div class="main_tag" >
+    <div class="tag_box">
+        <table width="100%" class="table_form table_form_thr" style="background:#fff;">
+          <tr>
+            <td colspan="4" bgcolor="#f0f6fb"><div class="admin_bold">基本信息</div></td>
+          </tr>
+          <tr>
+            <th width="140">姓名：</th><td width="300">{yun:}$resume.uname{/yun}</td>
+            <th width="160">性别：</th><td >{yun:}$resume.sex{/yun}</td>
+          </tr>
+          <tr>
+            <th width="140">出生年月：</th><td width="300">{yun:}$resume.birthday{/yun}</td>
+            <th width="160">最高学历：</th><td >{yun:}$userclass_name[$resume.edu]{/yun}</td>
+          </tr>
+          <tr>
+            <th width="140">工作经验：</th><td width="300">{yun:}$userclass_name[$resume.exp]{/yun}</td>
+            <th width="160">联系手机：</th><td >{yun:}$resume.telphone{/yun}</td>
+          </tr>
+          <tr>
+            <th width="160">联系邮箱：</th><td >{yun:}$resume.email{/yun}</td>
+          </tr>
+          <tr>
+            <td colspan="4" bgcolor="#f0f6fb"><div class="admin_bold">求职意向</div></td>
+          </tr>
+          <tr>
+            <th>从事行业：</th><td>{yun:}$industry_name[$resume.hy]{/yun}</td>
+            <th>期望职位：</th> <td>{yun:}$resume.jobname{/yun}</td>
+          </tr>
+         <tr>
+             <th>期望城市：</th><td>{yun:}$resume.city{/yun}</td>
+            <th>期望薪资：</th> <td>{yun:}$resume.rsalary{/yun}</td>
+          </tr>
+          <tr>
+             <th>工作性质：</th><td>{yun:}$userclass_name[$resume.type]{/yun}</td>
+            <th>到岗时间：</th> <td>{yun:}$userclass_name[$resume.report]{/yun}</td>
+          </tr>
+          <tr>
+            <td colspan="4" bgcolor="#f0f6fb"><div class="admin_bold">推荐理由</div></td>
+          </tr>
+         <tr class="admin_table_trbg">
+          <th>推荐描述：</th>
+            <td colspan="3" height='33px;'><div > {yun:}$rebate.content{/yun} </div></td>
+          </tr>
+          {yun:}if $rebate.reply{/yun}
+          <tr>
+            <td colspan="4" bgcolor="#f0f6fb"><div class="admin_bold">接收人回复</div></td>
+          </tr>
+         <tr class="admin_table_trbg">
+          <th>回复内容：</th>
+            <td colspan="3"  height='33px;'><div> {yun:}$rebate.reply{/yun} </div></td>
+          </tr>
+          {yun:}/if{/yun}
+        </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

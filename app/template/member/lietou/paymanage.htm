@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	{yun:}include file="$lietoustyle/public.htm"{/yun}
+	<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+	<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+
+<body>
+	{yun:}include file="$lietoustyle/header.htm"{/yun} 
+	<!--内容部分content-->
+	<div class="m_content">
+		<div class="wrap">
+			{yun:}include file="$lietoustyle/left.htm"{/yun}
+			<div class="m_inner_youb fr">
+				<div class="report_uaer_list fl">
+					<ul>
+						<li class="report_uaer_list_cur"><a href="index.php?c=paymanage" >订单管理</a></li>
+						<li><a href="index.php?c=paylog" >充值记录</a></li>
+						<li><a href="index.php?c=consume" >消费记录</a></li> 
+					</ul>
+				</div>
+				
+				<div class="clear"></div>
+				<div class="search_con">
+			 <div class="lt_m_table">
+          <table>
+                <tbody>
+					{yun:}if !empty($rows){/yun}
+                     <tr>   
+                                   
+                 <th scope="col" ><span>充值单号</span></th>
+                  <th scope="col" ><span>支付类型</span></th>
+                  <th scope="col" ><span>支付形式</span></th>
+                 <th scope="col" ><span>金额</span></th>
+                 	<th scope="col" ><span>状态</span></th>
+					<th scope="col" ><span>时间</span></th>
+                    <th scope="col" width="100" >备注</th>
+                </tr>
+                
+					{yun:}/if{/yun}
+
+						{yun:}foreach item=log from=$rows{/yun}
+							{yun:}assign var="state" value=$log.order_state{/yun}
+							{yun:}assign var="type" value=$log.order_type{/yun}
+                               <tr>   
+                                   
+                 <td align="center">{yun:}$log.order_id{/yun}</td>
+                 <td align="center">{yun:}if $log.type==1{/yun}购买会员
+									{yun:}elseif $log.type=='2'{/yun}{yun:}$config.integral_pricename{/yun}充值
+									{yun:}elseif $log.type=='3'{/yun}银行转帐
+									{yun:}elseif $log.type=='4'{/yun}金额充值
+									{yun:}elseif $log.type=='5'{/yun}购买增值包
+									
+ 									{yun:}elseif $log.type=='12'{/yun}职位推荐
+  									{yun:}elseif $log.type=='18'{/yun}刷新高级职位
+									{yun:}elseif $log.type=='19'{/yun}下载简历
+ 									{yun:}elseif $log.type=='22'{/yun}发布职位
+									{yun:}elseif $log.type=='23'{/yun}面试邀请
+ 									{yun:}/if{/yun}</td>
+                  <td align="center">{yun:}if $type{/yun}{yun:}$arr_data.pay.$type{/yun}{yun:}else{/yun}手动{yun:}/if{/yun}</td>
+                 <td align="center">{yun:}$log.order_price{/yun}</td>
+                  <td align="center">{yun:}$arr_data.paystate.$state{/yun}</td>
+                   <td  align="center">{yun:}$log.order_time|date_format:'%Y-%m-%d %H:%M:%S'{/yun}</td>
+				 <td>{yun:}if $log.order_remark{/yun}
+							{yun:}$log.order_remark{/yun} 
+								{yun:}/if{/yun} </td>
+                </tr>
+                
+						{yun:}foreachelse{/yun}
+                        <tr>
+                    <td colspan="7"class="lt_m_table_end">
+							<div class="member_no_content"> 您还没有订单记录！</div></td>
+                </tr>
+                
+						{yun:}/foreach{/yun}
+					<tr>
+                    <td colspan="7"class="lt_m_table_end">
+					<div class="pages">{yun:}$pagenav{/yun}</div></td>
+                </tr>
+                
+                    
+                </tbody></table>
+                
+                
+				</div>
+			</div>
+			
+			<div class="clear"></div>
+
+		</div>
+	</div>
+	
+</div>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

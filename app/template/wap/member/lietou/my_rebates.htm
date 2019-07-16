@@ -1,0 +1,67 @@
+{yun:}include file="$wapstyle/member/lheader.htm"{/yun}
+<section class="wap_member">
+<div class="wap_member_comp_h1"><span>我推荐的悬赏</span></div>
+</section>
+<section>
+<div class="wap_member_job_show">
+
+{yun:}if !empty($rows){/yun}
+{yun:}foreach item=v from=$rows{/yun}
+<div class="com_member_hr ">
+<div class="com_member_hr_name"><span class="yun_m_job_date_n">&nbsp;
+{yun:}if $v.type==2{/yun} 
+<a class="job_list_jobname com_member_hr_cblue"  href="{yun:}url m=wap c=ltjob a=recshow id='`$v.job_id`'{/yun}">{yun:}$v.job_name{/yun}</a> <font color="#FF0000">[企业]</font> 
+{yun:}else{/yun} 
+<a class="job_list_jobname com_member_hr_cblue"  href="{yun:}url m=wap c=ltjob a=show id='`$v.job_id`'{/yun}" >{yun:}$v.job_name{/yun}</a> <font color="#FF0000">[猎头]</font> 
+{yun:}/if{/yun} 
+</span>
+<a href="index.php?c=rebateshow&id={yun:}$v.id{/yun}" class="wap_member_com_lokr">查看人才</a>
+</div>
+<div class="com_member_user_box">
+<div class="com_member_hr_tj" style="border-bottom:none;">
+<div class="com_member_hr_p1"><span class="member_c9">企业名称：</span> {yun:}if $v.type==3{/yun} 
+					<a href="{yun:}url m=wap c=ltjob a=hunter uid='`$v.job_uid`'{/yun}" >{yun:}$v.com_name{/yun} </a> 
+				{yun:}else{/yun} 
+				<a href="{yun:}url m=wap c=company a=show id='`$v.job_uid`'{/yun}" >{yun:}$v.com_name{/yun} </a> 
+				{yun:}/if{/yun}</div>
+<div class="com_member_hr_p1">
+    <span class="member_c9">悬赏金额：</span>￥{yun:}$v.rebates{/yun}
+</div>
+<div class="com_member_hr_p1"><span class="member_c9">时间：</span>{yun:}$v.datetime|date_format:"%Y-%m-%d %H:%M"{/yun}</div>
+<div class="rebate_c_date" style="color:#666;">
+ <span class="rebate_c_date_r" style="width:30%"><a href="javascript:layer_del('确定要删除我推荐的悬赏吗？','index.php?c=delrebate&type=2&id={yun:}$v.id{/yun}');" class="rerate_c_gr">删除</a></span>
+<span class="rebate_c_date_r" style="width:33%">回复：{yun:}if $v.reply!=""{/yun}<a href="javascript:void(0)" onclick="show_reply('{yun:}$v.id{/yun}');">查看回复</a>{yun:}else{/yun}<i class="rerate_c_col">未回复</i>{yun:}/if{/yun}</span>
+<span class="rebate_c_date_z" style="width:33%">状态：<i class="rerate_c_col">{yun:}if $v.status=="0"{/yun}未查看{yun:}elseif $v.status=="1"{/yun}已查看{yun:}elseif $v.status=="2"{/yun}已试用{yun:}elseif $v.status=="3"{/yun}未通过{yun:}elseif $v.status=="4"{/yun}已返利{yun:}/if{/yun}</i></span>
+</div>     
+   <div class="m_cont_chakan " id="reply{yun:}$v.id{/yun}" style="display: none;">
+     <div class="m_ck_arrow"></div>
+     <dl class="fl">
+     <dt class="cont_consult">收件人回复：</dt>
+     <dd><div class="fl">{yun:}$v.reply{/yun}</div><div class="hunter_time fr">回复时间：{yun:}$v.reply_time|date_format:"%Y-%m-%d %H:%M"{/yun}</div></dd>
+     </dl>
+     </div>
+</div>
+</div>
+</div>
+{yun:}/foreach{/yun}
+{yun:}else{/yun}
+<div class="wap_member_no">暂无我推荐的悬赏<div><a class="wap_mb_no_sr" href="{yun:}url m=wap c=ltjob{/yun}">去推荐</a></div></div>
+{yun:}/if{/yun}
+</div>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+</section>
+</div>
+<script type="text/javascript">
+
+function show_reply(id){
+	replyhtml=$("#reply"+id).html();
+	layer.open({
+		type:1,
+		title :'查看回复',
+		closeBtn : [0 , true],
+		area : ['300px','auto'],
+		content:replyhtml
+	});
+}
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

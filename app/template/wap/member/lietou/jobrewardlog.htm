@@ -1,0 +1,85 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/rewardpay.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script> 
+
+<section class="wap_member">
+<div class="wap_member_comp_h1" style="position:relative"><span><a href='index.php?c=rewardlog'>赏金职位</a></span></div>
+
+
+{yun:}if !empty($rows){/yun}
+	<div class="wap_member_job_show">
+	{yun:}foreach item=v from=$rows{/yun}
+	<div class="wap_member_msg ">
+	<div class="wap_member_date">
+	<span class="yun_m_job_date_n">&nbsp;{yun:}$v.uname{/yun}{yun:}if $v.usertype=='3'{/yun}(猎头中介推荐){yun:}else{/yun}(用户自荐){yun:}/if{/yun}</span>
+	<div class="wap_member_date_r">
+	{yun:}$v.log.nowmsg{/yun}
+	</div>
+	</div>
+	
+	
+	<div class="yun_m_job_list_zt">
+	应聘职位：<a href="{yun:}url m=wap c=job a=view id='`$v.jobid`'{/yun}" target="_blank" class="sq_jobpack_info_job">{yun:}$v.name{/yun}</a>
+
+	<div class="jobrewardlog_list_p">申请日期：{yun:}$v.datetime|date_format:"%Y-%m-%d %H:%M"{/yun}</div>
+	
+	<div class="jobrewardlog_list_p">意向：{yun:}$v.jobclass{/yun}</div>
+	
+	<div class="jobrewardlog_list_p">经验：{yun:}$v.exp{/yun}   <span class="wap_member_msg_job_s">学历：{yun:}$v.edu{/yun}</span></div>
+
+
+	</div>
+    <div class="yun_m_job_list_zt">
+	<!--操作日志--->
+
+	{yun:}if $v.log.loglist{/yun}
+						<ul class="jobrewardlog_list">
+							{yun:}foreach from=$v.log.loglist item=linfo{/yun}
+							<li class="m_xs_pr_f_cur">
+							<i class="m_xs_pr_f_icon"></i>
+                            <div class="jobrewardlog_time">{yun:}$linfo.time|date_format:"%Y-%m-%d %H:%M"{/yun} </div>
+                            <div class="jobrewardlog_box">{yun:}$linfo.info{/yun}</div>
+                            </li>
+							{yun:}/foreach{/yun}
+						</ul>
+					 {yun:}/if{/yun}
+						{yun:}if $v.log.endmsg{/yun}
+						<ul  class="jobrewardlog_list">
+							<li><i class="m_xs_pr_f_icon"></i>
+                             <div class="jobrewardlog_box jobrewardlog_box_ddai">{yun:}$v.log.endmsg{/yun}</div></li>		
+						</ul>
+						{yun:}/if{/yun}
+	<!--end-->
+    </div>
+	<div class="yun_member_bth">
+
+	
+				{yun:}foreach from= $v.log.input item=inputv{/yun}
+				<a class="yun_member_sub yun_member_bth2" href="javascript:void(0);" onclick="getStatus('{yun:}$v.id{/yun}','{yun:}$inputv.status{/yun}');">{yun:}$inputv.name{/yun}</a>
+				{yun:}/foreach{/yun}
+	</div>
+
+	</div>
+
+	{yun:}/foreach{/yun}
+
+	<div class="pages" style="margin-top:10px;"> {yun:}$pagenav{/yun}</div>
+	</div>
+{yun:}else{/yun}
+  <div class="wap_member_no">暂无应聘该职位。</div>
+  <em class="wap_memberjob_fabu "></em>
+{yun:}/if{/yun}
+<!--没有职位提示-->
+</section>
+</div>
+
+<script>
+$(function(){
+$('.sq_jobpack_zt_sq').click(function(){
+	var showid = $(this).attr('data-id');
+	
+	$('.show'+showid).toggle()
+});
+
+})
+</script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,134 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+
+{yun:}if $isweixin==1{/yun}
+
+<div class="reward_tip">转发职位到朋友圈,好友浏览，<span class="reward_tip_s">我赚现金！</span></div>
+
+{yun:}foreach from=$rows item=v{/yun}
+<div class="reward_list">
+<div class="reward_list_name"><a href="{yun:}url m=wap c=reward a=shareshow id=$v.id{/yun}">{yun:}$v.name{/yun}</a></div>
+<div class="">转发好友浏览奖励：<span class="reward_list_zf_money">{yun:}$v.packmoney{/yun} </span>元/次</div>
+<ul class="share_job_list">
+
+<li><div class="share_job_list_b share_job_list_b_ze"><i class="share_job_list_icon"></i><div class="share_job_list_n">{yun:}$v.packprice{/yun}</div>赏金总额</div></li>
+<li><div class="share_job_list_b share_job_list_b_sj"><i class="share_job_list_icon"></i><div class="share_job_list_n">{yun:}$v.nowprice{/yun}</div>剩余赏金</div></li>
+
+</ul>
+
+<a href="javascript:;" data-title='{yun:}$v.salary{/yun} {yun:}$v.cityname{/yun}{yun:}$v.com_name{/yun}现在招聘{yun:}$v.name{/yun}， 赶紧来看看吧！' data-desc='{yun:}$v.description{/yun}' data-link='{yun:}url m=wap c=reward a=shareshow id=$v.id u=$uid{/yun}' class="reward_list_zf_fx">立即分享</a>
+</div>
+{yun:}/foreach{/yun}
+
+
+<input value='{yun:}$uid{/yun}' type='hidden' id='uid'>
+
+
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+
+<script src="{yun:}$wap_style{/yun}/js/layer/layer.m.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$wap_style{/yun}/js/public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<!----如果是微信登录，引导微信自有分享------>
+
+<script src="{yun:}$wap_style{/yun}/js/nativeshare/nativeshare.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link rel="stylesheet" href="{yun:}$wap_style{/yun}/js/nativeshare/nativeshare.css?v={yun:}$config.cachecode{/yun}" type="text/css"/>
+
+
+{yun:}if $isweixin{/yun}
+
+	{yun:}if strpos($config.sy_wapdomain, 'https://')!==false{/yun}
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js?v={yun:}$config.cachecode{/yun}"></script>
+	{yun:}else{/yun}
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?v={yun:}$config.cachecode{/yun}"></script>
+
+	{yun:}/if{/yun}
+
+<script>
+	$(function(){
+		$('.reward_list_zf_fx').click(function(){
+			var uid=$('#uid').val();
+			if(uid){
+				$("#weixinBrowser").show();
+				var link = $(this).attr('data-link');
+				
+				var title = $(this).attr('data-title');
+
+				var desc = $(this).attr('data-desc');
+
+				shareJob(title,desc,link);
+			}else{
+				layermsg('请先登录！',2,function(){window.location.href='{yun:}url m=wap c=login{/yun}'});
+			}
+			
+
+		});
+		$('#weixinBrowser').click(function(){
+			
+			$(this).hide();
+			
+			shareJob('{yun:}$title{/yun}','{yun:}$description{/yun}','{yun:}$signPackage.url{/yun}');
+		});
+		shareJob('{yun:}$title{/yun}','{yun:}$description{/yun}','{yun:}$signPackage.url{/yun}');
+	});
+
+{yun:}if $signPackage{/yun}
+
+var shareurl = '{yun:}$shareurl{/yun}';
+wx.config({
+    appId: '{yun:}$signPackage.appId{/yun}',
+    timestamp: '{yun:}$signPackage.timestamp{/yun}',
+    nonceStr: '{yun:}$signPackage.nonceStr{/yun}',
+    signature: '{yun:}$signPackage.signature{/yun}',
+    jsApiList: [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+		'onMenuShareQZone'
+      ]
+  });
+	
+	
+	function shareJob(title,description,link){
+	
+		 wx.ready(function () {
+		  var shareData = {
+			  title: title,
+			  desc: description,
+			  link: link,
+			  imgUrl: '{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_wx_sharelogo{/yun}',
+				success: function () { 
+					// 用户确认分享后执行的回调函数
+
+				},
+				cancel: function () { 
+					// 用户取消分享后执行的回调函数
+					
+				}
+			  };
+			  wx.onMenuShareAppMessage(shareData);
+			  wx.onMenuShareTimeline(shareData);
+			  wx.onMenuShareQQ(shareData);
+			  wx.onMenuShareWeibo(shareData);
+			  wx.onMenuShareQZone(shareData);
+		  });
+		  wx.error(function (res) {
+			console.log(res.errMsg);
+		  });
+	}
+
+{yun:}/if{/yun}
+</script>
+{yun:}/if{/yun}
+
+<div id="weixinBrowser" style="width:100%;height:100%; background:rgba(51,51,51,0.9); position:fixed;left:0px;top:0px ; z-index:100000001;display:block;display:none" > 
+ <div class="yun_wap_share_tip" style="width:100%; position:absolute; z-index:100000001;">
+ <i class="yun_wap_share_tip_wxicon_more"></i>
+<i class="yun_wap_share_tip_wxicon"></i>
+</div>
+</div>
+
+{yun:}else{/yun}
+<!--<start>-->
+<div class="phpyun_wap_msg"><i class="phpyun_wap_msg_icon_ts">i</i>请在微信客户端打开链接</div>
+<!--<start end>-->
+{yun:}/if{/yun}

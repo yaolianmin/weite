@@ -1,0 +1,28 @@
+{yun:}include file="$wapstyle/member/cheader.htm"{/yun} 
+<section class="main_member_cot_box">
+<div class="wap_member_comp_h1" style="position:relative"><span><a href="index.php?c=loglist">分享赏金收益</a></span></div>
+
+<div class="loglist_box">
+<div class="loglist_box_list"><div class="">我的钱包</div><span class="yun_reward_list_box_n">￥{yun:}$statis.packpay{/yun}</span></div> 
+<div class="loglist_box_list"><div class="">冻结金额</div><span class="loglist_box_n">￥{yun:}$statis.freeze{/yun}</span> </div>
+  <a href="index.php?c=withdraw" class="loglist_bth">提现</a>
+</div>
+<div class="wap_member_post_list">
+{yun:}foreach item=v from=$rows{/yun}
+<div class="com_member_hr">
+<div class="user_member_box">
+<div class="com_member_hr_p1"><span class="member_c9">转发职位：</span>{yun:}$v.jobname{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">浏览时间：</span>{yun:}$v.time|date_format:"%Y-%m-%d %H:%M:%S"{/yun}</div>
+<div class="com_member_hr_p1"><span class="member_c9">获得金额：</span><span class="yun_reward_list_box_n">+{yun:}$v.packmoney{/yun}</span> 元</div>
+
+</div>
+
+</div>
+{yun:}foreachelse{/yun}
+<div class="wap_member_no">暂无相关信息</div>
+{yun:}/foreach{/yun}
+</div>
+</section>
+<div class="pages"> {yun:}$pagenav{/yun}</div>
+</div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="js/echarts_plain.js?v={yun:}$config.cachecode{/yun}"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+
+<div class="infoboxp">
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list">该页面展示了财务统计。</div>
+</div>
+</div>
+ 
+{yun:}include file="admin/admin_tongji_top.htm"{/yun} 
+ <div class="clear"></div>
+
+
+
+<div class="table-list">
+  <div class="">
+  <div class="admin_tongji_box">
+    <div class="admin_atatic_chart" id="main2" style="width:100%;height:300px;"></div>
+	
+    <div class="admin_udbox">
+	<div class="admin_tj_udtit">充值最多用户</div>
+       <div class="admin_udbox_list">
+	{yun:}foreach from=$toplist.company item=clist{/yun}
+    <div class="admin_udbox_list_resume">
+	<div class="admin_udbox_list_resume_name">{yun:}$clist.username{/yun}</div>
+	充值金额：{yun:}$clist.count{/yun}
+    </div>
+	{yun:}/foreach{/yun}
+	</div>
+    </div>
+  <div class="clear"></div><div class="admin_udbox_table_bor">
+  <div class="admin_udbox_table_box">
+  <div class="admin_udbox_right_fx">充值数据分析：</div>
+ <table cellpadding="0" cellspacing="0" width="100%" class="admin_udbox_table">
+ <tr>
+ <td><!-- 支付类型 -->
+	<div class="admin_atatic_chart" id="typetj" style="width:500px;height:300px; margin:0 auto"></div></td>
+  <td class="admin_atatic_chart_tdbor">
+	<!-- 购买类型 -->
+	<div class="admin_atatic_chart" id="ordertypetj" style="width:500px;height:300px; margin:0 auto"></div></td>
+ </tr>
+  
+ 
+ 
+ </table>
+ </div>
+    </div>
+   </div>
+
+</div> 
+</div> 
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts图表
+        var myChart = echarts.init(document.getElementById('main2'));
+		option = null;
+       option = {
+    title: {
+        text: '{yun:}$name{/yun}'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:[{yun:}foreach name=foo from=$list item=daylist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$daylist.date{/yun}'{yun:}/foreach{/yun}]
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : [
+			{yun:}foreach name=foo1 from=$list item=lists{/yun}
+			{yun:}if $smarty.foreach.foo1.index<1{/yun}
+			{yun:}foreach name=foo2 from=$lists.list item=daylist{/yun}{yun:}if $smarty.foreach.foo2.index>0{/yun},{yun:}/if{/yun}'{yun:}$daylist.date{/yun}'{yun:}/foreach{/yun}
+			{yun:}/if{/yun}
+			{yun:}/foreach{/yun}
+			
+			]
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+        {yun:}foreach name=foo1 from=$list item=lists{/yun}
+		
+		{yun:}if $smarty.foreach.foo1.index>0{/yun},{yun:}/if{/yun}{
+            name:'{yun:}$lists.name{/yun}',
+            type:'line',
+            stack: '总量',
+            areaStyle: {normal: {}},
+            data:[{yun:}foreach name=foo2 from=$lists.list item=daylist{/yun}{yun:}if $smarty.foreach.foo2.index>0{/yun},{yun:}/if{/yun}{yun:}$daylist.count{/yun}{yun:}/foreach{/yun}]
+        }
+		{yun:}/foreach{/yun}
+    ]
+};
+        myChart.setOption(option); // 为echarts对象加载数据 
+
+		//招聘需求行业统计
+		var myChartType = echarts.init(document.getElementById('typetj'));
+		optiontype = null;
+		optiontype = {
+    title : {
+        text: '购买类型',
+        subtext: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+		top:'20%',
+        data: [{yun:}foreach name=foo from=$counttj.type item=typelist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$typelist.name{/yun}'{yun:}/foreach{/yun}]
+    },
+    series : [
+        {
+            name: '占比分析',
+            type: 'pie',
+            radius : '55%',
+            center: ['70%', '60%'],
+            data:[
+			{yun:}foreach name=foo from=$counttj.type item=typelist{/yun}
+
+			{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}
+			{value:'{yun:}$typelist.count{/yun}', name:'{yun:}$typelist.name{/yun}'}
+			
+			
+			
+			{yun:}/foreach{/yun}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+ myChartType.setOption(optiontype); // 为echarts对象加载数据 
+
+ //招聘需求区域统计
+		var myChartOrdertype = echarts.init(document.getElementById('ordertypetj'));
+		optionordertype = null;
+		optionordertype = {
+    title : {
+        text: '支付方式',
+        subtext: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+		top:'20%',
+        data: [{yun:}foreach name=foo from=$counttj.ordertype item=ordertypelist{/yun}{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}'{yun:}$ordertypelist.name{/yun}'{yun:}/foreach{/yun}]
+    },
+    series : [
+        {
+            name: '占比分析',
+            type: 'pie',
+            radius : '55%',
+            center: ['60%', '60%'],
+            data:[
+			{yun:}foreach name=foo from=$counttj.ordertype item=ordertypelist{/yun}
+
+			{yun:}if $smarty.foreach.foo.index>0{/yun},{yun:}/if{/yun}
+			{value:'{yun:}$ordertypelist.count{/yun}', name:'{yun:}$ordertypelist.name{/yun}'}
+			
+			
+			
+			{yun:}/foreach{/yun}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+ myChartOrdertype.setOption(optionordertype); // 为echarts对象加载数据 
+
+
+    </script>
+</body>
+</html>

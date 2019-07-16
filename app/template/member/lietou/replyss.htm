@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head><body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<script>
+function Showsub(){
+	 var con = $.trim($("#content").val());
+	 if(con==""){layer.msg('请填写回复内容！', 2, 8);return false;}			
+}
+</script> 
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap"> {yun:}include file="$lietoustyle/left.htm"{/yun}
+    <div class="m_inner_youb fr" style="padding-top:0px;">
+      <div class="m_add_inner">
+		<div class="m_right_addto">
+          <div class="m_add_tit">咨询内容</div>
+            <div class="m_add_box">
+              <textarea class="m_box_area" >{yun:}$reply.content{/yun}</textarea>
+            </div>
+        </div>
+        <div class="m_right_addto">
+          <div class="m_add_tit">咨询回复</div>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <FORM name=MyForm target="supportiframe" onSubmit="return Showsub();" action='index.php?c=zixun&act=sreplys' method="post" >
+            <div class="m_add_box">
+              <textarea class="m_box_area" id="content" name="reply">{yun:}$reply.reply{/yun}</textarea>
+            </div>
+			{yun:}if !$reply.reply{/yun}
+            <div class="m_add_sub"><span class="fl"></span>
+              <input type="hidden" id="id" name="id" value="{yun:}$id{/yun}" />
+              <input type="submit" name="submit" class="m_sub_but fr" value="回  复">
+            </div>
+			{yun:}/if{/yun}
+          </FORM>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<div class="clear"></div>
+</div>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

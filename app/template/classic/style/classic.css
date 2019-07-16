@@ -1,0 +1,349 @@
+@charset "gb2312";
+.cont_Projector{width:640px; float:left;margin:0 0 0 10px;}
+.Projector {width:640px;float:left;margin:10px 0 0 0;height:260px;}
+.yun_Announcement{width:613px;height:34px; line-height:34px;color:#666; background:#fff url(../images/job-gg.png) no-repeat 8px 10px;overflow:hidden;border:1px solid #e1e1e1; margin-top:10px; float:left;padding-left:25px;}
+.yun_Announcement ul li a{ display:inline-block;color:#3377cc; margin-right:20px;}
+.yun_Announcement ul li .yun_new_dt_em{color:#999;margin-right:8px;}
+.yuin_index_r{width:263px;height:304px; float:right; margin-top:10px;border:1px solid #dcdcdc; background:#fff;}
+.yuin_index_r_b{width:223px;border:1px solid #ccc; background:#fff; padding:2px; margin-top:5px; float:left; }
+.yuin_index_r_h1{width:100%;height:32px; line-height:32px; font-size:14px; font-family:microsoft yahei,ËÎÌå;  background:#f4f4f4 url(../images/cbg.png) repeat-x;border-bottom:1px solid #dcdcdc;  }
+.yun_index_h1_list{width:100%;}
+.yun_index_h1_list li{width:86px; float:left;border-right:1px solid #dedede; text-align:center; cursor:pointer}
+.yun_index_h1_list  .yun_index_h1_cur{ background:#fff; position:relative}
+.yun_index_h1_list  .yun_index_h1_cur span{width:86px; height:33px; background:#fff; display:block; position:absolute;left:0px;top:0px;}
+.yun_in_news{width:100%; float:left;}
+.yun_in_news li{width:100%; float:left; padding-top:12px; }
+.yun_in_news li .yun_in_news_span{ display:inline-block;width:17px;height:17px; background:#e9e5e5; text-align:center; line-height:16px;color:#333; float:left; margin-left:10px; font-family:microsoft yahei,ËÎÌå;border-radius:2px; font-size:12px }
+.yun_in_news_a{width:220px;height:20px; line-height:20px; overflow:hidden; display:inline-block; line-height:16px; padding-left:10px; float:left}
+.yun_in_news li .yun_in_news_span_cur{ background:#ff6600;color:#fff;}
+.index_latest_news{width:100%; float:left; padding-top:5px;}
+.index_latest_news li{width:230px;height:26px; line-height:26px; margin-left:10px; overflow:hidden; background:url(../images/new_li.png) no-repeat left center; padding-left:10px;}
+.w980 {width:1200px;_overflow: hidden;}
+.Famous_recruitment {width:1198px;float: left;border:1px solid #dcdcdc; background:#fff; margin-top:10px;_overflow: hidden;}
+.Latest_talent_cont {float: left; padding-left:5px; padding-top:5px;font-size:14px;}
+.Latest_talent_list {width:380px;float:left;height: 28px;line-height: 28px;float: left;background:#f4f4f4;margin-right:13px; margin-left:5px;_margin-right:5px;}
+.Latest_talent_list li {float: left;text-align: center;font-weight: bold;color:#666}
+.Latest_talent_list_a {width: 70px;}
+.Latest_talent_list_b {width: 45px;}
+.Latest_talent_list_c {width: 55px;}
+.Latest_talent_list  .Latest_talent_list_d {width: 130px; text-align:left; float:right}
+.Latest_talent_list2 {border-bottom: 1px dotted #ddd;background: none;height: 35px;line-height: 35px;width:380px;float:left}
+.Latest_talent_list2 li {font-weight: normal;color: #666}
+.Latest_talent_list_a img {display: block;float: left; margin:8px 0 0 0;}
+.Latest_talent_list_a a {float: left;margin:0 0 0 5px;display:inline-block;width:50px;text-align:left; overflow:hidden;}
+.Recommended_jobs_cont {width: 100%;float: left; padding-bottom:8px;}
+.Recommended_jobs_cont ul li {width:285px;height:50px; font-size:14px;line-height:22px; padding-left:5px; padding-top:5px; padding-bottom:5px;border-bottom:1px dotted #e7e7e7; float:left; margin-top:5px; margin-left:8px;_margin-left:4px;_margin-right:4px; color:#928b8b}
+.Recommended_jobs_cont ul li .Recommended_jobs_name_a {color:#3b8ee3}
+.Recommended_jobs_cont ul li .Recommended_jobs_name { display:block;color:#666;}
+.Recommended_jobs_cont ul li .Recommended_jobs_name a {color:#928b8b}
+.index_Famous_show {width: 310px;border: 1px solid #00C;padding: 1px;position: absolute;top: -1px;left: -1px;padding-top: 51px;}
+.index_Emergency_job{width:1198px; background:#fff;border:1px solid #dcdcdc; float:left; margin-top:10px;}
+.Emergency_index_cont{width:100%; float:left; padding-bottom:10px;}
+.Emergency_index_cont ul{width:100%; float:left; padding-top:10px;}
+.Emergency_index_cont li{	width:370px;height:35px; line-height:35px;float: left; padding-left:20px; overflow:hidden; background:url(../images/index_li.gif) no-repeat 10px 15px;}
+.Emergency_index_cont li a{font-size:14px;}
+.index_Emergency_post_name{color:#4776aa; margin-left:10px;}
+.index_Emergency_com_name{color:#666}
+.Featured_Jobs {width: 100%;float: left;position: relative; padding-bottom: 6px; overflow:hidden;}
+.jinji_list{ width:100%; float:left; padding:10px 0;}
+.angle_l_t {width: 14px;height: 14px;background-position: -386px -167px;left: -1px;top: -1px;position: absolute;}
+.angle_l_b {width: 14px;height: 14px;background-position: -386px -206px;left: -1px;bottom: -1px;position: absolute;}
+.angle_r_t {width: 14px;height: 14px;background-position: -386px -187px;right: -1px;top: -1px;position: absolute;}
+.angle_r_b {width: 14px;height: 14px;background-position: -386px -224px;right: -1px;bottom: -1px;position: absolute;}
+.Featured_Jobs_list {width:968px;padding:0px 0 15px 0;float: left; padding-left:10px;}
+.Featured_Jobs_list dl {width:230px;float: left;margin-right:12px;background: url(../images/yun_icodd.jpg) repeat-x bottom;height:57px;overflow:hidden}
+.Featured_Jobs_list dl dt {float: left;width: 18px;margin: 10px 5px 0 0}
+.Featured_Jobs_list dl dd {width:225px;padding: 10px 0 10px 5px;float: left;line-height:23px;}
+.Featured_Jobs_list dl dd  {display: block;}
+.Featured_Jobs_date{color:#999}
+.Featured_Jobs_t1{width:100%; float:left}
+.Featured_Jobs_t2{width:100%; float:left}
+.Featured_Jobs_name{color:#666}
+.Featured_Jobs_name_c{color:#4776aa}
+.right_banner{width:275px;float:right; margin-right:5px;}
+.right_banner a{width:269px; display:block;	border: 1px solid #e5e5e5; padding:2px; margin-top:5px;}
+.right_banner img{ display:block}
+.right_banner a:hover{border:1px solid #ccc}
+.index_news {float: left;margin:10px 0 0px 0;width: 978px;position: relative;border:1px solid #e0dedf;background:#fff;}
+.index_news_content {width:374px;padding: 10px 15px 10px 10px;margin:5px 0 0 0;float: left;}
+.bgnone{ background:none}
+.index_news_fr {margin-right: 0px;float: right}
+.index_news_top {float: left;width: 100%;border-bottom: 1px dashed #ccc;padding-bottom: 10px;margin-bottom: 10px;}
+.index_news_top dt {background:#FFFFFF;border: 1px solid #CCCCCC;float: left;padding: 2px;width:100px;}
+.index_news_top dt img {display: block; float:left;}
+.index_news_top dd {color: #575757;float: left;line-height: 20px;padding-left: 10px;width:250px;}
+.index_news_top dd strong {color: #000000;display: block;}
+.index_news_top dd a {color: #FF0000;}
+.index_news_top dd strong a {color:#09F;}
+.index_news_right {width: 100%;float: left}
+.index_news_right ul li {height: 35px;line-height: 35px;background: url(../images/left_list02.gif) no-repeat 0 17px;padding-left: 10px;}
+.index_link {width: 100%;float: left;}
+.index_link_cont {width:1200px;margin: 0 auto}
+.index_link_cont_h1 {width: 100%;height: 35px;line-height: 35px;}
+.index_link_cont_h1 span {display: block;float: left;font-size:14px;color:#333; font-weight:bold}
+.index_link_cont_h1 a {float: left; margin:0 0 0 10px;color: #285691;}
+.index_link_list {width: 1200px;float: left;}
+.index_link_list_name {width: 1200px;float:left;}
+.index_link_list a {margin-left:15px;_margin-left:7px;line-height: 35px;display: inline-block}
+.index_link_l {width: 8px;height: 269px;float: left;background: url(../images/yun_link_l.png) no-repeat left center}
+.index_link_list_img {width: 100%;float: left;}
+.index_link_list_img a {display: block;float: left; margin:15px 0px 0px 15px;}
+.index_link_list_img img {width: 128px;border: 1px solid #ccc;display: block;float: left;_margin-right: 0px; text-align:center}
+.index_left15560 {float: left;text-align: right;width:1200px;}
+.Famous_recruitment_cont {width: 1198px;float: left;  _overflow:hidden ;}
+.Famous_recruitment_cont_box{width:1198px;border:1px solid #e6e6e6;border-top:none; float:left; _overflow:hidden}
+.Famous_recruitment_cont .tlogo li {border-right: 1px solid #eee;border-bottom: 1px solid #eee;width:198.9px; height:165px;background: #fff;float: left; text-align:center; position:relative  }
+.Famous_recruitment_cont .tlogo li img{ margin-top:20px;}
+.yunFamousenterprises_comname{ width:170px; margin:0 auto;height:25px; line-height:25px; text-align:center;color:#666;overflow:hidden; margin-top:10px; position:absolute;left:10px;bottom:10px; z-index:10000}
+
+.Famous_recruitment_act {position: relative}
+#mainids .tlogo ul li.current1 {list-style-type: none;position: relative;width:198.9px;z-index:1000}
+#mainids .tlogo ul li.current1 .on {position: relative;z-index: 1003;}
+#mainids .tlogo ul li .show {display: none;left:0px;position: absolute;
+text-align: left;top:-2px;width:198.9px;;box-shadow: 4px 2px 6px #eee; text-align:center;  border: 2px solid #3b8ee3;overflow:hidden}
+#mainids .tlogo ul li.current1 .yunFamousenterprises_comname{ font-weight:bold}
+#mainids .tlogo .show .area {width:100%;background:#fff;overflow: hidden;padding:155px 0 0;float: left}
+#mainids .tlogo ul li.current1 .show {display: block;}
+
+
+#mainids .area_left {width:190px;max-height:135px; overflow:auto;float: left; padding-bottom:10px; }
+#mainids .area_left a {color:#1c99ef;;overflow: hidden; display:block; padding:0px 0px 0px 20px;height:24px; line-height:24px; margin-top:5px; background:url(../images/job-Auction.png) no-repeat 8px 12px; text-align:left}
+#mainids .area_left a:hover {color: #3B8EE3;text-decoration:none}
+#mainids .area_right {float: left;width:130px;overflow: hidden;padding-left: 5px;line-height: 22px;color: #333;white-space: normal; word-break: break-all; display:none; }
+#mainids .area_right a {width: 100%;height: 22px;line-height: 22px;overflow: hidden;text-align: center;display: block;color:#3B8EE3;font-weight: bold}
+#mainids .area_right a:hover {color: #333;text-decoration: underline}
+#mainids .area_left_bot {width:93px;background-color: #EEEEEE;float: left;height: 22px;line-height: 22px;margin-top: 5px;text-align: center;}
+#mainids .area_left_bot a {color: #333;}
+#mainids .area_right_bot{width:91px;background-color: #EEEEEE;float: left;height: 22px;line-height: 22px;margin-top: 5px;text-align: center;border-left:1px solid #fff;}
+#mainids .area_right_bot a {color: #333}
+#mainids .w160 {width: 160px;}
+#mainids .w170 {width: 173px;}
+#mainids .tlogo ul li .show_ban {background: #EAE8E8;border: 1px solid #65A9E6;display: none;left: -1px;padding: 1px;position: absolute;text-align: left;top: -1px;width: 313px;}
+#mainids .tlogo ul li.current1 .show_ban {display: block;}
+#mainids .tlogo .show_ban .area {background: #FFFFFF;overflow: hidden;padding: 55px 0 0;float: left}
+#mainids .tlogo ul li.current2 {list-style-type: none;position: relative;width: 313px;}
+#mainids .tlogo ul li.current2 .on {position: relative;z-index: 1003;}
+
+#slides {position: relative;width:640px;height:260px;float:left;}
+.slides_container {overflow:hidden;position:relative;display:none;width:640px;height:260px;}
+.slides_container div.slide {width:640px;height:260px;display:block;}
+.slides_container img {width: 640px;height:260px;display: block;}
+#slides .prev {margin-right: 5px;float:left;}
+#slides .next {margin-right: 5px;float:left;}
+.pagination {margin:6px 0 0;list-style: none;z-index:9999;position: absolute;bottom: 15px;right:15px;}
+.pagination li {float: left;margin: 0 1px;}
+.pagination li a {display: block;width: 13px;height: 0;padding-top: 13px;background-position: 0 0;float: left;overflow: hidden;background-image: url(../images/circle.png);}
+.pagination li.current a, .pagination li.current a:hover { background-position: -16px -0px }
+.pagination li a:hover { background-position: 0px -0px }
+#slides a:link, #slides a:visited { color: #333 }
+#slides a:hover, #slides a:active { color: #9e2020 } 
+.index_banner{width:100%; float:left;}
+.index_banner img{ margin-top:10px;}
+.index_banner_cont{width:1250px;}
+.index_banner_cont a{ display:inline-block;float:left; margin-top:10px; margin-right:11px;}
+.index_banner_cont img{ display:block}
+.index_logoin_box{width:255px; float:left;margin-top:10px;border:1px solid #dcdcdc;padding:0px 0px 10px 0px; overflow:hidden}
+.Latest_talent_h1 {width:100%;height: 35px; float:left; background:url(../images/cbg.png) repeat-x;border-bottom:1px solid #dcdcdc;background:#f4f4f4;}
+.Latest_talent_h1 b { height:20px; line-height:20px; float:left;display: block; padding-left:26px;font-size:15px; font-weight:bold;margin-top:7px;font-family: Î¢ÈíÑÅºÚ, ËÎÌå; background:url(../images/pic_arrow.gif) no-repeat 10px center}
+.index_Emergency_span{color:#FC9B00; font-size:14px; font-weight:normal; margin-left:5px; font-family:tahoma,arial,"ËÎÌå"}
+.Latest_talent_h1 .Famous_tit{ background-position:0 -116px;}
+.Latest_talent_h1 .Emergency_tit {background-position:0 -169px;}
+.Latest_talent_h1  .HOt_tit{background-position:0 -262px;}
+.Latest_talent_h1 .User_tit{background-position:0 -233px;}
+.index_News_h1{width:100%;height:40px;}
+.index_News_h1  b { height:20px; line-height:20px; border-left:6px solid #f60; float:left;display: block; padding-left:10px;font-size:16px;color:#1F7FCC;margin-top:8px;font-family: Î¢ÈíÑÅºÚ, ËÎÌå; }
+.index_News_h1  .News_tit{	display: block;float: left;color: #2d5382;font-size: 14px;width:74px;height:18px;margin-top:7px; margin-left:10px;background-position:0 -200px;}
+.Latest_talent_h1 .index_more{display: block;float: right;text-align: center;margin-top: 10px;font-family: Î¢ÈíÑÅºÚ;font-size:12px;color: #333;margin-right:10px;}
+.index_News_h1 u{ float:right; text-decoration:none; line-height:40px; margin-right:10px;color:#666}
+.index_News_h1 u a{color:#666}
+.Recommended_jobs_cont_li{width:100%;height:23px; line-height:23px; overflow:hidden; display:block}
+.Recommended_jobs_pin{color:#ed2121; float:left}
+.Recommended_jobs_name_cor{color:#4776aa; margin-left:5px;}
+.index_buildPic{width:355px; float:right; overflow:hidden}
+.index_buildPic_cont{width:360px;}
+.index_buildPic  ul li {float: left;display: inline;width: 117px;height: 65px;overflow: hidden;text-align: center;vertical-align: bottom;border-top: 1px solid #E6E6E6;border-left:1px solid #e6e6e6; margin-top:-1px;}
+.index_buildPic ul li img{ margin: 9px 0px 0px;}
+.jinji_list li{width:370px; float:left;height:35px; line-height:35px;font-size:14px; background:url(../images/yun_icodd2.jpg) no-repeat 10px 15px; padding-left:20px; overflow:hidden; padding-right:5px;}
+.jinji_list_name{color:#0066aa}
+.jinji_list li a{ margin-right:5px;}
+.index_news_box{width:100%; float:left; overflow:hidden}
+.index_news_box_nc{width:1220px; float:left}
+.index_user_box{width:290px; float:left;border:1px solid #dcdcdc; float:left; margin-top:10px;; margin-right:10px;}
+.index_n_list{ padding-top:3px; padding-bottom:3px;}
+.index_n_list li{width:260px; line-height:26px; height:26px; overflow:hidden; background:url(../images/zx-list1.gif) no-repeat 5px 10px; padding-left:15px;}
+.index_n_dl{width:100%; float:left}
+.index_n_dl dt{width:64px;height:64px; padding:2px;border:1px solid #ccc; float:left}
+.index_n_dl  dd{width:200px; float:left; padding-left:10px; line-height:22px;}
+.index_n_dl_h1{width:100%; font-size:14px; font-weight:bold;height:33px; line-height:33px; float:left}
+.index_n_dl_h1 a{color:#000}
+.index_n_dl  dd a{color:#333}
+.index_n_dl_t_p{ padding:0px 5px; float:left;}
+
+.hp_people{width:1200px; float:left; padding-bottom:10px; overflow:hidden}
+.hp_people ul{width:1220px;}
+.hp_people ul li{width:166px;line-height:23px;padding:10px;border:1px solid #e3e2e2;float:left;margin-left:10px;margin-top:10px;}
+.hp_people ul li:hover{border:1px #5bb7f6 solid;z-index:99;/*ie*/-moz-box-shadow:0px 0px 10px #CCCCCC;/*firefox*/-webkit-box-shadow:0px 0px 10px #CCCCCC;/*safari»òchrome*/box-shadow:0px 0px 10px #CCCCCC;/*opera»òie9*/}
+.hp_people_box_ft{width:100%; text-align:center}
+.hp_people_box_rt{width:100%; height:100px; position:relative;text-align:center}
+.hp_people_box_rt_bg{width:100%;height:100px; background:url(../images/yun_user_b.png) no-repeat center center; position:absolute;left:0px;top:0px;}
+.hp_people_box_ft_nm a{color:#666;font-size:16px;font-weight:bold;}
+.hp_people_box_ft_nm a:hover{color:#1c99ef;}
+.hp_people_box_ft_y{width:100%;height:23px; line-height:23px; overflow:hidden;white-space: nowrap; text-overflow: ellipsis;color:#f72a4b;}
+.hp_people_box_ft_v{color:#666;width:100%;overflow:hidden;word-break:keep-all;text-overflow:ellipsis;white-space:nowrap; padding:10px 0;}
+
+
+.index_job_red{width:100%;}
+.index_job_red .index_job_red_list{width:1220px;}
+.index_job_red .index_job_red_list li{width:277px;padding:0px 7px 7px 108px;border:1px solid #e3e2e2;float:left;margin-right:9px;margin-top:14px; position:relative}
+.index_job_red .index_job_red_list li:hover{border:1px #5bb7f6 solid;z-index:99;background-color:#eff6fb;/*ie*/-moz-box-shadow:0px 0px 10px #CCCCCC;/*firefox*/-webkit-box-shadow:0px 0px 10px #CCCCCC;box-shadow:0px 0px 10px #CCCCCC;}
+.index_job_red_momey{width:79px;height:79px; background:url(../images/red_icon.png) no-repeat; position:absolute;left:10px;top:10px;border-radius:5px;}
+.index_job_red_momey_n{width:100%; text-align:center; padding-top:10px;color:#fcee07; font-weight:bold}
+.reward_hb_list{width:65px; float:left; padding-left:25px; position:relative;  margin-top:15px; padding-bottom:5px;}
+.reward_hb_list_icon{width:20px;height:20px; background:url(../images/reward_icon1.png) no-repeat; display:inline-block; position:absolute;left:0px;top:10px;}
+.reward_hb_list_r{border:none;}
+.reward_hb_list_icon_ms{ background:url(../images/reward_icon2.png) no-repeat; }
+.reward_hb_list_icon_rz{ background:url(../images/reward_icon3.png) no-repeat; }
+.reward_hb_list_P{color:#999; font-size:12px;}
+.reward_hb_fonttd{color:#ff6479}
+.reward_hb_fontms{color:#1b9def}
+.reward_hb_fontrz{color:#eea067}
+.reward_hb_listjobname{width:100%; padding:10px 0;height:22px; line-height:22px; float:left;border-bottom:1px solid #eee}
+.reward_hb_listjobname_l{width:170px; float:left;height:22px; line-height:22px; font-size:16px; font-weight:bold; overflow:hidden}
+.reward_hb_listjobmoney{width:105px; float:right;color:#f00; text-align:right}
+.reward_hb_list_line{width:1px;height:40px; background:#eee; position:absolute;right:10px;top:0px; display:block}
+/*login*/
+.hp_login{width:242px;height:304px; background:#fff;border:1px solid #dcdcdc; font-size:14px; margin-top:10px; padding:0 15px}
+.hp_login_tit{position:relative;width:100%; float:left;}
+.yun_Indexlogin_tit_s{width:100px; padding-left:26px; font-size:15px; font-weight:bold; display:inline-block;height: 33px;  line-height:33px; background:url(../images/pic_arrow.gif) no-repeat 10px center;  position:relative}
+.yun_Indexlogin_tit_line{width:6px;height:20px; display:block; position:absolute;left:0px;top:10px; overflow:hidden; background:#db3e00; display:none;}
+.yun_Indexlogin_tit_sw{width:14px;height:39px;  background:url(../images/yun_login_sw.jpg) no-repeat; position:absolute;right:-14px;top:0px; display:inline-block}
+.yun_Indexlogin_box{width:238px; padding:0px 10px;}
+.hp_login_hy{width:200px;height:40px;border:1px solid #e6e6e6; padding-left:40px; margin-top:13px; position:relative; float:left;}
+.hp_login_hy_but{width:100%;height:34px; line-height:34px;border:none; background:#fff; float:left;color:#999}
+.hp_login_hy_icon{width:17px;height:20px; background:url(../images/yun_login_icon.jpg) no-repeat 0 0; position:absolute;left:10px;top:12px;}
+.hp_login_mm_icon{width:17px;height:20px; background:url(../images/yun_login_icon2.jpg) no-repeat 0px 2px;position:absolute;left:10px;top:12px;}
+.hp_login_yz_icon{width:17px;height:20px; background:url(../images/yun_login_icon3.jpg) no-repeat 0px 0px;position:absolute;left:10px;top:7px;}
+.hp_login_lg{width:100%; margin-top:15px; float:left; padding-bottom:8px}
+.hp_login_lg_but{width:100%;height:42px; background:#db3e00;color:#fff;border:none; cursor:pointer;border-radius:2px; font-size:16px;}
+.yun_Indexlogin_zd{width:100%; padding:13px 0; position:relative;color:#999}
+.yun_Indexlogin_ft{ position:absolute;right:0px;top:0px; }
+.yun_Indexlogin_p{width:100%;border-top:1px solid #e7e7e7; text-align:center;color:#999;float:left}
+
+.index_login_tp{width:100%; margin-top:10px; float:left; position:relative}
+.yun_text_color_login{width:76px; float:left;height:34px; line-height:34px; font-weight:bold; font-size:14px; display:inline-block; background:url(../images/greg1.png) no-repeat;color:#db3e00; padding-left:40px;}
+.yun_text_color_login_gr{width:72px; float:right; height:34px; line-height:34px;  font-weight:bold; font-size:14px; display:inline-block;background:url(../images/greg.png) no-repeat;color:#db3e00; padding-left:50px;}
+.yun_text_color_login:hover{background:url(../images/greg1_h.png) no-repeat;color:#db3e00;text-decoration:none}
+.yun_text_color_login_gr:hover{ background:url(../images/greg_h.png) no-repeat;color:#db3e00;text-decoration:none}
+.yun_Indexlogin_sub_fotg{width:100%; float:left; position:relative;padding-bottom:8px;}
+.yun_Indexlogin_yzm_t{width:100%;height:32px; float:left; margin-top:10px; position:relative}
+.yun_Indexlogin_yzm{width:70px; padding-left:40px;height:40px; line-height:40px; border:1px solid #e6e6e6; float:left; color:#999 }
+.yun_Indexlogin_yzm_img{ float:left;margin-left:5px;  }
+.yun_Indexlogin_icon_m_hyh{ display:inline-block; float:left; line-height:30px; position:absolute;right:0px;top:0px;}
+.yun_Indexlogin_zddl{ margin-top:10px;}
+.hp_login_yzbox_icon{position:absolute;left:10px;top:12px;width:18px;height:20px;background:url(../images/yun_login_icon3.jpg) no-repeat;}
+.hp_login_sj_icon {position:absolute;left:10px;top:10px;width:18px;height:20px;background:url(../images/sjicon.png) no-repeat;}
+.hp_login_hy_send{width: 90px;line-height:20px;text-align:center;display:inline-block; position:absolute;right:0px;top:12px;border-left:1px solid #eee;color:#f60;}
+.index_logoin_cont {width: 100%;float: left;color: #999; padding-top:5px;}
+.index_logoin_cont li {width: 100%;float: left;margin:13px 0 0 0;}
+.index_logoin_cont li span {display: block;width: 60px;font-size: 12px;float: left;line-height: 29px;text-align: right}
+.index_logoin_t{width:156px; float:left; padding-left:10px; margin-top:5px;}
+.index_logoin_inp {width: 145px;height:27px;border: 1px solid #e7e2e2;background: #fff;color:#9d9fa0;line-height:27px; margin-top:8px; padding-left:4px;}
+.hp_login_yzbox{ margin-top:15px; position:relative}
+.index_logoin_bth2{width:62px;height:62px;border:none; float:left; margin-top:15px; margin-left:5px; background:url(../images/yun_i_log.gif) no-repeat;border:none; cursor:pointer}
+.index_logoin_yz{width:90px;height:29px;border: 1px solid #e7e2e2;background: #fff;color:#c7c4c4;line-height:29px;}
+.index_logoin_check {width: 13px;height: 13px;overflow: hidden;display: block;float: left;margin:2px 5px 0 0;vertical-align:middle; margin-left:10px;_margin-left:5px;}
+.index_logoin_cont li .index_l_jz { display:inline-block;width:130px;float: left;line-height:18px;}
+.index_logoin_cont li a {float: left; margin:0 0 0 10px;}
+.index_logoin_submit {width:102px;height:32px;margin:0 0px 0 10px;display: block;float: left;background:#3b8ee3;border: none;cursor: pointer;_margin:0 0px 0 5px;border-radius:2px; font-size:14px; font-weight:bold;color:#fff; line-height:32px; text-align:center;}
+.index_logoin_submit:hover{color:#fff;}
+.index_logoin_submit2 {width: 102px;height:32px; line-height:32px; text-align:center;margin:0 10px 0 0;display: block;float: left;background:#e45e01;border-radius:2px; font-size:14px; font-weight:bold;color:#fff;cursor: pointer; display:block}
+.index_logoin_submit2:hover{color:#fff;}
+.index_logoin_cont .index_logoin_Coop {width: 223px;margin:10px 0 0 5px; _margin-left:2px;border-top: 1px dashed #fff;}
+.index_logoin_cont .index_logoin_Coop em {margin-right: 0px;}
+.index_logoin_cont .index_logoin_Coop img {display: block;float: left}
+.index_logoin_cont .index_logoin_Coop a {color:#0085C4;margin:0 0 0 5px;_margin:0 0 0 2px;}
+.index_logoin_cont a:hover{ text-decoration:none}
+.index_logoin_msg{width:165px;height:28px; position:absolute;left:0;top:-25px;}
+.index_logoin_msg_tx{width:124px;height:26px; line-height:26px; padding-left:25px;border:1px solid #ffc7c7; background:#ffecec url(../images/ico_warn2.png) no-repeat 5px center;color:#d54801; position:relative}
+.index_logoin_msg_icon{width:10px;height:6px; background:url(../images/yun_icon_sj.png) no-repeat; position:absolute;left:10px;bottom:-5px;_bottom:-13px;}
+
+.index_verification{width:235px; float:left; margin-top:10px;}
+.hp_login_box_ft{ padding-top:17px; padding-bottom:8px;color:#666}
+/*login after*/
+.login_after_userlogo{width:100%; text-align:center;height:83px; position:relative ; float:left}
+.login_after_comlogo{width:100%; text-align:center; padding-top:10px}
+
+.login_after_username{width:100%; font-size:14px;color:#787b7e; text-align:center; float:left;height:20px; line-height:20px; overflow:hidden;margin-top:10px;}
+.login_after_username_id{color:#ff6a6a}
+.login_after_webrname{width:100%; font-size:14px;color:#787b7e; text-align:center; padding:5px 0 5px 0;border-bottom:1px solid #e6e6e6; float:left}
+.login_after_ztbox{width:100%; padding-top:10px;color:#787b7e; float:left}
+.login_after_zt_list{width:78px;border-right:1px solid #e6e6e6; float:left;text-align:center;}
+.login_after_zt_list a{color:#787b7e;}
+.login_after_zt_list a:hover{ text-decoration:none;}
+.login_after_zt_list_n{ display:block;width:100%; font-size:20px; padding:5px 0; color:#1c99ef}
+.login_after_zt_list_end{border:none;}
+.login_after_bthbox{width:100%; padding-top:5px; float:left}
+.login_after_bth{width:115px;height:30px; line-height:30px; display:inline-block; background:#1c99ef;color:#fff; text-align:center; margin-top:10px; float:left;}
+.login_after_bthend{width:115px;height:30px; line-height:30px; display:inline-block; background:#ff6a6a;color:#fff; text-align:center; margin-top:10px; float:right;}.login_after_bttc{width:100%;height:30px; line-height:30px; display:inline-block; background:#ebf6ff url(../images/yun_intc.png) no-repeat 70px center; text-align:center; margin-top:10px; float:left;color:#55aae3}
+.login_after_bth:hover{ background:#00b2fc;color:#fff; text-decoration:none}
+.login_after_bthend:hover{ background:#f84848;color:#fff; text-decoration:none}
+.login_after_user_box{width:100%; float:left; padding:20px 0 20px 0;border-bottom:1px solid #e6e6e6; color:#787b7e;}
+.login_after_user_photo{ float:left}
+.login_after_user_name{ width:165px;float:left; padding-left:10px;}
+.login_after_user_webname{ padding:6px 0 0 0;height:20px; line-height:20px; overflow:hidden ;    overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.login_after_user_uname{width:100%;height:20px; line-height:20px; overflow:hidden}
+.login_after_userbth{width:115px;height:30px; line-height:30px; display:inline-block; background:#1c99ef;color:#fff; text-align:center; margin-top:10px; float:left;}
+.login_after_userbthend{width:115px;height:30px; line-height:30px; display:inline-block; background:#ff6a6a;color:#fff; text-align:center; margin-top:10px; float:right;}
+.login_after_usergz{width:115px;height:30px; line-height:30px; display:inline-block; background:#1c99ef;color:#fff; text-align:center; margin-top:10px; float:right;}
+.login_after_userbth:hover{ background:#00b2fc;color:#fff; text-decoration:none}
+.login_after_userbthend:hover{  background:#f84848;color:#fff; text-decoration:none}
+.login_after_usergz:hover{ background:#00b2fc;color:#fff; text-decoration:none}
+.login_box_h_list {border-bottom:1px solid #eee;float:left;}
+.login_box_h_list li{width: 115px;float:left;height:40px;line-height:40px;text-align:center;cursor:pointer;font-size: 14px;}
+.login_box_h_list .login_box_h_list_cur{color:#f60; position:relative; font-weight:bold}
+.login_box_h_list .login_box_h_list_cur .login_box_h_icon{width: 85px;height:2px;background:#f60;position:absolute;left: 0px;bottom:-1px;}
+.hp_login_mm_icon{position:absolute;left:10px;top:12px;width:14px;height:18px;background:url(../images/so.png) no-repeat;}
+.hp_login_mm_but{width:100%;height:38px;line-height:38px;border:0;color:#999;}
+.hp_login_rg{width:100%; }
+.index_login_tp{width:100%; margin-top:10px; float:left; position:relative}
+.yun_text_color_login{width:76px; float:left;height:34px; line-height:34px; font-weight:bold; font-size:14px; display:inline-block; background:url(../images/greg1.png) no-repeat;color:#db3e00; padding-left:40px;}
+.yun_text_color_login_gr{width:72px; float:right; height:34px; line-height:34px;  font-weight:bold; font-size:14px; display:inline-block;background:url(../images/greg.png) no-repeat;color:#db3e00; padding-left:50px;}
+.yun_text_color_login:hover{background:url(../images/greg1_h.png) no-repeat;color:#db3e00;text-decoration:none}
+.yun_text_color_login_gr:hover{ background:url(../images/greg_h.png) no-repeat;color:#db3e00;text-decoration:none}
+.wxcode_login {width: 35px;height: 35px;background: url(../images/eer.png) no-repeat;position: absolute;right:-10px;top: 10px;cursor: pointer;}
+.normal_login {width: 35px;height: 35px;background: url(../images/pc.png) no-repeat;position: absolute;right:-10px;top: 10px;cursor: pointer;display: none;}
+.wxlogintext {margin: 0 auto;width: 100%;height: 150px;padding:30px  0px 20px 0px;margin-top: 10px;text-align:center}
+.wxlogintext img {width: 150px;height: 150px;border: 0px;}
+.wxlogintxt {margin: 0 auto;width: 190px;text-align:center;margin-top:20px;height: 36px;line-height: 36px;background-color: #EEEEEE;color: #999999;border-radius: 30px;}
+.login_m_text{width: 100px;float:left;height: 38px;line-height: 38px;border: 0;color: #999;}
+
+
+/*index_loginend*/
+/*tip bottom*/
+.tip_bottom {width: 100%;height: 65px;position: fixed;bottom: 0;left: 0;z-index:1000000; }
+.tip_bottom_icon {width:155px;height:86px;background: url(../images/i_bottom.png) no-repeat; position:absolute;left:-150px;top:-86px; display:none;}
+.tip_bottom_cont {width: 100%;height: 65px;position: relative;}
+.tip_bottom_bg{width: 100%;height: 65px; position:absolute;left:0px;top:0px; z-index:9;background-color:#000000;opacity: 0.5; filter:Alpha(opacity=50); }
+.tip_bottom_cont_c{width: 100%;height: 65px; position:absolute;left:0px;top:0px; z-index:10}
+.tip_bottom_main {width:1200px;height: 65px;position: relative;margin:0 auto}
+.tip_bottom_left {width:1200px;position: relative;}
+.tip_bottom_ewm{width:110px;height:110px; padding:10px 10px  0 0; text-align:center; position:absolute;right:0px;bottom:3px;}
+.tip_bottom_ewm_p{width:100%;height:20px; line-height:20px; text-align:center;color:#fff; font-size:12px; position:relative}
+.tip_bottom_ewm_bg{width:90px;height:90px; background:#fff; position:relative; margin:0 auto}
+.tip_bottom_ewm_p_icon{width:15px;height:46px; background:url(../images/ewm_icon.png) no-repeat; display:inline-block; position:absolute;right:-15px;top:0px;}
+
+.tip_bottom_close {display: block;width: 11px;height: 11px;background: url(../images/i_bottom_close.png) no-repeat;position: absolute;top: 10px;right: -37px; z-index:10}
+.tip_bottom_logo {display: inline-block;color: #fff;font-size: 15px; }
+.tip_bottom_logo h1 {font-weight: bolder;line-height: 25px;font-size:18px;font-weight:normal}
+.tip_bottom_logo h2 {line-height: 65px;font-size:24px; font-weight:normal;}
+.tip_bottom_fast{ font-size:24px; display:inline-block; padding-left:50px; background:url(../images/i_bottomtime.png) no-repeat left center}
+.tip_bottom_time{color:#fcff00;font-weight:bold; font-size:28px; }
+.tip_bottom_num {display: inline-block;width: 195px;font-size: 17px;color: #fff;text-align: center;}
+.tip_bottom_num span {font-size: 31px;font-family: Arial;padding-right: 5px;}
+.tip_bottom_member{ position:absolute;right:130px;top:10px;}
+.tip_bottom_login,.tip_bottom_reg {display:inline-block;width: 110px;height: 46px;background:#0ea7f8;    border-radius: 4px;color: #fff;line-height: 46px;text-align: center;font-size: 18px;}
+.tip_bottom_reg:hover{ background:#ed9914;color:#fff; text-decoration:none;}
+.tip_bottom_login:hover{ background:#228dc9;color:#fff; text-decoration:none;}
+.tip_bottom_reg {width: 110px;text-align: center;background:#ff9f00;height:46px; line-height:46px; margin-left:10px;}
+.tip_bottom_login {margin-left: 25px;}
+.index_line{ padding:0px 5px; font-size:12px;color:#999}

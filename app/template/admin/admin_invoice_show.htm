@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="./images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="./images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+
+<link href="./images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<title></title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+
+ <div class="admin_new_tip">
+    <div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+    <div class="admin_new_tip_list_cont">
+      <div class="admin_new_tip_list">该页面展示了网需要开具的发票详细信息。</div>
+    </div>
+  </div>
+  <div class="clear"></div>
+
+
+        
+<div class="tag_box mt10">
+    
+		<table width="100%" class="table_form"> 
+			<tr>
+				<th align="right"  width="230">订单号:</th>
+				<td><div class="yun_admin_divh">{yun:}$invoice.order_id{/yun}</div></td>
+			</tr>
+			<tr class="admin_table_trbg">
+				<th align="right">申请时间:</th>
+				<td><div class="yun_admin_divh">{yun:}$invoice.addtime|date_format:"%Y-%m-%d %H:%M:%S"{/yun}</div></td>
+			</tr>
+			<tr>
+				<th align="right">金额:</th>
+				<td><div class="yun_admin_divh">{yun:}$row.order_price{/yun}元</div>
+				</td>
+			</tr> 
+			<tr class="admin_table_trbg">
+				<th align="right">支付状态:</th>
+				<td><div class="yun_admin_divh">{yun:}$row.order_state_n{/yun}</div>
+				</td>
+			</tr> 
+			{yun:}if $invoice.invoice_id{/yun}
+			<tr>
+				<th align="right"  width="230">发票税号:</th>
+		<td><div class="yun_admin_divh">{yun:}$invoice.invoice_id{/yun}</div></td>
+			</tr>
+			{yun:}/if{/yun}
+			<tr>
+				<th align="right"  width="230">发票抬头:</th>
+		<td><div class="yun_admin_divh">{yun:}$invoice.title{/yun}</div></td>
+			</tr>
+			<tr class="admin_table_trbg">
+				<th align="right">联系人:</th>
+	<td><div class="yun_admin_divh">{yun:}$invoice.link_man{/yun}</div></td>
+			</tr>
+			<tr>
+				<th align="right">联系电话:</th>
+				<td><div class="yun_admin_divh">{yun:}$invoice.link_moblie{/yun}</div>
+				</td>
+			</tr> 
+			<tr class="admin_table_trbg">
+				<th align="right">邮寄地址:</th>
+				<td><div class="yun_admin_divh">{yun:}$invoice.address{/yun}</div></td>
+			</tr>
+			<tr>
+				<th align="right">联系电话:</th>
+				<td><div class="yun_admin_divh">{yun:}$invoice.link_moblie{/yun}</div>
+				</td>
+			</tr> 
+             <tr >
+				<th align="right">发票状态:</th>
+	<td><div class="yun_admin_divh">
+				{yun:}if $invoice.status=='0'{/yun}未审核{yun:}/if{/yun}
+		        {yun:}if $invoice.status=='1'{/yun}已审核{yun:}/if{/yun}
+		        {yun:}if $invoice.status=='2'{/yun}未通过{yun:}/if{/yun}
+		        {yun:}if $invoice.status=='3'{/yun}已打印{yun:}/if{/yun}
+		        {yun:}if $invoice.status=='4'{/yun}已邮寄{yun:}/if{/yun}
+                </div>
+				</td>
+		  </tr>
+		  {yun:}if $invoice.statusbody{/yun}
+		<tr >
+		<th align="right">审核状态原因:</th>
+		<td><div class="yun_admin_divh">
+		{yun:}$invoice.statusbody{/yun}
+		</div>
+		</td>
+		</tr>
+		  {yun:}/if{/yun}
+		<tr>
+			<th align="right">&nbsp;</th>
+			<td><div class="yun_admin_divh">
+				<input class="admin_button" name="" type="button" value="返回" onclick="javascript:history.go(-1);">        </div>
+			</td>
+		</tr> 
+		 </table>
+</div>
+</div>
+</body>
+</html>

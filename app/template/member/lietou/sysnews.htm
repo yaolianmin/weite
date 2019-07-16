@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+        <div class="lt_m_tit"><span class="lt_m_tit_s">系统消息</span></div>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php?c=sysnews&act=del" target="supportiframe" method="post" id='myform'>
+          <div class="lt_m_box">
+        <div class="lt_m_table">
+          <table>
+            <tbody>
+            
+      
+        {yun:}if !empty($rows){/yun}
+        <tr> <th width="15">&nbsp;</th >
+              <th scope="col" ><span>发件人</span></th>
+              <th scope="col"><span>内容</span></th>
+              <th scope="col" ><span>时间</span></th>
+              <th scope="col">操作</th>
+            </tr>
+        
+          {yun:}/if{/yun}
+      
+          {yun:}foreach item=all from=$rows{/yun}
+            <tr> <td width="15"><input type="checkbox" name="delid[]" value="{yun:}$all.id{/yun}" class=""></td>
+              <td scope="col" ><span class="sysnews">管理员</span></td>
+              <td scope="col" {yun:}if $item.remind_status==0{/yun}style="font-weight:bold"{yun:}/if{/yun}>{yun:}$all.content|mb_substr:0:50:'utf-8'{/yun}</td>
+              <td scope="col" >{yun:}$all.ctime|date_format:'%Y-%m-%d %H:%M:%S'{/yun}</td>
+              <td scope="col" align="center"><a href="javascript:void(0)" onclick="showsys('{yun:}$all.content{/yun}','{yun:}$all.id{/yun}','{yun:}$all.ctime|date_format:'%Y-%m-%d %H:%M:%S'{/yun}'); "> 查看</a> 
+              <span class="del_span">|</span>
+			  <a href="javascript:void(0)" onclick="layer_del('确定要删除？', 'index.php?c=sysnews&act=del&id={yun:}$all.id{/yun}');">删除</a> </td>
+            </tr>
+            
+         
+        {yun:}foreachelse{/yun}
+		 <tr>
+                <td colspan="6" class="lt_m_table_end">	<div class="member_no_content"> 暂无系统消息！</div></td>
+            </tr>
+        {yun:}/foreach{/yun}
+         
+          {yun:}if !empty($rows){/yun}
+         <tr>
+                <td colspan="6" class="lt_m_table_end"> <div class="m_browse_del" style="width:905px;">
+        <input id='checkAll'  type="checkbox" onclick='m_checkAll(this.form)' class="m_del_che">
+          全选<a href="javascript:void(0);" onclick="return really('delid[]');">批量删除</a> </div>
+          {yun:}/if{/yun}
+            <div class="pages">{yun:}$pagenav{/yun}</div>
+      </td>
+            </tr>
+        </form>
+    </tbody>
+          </table>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div id="show" style="display:none;width:100%;">
+	<div class="sysnews_tcbox">
+	<div class="sysnews_tcbox_list"><i class="sysnews_tcbox_list_s">时间：</i><span id="systime"></span></div>
+	<div class="sysnews_tcbox_list"><i class="sysnews_tcbox_list_s">内容：</i><div class="sysnews_tcbox_list_p"><span id="sysshow"></span></div></div>
+	</div>
+	<div class="sys_bot">
+	<a class="sys_bot_del" href="javascript:void(0)" id="delsys"> 删除</a>
+    <a class="sys_bot_qx" href="javascript:void(0)" onclick="window.location.reload();" class="cblue">返回</a>
+	</div>
+</div>
+<!--内容结束--> 
+<style>.layui-layer-setwin{display:none}</style>
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

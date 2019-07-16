@@ -1,0 +1,30 @@
+{yun:}include file="$wapstyle/member/header.htm"{/yun} 
+<script src="{yun:}$wap_style{/yun}/js/rewardpay.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+
+<div class="wap_member_comp_h1"><span>申请仲裁</span></div> 
+
+<div class="wap_member_Receive">
+
+       <div class="com_box_yq" id='job_box' >
+       <div style="background:#fff;">
+          <form name="pay"  action="index.php?c=arb" method="post" onsubmit="return arb_form();">
+		 <dl class="resume-cont_wate_list">
+          <dt> <span class="city_01">资料凭证：</span></dt>
+			<dd> <input type="file" name="arbpic"></dd>
+        </dl>
+		 <dl class="resume-cont_wate_list">
+          <dt> <span class="city_01">仲裁原因：</span></dt>
+			<dd><textarea id="content" name="content" cols="40" rows="5" class="jobpark_zc_conttextarea"></textarea></dd>
+        </dl>
+       
+      <dl class="resume-cont_wate_list"> 
+        <dd>
+		<input type="hidden" name="rewardid" id="rewardid" value="{yun:}$smarty.get.rewardid{/yun}">
+		<input class="reinputText2" type="submit" value="申请仲裁"  ></dd>
+    </dl>
+	</form>
+   </div>
+ </div>
+</div> 
+</div> </div>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

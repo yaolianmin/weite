@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>会员服务</title>
+	<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/css.css?v={yun:}$config.cachecode{/yun}" type="text/css" />
+	<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css" /> 
+</head>
+<body>
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+{yun:}include file="$lietoustyle/header.htm"{/yun}
+<!--内容部分content-->
+<div class="m_content">
+	<div class="wrap">
+		{yun:}include file="$lietoustyle/left.htm"{/yun}
+		<iframe id="fdingdan"  name="fdingdan" onload="returnmessage('fdingdan');" style="display:none"></iframe>
+		<div class="m_inner_youb fr">
+            <div class="report_uaer_list fl">
+            <ul>
+			    <li><a href="index.php?c=right" >套餐会员</a></li>
+                <li><a href="index.php?c=right&act=time" >时间会员</a></li> 
+ 			    <li class="report_uaer_list_cur"><a href="index.php?c=right&act=added" >增值包</a></li> 
+             </ul>
+			
+		</div>
+              <div class="clear"></div>
+              
+			<div class="package_box">
+				<div class="search_con fl" style="padding-left:30px;">
+					<div class="value_added_box "> 
+						<div class="value_added_left ">  
+							<ul>
+								{yun:}foreach from=$rows item=v key=key{/yun}
+									<li {yun:}if $smarty.get.id==$v.id||($smarty.get.id==''&&$key<1){/yun}class="value_added_cur"{yun:}/if{/yun}>
+										<a href="index.php?c=right&act=added&id={yun:}$v.id{/yun}">{yun:}$v.name{/yun}</a>
+										<i class="Value_added_bg"></i>
+									</li>
+								{yun:}/foreach{/yun}
+							</ul>
+						</div>
+						
+						<div class="value_added_right"> 
+							{yun:}foreach from=$info key=key item=list{/yun}
+								<div class="value_added_right_list fl">
+									<div class="value_added_right_c fl"> 
+										<div class=""> 
+											服务价格：<em>{yun:}$list.service_price{/yun}</em>元
+											<span class="value_added_right_c_hy">
+												会员价格：
+												<em>
+												{yun:}if $discount.service_discount{/yun} 
+													{yun:}$list.service_price*$discount.service_discount*0.01{/yun} 
+												{yun:}else{/yun}
+													{yun:}$list.service_price{/yun}
+												{yun:}/if{/yun}
+												</em>元
+											</span>
+										</div>
+										可发布职位数：<em>{yun:}$list.lt_job_num{/yun}</em>份
+										可下载简历数：<em>{yun:}$list.resume{/yun}</em>份+
+										刷新职位数：<em>{yun:}$list.lt_breakjob_num{/yun}</em>份
+									</div>
+									
+									
+										
+										{yun:}if $statis.rating_type!=2{/yun}
+										<div class="value_added_right_bth fr">
+											<form name="alipayment" target="fdingdan" action="index.php?c=pay&act=dingdan" method="post" id='myform{yun:}$list.id{/yun}' >
+												<input type="hidden" value="{yun:}$list.id{/yun}" name="comservice" />
+													<div class="com_limit_vip fl">
+														<a href="javascript:buyvip('{yun:}$list.id{/yun}');">立即购买</a>
+													</div>
+											</form>
+										</div>
+										{yun:}else{/yun}
+											<span style="float:right; margin-right: 15px; transform: translateY(150%);">
+											时间会员无需购买
+											</span>
+										{yun:}/if{/yun}
+									
+								</div>
+							{yun:}foreachelse{/yun}
+								<div class="member_no_content">您还没有增值服务包信息!</div>
+							{yun:}/foreach{/yun}  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>  
+	</div>
+</div>
+<div class="clear"></div>
+<script>
+function buyvip(id){
+	$('#myform'+id).submit();
+}
+</script>
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

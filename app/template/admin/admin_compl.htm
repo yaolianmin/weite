@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="js/show_pub.js?v={yun:}$config.cachecode{/yun}"></script>
+<title>后台管理</title>
+<script type="text/javascript">
+function showbox(title,msg){
+	var pytoken=$("#pytoken").val();
+	$.post("index.php?m=com_pl&c=show",{id:msg,pytoken:pytoken},function(data){
+		data=eval('('+data+')');
+		$('#showboxmsg').html(data.content);
+		$.layer({
+			type : 1,
+			title :title, 
+			closeBtn : [0 , true],
+			border : [10 , 0.3 , '#000', true],
+			area : ['350px','240px'],
+			page : {dom :"#showbox"}
+		});
+	});
+}
+</script>
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+</head>
+<body class="body_ifm">
+<div class="infoboxp">
+  <div class="admin_new_tip">
+  <a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+    <div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+    <div class="admin_new_tip_list_cont">
+      <div class="admin_new_tip_list">该页面展示了网站所有的公司面试评价信息，可对公司面试评价进行审核删除操作。</div>
+      <div class="admin_new_tip_list">可输入名称关键字进行搜索，也可进行详细的高级搜索。</div>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="admin_new_search_box">
+    <form action="index.php" name="myform" method="get">
+      <input type="hidden" name="m" value="com_pl"/>
+      <div class="admin_new_search_name">搜索类型：</div>
+      <div class="admin_Filter_text formselect" did="dtype">
+        <input type="button" {yun:}if $smarty.get.type==''||$smarty.get.type=='1'{/yun} value="评论人"  {yun:}elseif $smarty.get.type=='2'{/yun} value="公司名称" {yun:}elseif $smarty.get.type=='3'{/yun} value="面试过程" {yun:}elseif $smarty.get.type=='4'{/yun} value="回复内容" {yun:}/if{/yun} class="admin_new_select_text" id="btype">
+        <input type="hidden" name="type" id="type" value="{yun:}if $smarty.get.type{/yun}{yun:}$smarty.get.type{/yun}{yun:}else{/yun}1{yun:}/if{/yun}"/>
+        <div class="admin_Filter_text_box" style="display:none" id="dtype">
+          <ul>
+            <li><a href="javascript:void(0);" onClick="formselect('1','type','评论人')">评论人</a></li>
+            <li><a href="javascript:void(0);" onClick="formselect('2','type','公司名称')">公司名称</a></li>
+            <li><a href="javascript:void(0);" onClick="formselect('3','type','面试过程')">面试过程</a></li>
+          </ul>
+        </div>
+      </div>
+      <input type="text" value="" placeholder="请输入你要搜索的关键字" name='keyword'class="admin_new_text">
+      <input type="submit" value="搜索" name='search'  class="admin_new_bth">
+      <a  href="javascript:void(0)" onclick="$('.admin_screenlist_box').toggle();"   class="admin_new_search_gj">高级搜索</a>
+    </form>
+    {yun:}include file="admin/admin_search.htm"{/yun} </div>
+  <div class="clear"></div>
+  <div class="table-list">
+    <div class="admin_table_border">
+      <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+      <form action="index.php?m=com_pl&c=del" name="myform" target="supportiframe" id='myform' method="post">
+        <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}">
+        <table width="100%">
+          <thead>
+            <tr class="admin_table_top">
+              <th style="width:20px;"><label for="chkall">
+                  <input type="checkbox" id='chkAll'  onclick='CheckAll(this.form)'/>
+                </label></th>
+              <th width="60" > {yun:}if $smarty.get.order=="asc"{/yun} <a href="{yun:}searchurl order=desc t=id m=com_pl untype='order,t'{/yun}">编号<img src="images/sanj.jpg"/></a> {yun:}else{/yun} <a href="{yun:}searchurl order=asc t=id m=com_pl untype='order,t'{/yun}">编号<img src="images/sanj2.jpg"/></a> {yun:}/if{/yun} </th>
+              <th align="left" width="100">评论人</th>
+              <th align="left">公司名称</th>
+              <th align="left">描述评分</th>
+              <th align="left">面试官评分</th>
+              <th align="left">环境评分</th>
+              <th align="left">面试过程</th>
+              <th align="left" width="130" >评论/回复时间</th>
+              <th align="center" >操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+          {yun:}foreach item=v from=$mes_list{/yun}
+          <tr align="center" id="list{yun:}$v.id{/yun}">
+            <td><input type="checkbox" value="{yun:}$v.id{/yun}"  name='del[]' onclick='unselectall()' rel="del_chk" /></td>
+            <td align="left" width="60" class="td1" style="text-align:center;"><span>{yun:}$v.id{/yun}</span></td>
+            <td align="left" width="100">{yun:}$v.username{/yun}</td>
+            <td align="left" width="250">{yun:}$v.com_name{/yun}</td>
+            <td align="left" width="100">{yun:}$v.desscore{/yun}</td>
+            <td align="left" width="100">{yun:}$v.hrscore{/yun}</td>
+            <td align="left" width="100">{yun:}$v.comscore{/yun}</td>
+            <td align="left" width="200"> {yun:}if $v.content{/yun} 
+              
+              {yun:}$v.content|mb_substr:0:45:"utf-8"{/yun}
+              {yun:}if strlen($v.content)>45{/yun} <a href="javascript:void(0);" onclick="showbox('评论内容','{yun:}$v.id{/yun}')" class="admin_cz_sc">[更多]</a> {yun:}/if{/yun}
+              {yun:}/if{/yun} </td>
+            <td align="left" width="120">{yun:}$v.ctime|date_format:"%Y-%m-%d %H:%M"{/yun}</br>
+              {yun:}$v.reply_time|date_format:"%Y-%m-%d %H:%M"{/yun}</td>
+            <td ><span onClick="showpl('houtai_div','{yun:}$v.id{/yun}')" class="admin_new_c_bth admin_new_c_bth_yl" style="cursor:pointer;">详情</span>
+            <div class="mt5"><a href="javascript:void(0)" onClick="layer_del('确定要删除？', 'index.php?m=com_pl&c=del&id={yun:}$v.id{/yun}');" class="admin_new_c_bth admin_new_c_bth_sc">删除</a></div></td>
+          </tr>
+          {yun:}/foreach{/yun}
+          <tr style="background:#f1f1f1;">
+            <td align="center"><input type="checkbox" id='chkAll2' onclick='CheckAll2(this.form)' /></td>
+            <td colspan="2" ><label for="chkAll2">全选</label>
+              &nbsp;
+              <input class="admin_button" type="button" name="delsub" value="删除所选" onClick="return really('del[]')" /></td>
+            <td colspan="10" class="digg">{yun:}$pagenav{/yun}</td>
+          </tr>
+            </tbody>
+          
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="houtai_div" style="display:none;width:400px">
+  <table class="table_form "  id="infobox" style="width:100%">
+    <tr>
+      <td>面试过程：</td>
+      <td><textarea name="beizhu" id="beizhu" class="web_compl_textarea" class="text" readonly>
+        </textarea></td>
+    </tr>
+    <tr>
+      <td>其他评论：</td>
+      <td><textarea name="beizhu" id="other" class="web_compl_textarea" class="text" readonly>
+        </textarea></td>
+    </tr>
+    <tr>
+      <td>企业回复：</td>
+      <td><textarea name="reply" id="reply"  class="web_compl_textarea"class="text" readonly>
+        </textarea></td>
+    </tr>
+  </table>
+</div>
+<div id="showbox"  style="display:none; width: 340px; overflow:hidden ">
+  <div id="showboxmsg" style="width:320px; padding:10px;height:150px; line-height:25px; font-size:14px; overflow:auto"> </div>
+</div>
+<script type="text/javascript">
+function showpl(div,id){ 
+	var pytoken=$("#pytoken").val();
+	$.post("index.php?m=com_pl&c=show",{id:id,pytoken:pytoken},function(data){
+		data=eval('('+data+')');
+		$("#beizhu").html(data.content);
+		$("#other").html(data.othercontent);
+		$("#reply").html(data.reply);
+		$.layer({
+			type : 1,
+			title :'面试评价', 
+			offset: [($(window).height() - 310)/2 + 'px', ''],
+			closeBtn : [0 , true],
+			border : [10 , 0.3 , '#000', true],
+			area : ['420px','360px'],
+			page : {dom :"#"+div}
+		}); 
+	});
+}
+</script>
+</body>
+</html>

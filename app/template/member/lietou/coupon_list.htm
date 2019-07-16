@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<!--内容部分content-->
+<div class="m_content">
+  <div class="wrap">
+{yun:}include file="$lietoustyle/left.htm"{/yun}
+      <div class="m_inner_youb fr">
+        <div class="m_s_browse">
+        {yun:}if !empty($rows){/yun}
+          <div class="m_browse_list">
+            <ul>
+              <li class="w90">优惠码</li>
+              <li class="w160">优惠券名称</li>
+              <li class="w90">金额</li>
+              <li class="w146">使用条件</li>
+              <li class="w90">获赠时间</li>
+              <li class="w90">到期时间</li>
+              <li class="w90">消费时间</li>
+              <li class="w90">状态</li>
+            </ul>
+            <div class="clear"></div>
+          </div>
+          {yun:}/if{/yun}
+          <div class="m_browse_cont">
+          {yun:}foreach from=$rows item=v{/yun}
+            <ul>
+              <li class="w90">{yun:}$v.number{/yun}</li>
+              <li class="w160">{yun:}$v.coupon_name{/yun}</li>
+              <li class="w90">{yun:}$v.coupon_amount{/yun}元</li>
+              <li class="w146">消费{yun:}$v.coupon_scope{/yun}元</li>
+              <li class="w90">{yun:}$v.ctime|date_format:"%Y-%m-%d"{/yun}</li>
+              <li class="w90">{yun:}$v.validity|date_format:"%Y-%m-%d"{/yun}</li>
+              <li class="w90">&nbsp;
+              {yun:}if $v.xf_time|date_format:"%Y-%d-%d"{/yun}
+              {yun:}$v.xf_time|date_format:"%Y-%m-%d"{/yun}
+              {yun:}else{/yun}
+              未使用
+              {yun:}/if{/yun}</li>
+              <li class="w90">{yun:}if $v.status==1{/yun}<font color="blue">未消费</font>{yun:}elseif $v.status==2{/yun}<font color="green">已消费</font>{yun:}else{/yun}<font color="red">已到期</font>{yun:}/if{/yun}</li>
+            </ul>
+            
+            {yun:}foreachelse{/yun}
+            <div class="member_no_content">您还没有优惠券。</div>
+            {yun:}/foreach{/yun}
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

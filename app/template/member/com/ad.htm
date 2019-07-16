@@ -1,0 +1,42 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody">
+{yun:}include file="$comstyle/left.htm"{/yun} 
+<div class=right_box>
+
+<div id="grow_freedom" class="grow_mod_wrap my_freedom">
+<div class=admincont_box>
+    <div class="com_tit"><span class="com_tit_span"> 广告位购买</span></div>
+      <div class="com_body">
+<div class="clear"></div>
+<div class="my_pay_table">
+<table id="vip_funtion" class="my_table" align="center"  cellpadding="1" cellspacing="1" style="margin-top:10px;">
+<thead>
+<tr id="m1">
+<th class="my_table_th_bg">广告位类别</th>
+<th class="my_table_th_bg">投放位置</th>
+<th class="my_table_th_bg">{yun:}$config.integral_pricename{/yun}购买</th>
+<th class="my_table_th_bg">购买</th>
+</tr>
+</thead>
+<tbody>
+{yun:}foreach item=v from=$rows{/yun}
+<tr id="m2">
+<th style="text-align:left;">{yun:}$v.class_name{/yun}</th>
+<td><a href="{yun:}$v.href{/yun}" target="_blank" class="cblue">查看</a></td>
+<td><span class="ad_but_btn_n">{yun:}$v.integral_buy{/yun}</span> {yun:}$config.integral_priceunit{/yun}/ 月</td>
+<td><a href="index.php?c=ad&act=adinfo&id={yun:}$v.id{/yun}" class="ad_but_btn">购买</a></td>
+</tr>
+{yun:}/foreach{/yun}
+</tbody>
+</table>
+<div class="clear"></div>
+<div class="my_pay_table_l_bg"></div>
+<div class="my_pay_table_r_bg"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+{yun:}include file="$comstyle/footer.htm"{/yun}

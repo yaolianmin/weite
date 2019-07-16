@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun} 
+<script type="text/javascript" src="{yun:}$config.sy_weburl{/yun}/js/member_public.js?v={yun:}$config.cachecode{/yun}"></script>
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<div class="m_content">
+  <div class="wrap my_rebates">
+    {yun:}include file="$lietoustyle/left.htm"{/yun}
+   			<div class="m_inner_youb fr">
+       <div class="lt_m_tit"><span class="lt_m_tit_s">悬赏申请</span></div>
+<div class="resume_box_list">
+           <div  class="resume_Prompt_box"><div  class="resume_Prompt"><i class="resume_Prompt_icon"></i>温馨提示：招聘企业无权收取任何费用，求职中请加强自我保护，避免上当受骗！</div></div>
+   
+        
+		
+         
+         <div class="m_xs fl">
+              <ul>
+                  <li {yun:}if !$smarty.get.state{/yun}class="m_xs_cur"{yun:}/if{/yun}><a href="index.php?c=jobpack">全部</a></li>
+                   
+					{yun:}foreach from=$StateList item=one{/yun}
+					 <li  {yun:}if $smarty.get.state==$one.id{/yun}class="m_xs_cur"{yun:}/if{/yun}> <a href="index.php?c=jobpack&state={yun:}$one.id{/yun}">{yun:}$one.name{/yun}</a></li>
+					{yun:}/foreach{/yun}
+			  </ul>
+         </div>
+		  {yun:}foreach item=v key=key from=$rows{/yun}
+           <div class="sq_jobpack">
+      <div class="sq_jobpack_top"><a href="{yun:}url m=job c=comapply id='`$v.jobid`'{/yun}" target="_blank" class="sq_jobpack_jobname_a">{yun:}$v.name{/yun}</a>
+        <div class="sq_jobpack_time">申请日期：{yun:}$v.datetime|date_format:"%Y-%m-%d"{/yun}</div>
+      </div>
+       <div class="jobrewardiog_info"><span class="jobrewardiog_job_l">{yun:}$v.uname{/yun}</span><span class="jobrewardiog_job_l">意向岗位：<font color="#dd5a43">{yun:}$v.jobclass{/yun}</font></span><span class="jobrewardiog_info_line">|</span>{yun:}$v.exp{/yun}经验<span class="jobrewardiog_info_line">|</span>{yun:}$v.edu{/yun}学历<span class="jobrewardiog_info_line">|</span>手机：{yun:}$v.linktel{/yun}
+       </div>
+      <div class="sq_jobpack_left">
+        <div class="reward_hb_box">
+          <div class="reward_hb_list"> <i class="reward_hb_list_line"></i> <span class="reward_hb_fonttd">￥{yun:}$v.money{/yun}</span>
+            <div class="reward_hb_list_P">总赏金</div>
+          </div>
+          <div class="reward_hb_list"> <i class="reward_hb_list_line"></i> <span class="reward_hb_fonttd">￥{yun:}$v.sqmoney{/yun}</span>
+            <div class="reward_hb_list_P">投递简历</div>
+          </div>
+          <div class="reward_hb_list"> <i class="reward_hb_list_line"></i> <span class="reward_hb_fontms">￥{yun:}$v.invitemoney{/yun}</span>
+            <div class="reward_hb_list_P">面试职位</div>
+          </div>
+          <div class="reward_hb_list"><span class="reward_hb_fontrz">￥{yun:}$v.offermoney{/yun}</span>
+            <div class="reward_hb_list_P">入职成功</div>
+          </div>
+        </div>
+        <div class="sq_jobpack_zt"> <span class="sq_jobpack_zt_c">状态：{yun:}$v.log.nowmsg{/yun}</span> {yun:}if $v.log.loglist{/yun} <span class="sq_jobpack_zt_sq" data-id='{yun:}$v.id{/yun}'> </span> {yun:}/if{/yun} </div>
+      </div>
+      <div class="sq_jobpack_right"> {yun:}foreach from= $v.log.input item=inputv{/yun} <a class="sq_jobpack_right_a" href="javascript:void(0);" onclick="getStatus('{yun:}$v.id{/yun}','{yun:}$inputv.status{/yun}');">{yun:}$inputv.name{/yun}</a> {yun:}/foreach{/yun} </div>
+      <div class="sq_jobpack_zt_list  show{yun:}$v.id{/yun}" style="display:none"> {yun:}if $v.log.loglist{/yun}
+        <ul class="">
+          {yun:}foreach from=$v.log.loglist item=linfo{/yun}
+          <li class="m_xs_pr_f_cur"> <span class="m_xs_pr_f_icon"><i class="m_xs_pr_f_icon_c"></i></span>
+            <div class="jobrewardlog_box">{yun:}$linfo.info{/yun}</div>
+            <div class="jobrewardlog_time"> {yun:}$linfo.time|date_format:"%Y-%m-%d %H:%M"{/yun} </div>
+          </li>
+          {yun:}/foreach{/yun}
+        </ul>
+        {yun:}/if{/yun}
+        {yun:}if $v.log.endmsg{/yun}
+        <ul>
+          <li><span class="m_xs_pr_f_icon"><i class="m_xs_pr_f_icon_c m_xs_pr_f_icon_c_f60"></i></span><font color="#FF6600">{yun:}$v.log.endmsg{/yun}</font></li>
+        </ul>
+        {yun:}/if{/yun} 
+        
+        <!----操作记录END----> 
+        
+      </div>
+    </div>
+  
+				
+
+				</div>   </div>
+			  {yun:}foreachelse{/yun}
+				
+                    <div class="member_no_content">
+                    <p>您还未推荐过简历</p>
+                <div class="lt_src ">   <a href="{yun:}url m=reward{/yun}" target="_blank">立即搜索赏金职位</a></div></div>
+             
+         
+			{yun:}/foreach{/yun}
+
+
+
+
+
+
+            <div class="clear"></div>
+            <div class="diggg">{yun:}$pagenav{/yun}</div>
+        </div>
+       </div>
+</div>
+<script src="{yun:}$config.sy_weburl{/yun}/js/rewardpay.js?v={yun:}$config.cachecode{/yun}" type="text/javascript"></script> 
+<!----申请仲裁--->
+<div id='job_box' style="display:none;float:left">
+  <div class="jobpark_zc_cont">
+    <form name="alipayment" action="index.php?c=jobpack&act=arb" method="post"  target="supportiframe" encType="multipart/form-data">
+
+    <dl><dt>资料凭证：</dt><dd>
+		<button type="button" class="layui-btn layui-btn-normal" id="noupload">选择文件</button>
+		<input type="hidden" id="laynoupload" value="1"/>
+	</dd></dl>
+    <dl><dt>仲裁原因：</dt><dd> <textarea id="content" name='content' cols="40" rows="5" class="jobpark_zc_conttextarea"></textarea></dd></dl>
+    <dl><dt>&nbsp;</dt><dd>
+		<input  type="hidden" name='rewardid' id='rewardid' value="">
+        <input class="jobpark_zc_bth" type="submit" value="申请仲裁"></dd></dl>
+    </form>
+  </div>
+</div>
+<script>
+$(function(){
+$('.sq_jobpack_zt_sq').click(function(){
+	var showid = $(this).attr('data-id');
+	
+	$('.show'+showid).toggle()
+});
+
+})
+</script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui.upload.js?v={yun:}$config.cachecode{/yun}" type='text/javascript'></script>
+{yun:}include file="$lietoustyle/footer.htm"{/yun} 

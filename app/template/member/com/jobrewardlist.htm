@@ -1,0 +1,114 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <div class=right_box>
+    <div class=admincont_box>
+<div class="yun_com_tit"><span class="yun_com_tit_s">赏金推广职位</span></div>
+        <div class="job_list_tit">
+         <ul class="">
+         <li {yun:}if !$smarty.get.t{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=jobpack">分享职位</a></li>
+         <li {yun:}if $smarty.get.t=="r"{/yun} class="job_list_tit_cur"{yun:}/if{/yun}><a href="index.php?c=jobpack&t=r">悬赏职位</a></li>
+         </ul>
+         </div> <div class="clear"></div>
+   <div class="com_body">
+       
+        <div class="com_Release_job">
+         <div class="clear"></div>
+         <div class="joblist_search">
+      </div>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php?c=job&act=opera" target="supportiframe" method="post" id='myform'>
+            {yun:}foreach item=job from=$rows{/yun}
+            
+            
+            <div class="jobshrelist_box">
+              <div class="job_shrelist_box">
+              <div class="job_shrelist_top">
+              <a href="{yun:}url m=job c=comapply id='`$job.jobid`'{/yun}" class="job_list_sj_time_jobname" target="_blank">{yun:}$job.name{/yun}</a>
+              
+                <span  class="job_shrelist_time">更新时间：{yun:}$job.lastupdate|date_format:'%Y-%m-%d'{/yun}</span>
+                </div>
+              
+               <div class="jobshrelist_sj jobshrelist_sj_yp">
+               <i class="job_list_sj_icon"></i>
+               <div class="jobshrelist_sj_n"> {yun:}$job.sqnum{/yun}</div>
+               <div class="jobshrelist_sj_name"><a href="index.php?c=jobpack&act=rewardlog&jobid={yun:}$job.jobid{/yun}" style="color:#f60; text-decoration:underline;">应聘简历</a></div>   
+   
+               </div>
+               
+               <div class="jobshrelist_sj jobshrelist_sj_td">
+               <i class="job_list_sj_icon"></i>
+               <div class="jobshrelist_sj_n">{yun:}$job.sqmoney{/yun}</div>
+               <div class="jobshrelist_sj_name">投递</div>   
+               </div>
+               
+              <div class="jobshrelist_sj jobshrelist_sj_ms">
+              <i class="job_list_sj_icon"></i>
+              <div class="jobshrelist_sj_n">{yun:}$job.invitemoney{/yun}</div>
+               <div class="jobshrelist_sj_name">面试</div> 
+               </div>
+              
+              <div class="jobshrelist_sj jobshrelist_sj_rz">
+              <i class="job_list_sj_icon"></i>
+              <div class="jobshrelist_sj_n">{yun:}$job.offermoney{/yun}</div>
+              <div class="jobshrelist_sj_name">入职</div> 
+              </div>
+                <div class="jobshrelist_czs">
+   
+                	<a href="index.php?c=jobadd&act=edit&id={yun:}$job.jobid{/yun}" class="jobshrelist_cz_xg">修改</a>
+					<a href="javascript:void(0);" onclick="layer_del('确定取消职位悬赏？','index.php?c=jobpack&act=delreward&id={yun:}$job.jobid{/yun}');" class="jobshrelist_cz_xg">取消</a>
+						<a href="{yun:}url m=job c=comapply id='`$job.jobid`'{/yun}" target="_blank" title="预览">预览</a> 
+                        
+                 </div>
+                     
+             
+                  
+                 </div>   
+                   
+          
+              
+              
+
+                           
+             
+             
+              
+              
+              
+              
+
+           </div>
+            {yun:}foreachelse{/yun}
+            <div class="com_msg_no">
+                 <p>亲爱的用户，目前您还没有赏金推广职位</p>
+            </div>   
+            {yun:}/foreach{/yun} 
+            {yun:}if !empty($rows){/yun}
+            {yun:}/if{/yun}
+          </form>
+        </div>
+        <div  class="clear"></div>
+        <div class="diggg">{yun:}$pagenav{/yun}</div>
+        <div  class="clear"></div>
+        <div  class="clear"></div>
+        <div class="wxts_box wxts_box_mt30">
+        <div class="wxts">温馨提示：</div>
+        1.发布赏金职位能更有效的吸引求职者投递简历<br>
+2.投递、面试、入职三项赏金模式至少设置一项即可，如：您只想提高投递量，则可以单独设置投递赏金，如：您发布的职位为中高端职位，可全部设置，赏金越丰厚吸引力越强<br>
+3：赏金职位除首页、职位搜索重点展示外，另有单独模块独立展示，展示区域更广，效果更强<br>
+重点说明：<br>
+1：按需付费：赏金职位无需预付款，求职者投递后，企业自主选择查看某份简历（预先展示简历学历、工作经验等主体信息），确定查看某份简历时支付相应赏金即可，不占用企业资金<br>
+2：资金明确：赏金发放记录明晰，每份赏金都必须企业确认后才会发放，企业若长时间停滞不进行下一步流程确认，系统才会根据个人申请自动判断是否发放赏金<br>
+3：流程严控：为防止赏金流程因为某一方原因出现停滞，系统会自动根据预定期限进行判断，个人预定期限内未回应状态下，企业可取消赏单，剩余赏金将会自动归还至企业赏金账户，企业可自主提现
+        </div>
+      </div>
+      </div>
+          
+      </div>
+    </div>
+  </div> 
+<script>
+
+</script> 
+
+ {yun:}include file="$comstyle/footer.htm"{/yun}

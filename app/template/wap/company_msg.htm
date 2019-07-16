@@ -1,0 +1,80 @@
+{yun:}include file="$wapstyle/header_cont.htm"{/yun}
+
+
+<section>
+  <div class=" mt10">
+    <div class="user_contnet_box ">
+
+
+{yun:}score uid=$row.uid item=score{/yun}
+		{yun:}if $score.num{/yun}
+              <div class="wap_title"><span class="">面试评价</span></div>
+
+        <div class="evaluate">
+        <div class="evaluate_pf_otherbox evaluate_pf_otherbox_bor">
+           <div class="evaluate_pf_left">
+           <div class="evaluate_pf_left_tit">综合评分<span class="evaluate_pf_left_tit_n">( 来自{yun:}$score.num{/yun}人评价 )</span></div>
+          <div class="evaluate_pf_other">
+         <div class="evaluate_pf_other_name">描述相符：</div>
+        <div class="evaluate_pf_other_start"><div class="evaluate_pf_other_startbox"  style="width:{yun:}$score.desscore/5*100{/yun}%"><i class="evaluate_pf_other_start_p"></i></div></div>
+        <div class="evaluate_pf_other_fs">{yun:}$score.desscore{/yun}</div>
+          </div>
+           <div class="evaluate_pf_other">
+         <div class="evaluate_pf_other_name">面试官：</div>
+        <div class="evaluate_pf_other_start"><div class="evaluate_pf_other_startbox"   style="width:{yun:}$score.hrscore/5*100{/yun}%"><i class="evaluate_pf_other_start_p"></i></div></div>
+          <div class="evaluate_pf_other_fs">{yun:}$score.hrscore{/yun}</div>
+          </div>
+                <div class="evaluate_pf_other">
+        <div class="evaluate_pf_other_name"> 公司环境：</div>
+        <div class="evaluate_pf_other_start"><div class="evaluate_pf_other_startbox" style="width:{yun:}$score.comscore/5*100{/yun}%" ><i class="evaluate_pf_other_start_p"></i></div></div>
+          <div class="evaluate_pf_other_fs">{yun:}$score.comscore{/yun}</div>
+          </div>
+          </div>
+          
+            <div class="evaluate_pf_right">
+             <div class="evaluate_pf_right_name">综合</div><span class="evaluate_pf_right_fs">{yun:}$score.score{/yun}</span>
+            分
+            </div>
+            
+            </div>
+        
+        <!-- 循环star-->
+		{yun:}commsg limit=5 id='auto.id' item=mlist{/yun}
+         <div class="evaluate_userlist">
+         <div class="evaluate_username">
+         <div class="evaluate_userphoto"><img src="{yun:}$mlist.photo{/yun}"onerror="showImgDelay(this,'{yun:}$config.sy_weburl{/yun}/{yun:}$config.sy_member_icon{/yun}',2);"><div class="evaluate_photouser_bg"></div></div>
+         <div class="evaluate_username_u">{yun:}$mlist.name{/yun}</div></div>
+         <div class="evaluate_user_pf">
+         <div class="evaluate_ms_box">
+         <div class="evaluate_pf_userzh">
+         <div class="evaluate_pf_userzh_l">综合评分：</div>
+        <div class="evaluate_pf_other_start"><div class="evaluate_pf_other_startbox" style="width:{yun:}$mlist.score*20{/yun}%"><i class="evaluate_pf_other_start_p"></i></div></div>
+          <div class="evaluate_pf_other_fs">{yun:}$mlist.score{/yun}</div>
+          </div>
+          <div class="evaluate_pf_job">面试职位：{yun:}if $mlist.jobname{/yun}<a href="{yun:}url m=job c=comapply id=$mlist.jobid{/yun}">{yun:}$mlist.jobname{/yun}</a>{yun:}else{/yun}职位已下架{yun:}/if{/yun}</div>
+       <div class="evaluate_date">{yun:}$mlist.ctime|date_format:"%Y-%m-%d"{/yun}</div>
+        </div>
+        <div class="evaluate_tag">
+        {yun:}foreach from=$mlist.tags item=v{/yun}
+        <span class="evaluate_tag_s">{yun:}$v{/yun}</span>
+		{yun:}/foreach{/yun}
+        </div>
+        <div class="evaluate_pj_box">
+        <div class="evaluate_pj">[面试过程] {yun:}$mlist.content{/yun}</div>
+        <div class="evaluate_pj">[其他评价] {yun:}$mlist.othercontent{/yun}</div>
+        </div>
+          </div>
+        </div> 
+		
+		{yun:}/commsg{/yun}
+         <!-- 循环end-->
+  {yun:}if $pagenav{/yun}<div class="pages">{yun:}$pagenav{/yun}</div>{yun:}/if{/yun}
+              </div>
+         {yun:}/if{/yun}
+          
+       </div>
+          </div>
+       </div>
+</section>    
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+{yun:}include file="$wapstyle/footer.htm"{/yun} 

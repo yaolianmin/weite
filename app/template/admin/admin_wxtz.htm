@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="images/reset.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/system.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<link href="images/table_form.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet" type="text/css" />
+<script src="{yun:}$config.sy_weburl{/yun}/js/jquery-1.8.0.min.js?v={yun:}$config.cachecode{/yun}"></script>
+<script src="js/admin_public.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<link href="{yun:}$config.sy_weburl{/yun}/js/layui/css/layui.css?v={yun:}$config.cachecode{/yun}" rel="stylesheet">
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/layui.js?v={yun:}$config.cachecode{/yun}" language="javascript"></script>
+<script src="{yun:}$config.sy_weburl{/yun}/js/layui/phpyun_layer.js?v={yun:}$config.cachecode{/yun}"></script>
+<title>后台管理</title>
+</head>
+<body class="body_ifm">
+<div class="infoboxp"> 
+<div class="admin_new_tip">
+<a href="javascript:;" class="admin_new_tip_close"></a>
+<a href="javascript:;" class="admin_new_tip_open" style="display:none;"></a>
+<div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+<div class="admin_new_tip_list_cont">
+<div class="admin_new_tip_list"><a href="http://www.phpyun.com/bbs/thread-10851-1-1.html" target="_blank">微信消息通知设置教程 <font color="#FF0000">查看教程>></font></a></div>
+</div>
+</div>
+<div class="clear"></div>
+
+<div class="main_tag">
+<div class="tag_box mt10">
+    <div>
+	<iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+             <form name="myform" target="supportiframe" action="index.php?m=wx&c=save" method="post" enctype="multipart/form-data" class="layui-form">
+             <table width="100%" class="table_form">
+                <tbody>
+  <tr class="admin_table_trbg">
+    <th width="160" bgcolor="#f0f6fb"><span class="admin_bold">参数说明</span></th>
+    <td bgcolor="#f0f6fb"><span class="admin_bold">参数值</span></td>   
+  </tr>
+ </tbody>
+		    
+			<tr>
+                <th width="160">微信消息通知：</th>
+                <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                     <div class="layui-input-inline">
+                       <input type="radio" name="wx_xxtz" {yun:}if $config.wx_xxtz!='1'{/yun}checked{yun:}/if{/yun} value='0' id="wx_xxtz_11" title="不通知">
+                       <input type="radio" {yun:}if $config.wx_xxtz=='1'{/yun}checked{yun:}/if{/yun} name="wx_xxtz" value='1' id="wx_xxtz_12" title="通知">
+                     </div>
+                   </div>
+                </div>
+				</td>
+            </tr>
+			 <tr  class="admin_table_trbg">
+                <th width="160">职位申请模板：</th>
+                <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                      <input name="wx_mbsqzw" autocomplete="off" id="wx_mbsqzw" class="layui-input" type="text" value="{yun:}$config.wx_mbsqzw{/yun}"
+                       size="60" maxlength="255"/>
+                    </div>
+                  </div>
+                </div>
+               </td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">职位审核模板：</th>
+                <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                      <input name="wx_mbzwsh" autocomplete="off" id="wx_mbzwsh" class="layui-input" type="text" value="{yun:}$config.wx_mbzwsh{/yun}"
+                       size="60" maxlength="255"/>
+                    </div>
+                  </div>
+                </div>
+                </td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">邀请面试模板：</th>
+                <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                      <input name="wx_mbyqms" autocomplete="off" id="wx_mbyqms" class="layui-input" type="text" value="{yun:}$config.wx_mbyqms{/yun}"
+                       size="60" maxlength="255"/>
+                    </div>
+                  </div>
+                </div>
+               </td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">兼职报名模板：</th>
+                <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                      <input name="wx_mbjzbm" autocomplete="off" id="wx_mbjzbm" class="layui-input" type="text" value="{yun:}$config.wx_mbjzbm{/yun}"
+                       size="60" maxlength="255"/>
+                    </div>
+                  </div>
+                </div>
+                </td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">兼职审核模板：</th>
+                <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                      <input name="wx_mbjzsh" autocomplete="off" id="wx_mbjzsh" class="layui-input" type="text" value="{yun:}$config.wx_mbjzsh{/yun}"
+                       size="60" maxlength="255"/>
+                    </div>
+                  </div>
+                </div>
+                </td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">充值提醒模板：</th>
+                <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                      <input name="wx_mbcztx" autocomplete="off" id="wx_mbcztx" class="layui-input" type="text" value="{yun:}$config.wx_mbcztx{/yun}"
+                       size="60" maxlength="255"/>
+                    </div>
+                  </div>
+                </div>
+                </td>
+            </tr>
+			<tr  class="admin_table_trbg">
+                <th width="160">赏金职位提醒模板：</th>
+                <td>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                      <input name="wx_mbreward" autocomplete="off" id="wx_mbreward" class="layui-input" type="text" value="{yun:}$config.wx_mbreward{/yun}"
+                       size="60" maxlength="255"/>
+                    </div>
+                  </div>
+                </div>
+                </td>
+            </tr>
+            <tr class="admin_table_trbg">
+                <td colspan="2" align="center">
+                <input type="hidden" name="pytoken" id='pytoken' value="{yun:}$pytoken{/yun}"/>	
+                <input class="layui-btn layui-btn-normal" id="wxconfig" type="submit" name="msgconfig" value="提交" />&nbsp;&nbsp;<input class="layui-btn layui-btn-normal" type="reset" value="重置" /></td>
+            </tr>
+        </table>
+		</form>
+    </div>
+</div>
+</div>
+</div>
+<script> 
+layui.use(['layer', 'form'], function(){
+    var layer = layui.layer
+    ,form = layui.form
+    ,$ = layui.$;
+});
+</script>
+</body>
+</html>

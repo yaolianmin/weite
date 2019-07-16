@@ -1,0 +1,99 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+  <div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun} 
+    
+    <div class=right_box>
+    <div class=admincont_box>
+    <div class="com_tit"><span class="com_tit_span">我的发票</span></div>
+   
+ <div class="com_body">
+<div class="admin_new_tip">
+          <div class="admin_new_tit"><i class="admin_new_tit_icon"></i>操作提示</div>
+          <div class="admin_new_tip_list_cont">
+            <div class="admin_new_tip_list">只有您所实际消耗的现金充值金额可开具发票，您提交开票申请后，如信息无误，我们将在5个工作日内开具，请耐心等待  </div>
+          </div>
+        </div>
+ 
+ 
+    <div class=admin_textbox_04>
+    <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+    <form action="{yun:}$now_url{/yun}" target="supportiframe" method="post" id='myform'>
+      <div class=table>        
+      <table class="com_table mt20" id="job_checkbokid">
+        {yun:}if $rows{/yun}
+        
+               <tr>
+                <th>充值单号</th>
+                 <th>发票抬头</th>
+                 <th>联系人</th>
+                  <th>联系电话</th>
+                  <th>邮寄地址</th>
+                     <th> 时间</th>
+                  <th>操作</th>
+              </tr>
+              {yun:}/if{/yun}
+          {yun:}foreach from=$rows item=log{/yun}
+          <tr>
+            <td align="center">{yun:}$log.order_id{/yun}</td>
+              <td align="center">{yun:}$log.title|mb_substr:0:10:'utf-8'{/yun}</td>
+            <td align="center">{yun:}$log.link_man{/yun}</td>
+            <td align="center">{yun:}$log.link_moblie{/yun}</td>
+          <td align="center">{yun:}$log.address{/yun}</td>
+           <td align="center">{yun:}$log.addtime|date_format:'%Y-%m-%d %H:%M:%S'{/yun}</td>
+          <td align="center">
+			{yun:}if $log.status=='0'{/yun}未审核{yun:}elseif $log.status=='1'{/yun}已审核{yun:}elseif $log.status=='2'{/yun}<font color=red>未通过</font><span class="com_m_line">|</span> <a href="javascript:;" onclick="show_msg('{yun:}$log.statusbody{/yun}')">查看原因</a>{yun:}elseif $log.status=='3'{/yun}已打印{yun:}elseif $log.status=='4'{/yun}已邮寄{yun:}/if{/yun}
+			 </td>
+          </tr>
+          {yun:}foreachelse{/yun} 
+           <tr>
+                  <td colspan="7" class="table_end">
+		  <div class="msg_no">您还没有发票列表。</div>]
+          	 </td>
+          </tr>
+          {yun:}/foreach{/yun}
+           <tr>
+            <td colspan="7" class="table_end">
+			<div class="diggg">{yun:}$pagenav{/yun}</div>
+			 </td>
+          </tr>
+        </table>
+       </div>
+ 
+    </form>
+    <div class="clear"></div>
+    
+  </div>
+</div>
+</div>
+</div>
+</div>  
+</div>  
+<script>
+function show_msg(msg){
+	$("#msgs").html(msg);
+	var layindex = $.layer({
+		type : 1,
+		title :'查看原因', 
+		closeBtn : [0 , true],
+		border : [10 , 0.3 , '#000', true],
+		area : ['400px','200px'],
+		page : {dom :"#showmsg"}
+	});
+	$("#layindex").val(layindex);
+}
+</script>
+<div id="showmsg"  style="display:none; width: 400px;">
+  <div>
+    <div id="infobox">
+      <div class="admin_Operating_sh" style="padding:10px; ">
+        <div class="admin_Operating_sh_h1" style="padding:5px;">
+          <div style="height:80px;overflow:auto;" id="msgs"></div>
+        </div>
+        <div class="admin_Operating_sub" style="margin-top:10px;"> &nbsp;&nbsp;
+          <input type="button" onClick="layer.close($('#layindex').val());" class="cancel_btn" value='确认'>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{yun:}include file="$comstyle/footer.htm"{/yun} 

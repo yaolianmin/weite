@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{yun:}include file="$lietoustyle/public.htm"{/yun}
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/jianli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/guanli.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+<link rel="stylesheet" href="{yun:}$lietou_style{/yun}/css/account.css?v={yun:}$config.cachecode{/yun}" type="text/css">
+</head>
+<body>
+{yun:}include file="$lietoustyle/header.htm"{/yun} 
+<!--内容部分content-->
+<div class="m_content">
+	<div class="wrap"> {yun:}include file="$lietoustyle/left.htm"{/yun}
+		<div class="m_inner_youb fr">
+			<div class="report_uaer_list fl">
+				<ul>
+					<li><a href="index.php?c=paymanage">订单管理</a></li>
+					<li class="report_uaer_list_cur"><a href="index.php?c=paylog" >充值记录</a></li>
+					<li><a href="index.php?c=consume" >消费记录</a></li> 
+				</ul>
+			</div>
+
+			<div class="search_con mt20 fl">
+				<div class="Available_h1">账户{yun:}$config.integral_pricename{/yun}</div>
+				<div class="Available_bal"> 
+					<span class="Available_blod">{yun:}$statis.integral_format{/yun}</span>
+					{yun:}$config.integral_priceunit{/yun}{yun:}$config.integral_pricename{/yun}
+					<a class="Available_bth" href="index.php?c=pay&type=integral"></a> 
+				</div>
+        <div class="lt_m_table">
+          <table>
+                <tbody>
+                
+				{yun:}if !empty($rows){/yun}
+                 <tr>   
+                                   
+                 <th scope="col" ><span>充值单号</span></th>
+                  <th scope="col"><span>充值金额</span></th>
+                  <th scope="col" ><span>支付类型</span></th>
+                  <th scope="col" ><span>支付形式</span></th>
+                 <th scope="col" ><span>状态</span></th>
+                 	<th scope="col" width="150" ><span>备注</span></th>
+					<th scope="col" ><span>时间</span></th>
+                  <th scope="col">操作</th>
+                </tr>
+                
+				
+				{yun:}/if{/yun}
+
+				<div class="subsc_con recharge_list fl"> 
+					{yun:}foreach item=v from=$rows{/yun}
+                     <tr>   
+                                   
+                 <td >{yun:}$v.order_id{/yun}</td>
+                 <td align="center">{yun:}$v.order_price{/yun}</td>
+                  <td align="center">{yun:}if $v.type==1{/yun}购买会员
+								{yun:}elseif $v.type=='2'{/yun}{yun:}$config.integral_pricename{/yun}充值
+								{yun:}elseif $v.type=='3'{/yun}银行转帐
+								{yun:}elseif $v.type=='4'{/yun}金额充值
+								{yun:}elseif $v.type=='5'{/yun}购买增值包
+								
+								{yun:}elseif $v.type=='12'{/yun}职位推荐
+								{yun:}elseif $v.type=='18'{/yun}刷新高级职位
+								{yun:}elseif $v.type=='19'{/yun}下载简历
+								{yun:}elseif $v.type=='22'{/yun}发布职位
+								{yun:}elseif $v.type=='23'{/yun}面试邀请
+								{yun:}/if{/yun} </td>
+                 <td align="center">{yun:}if $v.zf_type{/yun}{yun:}$v.zf_type{/yun}{yun:}else{/yun}手动{yun:}/if{/yun}</td>
+                 <td align="center">{yun:}$v.sname{/yun}</td> <td>{yun:}if $v.order_remark{/yun}
+								<em class="used_for">{yun:}$v.order_remark{/yun} </em>
+							{yun:}/if{/yun} </td>
+				<td align="center">{yun:}$v.order_time|date_format:'%Y-%m-%d %H:%M'{/yun}</td>
+                <td align="center">{yun:}if $v.order_state=='1'&& $v.order_type!='bank'{/yun}
+									<a href="index.php?c=payment&id={yun:}$v.id{/yun}" >付款</a> <span class="del_span">|</span>
+									<a href="javascript:void(0)" onclick="layer_del('确定要取消？', 'index.php?c=paylog&act=del&id={yun:}$v.id{/yun}');">取消</a>
+								{yun:}else{/yun}
+									{yun:}$v.sname{/yun}
+								{yun:}/if{/yun}
+								{yun:}if $v.order_state=='1'{/yun}{yun:}/if{/yun}</td>
+              </tr>
+                
+                
+						
+					{yun:}foreachelse{/yun}  <tr>
+                    <td colspan="8"class="lt_m_table_end">
+						<div class="member_no_content"> 您还没有充值记录！</div>  </td>  </tr>
+					{yun:}/foreach{/yun} 
+				
+				<tr>
+                    <td colspan="8"class="lt_m_table_end"><div class="pages"> {yun:}$pagenav{/yun}</div> </td>  </tr>
+				
+                </tbody></table>
+                </div>
+                
+                
+                
+				<div class="recharge_tips fl">
+					<div class="wxts">温馨提示：</div>
+					1.购买会员：请仔细阅读会员功能列表，再选择适合您的类型！<br>
+					2.{yun:}$config.integral_pricename{/yun}兑换：可直接用账户余额兑换您所需{yun:}$config.integral_pricename{/yun}<br>
+					3.购买短信：由本站支付各项短信费用，暂无需购买 
+				</div>
+			</div></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+  <!--内容结束--> 
+{yun:}include file="$lietoustyle/footer.htm"{/yun}

@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*查看会员特权*/
+.com_member_limit{ width:100%; /*margin-bottom:20px;*/}
+.com_member{ width:100%;}
+.com_member_year{ width:280px; padding-left:20px; height:34px; line-height:34px; background:#156da0 ; font-size:16px; color:#fff; border-radius:2px 2px 0 0;}
+.com_member_year em{ color:#f6eb3b; margin-left:10px;}
+.com_member_total{ color:#000;margin-left:13px;line-height:34px; }
+.com_limit_con{ width:878px; border:1px solid #e4dcdc;}
+.com_limit_left{ width:668px; padding:10px 0 10px 20px;}
+.com_limit_left li{ width:264px; float:left;line-height:30px;}
+.com_limit_left li em{ color:#ca0420;}
+.com_limit_left .com_limit_left_h{ width:100%;}
+.color_orange{ color:#e37a1e;}
+.com_limit_right{width:160px; background:#f7f7f7;  border-left:1px solid #e4dcdc;}
+.com_limit_vip{ width:100%; text-align:center;font-size:16px; color:#cccccc; line-height:28px; margin-top:14px; margin-bottom:11px; }
+.com_limit_vip a{ display:block; width:115px; height:39px; background:#dd4122; color:#fff;  line-height:39px; text-align:center; margin:10px 0 10px 24px;}
+.com_limit_vip a:hover{color:#fff;}
+.com_limit_vip a:hover{ background:#C33;}
+.subsc_list .com_banner{ width:340px; padding-left:10px;} 
+.subsc_title .com_banner{ width:330px; padding-left:20px;}
+.com_buy{ width:63px; height:27px; background:#0086b5; color:#fff; line-height:27px; text-align:center; display:inline-block; border-radius:2px;}
+.com_buy:hover{ background:#076485; color:#fff;}
+
+/*操作日志*/
+.w449{ width:449px;}
+.w168{ width:168px;}
+.w120{ width:120px;}
+.w160{width:160px;}
+.m_you_record{ padding:0px 26px 0px 30px;}
+.m_reco_tit{ line-height:41px; background:#f6f7f9; color:#000; border-bottom:1px solid #ececec;}
+.m_tit_cz{ width:415px; padding-left:34px;}
+.m_tit_ip{text-align:center;}
+.m_tit_time{ text-align:center;}
+.m_reco_list ul li{ float:left; line-height:45px; border-bottom:1px solid #f2f2f2; color:#666;}
+.m_list_xg{ width:436px; padding-left:13px;}
+.m_list_dz{ text-align:center;}
+.m_tit_shij{ text-align:center;}

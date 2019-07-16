@@ -1,0 +1,108 @@
+{yun:}include file="$comstyle/header.htm"{/yun}
+<div class="w1000">
+<div class="admin_mainbody"> {yun:}include file="$comstyle/left.htm"{/yun}
+  <div class=right_box>
+    <div class=admincont_box>
+	<div class="yun_com_tit"><span class="yun_com_tit_s">职位管理</span></div>
+        
+   <div class="com_body">
+
+        <div class="clear"></div>
+        
+        <div class="com_Release_job">
+       
+         <div class="clear"></div>
+         <div class="joblist_search"><form action="index.php" method="get">
+    <div class="joblist_search_box">
+        <input name="c" type="hidden" value="jobpack"><input name="w" type="hidden" value="1">
+          <input name="keyword" type="text" class="hr_resumesearch_text" placeholder="请输入职位关键字">
+          <input name="" type="submit" class="hr_resumesearch_bth" value="搜索"></div>
+      </form>
+      </div>
+          <iframe id="supportiframe"  name="supportiframe" onload="returnmessage('supportiframe');" style="display:none"></iframe>
+          <form action="index.php?c=job&act=opera" target="supportiframe" method="post" id='myform'>
+         
+            {yun:}foreach item=job from=$rows{/yun}
+             <div class="com_m_job_list">
+              <div class="job_list_box">
+               
+                <div class="job_list_box_left">
+                 <div class="com_m_job_list_t">
+               
+                <div class="com_m_job_list_jobname">
+                <div class="fl"><a href="{yun:}url m=job c=comapply id='`$job.id`'{/yun}" class="com_m_job_list_jobname_a cblue" target="_blank">{yun:}$job.name{/yun}</a>
+       
+                </div>
+                 <div class="job_share">
+					<span>分享到朋友圈</span>
+					<div class="job_share_img" style="display:none"><img src="{yun:}url m=job c=comapply a=qrcode id=$job.id{/yun}" width="130" height="130"/></div>
+				</div>
+             </div>
+                </div> 
+                   <div class="com_m_job_lis_j">
+				   <a href="index.php?c=hr&jobid={yun:}$job.id{/yun}">
+
+				   <span class="job_list_list_left_name">应聘简历：</span>
+				   <strong class="job_list_list_left_u">{yun:}$job.jobnum{/yun}</strong>
+				   </a> 
+<span style="margin-left:20px;" class="job_list_list_left_name">更新时间：{yun:}$job.lastupdate|date_format:'%Y-%m-%d'{/yun}</span> 
+				   <span class="job_list_list_left_name" style="margin-left:30px;">推广量：</span>
+				   <strong class="job_list_list_left_u">{yun:}$job.jobhits{/yun}</strong>
+        </div><div class="com_m_job_lis_j">
+				   <span class="job_list_list_left_name" >赏金单价：</span>
+				   <strong class="job_list_list_left_u">{yun:}$job.packmoney{/yun}元/次</strong>
+
+				   <span class="job_list_list_left_name" style="margin-left:30px;">赏金总额：</span>
+				   <strong class="job_list_list_left_u">{yun:}$job.packprice{/yun}元</strong>
+
+				   <span class="job_list_list_left_name" style="margin-left:30px;">剩余赏金：</span>
+				   <strong class="job_list_list_left_u">{yun:}$job.nowprice{/yun}元</strong>
+
+                     </div>
+        
+
+				
+                </div>
+				 
+                 <div class="jobxlist_oper">
+                                       
+						<a href="index.php?c=jobadd&act=edit&id={yun:}$job.id{/yun}">修改</a>
+                       
+						<a href="{yun:}url m=job c=comapply id='`$job.id`'{/yun}" target="_blank" title="预览">预览</a> 
+                      
+                    
+                   
+                  </div>  
+              </div>
+           </div>
+            {yun:}foreachelse{/yun}
+            <div class="com_msg_no">
+                 <p>亲爱的用户，目前您还没有赏金推广职位</p>
+              
+            </div>   
+            {yun:}/foreach{/yun} 
+            {yun:}if !empty($rows){/yun}
+          
+            {yun:}/if{/yun}
+          </form>
+        </div>
+        <div  class="clear"></div>
+        <div class="diggg">{yun:}$pagenav{/yun}</div>
+        <div  class="clear"></div>
+
+        <div  class="clear"></div>
+        <div class="wxts_box wxts_box_mt30">
+          <div class="wxts">温馨提示：</div>
+       
+        </div>
+      </div>
+      </div>
+          
+      </div>
+    </div>
+  </div> 
+<script>
+
+</script> 
+
+ {yun:}include file="$comstyle/footer.htm"{/yun}
